@@ -1,0 +1,26 @@
+<app-card [footer]=true>
+  <div card-section="body">
+    <h4 class="card-title">All Users</h4>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User Name</th>
+          <th>Email</th>
+          <th>Create Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of _users">
+          <td>{{ user.ID }}</td>
+          <td>{{ user.UserName }} </td>
+          <td>{{ user.Email }}</td>
+          <td>{{ user.CreateDate | date: 'medium'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div card-section="footer">
+    <a name="new-user" id="" class="btn btn-primary" [routerLink]="['New']" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
+  </div>
+</app-card>

@@ -1,0 +1,13 @@
+<div class="container" *ngIf="_matrix">
+  <div class="card" *ngFor="let category of _matrix.ParamCategories">
+    <div class="card-header">{{ category.EnglishName }}</div>
+    <div class="card-block row">
+      <div class="col-md-6" *ngFor="let param of category.Params">
+        <compliance-param [param]="param" [participant]="participant" [partParams]="participant.ParticipantParams"></compliance-param>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="container" *ngIf="participant && participant.Score">
+  <participant-compliance-details [participant]="participant"></participant-compliance-details>
+</div> -->

@@ -1,0 +1,36 @@
+.nav-item:hover {
+    background-color: #2a3948;
+}
+
+.nav-item > .nav-link {
+    color: #abb2b9;
+}
+
+.nav-item > a.nav-link:hover, .nav-item > a.nav-link.active {
+    color: #fff;
+}
+
+ul.sub-items {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sub-items > .sub-item > a {
+  padding-left: 30px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.10rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-name.nav-item > a.nav-link:hover, .user-name > a.nav-item:focus  {
+   color: #abb2b9 !important;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  right: auto;
+}

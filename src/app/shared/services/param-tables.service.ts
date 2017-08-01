@@ -1,0 +1,85 @@
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import { ConnectionService } from './connection.service';
+import { ParamTable, ParamValue, ParamSubValue } from './../models/params.model';
+
+@Injectable()
+export class ParamTablesService {
+
+  private _tablesURL: string;
+  private _valuesURL: string;
+  private _subValuesURL: string;
+  private _tables: ParamTable[];
+  private _table: ParamTable;
+  private _newTable: ParamTable;
+  private _newValue: ParamValue;
+  private _newSubValue: ParamSubValue;
+  private _headers = new Headers({ 'Content-Type': 'application/json' });
+
+  constructor(
+    private _http: Http,
+    private _conn: ConnectionService
+  ) {
+    this._tablesURL = _conn.APIUrl + 'paramtables';
+    this._valuesURL = _conn.APIUrl + 'paramvalues';
+    this._subValuesURL = _conn.APIUrl + 'paramsubvalues';
+  }
+
+  getTables() {
+    return this._http
+      .get(this._tablesURL)
+      .map(response => {
+        this._tables = response.json();
+        return this._tables;
+      });
+  }
+
+  getTable(_id: number) {
+    return this._http
+      .get(this._tablesURL + '/' + _id)
+      .map(response => {
+        this._table = response.json();
+        return this._table;
+      });
+  }
+
+  createtable(tab: ParamTable): Observable<ParamTable> {
+    return this._http
+      .post(this._tablesURL, JSON.stringify(tab), { headers: this._headers })
+      .map(response => {
+        this._newTable = response.json();
+        return this._newTable;
+      });
+  }
+
+  addValue(val: ParamValue): Observable<ParamValue> {
+    return this._http
+      .post(this._valuesURL, JSON.stringify(val), { headers: this._headers })
+      .map(response => {
+        this._newValue = response.json();
+        return this._newValue;
+      });
+  }
+
+  addSubValue(val: ParamSubValue): Observable<ParamSubValue> {
+    return this._http
+      .post(this._subValuesURL, JSON.stringify(val), { headers: this._headers })
+      .map(response => {
+        this._newSubValue = response.json();
+        return this._newSubValue;
+      });
+  }
+
+  editValue(_id: number, _val: ParamValue): Observable<ParamValue> {
+    return this._http
+      .put(this._valuesURL + '/' + _id, JSON.stringify(_val), { headers: this._headers })
+      .map(response => {
+        this._newValue = response.json();
+        return this._newValue;
+      });
+  }
+
+}

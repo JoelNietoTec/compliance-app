@@ -1,0 +1,34 @@
+<div *ngIf="_participant" >
+  <div class="row">
+    <div class="col-md-4">
+      <ng-container [ngSwitch]="_participant.ParticipantTypeID">
+        <individual-details *ngSwitchCase=1 [individual]="_participant"></individual-details>
+        <entity-details *ngSwitchCase=2 [entity]="_participant"></entity-details>
+      </ng-container>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <ngb-tabset type="pills" *ngIf="_participant">
+          <ngb-tab title="Risks Matrix">
+            <ng-template ngbTabContent>
+              <participant-compliance [participant]="_participant"></participant-compliance>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Documents">
+            <ng-template ngbTabContent></ng-template>
+          </ngb-tab>
+          <ngb-tab title="Edit">
+            <ng-template ngbTabContent>
+              <div class="form-container">
+                <individual-form *ngIf="_participant.ParticipantTypeID == 1" [individual]="_participant"></individual-form>
+              </div>
+              <div class="form-container">
+                <entity-form *ngIf="_participant.ParticipantTypeID == 2" [entity]="_participant"></entity-form>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

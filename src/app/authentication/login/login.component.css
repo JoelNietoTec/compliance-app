@@ -1,0 +1,11 @@
+.login-page {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  padding: 10% 0;
+  position: fixed;
+  background-image: url("/src/assets/img/login.jpg");
+  margin-top: -50px;
+}

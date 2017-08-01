@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-block text-center">
+    <img src="assets/img/company.jpg" alt="" class="img-fluid img-circle user-img">
+    <h4 class="user-name">
+      {{ entity.FirstName }}
+    </h4>
+    <h5 [ngClass]="{'text-success': entity.Score < 3, 'text-warning': entity.Score > 2.99 && entity.Score < 6, 'text-danger': entity.Score >= 6 }">{{ entity.Score }}</h5>
+  </div>
+  <div>
+    <hr/>
+  </div>
+  <div class="card-block section-block">
+    <small class="text-muted">Email address <i class="fa fa-envelope-o" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.Email }}</h6>
+    <small class="text-muted">Phone number <i class="fa fa-phone" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.Phone }}</h6>
+    <small class="text-muted">Mobile phone <i class="fa fa-mobile-phone" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.MobilePhone }}</h6>
+    <small class="text-muted">Constitution date <i class="fa fa-birthday-cake" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.BirthDate | date: 'shortDate' }} </h6>
+    <small class="text-muted">Legal Representative <i class="fa fa-user-md" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.LegalRepresentative }}</h6>
+    <small class="text-muted">WebSite <i class="fa fa-globe" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.WebSite }}</h6>
+    <small class="text-muted">Address <i class="fa fa-map-marker" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.Address }}</h6>
+  </div>
+</div>

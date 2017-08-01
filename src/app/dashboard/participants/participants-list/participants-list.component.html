@@ -1,0 +1,20 @@
+<div class="row d-flex justify-content-center animated fadeIn" *ngIf="!_participants">
+  <img src="assets/img/spinner.gif" class="spinner">
+</div>
+<div *ngIf="_participants" class="card animated fadeIn">
+  <ngb-tabset type="pills">
+    <ngb-tab title="Individuals">
+      <ng-template ngbTabContent>
+        <individuals-list [individuals]="_individuals"></individuals-list>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Entities">
+      <ng-template ngbTabContent>
+        <entities-list [entities]="_entities"></entities-list>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+  <div class="card-footer">
+    <a class="btn btn-primary animated fadeIn" href="#" role="button" [routerLink]="['New']">New <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </div>
+</div>

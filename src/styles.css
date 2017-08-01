@@ -1,1 +1,226 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400');
+
+body, button, input, input.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.card-header {
+  background-color: #eceeef;
+  border-width: 0;
+}
+
+.spinner {
+  height: 80px;
+}
+
+.tooltip {
+  font-size: 13px;
+}
+
+.card, .form-control, .input-group, .input-group-addon, .breadcrumb, .card-header, .card-footer {
+  border-radius: 0 !important;
+}
+
+.btn-sm {
+  font-size: .75em;
+}
+
+.text-muted {
+  color: #99abb4 !important
+}
+
+.btn {
+  margin: 0 0 0 10px;
+}
+
+.btn-block {
+  margin: 0;
+}
+
+.card, .breadcrumb, .navbar, .dropdown-menu {
+  /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2); */
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+}
+
+a:not([href]):not([tabindex]) {
+  color: #0275d8 !important
+}
+.breadcrumb-item  {
+  font-weight: bold;
+}
+
+/* .breadcrumb {
+  background-color: #fff;
+} */
+
+/*
+ * Base structure
+ */
+
+/*
+ * Typography
+ */
+
+label {
+  font-weight: bold;
+}
+
+h1, h3 {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+/* Sidebar navigation */
+.sidebar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+  margin-left: 0;
+}
+
+.sidebar .nav-link {
+  border-radius: 0;
+}
+
+/*
+ * Dashboard
+ */
+
+ /* Placeholders */
+.placeholders {
+  padding-bottom: 3rem;
+}
+
+.placeholder img {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+
+/* Transitions */
+
+.animated, .card, h3, td, .card-footer {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0
+  }
+}
+
+.fadeIn, .card, h3, td, .card-footer {
+  animation-name: fadeIn;
+}
+
+
+.card {
+  margin-bottom: 20px;
+}
+
+ngb-tabset > .tab-content {
+  margin-top: 20px;
+}
+
+ngb-tabset > ul.nav {
+  border-bottom: 1px solid #ccc;
+}
+
+ngb-tabset > ul.nav > li.nav-item > a.nav-link.active {
+  border-bottom: 1px solid #0275d8;
+  border-radius: 0;
+  font-weight: bold;
+}
+
+ngb-tabset > ul.nav > li.nav-item > a.nav-link {
+  background-color: inherit !important;
+  color: #292b2c !important;
+  text-transform: uppercase;
+}
+
+.card > ngb-tabset > ul.nav > li.nav-item > a.nav-link {
+  padding: 15px 20px;
+}
+
+.card > ngb-tabset > ul.nav > li.nav-item {
+  margin-bottom: -1px;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa  { left:  0px;}
+.right-addon .fa { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

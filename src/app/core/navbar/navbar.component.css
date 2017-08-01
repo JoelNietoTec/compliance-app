@@ -1,0 +1,13 @@
+.dropdown-menu {
+  border-radius: 0;
+  right: 0;
+  left: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dropdown-item {
+  padding:10px 1.5rem;
+  border-bottom: 1px solid #f6f6f6;
+  color: #636c72;
+}

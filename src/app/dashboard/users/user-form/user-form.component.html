@@ -1,0 +1,36 @@
+<div class="row d-flex align-content-center justify-content-center">
+  <div class="col-md-5">
+    <app-card>
+      <div card-section="body">
+        <h4 class="card-title">New User</h4>
+        <form [formGroup]="_userForm" novalidate (ngSubmit)="saveUser(_user)">
+          <div class="form-group" [ngClass]="{'has-danger': !_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine}">
+            <label class="form-control-label" for="">User Name</label>
+            <input type="text" class="form-control" [(ngModel)]="_user.UserName" id="name" required #name name="name" formControlName="UserName" placeholder="User's Name">
+            <small *ngIf="!_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine" class="form-text text-danger animated fadeIn">Name require at least 5 characters</small>
+          </div>
+          <div class="form-group" [ngClass]="{'has-danger': !_userForm.controls.Email.valid && !_userForm.controls.Email.pristine}">
+            <label class="form-control-label" for="">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="_user.Email" formControlName="Email" email placeholder="User's Email Address">
+            <small *ngIf="!_userForm.controls.Email.valid && !_userForm.controls.Email.pristine" class="form-text text-danger animated fadeIn">Invalid email address</small>
+          </div>
+          <div class="form-group" [ngClass]="{'has-danger': !_userForm.controls.Password.valid && !_userForm.controls.Password.pristine}">
+            <label class="form-control-label" for="">Password</label>
+            <input type="password" class="form-control" [(ngModel)]="_user.Password" formControlName="Password" name="password" id="" placeholder="User's Password">
+            <small *ngIf="!_userForm.controls.Password.valid && !_userForm.controls.Password.pristine" class="form-text text-danger animated fadeIn">Password require at least 6 characters</small>
+          </div>
+          <div class="form-group" [ngClass]="{'has-danger': !_userForm.controls.PasswordConfirm.pristine && _userForm.controls.PasswordConfirm.value != _userForm.controls.Password.value }">
+            <label class="form-control-label" for="">Confirm Password</label>
+            <input type="password" class="form-control" formControlName="PasswordConfirm" name="confirm-password" id="confirm-password"
+              placeholder="Password Confirmation">
+            <small *ngIf="!_userForm.controls.PasswordConfirm.pristine && _userForm.controls.PasswordConfirm.value != _userForm.controls.Password.value"
+              class="form-text text-danger animated fadeIn">Password confirmation doesn't match</small>
+          </div>
+          <div class="form-group d-flex justify-content-end ">
+            <button type="submit" [disabled]="!_userForm.valid" class="btn btn-primary"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+          </div>
+        </form>
+      </div>
+    </app-card>
+  </div>
+</div>

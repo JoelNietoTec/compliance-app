@@ -1,0 +1,24 @@
+.user-img {
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.info-section {
+  border-right: 1px solid #d6d6d6;
+  padding-left: 0;
+  margin-left: -20px;
+}
+
+.info-name {
+  color: #4d85b6;
+  font-weight: bold;
+}
+
+.participant-info {
+  margin-bottom: 15px;
+}
+
+.img-circle {
+  border-radius: 100%;
+  border: 1px solid #d6d6d6;
+}

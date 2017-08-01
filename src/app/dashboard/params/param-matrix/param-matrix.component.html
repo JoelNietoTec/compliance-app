@@ -1,0 +1,15 @@
+<app-loading-modal *ngIf="!_matrix">
+</app-loading-modal>
+<h3 *ngIf="_matrix">{{ _matrix.Name }} / {{ _matrix.Code }}</h3>
+<ngb-tabset type="pills" *ngIf="_matrix">
+  <ngb-tab title="Categories">
+    <ng-template ngbTabContent>
+      <param-categories [matrix]="_matrix"></param-categories>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Params">
+    <ng-template ngbTabContent>
+      <param-items [matrix]="_matrix"></param-items>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
