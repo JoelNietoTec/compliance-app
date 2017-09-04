@@ -63,12 +63,12 @@ export class EntityFormComponent implements OnInit {
     if (!this.entity) {
       this._partServ.createParticipant(this._entity)
         .subscribe(data => {
-          this._router.navigate(['/Participants', data.ID]);
+          this._router.navigate(['/Dashboard/Participants', data.ID]);
         });
     } else {
       this._partServ.updateParticipant(this._entity.ID, this._entity)
         .subscribe(data => {
-          this._router.navigate(['/Participants', this._entity.ID]);
+          this._router.navigate(['/Dashboard/Participants', this._entity.ID]);
         });
     }
   }

@@ -43,6 +43,10 @@ export class UtilService {
     return array.find(item => item.ID === id);
   }
 
+  removeByID(array: Array<any>, id: number): Array<any> {
+    return array.filter(item => item.ID !== id);
+  }
+
   searchFilter(array: Array<any>, args: Array<string>, searchText: string): Array<any> {
     let filterArray: Array<any> = [];
 

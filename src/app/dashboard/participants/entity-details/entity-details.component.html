@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-block text-center">
+  <div class="card-body text-center">
     <img src="assets/img/company.jpg" alt="" class="img-fluid img-circle user-img">
     <h4 class="user-name">
       {{ entity.FirstName }}
@@ -9,7 +9,7 @@
   <div>
     <hr/>
   </div>
-  <div class="card-block section-block">
+  <div class="card-body section-block">
     <small class="text-muted">Email address <i class="fa fa-envelope-o" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ entity.Email }}</h6>
     <small class="text-muted">Phone number <i class="fa fa-phone" aria-hidden="true"></i></small>
@@ -24,5 +24,7 @@
     <h6 class="participant-info">{{ entity.WebSite }}</h6>
     <small class="text-muted">Address <i class="fa fa-map-marker" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ entity.Address }}</h6>
+    <small class="text-muted">Created By <i class="fa fa-plus-square" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ entity.CreatedByUser.UserName }} - {{ entity.CreateDate | date: 'medium'}}</h6>
   </div>
 </div>

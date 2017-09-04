@@ -85,6 +85,7 @@ export class IndividualFormComponent implements OnInit {
           this._router.navigate(['Dashboard/Participants', data.ID]);
         });
     } else {
+      console.log('This');
       this._partServ.updateParticipant(this._individual.ID, this._individual)
       .subscribe(data => {
         this._router.navigate(['Dashboard/Participants', this._individual.ID]);

@@ -1,5 +1,8 @@
 import { Gender } from './genders.model';
 import { Param, ParamValue, ParamSubValue } from './params.model';
+import { User } from './users.model';
+import { ParticipantDocument } from './documents.models';
+import { ParticipantRelationship } from './relationships.model';
 
 export interface Participant {
   ID?: number;
@@ -19,11 +22,20 @@ export interface Participant {
   LegalRepresentative?: string;
   Phone?: string;
   MobilePhone?: string;
-  ParticipantContacts?: ParticipantContact[];
+  ParticipantContacts?: Array<ParticipantContact>;
   ParamMatrixID?: number;
-  ParticipantParams?: ParticipantParam[];
+  ParticipantParams?: Array<ParticipantParam>;
   Score?: number;
   Rate?: string;
+  CreateDate?: Date;
+  CreatedBy?: number;
+  CreatedByUser?: User;
+  ModifiedDate?: Date;
+  ModifiedBy?: number;
+  ModifiedByUser?: User;
+  ParticipantDocuments?: Array<ParticipantDocument>;
+  Relationships?: Array<ParticipantRelationship>;
+  PEP?: Boolean;
 }
 
 export interface ParticipantParam {

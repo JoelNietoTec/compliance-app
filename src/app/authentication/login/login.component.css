@@ -6,6 +6,6 @@
   width: 100%;
   padding: 10% 0;
   position: fixed;
-  background-image: url("/src/assets/img/login.jpg");
+  background-image: url("/assets/img/login.jpg");
   margin-top: -50px;
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../shared/services/auth.service';
+import { User } from '../../shared/models/users.model';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  _loggedUser: User;
+
+  constructor(
+    private _auth:AuthService
+  ) { }
 
   ngOnInit() {
+    this._loggedUser = this._auth.getUserInfo();
   }
 
 }

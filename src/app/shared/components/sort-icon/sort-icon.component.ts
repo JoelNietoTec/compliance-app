@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SortIconComponent implements OnInit {
 
   @Input() desc?: Boolean;
-  @Input() type: string;
+
+  _icon = 'typcn-arrow-sorted-';
 
   constructor() { }
 

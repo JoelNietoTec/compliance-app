@@ -1,4 +1,4 @@
-<div *ngIf="_participant" >
+<div *ngIf="_participant">
   <div class="row">
     <div class="col-md-4">
       <ng-container [ngSwitch]="_participant.ParticipantTypeID">
@@ -15,7 +15,14 @@
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Documents">
-            <ng-template ngbTabContent></ng-template>
+            <ng-template ngbTabContent>
+              <participant-documents [participant]="_participant" [documents]="_participant.ParticipantDocuments"></participant-documents>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Relationships">
+            <ng-template ngbTabContent>
+              <participant-relationships [relationships]="_participant.Relationships" [participant]="_participant"></participant-relationships>
+            </ng-template>
           </ngb-tab>
           <ngb-tab title="Edit">
             <ng-template ngbTabContent>

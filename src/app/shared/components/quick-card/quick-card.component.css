@@ -1,0 +1,16 @@
+.card-number {
+  font-size: 3em;
+}
+
+.card-icon {
+  font-size: 3.5em;
+}
+
+
+h6.card-text {
+  font-size: .85em;
+}
+
+.card {
+  border-top-width: 4px;
+}

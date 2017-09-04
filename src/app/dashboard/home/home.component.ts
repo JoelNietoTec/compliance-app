@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantsService } from '../../shared/services/participants.service';
 
+import { UtilService } from '../../shared/services/util.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,19 +13,28 @@ export class HomeComponent implements OnInit {
 
   public pieChartLabels: Array<string> = []; // ['High', 'Medium', 'Low', 'Incomplete'];
   public pieChartData: Array<number> = []; // = [200, 600, 400, 300];
-  public pieChartType: string = 'pie';
+  public pieChartType: string = 'doughnut';
   public pieChartOptions: any;
   public chartColors: Array<any>;
   public chartReady: Boolean = false;
 
   constructor(
-    private _partServ: ParticipantsService
+    private _partServ: ParticipantsService,
+    private _util: UtilService
   ) {
     this._partServ.getParticipantsbyRisk()
       .subscribe(data => {
         this.byRisk = data;
+        for (let i of this.byRisk) {
+          if (i.Rate === 'Incomplete') {
+            i.name = 'Incomplete';
+          } else {
+            i.name = i.Rate + ' Risk Participants';
+          }
+        }
+        this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
+        console.log(this.byRisk);
         this.loadChart();
-
       });
   }
 
@@ -45,24 +56,24 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Risk Distribution',
-        fontFamily: 'Nunito',
+        fontFamily: 'Poppins',
         fontSize: 16
       },
       legend: {
-        position: 'right',
+        position: 'bottom',
         labels: {
-          fontFamily: 'Nunito',
+          fontFamily: 'Poppins',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Poppins',
         bodyFontSize: 14
       }
     };
     this.chartColors = [
       {
-        backgroundColor: ['#b2b2b2', '#639a6f', '#f8cd79', '#db7b7b']
+        backgroundColor: ['#db7b7b', '#f8cd79', '#639a6f', '#b2b2b2']
       }
     ];
     this.chartReady = true;

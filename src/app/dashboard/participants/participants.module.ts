@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,11 +19,16 @@ import { ParticipantComplianceParamComponent } from './participant-compliance-pa
 import { ParticipantDetailsComponent } from './participant-details/participant-details.component';
 import { EntityDetailsComponent } from './entity-details/entity-details.component';
 import { IndividualDetailsComponent } from './individual-details/individual-details.component';
+import { ParticipantDocumentComponent } from './participant-document/participant-document.component';
+import { ParticipantDocumentsComponent } from './participant-documents/participant-documents.component';
+import { ParticipantRelationshipsComponent } from './participant-relationships/participant-relationships.component';
+import { ParticipantRelationshipComponent } from './participant-relationship/participant-relationship.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     ParticipantsRoutingModule,
     SharedModule
@@ -42,7 +47,11 @@ import { IndividualDetailsComponent } from './individual-details/individual-deta
     ParticipantComplianceParamComponent,
     ParticipantDetailsComponent,
     EntityDetailsComponent,
-    IndividualDetailsComponent
+    IndividualDetailsComponent,
+    ParticipantDocumentComponent,
+    ParticipantRelationshipsComponent,
+    ParticipantRelationshipComponent,
+    ParticipantDocumentsComponent
   ]
 })
 export class ParticipantsModule { }

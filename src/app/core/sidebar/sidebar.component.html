@@ -1,15 +1,16 @@
 <ul class="nav nav-pills flex-column ">
-  <li class="nav-item dropdown user-name"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Joel Nieto</a>
+  <h6 class="user-name"><i class="typcn typcn-user-outline" aria-hidden="true"></i> {{ _loggedUser.UserName }}</h6>
+  <li class="nav-item dropdown user-email"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> Change Password</a>
-      <a [routerLink]="['/login']" class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+      <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a>
+      <a [routerLink]="['/login']" class="dropdown-item"><i class="typcn typcn-power-outline" aria-hidden="true"></i> Logout</a>
     </div>
   </li>
-  <li class="nav-item"><a [routerLink]="['Home']" class="nav-link" routerLinkActive="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-  <li class="nav-item"><a [routerLink]="['Participants']" class="nav-link" routerLinkActive="active"><i class="fa fa-user-circle" aria-hidden="true"></i> Participants</a></li>
+  <li class="nav-item"><a [routerLink]="['Home']" class="nav-link" routerLinkActive="active"><i class="typcn typcn-home-outline" aria-hidden="true"></i> Home</a></li>
+  <li class="nav-item"><a [routerLink]="['Participants']" class="nav-link" routerLinkActive="active"><span class="typcn typcn-group"></span> Participants</a></li>
   <li class="nav-item">
     <a data-toggle="collapse" href="#paramLinks" class="nav-link">
-      <i class="fa fa-bar-chart" aria-hidden="true"></i> Parameters
+      <i class="typcn typcn-chart-bar-outline" aria-hidden="true"></i> Parameters
       </a>
     <ul class="nav-pills flex-column sub-items collapse" id="paramLinks">
       <li class="nav-item sub-item">
@@ -20,4 +21,5 @@
       </li>
     </ul>
   </li>
+  <li class="nav-item"><a [routerLink]="['Settings']" class="nav-link" routerLinkActive="active"><i class="typcn typcn-spanner-outline" aria-hidden="true"></i> Settings</a></li>
 </ul>

@@ -1,0 +1,38 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">New relationships</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <participant-relationship [relation]="_currentRelationship"></participant-relationship>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="c('Close click')"><i class="typcn typcn-download-outline"></i> Save</button>
+  </div>
+</ng-template>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let relation of relationships" class="col-md-4">
+      <app-card>
+        <div card-section="body">
+          <h4 class="card-title">
+            <a [routerLink]="['/Dashboard/Participants', relation.RelatedParticipantID]">
+              {{ relation.RelatedParticipant.FirstName }} {{ relation.RelatedParticipant.ThirdName }}
+            </a>
+          </h4>
+          <p>{{ relation.Type.EnglishName }}</p>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-danger btn-sm"><i class="typcn typcn-trash"></i> Delete</button>
+            <button type="button" class="btn btn-primary btn-sm"><i class="typcn typcn-edit"></i> Edit</button>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary add-link" (click)="open(content)"><i class="typcn typcn-user-add-outline"></i> Add Relationship</button>
+  </div>
+</div>

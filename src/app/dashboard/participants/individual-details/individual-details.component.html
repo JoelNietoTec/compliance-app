@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-block text-center">
+  <div class="card-body text-center">
     <img src="assets/img/user.jpg" alt="" class="img-fluid img-circle user-img">
     <h4 class="user-name">
       {{ individual.ThirdName }}, {{ individual.FirstName }}
@@ -10,20 +10,22 @@
   <div>
     <hr/>
   </div>
-  <div class="card-block section-block">
-    <small class="text-muted">Email address <i class="fa fa-envelope-o" aria-hidden="true"></i></small>
+  <div class="card-body section-block">
+    <small class="text-muted">Email address <i class="typcn typcn-mail" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.Email }}</h6>
-    <small class="text-muted">Phone number <i class="fa fa-phone" aria-hidden="true"></i></small>
+    <small class="text-muted">Phone number <i class="typcn typcn-phone-outline" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.Phone }}</h6>
-    <small class="text-muted">Mobile phone <i class="fa fa-mobile-phone" aria-hidden="true"></i></small>
+    <small class="text-muted">Mobile phone <i class="typcn typcn-device-phone" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-    <small class="text-muted">Birth date (age) <i class="fa fa-birthday-cake" aria-hidden="true"></i></small>
+    <small class="text-muted">Birth date (age) <i class="typcn typcn-weather-sunny" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.BirthDate | date: 'shortDate' }} <em>({{ individual.Age }})</em></h6>
     <small class="text-muted">Gender <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.Gender.EnglishName }}</h6>
-    <small class="text-muted">WebSite <i class="fa fa-globe" aria-hidden="true"></i></small>
+    <small class="text-muted">WebSite <i class="typcn typcn-globe-outline" aria-hidden="true"></i></small>
     <h6 class="participant-info">{{ individual.WebSite }}</h6>
-    <small class="text-muted">Address <i class="fa fa-map-marker" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ individual.Address }}</h6>
+    <small class="text-muted">Address <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>
+    <h6 class="participant-info" >{{ individual.Address }}</h6>
+    <small class="text-muted">Created By <i class="typcn typcn-user-add-outline" aria-hidden="true"></i></small>
+    <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
   </div>
 </div>

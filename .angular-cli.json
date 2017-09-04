@@ -26,12 +26,15 @@
         "../node_modules/ng2-toasty/bundles/style-bootstrap.css",
         "../node_modules/ng2-toasty/bundles/style-material.css",
         "../node_modules/ng2-toasty/bundles/style-default.css",
+        "../node_modules/typicons.font/src/font/typicons.css",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.slim.min.js",
         "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",

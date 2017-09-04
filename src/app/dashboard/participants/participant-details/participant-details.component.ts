@@ -30,6 +30,7 @@ export class ParticipantDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this._route.params.subscribe(params => {
       this._partServ.getParticipant(params['id'])
         .subscribe(data => {

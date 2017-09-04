@@ -1,69 +1,52 @@
 <div class="container-fluid">
-  <h4 class="card-title">All Individuals</h4>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <div class="inner-addon left-addon">
-          <i class="fa fa-search text-muted" aria-hidden="true"></i>
-          <input type="search" class="form-control" [(ngModel)]="_searchText" (ngModelChange)="filterIndividuals()" placeholder="Search">
+          <i class="typcn typcn-zoom text-muted" aria-hidden="true"></i>
+          <input type="search" class="form-control" [(ngModel)]="_searchText" (ngModelChange)="filterIndividuals()" placeholder="Search Individuals">
         </div>
       </div>
     </div>
   </div>
-  <table class="table table-sm table-hover">
+  <table class="table table-sm table-striped table-squared">
     <thead>
       <tr>
-        <th (click)="sort('ID')">ID
-          <app-sort-icon *ngIf="_sortTerm.column =='ID'" [type]="'numeric'" [desc]="_sortTerm.desc"></app-sort-icon>
+        <th (click)="sort('ID')" class="text-center">ID
+          <app-sort-icon *ngIf="_sortTerm.column =='ID'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('FirstName')">First Name
-          <app-sort-icon *ngIf="_sortTerm.column =='FirstName'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
-        </th>
-        <th (click)="sort('SecondName')">Second Name
-          <app-sort-icon *ngIf="_sortTerm.column =='SecondName'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='FirstName'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('ThirdName')">Third Name
-          <app-sort-icon *ngIf="_sortTerm.column =='ThirdName'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
-        </th>
-        <th (click)="sort('FourthName')">Fourth Name
-          <app-sort-icon *ngIf="_sortTerm.column =='FourthName'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
-        </th>
-        <th (click)="sort('GenderID')">Gender
-          <app-sort-icon *ngIf="_sortTerm.column =='GenderID'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='ThirdName'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('BirthDate')">Birth Date
-          <app-sort-icon *ngIf="_sortTerm.column =='BirthDate'" [type]="'numeric'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='BirthDate'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('Email')">Email
-          <app-sort-icon *ngIf="_sortTerm.column =='Email'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
-        </th>
-        <th (click)="sort('WebSite')">WebSite
-          <app-sort-icon *ngIf="_sortTerm.column =='WebSite'" [type]="'alpha'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='Email'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('Score')">Score
-          <app-sort-icon *ngIf="_sortTerm.column =='Score'" [type]="'numeric'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='Score'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('Score')">Rate
-          <app-sort-icon *ngIf="_sortTerm.column =='Score'" [type]="'numeric'" [desc]="_sortTerm.desc"></app-sort-icon>
+          <app-sort-icon *ngIf="_sortTerm.column =='Score'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let individual of _filterIndividuals">
-        <td>{{ individual.ID }}</td>
+        <td class="text-center">{{ individual.ID }}</td>
         <td>{{ individual.FirstName }}</td>
-        <td>{{ individual.SecondName }}</td>
         <td>{{ individual.ThirdName }}</td>
-        <td>{{ individual.FourthName }}</td>
-        <td>{{ individual.Gender.EnglishName }}</td>
         <td>{{ individual.BirthDate | date:'mediumDate' }}</td>
         <td>{{ individual.Email }}</td>
-        <td>{{ individual.WebSite }}</td>
         <td class="font-weight-bold" [ngClass]="{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Score | number: '1.3-3' }}</td>
         <td class="font-weight-bold" [ngClass]="{'text-muted': !individual.Score, 'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Rate }}</td>
         <td class="text-center">
-          <a [routerLink]="[individual.ID]" class="btn btn-outline-primary btn-sm" placement="left" ngbTooltip="Details"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <a [routerLink]="[individual.ID]" class="btn btn-outline-primary btn-sm" placement="left" ngbTooltip="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
       </tr>
     </tbody>
   </table>

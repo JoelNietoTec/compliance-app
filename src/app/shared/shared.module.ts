@@ -15,12 +15,16 @@ import { ParamsService } from './services/params.service';
 import { UtilService } from './services/util.service';
 import { UserService } from './services/users.service';
 import { AuthService } from './services/auth.service';
+import { DocumentsService } from './services/documents.service';
+import { CountriesService } from './services/countries.service';
+import { RelationTypesService } from './services/relationshiptypes.service';
 import { AuthGuard } from './services/auth.guard';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
 import { CardComponent } from './components/card/card.component';
 import { SortIconComponent } from './components/sort-icon/sort-icon.component';
+import { QuickCardComponent } from './components/quick-card/quick-card.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -43,6 +47,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     EqualValidator,
     FormsModule,
     CommonModule,
+    QuickCardComponent,
     ToastyModule
   ],
   providers: [
@@ -57,6 +62,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
     UserService,
     UtilService,
     AuthService,
+    DocumentsService,
+    CountriesService,
+    RelationTypesService,
     AuthGuard
   ],
   declarations: [
@@ -64,6 +72,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     CardComponent,
     ScorePipe,
     SortIconComponent,
+    QuickCardComponent,
     EqualValidator
   ]
 })

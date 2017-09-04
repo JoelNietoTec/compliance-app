@@ -1,0 +1,66 @@
+<app-card [header]="_title" *ngIf="_partDocument && types">
+  <div card-section="body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="">Document Code</label>
+          <input type="text" [(ngModel)]="_partDocument.DocumentCode"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="doc-type" class="form-control-label">Document Type</label>
+          <select [compareWith]="equals" class="form-control custom-select" [(ngModel)]="_partDocument.DocumentType" name="" id="">
+            <option disabled value="undefined">--- Select one ---</option>
+            <option *ngFor="let type of types" [ngValue]="type">{{ type.EnglishName }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+       <div class="form-group">
+        <label for="">File</label>
+        <div class="input-group">
+          <input type="file" class="form-control" (change)="setFile($event.target.files[0])">
+        </div>
+       </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Issue Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpeditionDate" ngbDatepicker #d="ngbDatepicker" placeholder="">
+            <div class="input-group-addon" (click)="d.toggle()">
+            <i class="typcn typcn-calendar-outline" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Expiration Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpirationDate" ngbDatepicker #e="ngbDatepicker" placeholder="">
+            <div class="input-group-addon" (click)="e.toggle()">
+            <i class="typcn typcn-calendar-outline" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Issue Country</label>
+          <select [compareWith]="equals" class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.Country" required>
+            <option [value]="undefined" disabled>--- Select One ---</option>
+            <option *ngFor="let country of _countries" [ngValue]="country">
+              {{ country.EnglishName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-danger" (click)="removeDoc()" role="button"><i class="typcn typcn-trash" aria-hidden="true"></i> Delete</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()" ><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
+      </div>
+    </div>
+  </div>
+</app-card>

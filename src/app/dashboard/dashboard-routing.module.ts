@@ -7,6 +7,7 @@ import { ParticipantsModule } from './participants/participants.module';
 import { ParamsModule } from './params/params.module';
 import { UsersModule } from './users/users.module';
 import { AuthGuard } from '../shared/services/auth.guard';
+import { SettingsModule } from './settings/settings.module';
 
 export function getParticipantsModule() {
   return ParticipantsModule;
@@ -44,6 +45,11 @@ export const routes: Routes = [
         canActivateChild: [AuthGuard],
         loadChildren: () => getUsersModule()
 
+      },
+      {
+        path: 'Settings',
+        canActivateChild: [AuthGuard],
+        loadChildren: () => SettingsModule
       },
       {
         path: '**',

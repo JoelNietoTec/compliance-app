@@ -6,7 +6,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 import { User } from '../models/users.model';
+import { Country } from '../models/country.model';
 import { ConnectionService } from './connection.service';
+import { CountriesService } from './countries.service';
 
 @Injectable()
 export class AuthService {
@@ -17,12 +19,14 @@ export class AuthService {
     Password: ''
   };
   public token: any;
+  public _countries: Array<Country>;
   public _loggedUser: User;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(
     private _http: Http,
-    private _conn: ConnectionService
+    private _conn: ConnectionService,
+    private _countryServ: CountriesService
   ) {
     this._loginURL = _conn.APIUrl + 'users/login';
   }
@@ -32,12 +36,11 @@ export class AuthService {
     return this._http
       .post(this._loginURL, JSON.stringify(login), { headers: this._headers })
       .map((response: Response) => {
-        console.log(response);
         let token = response.json();
         if (token) {
           this.token = token;
           localStorage.setItem('currentUser', JSON.stringify({ username: login.UserName, token: response.json() }));
-          console.log(localStorage.getItem('currentUser'));
+          this.initLocalInfo();
           return true;
         } else {
           return false;
@@ -56,6 +59,16 @@ export class AuthService {
   authLogout(): void {
     this.token = null;
     localStorage.removeItem('currentUser');
+  }
+
+  initLocalInfo(): void {
+    if (!localStorage.getItem('countries')) {
+      this._countryServ.getCountries()
+        .subscribe(data => {
+          this._countries = data;
+          localStorage.setItem('countries', JSON.stringify(this._countries));
+        });
+    }
   }
 
 }

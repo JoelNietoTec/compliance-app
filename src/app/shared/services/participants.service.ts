@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Participant, ParticipantParam } from '../models/participants.model';
+import { ParticipantRelationship } from '../models/relationships.model';
 import { ConnectionService } from './connection.service';
 import { UtilService } from './util.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ParticipantsService {
@@ -22,7 +24,8 @@ export class ParticipantsService {
   constructor(
     private _http: Http,
     private _conn: ConnectionService,
-    private _util: UtilService
+    private _util: UtilService,
+    private _auth: AuthService
   ) {
     this._partURL = _conn.APIUrl + 'participants';
     this._paramURL = _conn.APIUrl + 'participantparams';
@@ -46,20 +49,30 @@ export class ParticipantsService {
       });
   };
 
-  createParticipant(ind: any): Observable<Participant> {
+  createParticipant(part: Participant): Observable<Participant> {
+    const _user = this._auth.getUserInfo(); // get Current User
+    part.CreatedBy = _user.ID; // set User ID
     return this._http
-      .post(this._partURL, JSON.stringify(ind), { headers: this._headers })
+      .post(this._partURL, JSON.stringify(part), { headers: this._headers })
       .map(response => {
         this._newParticipant = response.json();
+        this._newParticipant.CreatedByUser = _user; // set Created By User
         return this._newParticipant;
       });
   }
 
   updateParticipant(_id: number, _part: Participant): Observable<Participant> {
+    const _user = this._auth.getUserInfo(); // get Current User
+    _part.ModifiedBy = _user.ID;
+    _part.ModifiedByUser = _user;
+    console.log(_part);
     return this._http
       .put(`${this._partURL}/${_id}`, JSON.stringify(_part), { headers: this._headers })
       .map(response => {
-        return response.json();
+        this._newParticipant = response.json();
+        console.log(this._newParticipant);
+        this._newParticipant.ModifiedByUser = _user;
+        return this._newParticipant;
       });
   }
 
@@ -109,6 +122,16 @@ export class ParticipantsService {
     return this._http
       .get(`${this._partURL}/byrisk`)
       .map(response => {
+        return response.json();
+      });
+  }
+
+  addRelationship(relationship: ParticipantRelationship): Observable<ParticipantRelationship> {
+    console.log(relationship);
+    return this._http
+      .post(this._partURL + '/relationships', JSON.stringify(relationship), { headers: this._headers })
+      .map(response => {
+        console.log(response.json());
         return response.json();
       });
   }
