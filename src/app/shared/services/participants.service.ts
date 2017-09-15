@@ -17,7 +17,7 @@ export class ParticipantsService {
   private _participant: Participant;
   private _param: ParticipantParam;
   private _newParam: ParticipantParam;
-  private _participants: Participant[];
+  private _participants: Array<Participant>;
   private _newParticipant: Participant;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
 
@@ -63,15 +63,12 @@ export class ParticipantsService {
 
   updateParticipant(_id: number, _part: Participant): Observable<Participant> {
     const _user = this._auth.getUserInfo(); // get Current User
-    _part.ModifiedBy = _user.ID;
-    _part.ModifiedByUser = _user;
     console.log(_part);
     return this._http
       .put(`${this._partURL}/${_id}`, JSON.stringify(_part), { headers: this._headers })
       .map(response => {
         this._newParticipant = response.json();
         console.log(this._newParticipant);
-        this._newParticipant.ModifiedByUser = _user;
         return this._newParticipant;
       });
   }
@@ -95,6 +92,14 @@ export class ParticipantsService {
 
     return filterParticipants;
 
+  }
+
+  getParams(_partID: number): Observable<Array<ParticipantParam>> {
+    return this._http
+      .get(`${this._partURL}/${_partID}/params`)
+      .map(response => {
+        return response.json();
+      });
   }
 
   updateParam(_id: number, _param: ParticipantParam): Observable<ParticipantParam> {

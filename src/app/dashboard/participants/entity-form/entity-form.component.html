@@ -20,7 +20,7 @@
         <input class="form-control" [(ngModel)]="_entity.formBirthDate" [maxDate]="_maxDate" [minDate]="_minDate" placeholder="yyyy-mm-dd"
           name="dp" ngbDatepicker #d="ngbDatepicker">
         <div class="input-group-addon" (click)="d.toggle()">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <i class="typcn typcn-calendar" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
     </div>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
-    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-secondary" role="button"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
-    <button type="button" class="btn btn-success" (click)="saveEntity()"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancel</a>
+    <button type="button" class="btn btn-primary" (click)="saveEntity()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
   </div>
 </div>

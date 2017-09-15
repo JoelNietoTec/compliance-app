@@ -28,6 +28,7 @@
         "../node_modules/ng2-toasty/bundles/style-default.css",
         "../node_modules/typicons.font/src/font/typicons.css",
         "../node_modules/sweetalert2/dist/sweetalert2.min.css",
+        "../node_modules/angular-calendar/dist/css/angular-calendar.css",
         "styles.css"
       ],
       "scripts": [

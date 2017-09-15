@@ -41,6 +41,11 @@ small.text-muted > .typcn {
   border: 1px solid #e9ecef !important;
 }
 
+.select-item {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
 .spinner {
   height: 80px;
 }
@@ -49,14 +54,15 @@ small.text-muted > .typcn {
   font-size: 13px;
 }
 
-.card, .form-control, .input-group, .input-group-addon, .breadcrumb, .card-header, .card-footer, .modal-content {
-  border-radius: 2.5px !important;
+.card, .form-control, .input-group, .input-group-addon, .breadcrumb, .card-header, .card-footer, .modal-content, .btn {
+  border-radius: 0 !important;
 }
 
 .input-group > input {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
+
 
 .input-group-addon {
   padding-bottom: 2px;
@@ -89,7 +95,8 @@ a:not([href]):not([tabindex]) {
   color: #0275d8 !important
 }
 .breadcrumb-item  {
-  font-weight: bold;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 /* .breadcrumb {
@@ -105,7 +112,7 @@ a:not([href]):not([tabindex]) {
  */
 
 label {
-  font-weight: bold;
+  font-weight: 400;
 }
 
 h1, h3 {
@@ -279,9 +286,7 @@ ngb-tabset > ul.nav > li.nav-item {
 }
 
 
-.bg-primary {
-  background-color: #287FB9 !important;
-}
+
 /* Button Primary*/
 .btn-primary {
   background-color: #287FB9 !important;
@@ -396,6 +401,14 @@ thead > tr > th {
 
 
 /*********Backgrounds************/
+.bg-primary {
+  background-color: #287FB9 !important;
+}
+
+.border-primary {
+  border-color: #287FB9 !important;
+}
+
 .bg-warning {
  background-color: #f1c40f !important;
 }
@@ -414,4 +427,13 @@ thead > tr > th {
 
 td > input {
   border-width: 0 !important;
+}
+
+.card {
+  border-width: 0;
+}
+
+select.custom-select {
+  padding: 8px 28px 8px 12px !important;
+  height: 34px !important;
 }

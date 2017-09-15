@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SharedModule } from '../../shared/shared.module';
 import { ParticipantsRoutingModule } from './participants-routing.module';
@@ -29,7 +28,6 @@ import { ParticipantRelationshipComponent } from './participant-relationship/par
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
     ParticipantsRoutingModule,
     SharedModule
   ],

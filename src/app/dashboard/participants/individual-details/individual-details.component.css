@@ -22,3 +22,12 @@
   border-radius: 100%;
   border: 1px solid #d6d6d6;
 }
+
+
+.section-block {
+  padding-top: 0;
+}
+
+.completed {
+  text-decoration: line-through;
+}

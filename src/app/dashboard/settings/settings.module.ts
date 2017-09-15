@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { RelationshipTypesComponent } from './relationship-types/relationship-types.component';
+import { DocumentTypesComponent } from './document-types/document-types.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { RelationshipTypesComponent } from './relationship-types/relationship-ty
     NgbModule,
     SettingsRoutingModule
   ],
-  declarations: [SettingsComponent, RelationshipTypesComponent]
+  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent]
 })
 export class SettingsModule { }

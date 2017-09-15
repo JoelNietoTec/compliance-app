@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <table class="table table-sm table-squared table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Name</th>
+        <th>English Name</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let type of _types">
+        <td class="text-center">{{ type.ID }}</td>
+        <td>{{ type.Name}}</td>
+        <td>{{ type.EnglishName }}</td>
+        <td class="text-center">
+            <div class="btn btn-success btn-sm"><i class="typcn typcn-edit"></i> Edit</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

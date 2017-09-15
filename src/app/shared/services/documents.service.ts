@@ -13,6 +13,7 @@ export class DocumentsService {
   private _documentURL: string;
   private _docTypeURL: string;
   private _partDocURL: string;
+  private _partURL: string;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
   private _types: Array<DocumentType>;
 
@@ -23,6 +24,7 @@ export class DocumentsService {
     this._docTypeURL = _conn.APIUrl + 'documenttypes';
     this._documentURL = _conn.APIUrl + 'documents';
     this._partDocURL = _conn.APIUrl + 'participantdocuments';
+    this._partURL = _conn.APIUrl + 'participants';
   }
 
   getTypes() {
@@ -31,6 +33,14 @@ export class DocumentsService {
       .map(response => {
         this._types = response.json();
         return this._types;
+      });
+  }
+
+  getDocByParticipant(participantID: number): Observable<Array<ParticipantDocument>> {
+    return this._http
+      .get(`${this._partURL}/${participantID}/documents`)
+      .map(response => {
+        return response.json();
       });
   }
 

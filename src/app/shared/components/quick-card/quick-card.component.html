@@ -1,11 +1,11 @@
-<div class="card" >
+<div class="card" [ngClass]="'border-' + type">
   <div class="card-body" [ngClass]="'text-' + type">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <span class="card-number">{{ value }}</span>
-        <h6 class="card-text">{{ name }}</h6>
+        <h6 class="card-text text-secondary">{{ name }}</h6>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
           <span class="typcn float-right card-icon" [ngClass]="'typcn-' + icon"></span>
         </div>
     </div>

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastyModule } from 'ng2-toasty';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 // Model Services
 import { GendersService } from './services/genders.service';
@@ -18,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { DocumentsService } from './services/documents.service';
 import { CountriesService } from './services/countries.service';
 import { RelationTypesService } from './services/relationshiptypes.service';
+import { TasksService } from './services/tasks.service';
 import { AuthGuard } from './services/auth.guard';
 
 // Components
@@ -25,6 +28,8 @@ import { LoadingModalComponent } from './components/loading-modal/loading-modal.
 import { CardComponent } from './components/card/card.component';
 import { SortIconComponent } from './components/sort-icon/sort-icon.component';
 import { QuickCardComponent } from './components/quick-card/quick-card.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -36,7 +41,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
   imports: [
     CommonModule,
     ToastyModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot(),
+    MultiselectDropdownModule
   ],
   exports: [
     LoadingModalComponent,
@@ -48,7 +55,11 @@ import { EqualValidator } from './directives/equal-validator.directive';
     FormsModule,
     CommonModule,
     QuickCardComponent,
-    ToastyModule
+    ToastyModule,
+    TaskCardComponent,
+    NgbModule,
+    TaskFormComponent,
+    MultiselectDropdownModule
   ],
   providers: [
     GendersService,
@@ -65,6 +76,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     DocumentsService,
     CountriesService,
     RelationTypesService,
+    TasksService,
     AuthGuard
   ],
   declarations: [
@@ -73,7 +85,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ScorePipe,
     SortIconComponent,
     QuickCardComponent,
-    EqualValidator
+    EqualValidator,
+    TaskCardComponent,
+    TaskFormComponent
   ]
 })
 export class SharedModule { }

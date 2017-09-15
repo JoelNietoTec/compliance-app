@@ -14,10 +14,10 @@ import { DocumentsService } from '../../../shared/services/documents.service';
 export class ParticipantDocumentsComponent implements OnInit {
 
   @Input() participant: Participant;
-  @Input() documents: Array<ParticipantDocument>;
 
   _types: Array<DocumentType>;
   _showForm: Boolean = false;
+  _documents: Array<ParticipantDocument>;
 
   constructor(
     private _docServ: DocumentsService,
@@ -30,12 +30,18 @@ export class ParticipantDocumentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("hit");
+    this._docServ.getDocByParticipant(this.participant.ID)
+      .subscribe(data => {
+        this._documents = data;
+        console.log(this._documents);
+      });
   }
 
   removeDoc(id: number) {
     this._docServ.deleteDoc(id)
       .subscribe(data => {
-        this.documents = this._util.removeByID(this.documents, id);
+        this._documents = this._util.removeByID(this._documents, id);
       });
   }
 
@@ -43,7 +49,7 @@ export class ParticipantDocumentsComponent implements OnInit {
     console.log(doc);
     this._docServ.saveDoc(doc)
       .subscribe(data => {
-        this.documents.push(doc);
+        this._documents.push(doc);
         this._toggleForm();
       });
   }

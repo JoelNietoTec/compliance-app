@@ -25,7 +25,6 @@ export class ParticipantDocumentComponent implements OnInit {
   @Input() index: number;
   @Output() addDocument = new EventEmitter();
   @Output() removeDocument = new EventEmitter();
-  @Output() caca = new EventEmitter();
 
   _countries: Array<Country> = JSON.parse(localStorage.getItem('countries'));
   _partDocument: FormDocument = { File: {} };

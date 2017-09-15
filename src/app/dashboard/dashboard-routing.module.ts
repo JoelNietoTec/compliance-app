@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 import { ParticipantsModule } from './participants/participants.module';
 import { ParamsModule } from './params/params.module';
 import { UsersModule } from './users/users.module';
@@ -20,6 +20,10 @@ export function getParamsModule() {
 export function getUsersModule() {
   return UsersModule;
 }
+
+export function getHomeModule() {
+  return HomeModule;
+}
 export const routes: Routes = [
   {
     path: 'Dashboard',
@@ -28,7 +32,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'Home',
-        component: HomeComponent
+        canActivateChild: [AuthGuard],
+        loadChildren: () => getHomeModule()
       },
       {
         path: 'Participants',

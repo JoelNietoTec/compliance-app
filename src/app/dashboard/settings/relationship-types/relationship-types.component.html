@@ -1,43 +1,40 @@
-<h3>Relationship Types</h3>
-<app-card>
-  <div card-section="body">
-    <table class="table table-sm table-squared table-bordered table-hover">
-      <thead>
+<div class="container-fluid">
+  <table class="table table-sm table-squared table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Name</th>
+        <th>English Name</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let type of _types">
         <tr>
-          <th class="text-center">ID</th>
-          <th>Name</th>
-          <th>English Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let type of _types">
-          <tr>
-            <td class="text-center">{{ type.ID }}</td>
-            <td>{{ type.Name }}</td>
-            <td>{{ type.EnglishName }}</td>
-            <td class="text-center">
-              <div class="btn btn-success btn-sm"><i class="typcn typcn-edit"></i> Edit</div>
-            </td>
-          </tr>
-          <!-- <tr>
-            <td></td>
-            <td><input type="text" [(ngModel)]="_selType.Name" class="form-control form-control-sm" name="name"></td>
-            <td><input type="text" [(ngModel)]="_selType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
-            <td class="text-center">
-              <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
-            </td>
-          </tr> -->
-        </ng-container>
-        <tr class="border-primary">
-          <td></td>
-          <td><input type="text" [(ngModel)]="_newType.Name" class="form-control form-control-sm" name="name"></td>
-          <td><input type="text" [(ngModel)]="_newType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
+          <td class="text-center">{{ type.ID }}</td>
+          <td>{{ type.Name }}</td>
+          <td>{{ type.EnglishName }}</td>
           <td class="text-center">
-            <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
+            <div class="btn btn-success btn-sm"><i class="typcn typcn-edit"></i> Edit</div>
           </td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-</app-card>
+        <!-- <tr>
+              <td></td>
+              <td><input type="text" [(ngModel)]="_selType.Name" class="form-control form-control-sm" name="name"></td>
+              <td><input type="text" [(ngModel)]="_selType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
+              <td class="text-center">
+                <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
+              </td>
+            </tr> -->
+      </ng-container>
+      <tr class="border-primary">
+        <td></td>
+        <td><input type="text" [(ngModel)]="_newType.Name" class="form-control form-control-sm" name="name"></td>
+        <td><input type="text" [(ngModel)]="_newType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
+        <td class="text-center">
+          <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

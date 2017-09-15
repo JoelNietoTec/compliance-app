@@ -1,0 +1,19 @@
+.dropdown-toggle {
+  text-transform: capitalize;
+}
+
+.select-container {
+  width: 100%;
+}
+
+.select-item {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+
+
+a:hover {
+  text-decoration: none;
+}
+

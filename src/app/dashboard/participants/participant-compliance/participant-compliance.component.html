@@ -3,7 +3,7 @@
     <div class="card-header">{{ category.EnglishName }}</div>
     <div class="card-body row">
       <div class="col-md-6" *ngFor="let param of category.Params">
-        <compliance-param [param]="param" [participant]="participant" [partParams]="participant.ParticipantParams"></compliance-param>
+        <compliance-param [param]="param" [participant]="participant" [partParams]="_partParams"></compliance-param>
       </div>
     </div>
   </div>

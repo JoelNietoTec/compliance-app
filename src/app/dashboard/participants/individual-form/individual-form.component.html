@@ -20,18 +20,24 @@
         aria-describedby="helpId">
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <label for="firs-name">Third Name</label>
       <input type="text" [(ngModel)]="_individual.ThirdName" name="third-name" id="third-name" class="form-control" placeholder="Participant´s Third Name"
         aria-describedby="helpId">
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <label for="fourth-name">Fourth Name</label>
       <input type="text" [(ngModel)]="_individual.FourthName" name="fourth-name" id="fourth-name" class="form-control" placeholder="Participant´s Fourth Name"
         aria-describedby="helpId">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="nationalities">Nationalities</label>
+      <ss-multiselect-dropdown [options]="_nationalities" [settings]="mySettings" [(ngModel)]="_individual.Nationalities"></ss-multiselect-dropdown>
     </div>
   </div>
   <div class="col-md-3">
@@ -90,7 +96,7 @@
     </div>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
-    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-danger" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i>Cancel</a>
+    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i>Cancel</a>
     <button type="button" class="btn btn-primary" (click)="saveIndividual()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
   </div>
 </div>

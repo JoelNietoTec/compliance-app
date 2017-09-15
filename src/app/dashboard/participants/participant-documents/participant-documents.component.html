@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngFor="let document of documents; let i = index">
+  <ng-container *ngFor="let document of _documents; let i = index">
     <participant-document *ngIf="document && _types" [types]="_types" [doc]="document" [index]="i" (removeDocument)="removeDoc($event)"></participant-document>
   </ng-container>
   <participant-document *ngIf="_showForm"  [types]="_types" [participant]="participant" (addDocument)="addDoc($event)"></participant-document>

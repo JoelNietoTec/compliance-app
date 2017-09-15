@@ -75,4 +75,8 @@ export class UtilService {
     return str || '';
   }
 
+  capitalize(str: string): string {
+    return str.replace(/\b\w/g, l => l.toUpperCase());
+  }
+
 }

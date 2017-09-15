@@ -9,8 +9,14 @@
 
 h6.card-text {
   font-size: .85em;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .card {
-  border-top-width: 4px;
+  border-top-width: 2px;
+  border-right: 1px solid rgba(0,0,0,.125) !important;
+  border-bottom: 1px solid rgba(0,0,0,.125) !important;
+  border-left: 1px solid rgba(0,0,0,.125) !important;
 }
+

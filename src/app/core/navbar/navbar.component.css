@@ -11,3 +11,15 @@
   border-bottom: 1px solid #f6f6f6;
   color: #636c72;
 }
+
+.typcn {
+  font-size: 2em;
+}
+
+.navbar {
+  padding: 0 16px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

@@ -3,6 +3,7 @@ import { Param, ParamValue, ParamSubValue } from './params.model';
 import { User } from './users.model';
 import { ParticipantDocument } from './documents.models';
 import { ParticipantRelationship } from './relationships.model';
+import { Country } from './country.model';
 
 export interface Participant {
   ID?: number;
@@ -30,12 +31,9 @@ export interface Participant {
   CreateDate?: Date;
   CreatedBy?: number;
   CreatedByUser?: User;
-  ModifiedDate?: Date;
-  ModifiedBy?: number;
-  ModifiedByUser?: User;
-  ParticipantDocuments?: Array<ParticipantDocument>;
   Relationships?: Array<ParticipantRelationship>;
   PEP?: Boolean;
+  Nationalities?: Array<Country>;
 }
 
 export interface ParticipantParam {

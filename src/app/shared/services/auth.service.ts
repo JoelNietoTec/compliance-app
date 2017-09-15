@@ -7,8 +7,10 @@ import 'rxjs/add/observable/of';
 
 import { User } from '../models/users.model';
 import { Country } from '../models/country.model';
+import { TaskStatus } from '../models/tasks.model';
 import { ConnectionService } from './connection.service';
 import { CountriesService } from './countries.service';
+import { TasksService } from './tasks.service';
 
 @Injectable()
 export class AuthService {
@@ -20,13 +22,15 @@ export class AuthService {
   };
   public token: any;
   public _countries: Array<Country>;
+  public _taskStatus: Array<TaskStatus>;
   public _loggedUser: User;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(
     private _http: Http,
     private _conn: ConnectionService,
-    private _countryServ: CountriesService
+    private _countryServ: CountriesService,
+    private _taskService: TasksService
   ) {
     this._loginURL = _conn.APIUrl + 'users/login';
   }
@@ -67,6 +71,15 @@ export class AuthService {
         .subscribe(data => {
           this._countries = data;
           localStorage.setItem('countries', JSON.stringify(this._countries));
+        });
+    }
+
+    if (!localStorage.getItem('taskStatus')) {
+      console.log(localStorage.getItem('taskStatus'));
+      this._taskService.getStatus()
+        .subscribe(data => {
+          this._taskStatus = data;
+          localStorage.setItem('taskStatus', JSON.stringify(this._taskStatus));
         });
     }
   }
