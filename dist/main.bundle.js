@@ -2301,7 +2301,7 @@ var SharedModule = /** @class */ (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    apiURL: 'http://localhost:53212/api/'
+    apiURL: 'http://complianceapi.azurewebsites.net/api/'
 };
 //# sourceMappingURL=environment.js.map
 
