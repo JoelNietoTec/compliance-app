@@ -7,13 +7,13 @@ import { ChartsModule } from 'ng2-charts';
 
 import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
+import { ParticipantsModule } from './participants/participants.module';
 import { TasksComponent } from './home/tasks/tasks.component';
 import { CoreModule } from '../core/core.module';
 
 // Routers
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { TaskFormComponent } from './shared/components/task-form/task-form.component';
 
 @NgModule({
   imports: [
@@ -22,12 +22,13 @@ import { TaskFormComponent } from './shared/components/task-form/task-form.compo
     Ng2BreadcrumbModule.forRoot(),
     SharedModule,
     CoreModule,
-    ChartsModule
+    ChartsModule,
+    HomeModule,
+    ParticipantsModule
   ],
   exports: [],
   declarations: [
-    DashboardComponent,
-    TaskFormComponent
+    DashboardComponent
   ],
   providers: [BreadcrumbService]
 })

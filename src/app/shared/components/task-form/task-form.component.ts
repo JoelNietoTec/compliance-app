@@ -1,7 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { TasksService } from '../../services/tasks.service';
-import { Task } from '../../models/tasks.model';
+import { Task, TaskStatus } from '../../models/tasks.model';
+
+interface FormTask extends Task {
+  formBeginDate?: NgbDateStruct;
+  formExpirationDate?: NgbDateStruct;
+}
 
 @Component({
   selector: 'app-task-form',
@@ -10,17 +17,22 @@ import { Task } from '../../models/tasks.model';
 })
 export class TaskFormComponent implements OnInit {
 
-  @Input() currentTask?: Task;
+  @Input() currentTask?: FormTask;
   @Output() addTask = new EventEmitter();
   @Output() updateTask = new EventEmitter();
 
-  _task: Task;
+  _task: FormTask;
+  _taskStatus: Array<TaskStatus>;
 
   constructor(
-    private _taskService: TasksService
+    private _taskService: TasksService,
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
+
+    this._taskStatus = JSON.parse(localStorage.getItem('taskStatus'));
+
     if (this.currentTask) {
       this._task = this.currentTask;
     } else {

@@ -5,12 +5,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ConnectionService } from './connection.service';
-import { RelationshipType } from '../models/relationships.model';
+import { RelationshipType, ParticipantRelationship } from '../models/relationships.model';
 
 @Injectable()
-export class RelationTypesService {
+export class RelationshipsService {
 
   private _typesURL: string;
+  private _participantsURL: string;
+  private _relationshipsURL: string;
   private _types: Array<RelationshipType>;
   private _newType: RelationshipType;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
@@ -20,6 +22,15 @@ export class RelationTypesService {
     private _conn: ConnectionService
   ) {
     this._typesURL = _conn.APIUrl + 'relationshiptypes';
+    this._participantsURL = _conn.APIUrl + 'participants';
+  }
+
+  getRelationships(participantID: number): Observable<Array<ParticipantRelationship>> {
+    return this._http
+      .get(`${this._participantsURL}/${participantID}/relationships`)
+      .map(response => {
+        return response.json();
+      });
   }
 
   getTypes(): Observable<Array<RelationshipType>> {

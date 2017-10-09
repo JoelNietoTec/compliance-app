@@ -22,31 +22,32 @@ export class ParamMatricesService {
     this._matrixURL = _conn.APIUrl + 'parammatrices';
   }
 
-  getMatrices() {
+  getMatrices(): Observable<Array<ParamMatrix>> {
     return this._http
       .get(this._matrixURL)
-      .map(response => {
-        this._matrices = response.json();
-        return this._matrices;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
-  getMatrix(_id: number) {
+  getMatrix(_id: number): Observable<ParamMatrix> {
     return this._http
-      .get(this._matrixURL + '/' + _id)
-      .map(response => {
-        this._matrix = response.json();
-        return this._matrix;
-      });
+      .get(`${this._matrixURL}/${_id}`)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   createMatrix(mat: any): Observable<ParamMatrix> {
     return this._http
       .post(this._matrixURL, JSON.stringify(mat), { headers: this._headers })
-      .map(response => {
-        this._newMatrix = response.json();
-        return this._newMatrix;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
+  updateMatrix(id: number, matrix: ParamMatrix): Observable<ParamMatrix> {
+    return this._http
+      .put(`${this._matrixURL}/${id}`, JSON.stringify(matrix), { headers: this._headers })
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
 }

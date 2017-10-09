@@ -23,22 +23,17 @@ export class ParamCategoriesService {
     this._categoryURL = _conn.APIUrl + 'paramcategories';
   }
 
-  getCategories() {
+  getCategories(): Observable<Array<ParamCategory>> {
     return this._http
       .get(this._categoryURL)
-      .map(response => {
-        this._categories = response.json();
-        return this._categories;
-      });
+      .map((response: Response) => response.json());
   }
 
   createCategory(cat: ParamCategory): Observable<ParamCategory> {
     return this._http
       .post(this._categoryURL, JSON.stringify(cat), { headers: this._headers })
-      .map(response => {
-        this._newCategory = response.json();
-        return this._newCategory;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
 }

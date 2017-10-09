@@ -20,11 +20,9 @@ export class GendersService {
     this._gendersURL = _conn.APIUrl + 'genders';
   }
 
-  getGenders() {
-    return this._http.get(this._gendersURL)
-      .map(response => {
-        this._genders = response.json();
-        return this._genders;
-      });
+  getGenders(): Observable<Array<Gender>> {
+    return this._http
+      .get(this._gendersURL)
+      .map((response: Response) => response.json());
   }
 }

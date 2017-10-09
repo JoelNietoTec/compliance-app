@@ -18,12 +18,9 @@ export class MatrixTypesService {
     this._matrixTypeURL = _conn.APIUrl + 'MatrixTypes';
   };
 
-  getMatrixTypes() {
+  getMatrixTypes(): Observable<Array<MatrixType>> {
     return this._http
       .get(this._matrixTypeURL)
-      .map(response => {
-        this._matrixTypes = response.json();
-        return this._matrixTypes;
-      });
+      .map((response: Response) => response.json());
   }
 }

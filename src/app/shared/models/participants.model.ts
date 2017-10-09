@@ -31,7 +31,6 @@ export interface Participant {
   CreateDate?: Date;
   CreatedBy?: number;
   CreatedByUser?: User;
-  Relationships?: Array<ParticipantRelationship>;
   PEP?: Boolean;
   Nationalities?: Array<Country>;
 }

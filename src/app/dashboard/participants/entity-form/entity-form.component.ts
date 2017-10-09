@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
@@ -32,6 +33,7 @@ export class EntityFormComponent implements OnInit {
   constructor(
     private _partServ: ParticipantsService,
     private _dateFormatter: NgbDateParserFormatter,
+    private toastr: ToastsManager,
     private _router: Router
   ) {
     this._maxDate = {
@@ -59,15 +61,16 @@ export class EntityFormComponent implements OnInit {
 
   saveEntity() {
     this._entity.BirthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
-    console.log(this._entity);
     if (!this.entity) {
       this._partServ.createParticipant(this._entity)
         .subscribe(data => {
+          this.toastr.info(`ID: ${data.ID}`, 'Entity Created');
           this._router.navigate(['/Dashboard/Participants', data.ID]);
         });
     } else {
       this._partServ.updateParticipant(this._entity.ID, this._entity)
         .subscribe(data => {
+          this.toastr.info(`ID: ${this._entity.ID}`, 'Entity Updated');
           this._router.navigate(['/Dashboard/Participants', this._entity.ID]);
         });
     }

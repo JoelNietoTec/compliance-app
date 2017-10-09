@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastyModule } from 'ng2-toasty';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { SweetAlert2Module } from '@toverux/ngsweetalert2';
+
 
 // Model Services
 import { GendersService } from './services/genders.service';
@@ -19,9 +23,10 @@ import { UserService } from './services/users.service';
 import { AuthService } from './services/auth.service';
 import { DocumentsService } from './services/documents.service';
 import { CountriesService } from './services/countries.service';
-import { RelationTypesService } from './services/relationshiptypes.service';
+import { RelationshipsService } from './services/relationships.service';
 import { TasksService } from './services/tasks.service';
 import { AuthGuard } from './services/auth.guard';
+
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -35,7 +40,7 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { ScorePipe } from './pipes/score.pipe';
 
 // Directives
-import { EqualValidator } from './directives/equal-validator.directive';
+import { SaveButtonComponent } from './components/save-button/save-button.component';
 
 @NgModule({
   imports: [
@@ -43,6 +48,12 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ToastyModule.forRoot(),
     FormsModule,
     NgbModule.forRoot(),
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-lg btn-primary',
+      cancelButtonClass: 'btn btn-lg btn-outline-danger'
+    }),
     MultiselectDropdownModule
   ],
   exports: [
@@ -51,7 +62,6 @@ import { EqualValidator } from './directives/equal-validator.directive';
     CardComponent,
     ScorePipe,
     SortIconComponent,
-    EqualValidator,
     FormsModule,
     CommonModule,
     QuickCardComponent,
@@ -59,6 +69,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     TaskCardComponent,
     NgbModule,
     TaskFormComponent,
+    SweetAlert2Module,
     MultiselectDropdownModule
   ],
   providers: [
@@ -75,8 +86,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
     AuthService,
     DocumentsService,
     CountriesService,
-    RelationTypesService,
+    RelationshipsService,
     TasksService,
+    NgbActiveModal,
     AuthGuard
   ],
   declarations: [
@@ -85,9 +97,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ScorePipe,
     SortIconComponent,
     QuickCardComponent,
-    EqualValidator,
     TaskCardComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    SaveButtonComponent
   ]
 })
 export class SharedModule { }

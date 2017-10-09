@@ -33,28 +33,28 @@ export const routes: Routes = [
       {
         path: 'Home',
         canActivateChild: [AuthGuard],
-        loadChildren: () => getHomeModule()
+        loadChildren: './home/home.module#HomeModule'
       },
       {
         path: 'Participants',
         canActivateChild: [AuthGuard],
-        loadChildren: () => getParticipantsModule()
+        loadChildren:  './participants/participants.module#ParticipantsModule'
       },
       {
         path: 'Params',
         canActivateChild: [AuthGuard],
-        loadChildren: () => getParamsModule()
+        loadChildren:  './params/params.module#ParamsModule'
       },
       {
         path: 'Users',
         canActivateChild: [AuthGuard],
-        loadChildren: () => getUsersModule()
+        loadChildren:  './users/users.module#UsersModule'
 
       },
       {
         path: 'Settings',
         canActivateChild: [AuthGuard],
-        loadChildren: () => SettingsModule
+        loadChildren:  './settings/settings.module#SettingsModule'
       },
       {
         path: '**',

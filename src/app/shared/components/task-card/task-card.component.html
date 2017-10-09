@@ -10,7 +10,7 @@
     </div>
   </span>
   </div>
-  <div class="card-body">
+  <div class="card-body" (click)="click()">
     <p class="task-description">{{ task.Description}}</p>
     <p><i class="typcn typcn-calendar-outline"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>
   </div>

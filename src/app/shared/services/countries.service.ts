@@ -18,10 +18,10 @@ export class CountriesService {
   }
 
   getCountries(): Observable<Array<Country>> {
-    return this._http.get(this._countryURL)
-      .map(response => {
-        return response.json();
-      });
+    return this._http
+      .get(this._countryURL)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
 }

@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { TaskFormComponent } from '../../shared/components/task-form/task-form.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
     HomeRoutingModule,
     CalendarModule.forRoot()
   ],
-  declarations: [HomeComponent, TasksComponent, ScheduleComponent]
+  declarations: [HomeComponent, TasksComponent, ScheduleComponent],
+  entryComponents: [TaskFormComponent]
 })
 export class HomeModule { }

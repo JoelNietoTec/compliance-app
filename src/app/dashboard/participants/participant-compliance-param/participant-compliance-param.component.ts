@@ -6,7 +6,7 @@ import { Param, ParamValue, ParamSubValue, ParamTable } from '../../../shared/mo
 
 import { UtilService } from '../../../shared/services/util.service';
 import { ParticipantsService } from '../../../shared/services/participants.service';
-import { ToastyModule, ToastyService, ToastOptions, ToastData, ToastyConfig } from 'ng2-toasty';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'compliance-param',
@@ -34,11 +34,10 @@ export class ParticipantComplianceParamComponent implements OnInit {
   constructor(
     private _util: UtilService,
     private _partService: ParticipantsService,
-    private ToastyService: ToastyService,
-    private ToastyConfig: ToastyConfig,
+    private toastr: ToastsManager,
     private _router: Router
   ) {
-    this.ToastyConfig.theme = 'material';
+
   }
 
   ngOnInit() {
@@ -81,11 +80,10 @@ export class ParticipantComplianceParamComponent implements OnInit {
     this._partService.updateParam(this._partParam.ID, this._partParam)
       .subscribe(data => {
         this._router.navigate(['Dashboard/Participants', this.participant.ID]);
-        console.log(this.participant.ID);
-        this.ToastyService.success({
-          title: 'Updated Parameter',
-          msg: this.param.EnglishName
-        });
+        this.toastr.info(
+          this.param.EnglishName,
+          'Updated Parameter'
+        );
       });
   }
 }

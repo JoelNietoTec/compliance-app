@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400');
 
-body, button, input, input.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
+body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 13px;
+}
+
+button.form-control {
+  text-align: left !important;
 }
 
 main {

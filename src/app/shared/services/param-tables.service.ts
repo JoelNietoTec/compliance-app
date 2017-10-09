@@ -28,58 +28,44 @@ export class ParamTablesService {
     this._subValuesURL = _conn.APIUrl + 'paramsubvalues';
   }
 
-  getTables() {
+  getTables(): Observable<Array<ParamTable>> {
     return this._http
       .get(this._tablesURL)
-      .map(response => {
-        this._tables = response.json();
-        return this._tables;
-      });
+      .map((response: Response) => response.json());
   }
 
-  getTable(_id: number) {
+  getTable(_id: number): Observable<ParamTable> {
     return this._http
-      .get(this._tablesURL + '/' + _id)
-      .map(response => {
-        this._table = response.json();
-        return this._table;
-      });
+      .get(`${this._tablesURL}/${_id}`)
+      .map((response: Response) => response.json());
   }
 
   createtable(tab: ParamTable): Observable<ParamTable> {
     return this._http
       .post(this._tablesURL, JSON.stringify(tab), { headers: this._headers })
-      .map(response => {
-        this._newTable = response.json();
-        return this._newTable;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   addValue(val: ParamValue): Observable<ParamValue> {
     return this._http
       .post(this._valuesURL, JSON.stringify(val), { headers: this._headers })
-      .map(response => {
-        this._newValue = response.json();
-        return this._newValue;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   addSubValue(val: ParamSubValue): Observable<ParamSubValue> {
     return this._http
       .post(this._subValuesURL, JSON.stringify(val), { headers: this._headers })
-      .map(response => {
-        this._newSubValue = response.json();
-        return this._newSubValue;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
-  editValue(_id: number, _val: ParamValue): Observable<ParamValue> {
+  editValue(id: number, val: ParamValue): Observable<ParamValue> {
     return this._http
-      .put(this._valuesURL + '/' + _id, JSON.stringify(_val), { headers: this._headers })
-      .map(response => {
-        this._newValue = response.json();
-        return this._newValue;
-      });
+      .put(`${this._valuesURL}/${id}`, JSON.stringify(val), { headers: this._headers })
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
 }

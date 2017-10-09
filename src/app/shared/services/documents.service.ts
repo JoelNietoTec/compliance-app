@@ -27,40 +27,31 @@ export class DocumentsService {
     this._partURL = _conn.APIUrl + 'participants';
   }
 
-  getTypes() {
+  getTypes(): Observable<Array<ParticipantDocument>> {
     return this._http
       .get(this._docTypeURL)
-      .map(response => {
-        this._types = response.json();
-        return this._types;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   getDocByParticipant(participantID: number): Observable<Array<ParticipantDocument>> {
     return this._http
       .get(`${this._partURL}/${participantID}/documents`)
-      .map(response => {
-        return response.json();
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   saveDoc(doc: ParticipantDocument): Observable<ParticipantDocument> {
     return this._http
       .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
-      .map(response => {
-        return response.json();
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   deleteDoc(id: number) {
     return this._http
       .delete(`${this._partDocURL}/${id}`, { headers: this._headers })
-      .map(response => {
-        return response.json();
-      });
-
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
-
-
-
 }

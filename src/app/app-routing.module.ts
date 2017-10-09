@@ -18,11 +18,11 @@ export function getAuthModule() {
 export const routes: Routes = [
   {
     path: 'Dashboard',
-    loadChildren: () => getDashboardModule()
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: 'login',
-    loadChildren: () => getAuthModule()
+    loadChildren: './authentication/authentication.module#AuthenticationModule'
   },
   {
     path: '**',

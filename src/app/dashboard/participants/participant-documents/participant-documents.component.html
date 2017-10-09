@@ -3,7 +3,7 @@
     <participant-document *ngIf="document && _types" [types]="_types" [doc]="document" [index]="i" (removeDocument)="removeDoc($event)"></participant-document>
   </ng-container>
   <participant-document *ngIf="_showForm"  [types]="_types" [participant]="participant" (addDocument)="addDoc($event)"></participant-document>
-  <div class="d-flex ">
+  <div class="d-flex justify-content-end">
     <button *ngIf="!_showForm" type="button" class="btn btn-primary add-link" (click)="_toggleForm()"><span class="typcn typcn-document-add"></span> Add Document</button>
   </div>
 </div>

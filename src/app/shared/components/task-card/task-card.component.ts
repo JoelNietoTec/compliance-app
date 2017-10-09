@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { TasksService } from '../../services/tasks.service';
 import { Task, TaskStatus } from '../../models/tasks.model';
@@ -12,6 +12,7 @@ import { Task, TaskStatus } from '../../models/tasks.model';
 export class TaskCardComponent implements OnInit {
 
   @Input() task: Task;
+  @Output() select = new EventEmitter();
 
   constructor(
     private taskService: TasksService
@@ -24,5 +25,9 @@ export class TaskCardComponent implements OnInit {
       .subscribe(data => {
         this.task = data;
       });
+  }
+
+  click() {
+    this.select.emit(this.task);
   }
 }

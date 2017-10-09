@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
@@ -33,6 +34,7 @@ export class IndividualFormComponent implements OnInit {
   _minDate: any;
   _countries: Array<Country> = JSON.parse(localStorage.getItem('countries'));
   _nationalities: Array<IMultiSelectOption> = [];
+  _selCountries: Array<number> = [];
 
   mySettings: IMultiSelectSettings = {
     enableSearch: true,
@@ -46,6 +48,7 @@ export class IndividualFormComponent implements OnInit {
     private _partServ: ParticipantsService,
     private _dateFormatter: NgbDateParserFormatter,
     private _util: UtilService,
+    private toastr: ToastsManager,
     private _router: Router
   ) {
     this._genders = [
@@ -80,11 +83,17 @@ export class IndividualFormComponent implements OnInit {
   ngOnInit() {
     if (!this.individual) {
       this._individual = {
-        ParticipantTypeID: 1
+        ParticipantTypeID: 1,
+        Nationalities: []
       };
     } else {
       this._individual = this.individual;
       this._individual.formBirthDate = this._dateFormatter.parse(this._individual.BirthDate.toString());
+
+      this._individual.Nationalities.forEach(nationality => {
+        this._selCountries.push(nationality.ID);
+      });
+
       console.log(this._individual);
     }
 
@@ -96,20 +105,32 @@ export class IndividualFormComponent implements OnInit {
       };
       this._nationalities.push(item);
     });
+  }
 
+  setNationalities() {
+    if (this._individual.Nationalities) {
+      console.log('this');
+      this._selCountries.forEach(c => {
+        const country = this._util.filterByID(this._countries, c);
+        this._individual.Nationalities.push(country);
+      });
+    }
   }
 
   saveIndividual() {
     this._individual.BirthDate = new Date(this._dateFormatter.format(this._individual.formBirthDate));
     if (!this.individual) {
+      this.setNationalities();
+      console.log(this._individual);
       this._partServ.createParticipant(this._individual)
         .subscribe(data => {
+          this.toastr.info(`ID: ${data.ID}`, 'Individual Created');
           this._router.navigate(['Dashboard/Participants', data.ID]);
         });
     } else {
-      console.log('This');
       this._partServ.updateParticipant(this._individual.ID, this._individual)
         .subscribe(data => {
+          this.toastr.info(`ID: ${this._individual.ID}`, 'Individual Updated');
           this._router.navigate(['Dashboard/Participants', this._individual.ID]);
         });
     }

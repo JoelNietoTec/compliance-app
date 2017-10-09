@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { Task, TaskStatus } from '../../../shared/models/tasks.model';
 import { TasksService } from '../../../shared/services/tasks.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { TaskFormComponent } from '../../../shared/components/task-form/task-form.component';
 
 interface FormTask extends Task {
   formBeginDate?: NgbDateStruct;
@@ -20,11 +21,14 @@ interface FormTask extends Task {
 export class TasksComponent implements OnInit {
 
   @Input() taskStatus: Array<TaskStatus>;
+  @ViewChild(TaskFormComponent)
+
+  private taskForm: TaskFormComponent;
 
   closeResult: string;
 
-  _newTask: FormTask = {};
-  _currentTask: Task;
+  _currentTask: FormTask = {};
+  _newTask: Task = {};
   _tasks: Array<Task>;
 
   constructor(
@@ -43,17 +47,22 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  open(content) {
-    this.modalService.open(content, { size: 'lg' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.addTask();
-      this._newTask = {};
-      console.log(this.closeResult);
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this._newTask = {};
-      console.log(this.closeResult);
-    });
+
+  open() {
+    const modalRef = this.modalService.open(TaskFormComponent, { size: 'lg' });
+    modalRef.result
+      .then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+        console.log(this._currentTask);
+        this.saveTask();
+        console.log(this.closeResult);
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this._currentTask = {};
+        console.log(this.closeResult);
+      });
+
+    modalRef.componentInstance.currentTask = this._currentTask;
   }
 
   private getDismissReason(reason: any): string {
@@ -66,19 +75,52 @@ export class TasksComponent implements OnInit {
     }
   }
 
+  selectTask(selectedTask: Task) {
+    this._currentTask = Object.assign({}, this._currentTask, selectedTask);
+    if (this._currentTask.BeginDate) {
+      this._currentTask.formBeginDate = this._dateFormatter.parse(this._currentTask.BeginDate.toString());
+    };
+    if (selectedTask.ExpirationDate) {
+      this._currentTask.formExpirationDate = this._dateFormatter.parse(this._currentTask.ExpirationDate.toString());
+    };
+    this.open();
+  }
+
   sortTask() {
     this._tasks = this._util.sortBy(this._tasks, 'ExpirationDate', true);
   }
 
+  saveTask() {
+    this._currentTask.BeginDate = new Date(this._dateFormatter.format(this._currentTask.formBeginDate));
+    this._currentTask.ExpirationDate = new Date(this._dateFormatter.format(this._currentTask.formExpirationDate));
+    if (!this._currentTask.ID) {
+      this.addTask();
+    } else {
+      this.updateTask();
+    }
+  }
+
   addTask() {
-    this._newTask.BeginDate = new Date(this._dateFormatter.format(this._newTask.formBeginDate));
-    this._newTask.ExpirationDate = new Date(this._dateFormatter.format(this._newTask.formExpirationDate));
-    this._taskService.createTasks(this._newTask)
+    this._taskService.createTasks(this._currentTask)
       .subscribe(data => {
         this._tasks.push(data);
         this.sortTask();
         this._currentTask = {};
       });
   }
+
+  updateTask() {
+    this._taskService.updateTask(this._currentTask.ID, this._currentTask)
+      .subscribe(data => {
+
+        const oldItem = this._util.filterByID(this._tasks, this._currentTask.ID);
+        const index = this._tasks.indexOf(oldItem);
+
+        this._tasks[index] = this._currentTask;
+      });
+  }
+
+
+
 
 }
