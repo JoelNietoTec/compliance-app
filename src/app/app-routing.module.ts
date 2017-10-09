@@ -7,28 +7,10 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { AuthenticationModule } from './authentication/authentication.module';
 import { AuthGuard } from './shared/services/auth.guard';
 
-export function getDashboardModule() {
-  return DashboardModule;
-}
-
-export function getAuthModule() {
-  return AuthenticationModule;
-}
-
 export const routes: Routes = [
-  {
-    path: 'Dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
-  },
-  {
-    path: 'login',
-    loadChildren: './authentication/authentication.module#AuthenticationModule'
-  },
-  {
-    path: '**',
-    pathMatch: 'full',
-    redirectTo: 'Dashboard'
-  }
+  { path: 'login', loadChildren: './authentication/authentication.module#AuthenticationModule' },
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

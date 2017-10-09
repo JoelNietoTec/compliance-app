@@ -36,9 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     NgbModule.forRoot(),
     SharedModule,
-    DashboardModule,
     AppRoutingModule,
-    AuthenticationModule,
     ChartsModule,
     ToastModule.forRoot(),
     ReactiveFormsModule

@@ -17,11 +17,6 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
-      },
-      {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: 'login'
       }
     ]
   }
@@ -35,5 +30,6 @@ export class AuthenticationRoutingModule { }
 
 export const routedComponents = [
   AuthenticationComponent,
+  LoginComponent,
   RegisterComponent
 ];

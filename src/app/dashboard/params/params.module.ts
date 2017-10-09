@@ -27,7 +27,9 @@ import { ParamValueComponent } from './param-value/param-value.component';
     SharedModule,
     ParamsRoutingModule
   ],
-  exports: [],
+  exports: [
+    ParamsComponent
+  ],
   declarations: [
     ParamsComponent,
     ParamCategoriesComponent,

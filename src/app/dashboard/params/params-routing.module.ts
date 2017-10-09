@@ -15,22 +15,22 @@ export const routes: Routes = [
     component: ParamsComponent,
     children: [
       {
-        path: 'Matrices', component: ParamMatricesComponent
+        path: 'matrices', component: ParamMatricesComponent
       },
       {
-        path: 'Tables', component: ParamTablesComponent
+        path: 'tables', component: ParamTablesComponent
       },
       {
-        path: 'Tables/:id', component: ParamTableComponent
+        path: 'tables/:id', component: ParamTableComponent
       },
       {
-        path: 'Matrices/:id', component: ParamMatrixDetailsComponent
+        path: 'matrices/:id', component: ParamMatrixDetailsComponent
       },
       {
-        path: 'Matrices/:id/Edit', component: ParamMatrixComponent
+        path: 'matrices/:id/edit', component: ParamMatrixComponent
       },
       {
-        path: '**', pathMatch: 'full', redirectTo: 'Matrices'
+        path: '**', pathMatch: 'full', redirectTo: 'matrices'
       }
     ]
   },

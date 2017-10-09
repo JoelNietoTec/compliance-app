@@ -9,6 +9,9 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { HomeModule } from './home/home.module';
 import { ParticipantsModule } from './participants/participants.module';
+import { ParamsModule } from './params/params.module';
+import { UsersModule } from './users/users.module';
+import { SettingsModule } from './settings/settings.module';
 import { TasksComponent } from './home/tasks/tasks.component';
 import { CoreModule } from '../core/core.module';
 
@@ -24,7 +27,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     CoreModule,
     ChartsModule,
     HomeModule,
-    ParticipantsModule
+    UsersModule,
+    SettingsModule
   ],
   exports: [],
   declarations: [
