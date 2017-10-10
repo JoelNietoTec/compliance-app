@@ -598,9 +598,11 @@ module.exports = "<form (ngSubmit)=\"onSubmit()\" class=\"card\">\r\n  <div clas
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamTableComplexComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -614,9 +616,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamTableComplexComponent = /** @class */ (function () {
-    function ParamTableComplexComponent(_tableService) {
+    function ParamTableComplexComponent(_tableService, toastr) {
         this._tableService = _tableService;
+        this.toastr = toastr;
     }
     ParamTableComplexComponent.prototype.ngOnInit = function () {
         this._newValue = {};
@@ -626,13 +630,14 @@ var ParamTableComplexComponent = /** @class */ (function () {
         this._newValue.ParamTableID = this._table.ID;
         this._tableService.addValue(this._newValue)
             .subscribe(function (data) {
+            _this.toastr.success(data.EnglishDisplayValue, 'Category created');
             _this._table.ParamValues.push(data);
             _this._newValue = {};
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
     ], ParamTableComplexComponent.prototype, "_table", void 0);
     ParamTableComplexComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -640,10 +645,10 @@ var ParamTableComplexComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-table-complex/param-table-complex.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-table-complex/param-table-complex.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
     ], ParamTableComplexComponent);
     return ParamTableComplexComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=param-table-complex.component.js.map
