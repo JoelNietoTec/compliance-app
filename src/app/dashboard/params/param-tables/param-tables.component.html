@@ -3,66 +3,59 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card" *ngIf="tables">
-      <div class="card-header">
-        <div (click)="addTable()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add</div>
-      </div>
       <div class="card-body">
         <h4 class="card-title">All Tables</h4>
         <table class="table table-sm">
           <thead>
             <tr>
+              <th class="text-center">ID</th>
               <th>Name</th>
               <th>English Name</th>
               <th>Type</th>
               <th>Create Date</th>
               <th>Modificate Date</th>
-              <th class="text-center">Values</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let table of tables">
+              <td class="text-center">{{ table.ID }}</td>
               <td>{{ table.Name }}</td>
               <td>{{ table.EnglishName }}</td>
-              <td>{{table.TableType.EnglishName }}</td>
+              <td>{{ table.TableType.EnglishName }}</td>
               <td>{{ table.CreateDate | date:'medium' }}</td>
               <td>{{ table.ModificateDate }}</td>
-              <td class="text-center"><a [routerLink]="[table.ID]">{{ table.ParamValues.length }}</a></td>
+              <td class="text-center">
+                <a [routerLink]="[table.ID]"><i class="fa fa-bars fa-lg text-primary" placement="top" ngbTooltip="Values" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <i class="fa fa-certificate fa-lg text-success" aria-hidden="true"></i>
+              </td>
+              <td>
+                <input [(ngModel)]="_newTable.Name" type="text" name="name" id="name" class="form-control form-control-sm"
+                  placeholder="Table Name" [disabled]="_saving">
+              </td>
+              <td>
+                <input [(ngModel)]="_newTable.EnglishName" type="text" name="english-name" id="english-name" class="form-control form-control-sm"
+                  placeholder="Table English Name" [disabled]="_saving">
+              </td>
+              <td>
+                <select [(ngModel)]="_newTable.TableTypeID" class="custom-select form-control form-control-sm" name="table-type" id="table-type">
+                  <option value="undefined" disabled> ---Select one--- </option>
+                  <option *ngFor="let type of _tableTypes" [value]="type.ID">{{ type.EnglishName }}</option>
+                </select>
+              </td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <i class="fa fa-plus-square fa-lg text-primary" (click)="createTable()" aria-hidden="true" placement="top" ngbTooltip="Add"></i>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <form (ngSubmit)="onSubmit()" class="card" [hidden]="!_showNewTable">
-      <div class="card-body">
-        <h4 class="card-title">
-          New Table
-        </h4>
-        <div class="row">
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input [(ngModel)] = "newTable.Name" type="text" name="name" id="name" class="form-control" placeholder="Table Name" [disabled]="_saving">
-            </div>
-          </div>
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="english-name">English Name</label>
-              <input [(ngModel)] = "newTable.EnglishName" type="text" name="english-name" id="english-name" class="form-control" placeholder="Table English Name" [disabled]="_saving">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="table-type">Table Types</label>
-              <select [(ngModel)] = "newTable.TableType" class="custom-select form-control" name="table-type" id="table-type">
-                <option *ngFor="let type of _tableTypes" [ngValue]="type">{{ type.EnglishName }}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="_saving"><i class="fa fa-save" aria-hidden="true" ></i> Save</button>
-      </div>
-    </form>
   </div>
 </div>

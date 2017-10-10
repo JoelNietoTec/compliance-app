@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamTable, ParamValue } from '../../../shared/models/params.model';
@@ -19,7 +20,8 @@ export class ParamTableSimpleComponent implements OnInit {
   _editing: Boolean;
 
   constructor(
-    private _tableService: ParamTablesService
+    private _tableService: ParamTablesService,
+    private toastr: ToastsManager
   ) { }
 
   ngOnInit() {
@@ -27,23 +29,35 @@ export class ParamTableSimpleComponent implements OnInit {
     this._currentValue = {};
     this._editing = false;
   }
+
   onSubmit() {
     this._saving = true;
     this._newValue.ParamTableID = this._table.ID;
     console.log(this._newValue);
     this._tableService.addValue(this._newValue)
       .subscribe(data => {
-        console.log(data);
+        this.toastr.success(data.EnglishDisplayValue, 'Value created');
         this._saving = false;
         this._table.ParamValues.push(data);
         this._newValue = {};
       });
   }
 
-  editValue(val: ParamValue) {
+  createValue() {
+    this._saving = true;
+    this._newValue.ParamTableID = this._table.ID;
+    this._tableService.addValue(this._newValue)
+      .subscribe(data => {
+        this.toastr.success(data.EnglishDisplayValue, 'Value created');
+        this._saving = false;
+        this._table.ParamValues.push(data);
+        this._newValue = {};
+      });
+  }
+
+  selectValue(val: ParamValue) {
     this._editing = true;
     this._currentValue = val;
-    window.scroll(0, 0);
   }
 
   onSaveValue() {
@@ -51,6 +65,21 @@ export class ParamTableSimpleComponent implements OnInit {
     this._tableService.editValue(this._currentValue.ID, this._currentValue)
       .subscribe(data => {
         console.log(data);
+        this._saving = false;
+        this._editing = false;
+        this._currentValue = {};
+      });
+  }
+
+  cancelUpdate() {
+    this._currentValue = {};
+  }
+
+  updateValue() {
+    this._saving = true;
+    this._tableService.editValue(this._currentValue.ID, this._currentValue)
+      .subscribe(data => {
+        this.toastr.success(this._currentValue.EnglishDisplayValue, 'Value updated');
         this._saving = false;
         this._editing = false;
         this._currentValue = {};

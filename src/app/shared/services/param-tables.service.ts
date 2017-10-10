@@ -61,6 +61,13 @@ export class ParamTablesService {
       .catch((err: Error) => err.message);
   }
 
+  editSubValue(id: number, val: ParamSubValue): Observable<ParamSubValue> {
+    return this._http
+      .put(`${this._subValuesURL}/${id}`, JSON.stringify(val), { headers: this._headers })
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
   editValue(id: number, val: ParamValue): Observable<ParamValue> {
     return this._http
       .put(`${this._valuesURL}/${id}`, JSON.stringify(val), { headers: this._headers })

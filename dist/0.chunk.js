@@ -671,7 +671,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"card-edit\" *ngIf=\"_editing\">\r\n  <div class=\"card card-outline-success\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">\r\n        Editing Value\r\n      </h4>\r\n      <form (ngSubmit)=\"onSaveValue()\" class=\"row\">\r\n        <div class=\"col-md-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"display\">Display Value</label>\r\n            <input type=\"text\" [(ngModel)]=\"_currentValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n              [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"english-display\">English Display Value</label>\r\n            <input type=\"text\" [(ngModel)]=\"_currentValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n              placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-2\">\r\n          <div class=\"form-group\">\r\n            <label for=\"score\">Score</label>\r\n            <input type=\"number\" [(ngModel)]=\"_currentValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-2 d-flex p-2 align-items-end form-group\">\r\n          <button type=\"submit \" class=\"btn btn-success align-bottom\" [disabled]=\"_saving\">Save Changes <i class=\"fa fa-lock\" aria-hidden=\"true\" ></i></button>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"!_editing\">\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">\r\n        New Value\r\n      </h4>\r\n      <form (ngSubmit)=\"onSubmit()\" class=\"row\">\r\n        <div class=\"col-md-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"display\">Display Value</label>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n              [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"english-display\">English Display Value</label>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n              placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-2\">\r\n          <div class=\"form-group\">\r\n            <label for=\"score\">Score</label>\r\n            <input type=\"number\" [(ngModel)]=\"_newValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-2 d-flex p-2 align-items-end form-group\">\r\n          <button type=\"submit \" class=\"btn btn-primary align-bottom\" [disabled]=\"_saving\">Add <i class=\"fa fa-plus-circle\" aria-hidden=\"true\" ></i></button>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Table Values</h4>\r\n    <table class=\"table table-sm table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>Display Value</th>\r\n          <th>English Display Value</th>\r\n          <th class=\"text-center\">Score</th>\r\n          <th class=\"text-center\">Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let value of _table.ParamValues\">\r\n          <td>{{ value.DisplayValue }}</td>\r\n          <td>{{ value.EnglishDisplayValue }}</td>\r\n          <td class=\"text-center\">{{ value.Score | number: '1.2-2' }}</td>\r\n          <td class=\"text-center\"><span (click)=\"editValue(value)\"><i class=\"fa fa-edit text-success\" aria-hidden=\"true\"></i></span></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Table Values</h4>\r\n    <table class=\"table table-sm table-squared table-bordered\">\r\n      <thead>\r\n        <tr>\r\n          <th>Display Value</th>\r\n          <th>English Display Value</th>\r\n          <th class=\"text-center\">Score</th>\r\n          <th class=\"text-center\">Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let value of _table.ParamValues\">\r\n          <tr *ngIf=\"value.ID!=_currentValue.ID\" (dblclick)=\"selectValue(value)\" >\r\n            <td>{{ value.DisplayValue }}</td>\r\n            <td>{{ value.EnglishDisplayValue }}</td>\r\n            <td class=\"text-center\">{{ value.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(value)\" placement=\"top\" ngbTooltip=\"Edit\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"value.ID==_currentValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n                [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n                placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"number\" [(ngModel)]=\"_currentValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" placement=\"top\" ngbTooltip=\"Save\" aria-hidden=\"true\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" placement=\"top\" ngbTooltip=\"Save\"placement=\"top\" ngbTooltip=\"Cancel\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n\r\n        <tr>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Display Value\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"number\" [(ngModel)]=\"_newValue.Score\" name=\"score\" id=\"score\" class=\"form-control form-control-sm\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createValue()\" placement=\"top\" ngbTooltip=\"Add\" aria-hidden=\"true\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -680,9 +680,11 @@ module.exports = "<div id=\"card-edit\" *ngIf=\"_editing\">\r\n  <div class=\"ca
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamTableSimpleComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -696,9 +698,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamTableSimpleComponent = /** @class */ (function () {
-    function ParamTableSimpleComponent(_tableService) {
+    function ParamTableSimpleComponent(_tableService, toastr) {
         this._tableService = _tableService;
+        this.toastr = toastr;
         this._saving = false;
     }
     ParamTableSimpleComponent.prototype.ngOnInit = function () {
@@ -713,16 +717,27 @@ var ParamTableSimpleComponent = /** @class */ (function () {
         console.log(this._newValue);
         this._tableService.addValue(this._newValue)
             .subscribe(function (data) {
-            console.log(data);
+            _this.toastr.success(data.EnglishDisplayValue, 'Value created');
             _this._saving = false;
             _this._table.ParamValues.push(data);
             _this._newValue = {};
         });
     };
-    ParamTableSimpleComponent.prototype.editValue = function (val) {
+    ParamTableSimpleComponent.prototype.createValue = function () {
+        var _this = this;
+        this._saving = true;
+        this._newValue.ParamTableID = this._table.ID;
+        this._tableService.addValue(this._newValue)
+            .subscribe(function (data) {
+            _this.toastr.success(data.EnglishDisplayValue, 'Value created');
+            _this._saving = false;
+            _this._table.ParamValues.push(data);
+            _this._newValue = {};
+        });
+    };
+    ParamTableSimpleComponent.prototype.selectValue = function (val) {
         this._editing = true;
         this._currentValue = val;
-        window.scroll(0, 0);
     };
     ParamTableSimpleComponent.prototype.onSaveValue = function () {
         var _this = this;
@@ -735,9 +750,23 @@ var ParamTableSimpleComponent = /** @class */ (function () {
             _this._currentValue = {};
         });
     };
+    ParamTableSimpleComponent.prototype.cancelUpdate = function () {
+        this._currentValue = {};
+    };
+    ParamTableSimpleComponent.prototype.updateValue = function () {
+        var _this = this;
+        this._saving = true;
+        this._tableService.editValue(this._currentValue.ID, this._currentValue)
+            .subscribe(function (data) {
+            _this.toastr.success(_this._currentValue.EnglishDisplayValue, 'Value updated');
+            _this._saving = false;
+            _this._editing = false;
+            _this._currentValue = {};
+        });
+    };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
     ], ParamTableSimpleComponent.prototype, "_table", void 0);
     ParamTableSimpleComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -745,10 +774,10 @@ var ParamTableSimpleComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
     ], ParamTableSimpleComponent);
     return ParamTableSimpleComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=param-table-simple.component.js.map
@@ -890,7 +919,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-tables/param-tables.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Param Tables</h3>\r\n<app-loading-modal *ngIf=\"!tables\"></app-loading-modal>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-header\">\r\n        <div (click)=\"addTable()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Add</div>\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">All Tables</h4>\r\n        <table class=\"table table-sm\">\r\n          <thead>\r\n            <tr>\r\n              <th>Name</th>\r\n              <th>English Name</th>\r\n              <th>Type</th>\r\n              <th>Create Date</th>\r\n              <th>Modificate Date</th>\r\n              <th class=\"text-center\">Values</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let table of tables\">\r\n              <td>{{ table.Name }}</td>\r\n              <td>{{ table.EnglishName }}</td>\r\n              <td>{{table.TableType.EnglishName }}</td>\r\n              <td>{{ table.CreateDate | date:'medium' }}</td>\r\n              <td>{{ table.ModificateDate }}</td>\r\n              <td class=\"text-center\"><a [routerLink]=\"[table.ID]\">{{ table.ParamValues.length }}</a></td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <form (ngSubmit)=\"onSubmit()\" class=\"card\" [hidden]=\"!_showNewTable\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">\r\n          New Table\r\n        </h4>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name</label>\r\n              <input [(ngModel)] = \"newTable.Name\" type=\"text\" name=\"name\" id=\"name\" class=\"form-control\" placeholder=\"Table Name\" [disabled]=\"_saving\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"english-name\">English Name</label>\r\n              <input [(ngModel)] = \"newTable.EnglishName\" type=\"text\" name=\"english-name\" id=\"english-name\" class=\"form-control\" placeholder=\"Table English Name\" [disabled]=\"_saving\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <div class=\"form-group\">\r\n              <label for=\"table-type\">Table Types</label>\r\n              <select [(ngModel)] = \"newTable.TableType\" class=\"custom-select form-control\" name=\"table-type\" id=\"table-type\">\r\n                <option *ngFor=\"let type of _tableTypes\" [ngValue]=\"type\">{{ type.EnglishName }}</option>\r\n              </select>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"_saving\"><i class=\"fa fa-save\" aria-hidden=\"true\" ></i> Save</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h3>Param Tables</h3>\r\n<app-loading-modal *ngIf=\"!tables\"></app-loading-modal>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">All Tables</h4>\r\n        <table class=\"table table-sm\">\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">ID</th>\r\n              <th>Name</th>\r\n              <th>English Name</th>\r\n              <th>Type</th>\r\n              <th>Create Date</th>\r\n              <th>Modificate Date</th>\r\n              <th class=\"text-center\">Actions</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let table of tables\">\r\n              <td class=\"text-center\">{{ table.ID }}</td>\r\n              <td>{{ table.Name }}</td>\r\n              <td>{{ table.EnglishName }}</td>\r\n              <td>{{ table.TableType.EnglishName }}</td>\r\n              <td>{{ table.CreateDate | date:'medium' }}</td>\r\n              <td>{{ table.ModificateDate }}</td>\r\n              <td class=\"text-center\">\r\n                <a [routerLink]=\"[table.ID]\"><i class=\"fa fa-bars fa-lg text-primary\" placement=\"top\" ngbTooltip=\"Values\" aria-hidden=\"true\"></i></a>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-certificate fa-lg text-success\" aria-hidden=\"true\"></i>\r\n              </td>\r\n              <td>\r\n                <input [(ngModel)]=\"_newTable.Name\" type=\"text\" name=\"name\" id=\"name\" class=\"form-control form-control-sm\"\r\n                  placeholder=\"Table Name\" [disabled]=\"_saving\">\r\n              </td>\r\n              <td>\r\n                <input [(ngModel)]=\"_newTable.EnglishName\" type=\"text\" name=\"english-name\" id=\"english-name\" class=\"form-control form-control-sm\"\r\n                  placeholder=\"Table English Name\" [disabled]=\"_saving\">\r\n              </td>\r\n              <td>\r\n                <select [(ngModel)]=\"_newTable.TableTypeID\" class=\"custom-select form-control form-control-sm\" name=\"table-type\" id=\"table-type\">\r\n                  <option value=\"undefined\" disabled> ---Select one--- </option>\r\n                  <option *ngFor=\"let type of _tableTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n                </select>\r\n              </td>\r\n              <td></td>\r\n              <td></td>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createTable()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Add\"></i>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -899,8 +928,10 @@ module.exports = "<h3>Param Tables</h3>\r\n<app-loading-modal *ngIf=\"!tables\">
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamTablesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -914,11 +945,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamTablesComponent = /** @class */ (function () {
-    function ParamTablesComponent(_tablesService, _util) {
+    function ParamTablesComponent(_tablesService, _util, toastr) {
         this._tablesService = _tablesService;
         this._util = _util;
-        this.newTable = {};
+        this.toastr = toastr;
+        this._newTable = {};
         this._saving = false;
     }
     ParamTablesComponent.prototype.ngOnInit = function () {
@@ -943,14 +976,27 @@ var ParamTablesComponent = /** @class */ (function () {
     ParamTablesComponent.prototype.onSubmit = function () {
         var _this = this;
         this._saving = true;
-        this.newTable.CreateDate = new Date();
-        this.newTable.TableTypeID = this.newTable.TableType.ID;
-        console.log(this.newTable);
-        this._tablesService.createtable(this.newTable)
+        this._newTable.CreateDate = new Date();
+        this._newTable.TableTypeID = this._newTable.TableType.ID;
+        console.log(this._newTable);
+        this._tablesService.createtable(this._newTable)
             .subscribe(function (data) {
             data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
             _this.tables.push(data);
-            _this.newTable = {};
+            _this._newTable = {};
+            _this._saving = false;
+        });
+    };
+    ParamTablesComponent.prototype.createTable = function () {
+        var _this = this;
+        this._saving = true;
+        this._newTable.CreateDate = new Date();
+        this._tablesService.createtable(this._newTable)
+            .subscribe(function (data) {
+            _this.toastr.success(data.EnglishName, 'Table Created');
+            data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
+            _this.tables.push(data);
+            _this._newTable = {};
             _this._saving = false;
         });
     };
@@ -963,10 +1009,10 @@ var ParamTablesComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-tables/param-tables.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-tables/param-tables.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__["a" /* UtilService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
     ], ParamTablesComponent);
     return ParamTablesComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=param-tables.component.js.map
@@ -994,7 +1040,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-value/param-value.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Group: {{ _value.DisplayValue }}\r\n    </h4>\r\n    <table class=\"table table-sm table-bordered\">\r\n      <thead>\r\n        <tr>\r\n          <th>Display</th>\r\n          <th>English Display</th>\r\n          <th>Score</th>\r\n          <th class=\"text-center\">Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let item of _value.ParamSubValues\">\r\n          <td>{{ item.DisplayValue }}</td>\r\n          <td>{{ item.EnglishDisplayValue}}</td>\r\n          <td>{{ item.Score }}</td>\r\n          <td></td>\r\n        </tr>\r\n        <tr>\r\n          <td><input [(ngModel)]=\"_newSubValue.DisplayValue\" class=\"form-control form-control-sm\" name=\"name\" type=\"text\"></td>\r\n          <td><input [(ngModel)]=\"_newSubValue.EnglishDisplayValue\" type=\"text\" name=\"english-name\" class=\"form-control form-control-sm\"></td>\r\n          <td><input [(ngModel)]=\"_newSubValue.Score\" type=\"number\" class=\"form-control form-control-sm\" name=\"score\"></td>\r\n          <td class=\"text-center\">\r\n            <div class=\"btn btn-primary btn-sm\" (click)=\"addValue()\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i></div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Group: {{ _value.DisplayValue }}\r\n    </h4>\r\n    <table class=\"table table-sm table-bordered\">\r\n      <thead>\r\n        <tr>\r\n          <th>Display</th>\r\n          <th>English Display</th>\r\n          <th>Score</th>\r\n          <th class=\"text-center\">Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let item of _value.ParamSubValues\">\r\n          <tr *ngIf=\"item.ID!=_currentSubValue.ID\" (dblclick)=\"selectValue(item)\">\r\n            <td>{{ item.DisplayValue }}</td>\r\n            <td>{{ item.EnglishDisplayValue}}</td>\r\n            <td>{{ item.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(item)\" placement=\"top\" ngbTooltip=\"Edit\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"item.ID==_currentSubValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.DisplayValue\" class=\"form-control form-control-sm\" name=\"name\" type=\"text\">\r\n            </td>\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.EnglishDisplayValue\" type=\"text\" name=\"english-name\" class=\"form-control form-control-sm\">\r\n            </td>\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.Score\" type=\"number\" class=\"form-control form-control-sm\" name=\"score\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Save\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancel\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n        <tr>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.DisplayValue\" class=\"form-control form-control-sm\" name=\"name\" type=\"text\" placeholder=\"Display Name\">\r\n          </td>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.EnglishDisplayValue\" type=\"text\" name=\"english-name\" class=\"form-control form-control-sm\"\r\n              placeholder=\"English Display\">\r\n          </td>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.Score\" type=\"number\" class=\"form-control form-control-sm\" name=\"score\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" aria-hidden=\"true\" (click)=\"addValue()\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1003,9 +1049,11 @@ module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamValueComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1019,9 +1067,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamValueComponent = /** @class */ (function () {
-    function ParamValueComponent(_tableService) {
+    function ParamValueComponent(_tableService, toastr) {
         this._tableService = _tableService;
+        this.toastr = toastr;
+        this._currentSubValue = {};
         this._saving = false;
         this._newSubValue = {};
     }
@@ -1031,13 +1082,28 @@ var ParamValueComponent = /** @class */ (function () {
         this._newSubValue.ParamValueID = this._value.ID;
         this._tableService.addSubValue(this._newSubValue)
             .subscribe(function (data) {
+            _this.toastr.success(data.EnglishDisplayValue, 'Value added');
             _this._value.ParamSubValues.push(data);
             _this._newSubValue = {};
         });
     };
+    ParamValueComponent.prototype.selectValue = function (value) {
+        this._currentSubValue = value;
+    };
+    ParamValueComponent.prototype.cancelUpdate = function () {
+        this._currentSubValue = {};
+    };
+    ParamValueComponent.prototype.updateValue = function () {
+        var _this = this;
+        this._tableService.editSubValue(this._currentSubValue.ID, this._currentSubValue)
+            .subscribe(function (data) {
+            _this.toastr.success(_this._currentSubValue.EnglishDisplayValue, 'Value updated');
+            _this._currentSubValue = {};
+        });
+    };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__["ParamValue"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__["ParamValue"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamValue"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__["ParamValue"]) === "function" && _a || Object)
     ], ParamValueComponent.prototype, "_value", void 0);
     ParamValueComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1045,10 +1111,10 @@ var ParamValueComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-value/param-value.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-value/param-value.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
     ], ParamValueComponent);
     return ParamValueComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=param-value.component.js.map

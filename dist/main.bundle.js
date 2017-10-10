@@ -1553,6 +1553,12 @@ var ParamTablesService = /** @class */ (function () {
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };
+    ParamTablesService.prototype.editSubValue = function (id, val) {
+        return this._http
+            .put(this._subValuesURL + "/" + id, JSON.stringify(val), { headers: this._headers })
+            .map(function (response) { return response.json(); })
+            .catch(function (err) { return err.message; });
+    };
     ParamTablesService.prototype.editValue = function (id, val) {
         return this._http
             .put(this._valuesURL + "/" + id, JSON.stringify(val), { headers: this._headers })

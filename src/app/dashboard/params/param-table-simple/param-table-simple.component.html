@@ -1,75 +1,7 @@
-<div id="card-edit" *ngIf="_editing">
-  <div class="card card-outline-success">
-    <div class="card-body">
-      <h4 class="card-title">
-        Editing Value
-      </h4>
-      <form (ngSubmit)="onSaveValue()" class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="display">Display Value</label>
-            <input type="text" [(ngModel)]="_currentValue.DisplayValue" name="display" id="display" class="form-control" placeholder="Display Value"
-              [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="english-display">English Display Value</label>
-            <input type="text" [(ngModel)]="_currentValue.EnglishDisplayValue" name="english-display" id="english-display" class="form-control"
-              placeholder="English Display Value" [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label for="score">Score</label>
-            <input type="number" [(ngModel)]="_currentValue.Score" name="score" id="score" class="form-control" [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-2 d-flex p-2 align-items-end form-group">
-          <button type="submit " class="btn btn-success align-bottom" [disabled]="_saving">Save Changes <i class="fa fa-lock" aria-hidden="true" ></i></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div *ngIf="!_editing">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">
-        New Value
-      </h4>
-      <form (ngSubmit)="onSubmit()" class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="display">Display Value</label>
-            <input type="text" [(ngModel)]="_newValue.DisplayValue" name="display" id="display" class="form-control" placeholder="Display Value"
-              [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="english-display">English Display Value</label>
-            <input type="text" [(ngModel)]="_newValue.EnglishDisplayValue" name="english-display" id="english-display" class="form-control"
-              placeholder="English Display Value" [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label for="score">Score</label>
-            <input type="number" [(ngModel)]="_newValue.Score" name="score" id="score" class="form-control" [disabled]="_saving">
-          </div>
-        </div>
-        <div class="col-md-2 d-flex p-2 align-items-end form-group">
-          <button type="submit " class="btn btn-primary align-bottom" [disabled]="_saving">Add <i class="fa fa-plus-circle" aria-hidden="true" ></i></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">Table Values</h4>
-    <table class="table table-sm table-hover">
+    <table class="table table-sm table-squared table-bordered">
       <thead>
         <tr>
           <th>Display Value</th>
@@ -79,11 +11,49 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let value of _table.ParamValues">
-          <td>{{ value.DisplayValue }}</td>
-          <td>{{ value.EnglishDisplayValue }}</td>
-          <td class="text-center">{{ value.Score | number: '1.2-2' }}</td>
-          <td class="text-center"><span (click)="editValue(value)"><i class="fa fa-edit text-success" aria-hidden="true"></i></span></td>
+        <ng-container *ngFor="let value of _table.ParamValues">
+          <tr *ngIf="value.ID!=_currentValue.ID" (dblclick)="selectValue(value)" >
+            <td>{{ value.DisplayValue }}</td>
+            <td>{{ value.EnglishDisplayValue }}</td>
+            <td class="text-center">{{ value.Score | number: '1.2-2' }}</td>
+            <td class="text-center">
+              <i class="fa fa-edit fa-lg text-success" (click)="selectValue(value)" placement="top" ngbTooltip="Edit" aria-hidden="true"></i>
+            </td>
+          </tr>
+          <tr *ngIf="value.ID==_currentValue.ID" class="table-info">
+            <td>
+              <input type="text" [(ngModel)]="_currentValue.DisplayValue" name="display" id="display" class="form-control" placeholder="Display Value"
+                [disabled]="_saving">
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="_currentValue.EnglishDisplayValue" name="english-display" id="english-display" class="form-control"
+                placeholder="English Display Value" [disabled]="_saving">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="_currentValue.Score" name="score" id="score" class="form-control" [disabled]="_saving">
+            </td>
+            <td class="text-center">
+              <i class="fa fa-lock fa-lg text-success" (click)="updateValue()" placement="top" ngbTooltip="Save" aria-hidden="true"></i>
+              <i class="fa fa-times fa-lg text-danger" (click)="cancelUpdate()" placement="top" ngbTooltip="Save"placement="top" ngbTooltip="Cancel" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <td>
+            <input type="text" [(ngModel)]="_newValue.DisplayValue" name="display" id="display" class="form-control form-control-sm"
+              placeholder="Display Value" [disabled]="_saving">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="_newValue.EnglishDisplayValue" name="english-display" id="english-display" class="form-control form-control-sm"
+              placeholder="English Display Value" [disabled]="_saving">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="_newValue.Score" name="score" id="score" class="form-control form-control-sm" [disabled]="_saving">
+          </td>
+          <td class="text-center">
+            <i class="fa fa-plus-square fa-lg text-primary" (click)="createValue()" placement="top" ngbTooltip="Add" aria-hidden="true"></i>
+          </td>
         </tr>
       </tbody>
     </table>
