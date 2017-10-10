@@ -12,6 +12,7 @@ import { ParamCategory } from '../models/params.model';
 export class ParamCategoriesService {
 
   private _categoryURL: string;
+  private _matrxixURL: string;
   private _categories: ParamCategory[];
   private _newCategory: ParamCategory;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
@@ -21,12 +22,20 @@ export class ParamCategoriesService {
     private _conn: ConnectionService
   ) {
     this._categoryURL = _conn.APIUrl + 'paramcategories';
+    this._matrxixURL = _conn.APIUrl + 'parammatrices';
   }
 
   getCategories(): Observable<Array<ParamCategory>> {
     return this._http
       .get(this._categoryURL)
       .map((response: Response) => response.json());
+  }
+
+  getCategoriesByMatrix(matrixID: number): Observable<Array<ParamCategory>> {
+    return this._http
+      .get(`${this._matrxixURL}/${matrixID}/categories`)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
   }
 
   createCategory(cat: ParamCategory): Observable<ParamCategory> {

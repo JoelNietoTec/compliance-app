@@ -10,9 +10,10 @@ import { ParamCategoriesService } from '../../../shared/services/param-categorie
 })
 
 export class ParamCategoriesComponent implements OnInit {
-  @Input() matrix: ParamMatrix;
+  @Input() matrixID: number;
 
-  _tables: ParamTable[];
+  _tables: Array<ParamTable>;
+  _categories: Array<ParamCategory>;
   _newCategory: ParamCategory;
   _newCategories: ParamCategory[] = [];
 
@@ -22,14 +23,21 @@ export class ParamCategoriesComponent implements OnInit {
 
   ngOnInit() {
     this._newCategory = {};
-    console.log(this.matrix);
+    this.getCategories();
+  }
+
+  getCategories() {
+    this._categoriesService.getCategoriesByMatrix(this.matrixID)
+      .subscribe(data => {
+        this._categories = data;
+      });
   }
 
   addCategory() {
-    this._newCategory.ParamMatrixID = this.matrix.ID;
+    this._newCategory.ParamMatrixID = this.matrixID;
     this._categoriesService.createCategory(this._newCategory)
       .subscribe(data => {
-        this.matrix.ParamCategories.push(data);
+        this._categories.push(data);
         this._newCategory = {};
       });
   }

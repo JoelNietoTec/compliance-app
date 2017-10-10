@@ -1,5 +1,5 @@
-<div class="container" *ngIf="_matrix">
-  <div class="card" *ngFor="let category of _matrix.ParamCategories">
+<div class="container" *ngIf="_categories">
+  <div class="card" *ngFor="let category of _categories">
     <div class="card-header">{{ category.EnglishName }}</div>
     <div class="card-body row">
       <div class="col-md-6" *ngFor="let param of category.Params">

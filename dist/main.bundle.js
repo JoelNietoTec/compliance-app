@@ -1396,11 +1396,18 @@ var ParamCategoriesService = /** @class */ (function () {
         this._conn = _conn;
         this._headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this._categoryURL = _conn.APIUrl + 'paramcategories';
+        this._matrxixURL = _conn.APIUrl + 'parammatrices';
     }
     ParamCategoriesService.prototype.getCategories = function () {
         return this._http
             .get(this._categoryURL)
             .map(function (response) { return response.json(); });
+    };
+    ParamCategoriesService.prototype.getCategoriesByMatrix = function (matrixID) {
+        return this._http
+            .get(this._matrxixURL + "/" + matrixID + "/categories")
+            .map(function (response) { return response.json(); })
+            .catch(function (err) { return err.message; });
     };
     ParamCategoriesService.prototype.createCategory = function (cat) {
         return this._http
@@ -2301,6 +2308,7 @@ var SharedModule = /** @class */ (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
+    // apiURL: 'http://localhost:53212/api/'
     apiURL: 'http://complianceapi.azurewebsites.net/api/'
 };
 //# sourceMappingURL=environment.js.map

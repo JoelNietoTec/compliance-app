@@ -16,9 +16,10 @@ import { ParamCategoriesService } from '../../../shared/services/param-categorie
 export class ParamMatrixComponent implements OnInit {
 
   _matrix: ParamMatrix;
-  _tables: ParamTable[];
+  _tables: Array<ParamTable>;
+  _categories: Array<ParamCategory>;
   _newCategory: ParamCategory;
-  _newCategories: ParamCategory[] = [];
+  _newCategories: Array<ParamCategory> = [];
   _totalPercent: number = 0;
 
   constructor(
@@ -42,12 +43,20 @@ export class ParamMatrixComponent implements OnInit {
       this._matrixService.getMatrix(params['id'])
         .subscribe(data => {
           this._matrix = data;
+          this.getCategories();
           console.log(this._matrix);
           if (this._matrix.ParamCategories) {
             this.calculatePercent();
           }
         });
     });
+  }
+
+  getCategories() {
+    this._categoryService.getCategoriesByMatrix(this._matrix.ID)
+      .subscribe(data => {
+        this._categories = data;
+      });
   }
 
   addCategory() {

@@ -246,15 +246,15 @@ var EntityFormComponent = /** @class */ (function () {
         if (!this.entity) {
             this._partServ.createParticipant(this._entity)
                 .subscribe(function (data) {
-                _this.toastr.info("ID: " + data.ID, 'Entity Created');
-                _this._router.navigate(['/Dashboard/Participants', data.ID]);
+                _this.toastr.success("ID: " + data.ID, 'Entity Created');
+                _this._router.navigate(['/dashboard/participants', data.ID]);
             });
         }
         else {
             this._partServ.updateParticipant(this._entity.ID, this._entity)
                 .subscribe(function (data) {
-                _this.toastr.info("ID: " + _this._entity.ID, 'Entity Updated');
-                _this._router.navigate(['/Dashboard/Participants', _this._entity.ID]);
+                _this.toastr.success("ID: " + _this._entity.ID, 'Entity Updated');
+                _this._router.navigate(['/dashboard/participants', _this._entity.ID]);
             });
         }
     };
@@ -485,15 +485,15 @@ var IndividualFormComponent = /** @class */ (function () {
             console.log(this._individual);
             this._partServ.createParticipant(this._individual)
                 .subscribe(function (data) {
-                _this.toastr.info("ID: " + data.ID, 'Individual Created');
-                _this._router.navigate(['Dashboard/Participants', data.ID]);
+                _this.toastr.success("ID: " + data.ID, 'Individual Created');
+                _this._router.navigate(['dashboard/participants', data.ID]);
             });
         }
         else {
             this._partServ.updateParticipant(this._individual.ID, this._individual)
                 .subscribe(function (data) {
-                _this.toastr.info("ID: " + _this._individual.ID, 'Individual Updated');
-                _this._router.navigate(['Dashboard/Participants', _this._individual.ID]);
+                _this.toastr.success("ID: " + _this._individual.ID, 'Individual Updated');
+                _this._router.navigate(['dashboard/participants', _this._individual.ID]);
             });
         }
     };
@@ -796,8 +796,7 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
         }
         this._partService.updateParam(this._partParam.ID, this._partParam)
             .subscribe(function (data) {
-            _this._router.navigate(['Dashboard/Participants', _this.participant.ID]);
-            _this.toastr.info(_this.param.EnglishName, 'Updated Parameter');
+            _this.toastr.success(_this.param.EnglishName, 'Updated Parameter');
         });
     };
     __decorate([
@@ -849,7 +848,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-compliance/participant-compliance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"_matrix\">\r\n  <div class=\"card\" *ngFor=\"let category of _matrix.ParamCategories\">\r\n    <div class=\"card-header\">{{ category.EnglishName }}</div>\r\n    <div class=\"card-body row\">\r\n      <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n        <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\"></compliance-param>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- <div class=\"container\" *ngIf=\"participant && participant.Score\">\r\n  <participant-compliance-details [participant]=\"participant\"></participant-compliance-details>\r\n</div> -->\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"_categories\">\r\n  <div class=\"card\" *ngFor=\"let category of _categories\">\r\n    <div class=\"card-header\">{{ category.EnglishName }}</div>\r\n    <div class=\"card-body row\">\r\n      <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n        <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\"></compliance-param>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- <div class=\"container\" *ngIf=\"participant && participant.Score\">\r\n  <participant-compliance-details [participant]=\"participant\"></participant-compliance-details>\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -861,8 +860,9 @@ module.exports = "<div class=\"container\" *ngIf=\"_matrix\">\r\n  <div class=\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_participants_model__ = __webpack_require__("../../../../../src/app/shared/models/participants.model.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_participants_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_models_participants_model__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__ = __webpack_require__("../../../../../src/app/shared/services/param-matrices.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_categories_service__ = __webpack_require__("../../../../../src/app/shared/services/param-categories.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParticipantComplianceComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -878,14 +878,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParticipantComplianceComponent = /** @class */ (function () {
-    function ParticipantComplianceComponent(_matrixService, _partService, _util) {
+    function ParticipantComplianceComponent(_matrixService, _partService, _categoriesService, _util) {
         this._matrixService = _matrixService;
         this._partService = _partService;
+        this._categoriesService = _categoriesService;
         this._util = _util;
     }
     ParticipantComplianceComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.getCategories();
         this._partService.getParams(this.participant.ID)
             .subscribe(function (data) {
             _this._partParams = data;
@@ -893,8 +896,15 @@ var ParticipantComplianceComponent = /** @class */ (function () {
         this._matrixService.getMatrix(this.participant.ParamMatrixID)
             .subscribe(function (data) {
             _this._matrix = data;
-            _this._matrix.ParamCategories = _this._util.sortBy(_this._matrix.ParamCategories, 'EnglishName');
-            for (var _i = 0, _a = _this._matrix.ParamCategories; _i < _a.length; _i++) {
+        });
+    };
+    ParticipantComplianceComponent.prototype.getCategories = function () {
+        var _this = this;
+        this._categoriesService.getCategoriesByMatrix(this.participant.ParamMatrixID)
+            .subscribe(function (data) {
+            _this._categories = data;
+            _this._categories = _this._util.sortBy(_this._categories, 'EnglishName');
+            for (var _i = 0, _a = _this._categories; _i < _a.length; _i++) {
                 var i = _a[_i];
                 i.Params = _this._util.sortBy(i.Params, 'EnglishName');
             }
@@ -910,10 +920,10 @@ var ParticipantComplianceComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance/participant-compliance.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance/participant-compliance.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_categories_service__["a" /* ParamCategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_categories_service__["a" /* ParamCategoriesService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
     ], ParticipantComplianceComponent);
     return ParticipantComplianceComponent;
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=participant-compliance.component.js.map

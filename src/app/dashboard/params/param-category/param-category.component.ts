@@ -7,7 +7,7 @@ import { ParamsService } from '../../../shared/services/params.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-param-category',
+  selector: 'param-category',
   templateUrl: './param-category.component.html',
   styleUrls: ['./param-category.component.css']
 })
@@ -22,13 +22,10 @@ export class ParamCategoryComponent implements OnInit {
     private _paramService: ParamsService
   ) {
     this._param = {};
-
-
   }
 
   ngOnInit() {
     this._header = `${this.category.EnglishName} / ${this.category.Weighting} %`;
-    console.log(this._header);
   }
 
   addParam() {

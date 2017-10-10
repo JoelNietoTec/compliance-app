@@ -4,12 +4,12 @@
 <ngb-tabset type="pills" *ngIf="_matrix">
   <ngb-tab title="Categories">
     <ng-template ngbTabContent>
-      <param-categories [matrix]="_matrix"></param-categories>
+      <param-categories [matrixID]="_matrix.ID"></param-categories>
     </ng-template>
   </ngb-tab>
   <ngb-tab title="Params">
     <ng-template ngbTabContent>
-      <param-items [matrix]="_matrix"></param-items>
+      <param-category *ngFor="let category of _categories" [category]="category" [tables]="_tables"></param-category>
     </ng-template>
   </ngb-tab>
 </ngb-tabset>

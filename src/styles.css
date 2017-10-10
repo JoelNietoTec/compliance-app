@@ -261,6 +261,11 @@ ngb-tabset > ul.nav > li.nav-item {
     position: relative;
 }
 
+.fa-lg {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
 /* style icon */
 .inner-addon .typcn {
   position: absolute;
@@ -433,6 +438,10 @@ td > input {
   border-width: 0 !important;
 }
 
+td > input, td > .form-control {
+  border-width: 0 !important;
+}
+
 .card {
   border-width: 0;
 }
@@ -441,3 +450,17 @@ select.custom-select {
   padding: 8px 28px 8px 12px !important;
   height: 34px !important;
 }
+
+select.custom-select {
+  padding: 8px 28px 8px 12px !important;
+  height: 34px !important;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+tr.form-table > td {
+  padding: 0
+}
+

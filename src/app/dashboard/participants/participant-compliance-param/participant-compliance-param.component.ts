@@ -79,8 +79,7 @@ export class ParticipantComplianceParamComponent implements OnInit {
 
     this._partService.updateParam(this._partParam.ID, this._partParam)
       .subscribe(data => {
-        this._router.navigate(['Dashboard/Participants', this.participant.ID]);
-        this.toastr.info(
+        this.toastr.success(
           this.param.EnglishName,
           'Updated Parameter'
         );

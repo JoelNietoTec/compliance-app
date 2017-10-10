@@ -1,4 +1,4 @@
-<div class="row" *ngIf="matrix">
+<div class="row" *ngIf="_categories">
   <div class="col-md-12" [hidden]="false">
     <h3>Categories</h3>
     <form (ngSubmit)="addCategory()" class="card">
@@ -30,7 +30,7 @@
       </div>
     </form>
   </div>
-  <div class="col-md-12" *ngIf="matrix.ParamCategories.length > 0">
+  <div class="col-md-12" *ngIf="_categories.length > 0">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Current Categories</h4>
@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of matrix.ParamCategories">
+            <tr *ngFor="let category of _categories">
               <td>{{ category.Name }}</td>
               <td>{{ category.EnglishName }}</td>
               <td>{{ category.Weighting }}%</td>

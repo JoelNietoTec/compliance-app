@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-categories/param-categories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"matrix\">\r\n  <div class=\"col-md-12\" [hidden]=\"false\">\r\n    <h3>Categories</h3>\r\n    <form (ngSubmit)=\"addCategory()\" class=\"card\">\r\n      <div class=\"card-body\">\r\n        <div class=\"row\" id=\"new-category-form\">\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name</label>\r\n              <input [(ngModel)]=\"_newCategory.Name\" type=\"text\" name=\"name\" id=\"new-category-name\" class=\"form-control\" placeholder=\"Category Name\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"english-name\">English Name</label>\r\n              <input [(ngModel)]=\"_newCategory.EnglishName\" type=\"text\" name=\"english-name\" id=\"new-category-name\" class=\"form-control\"\r\n                placeholder=\"English Category Name\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <div class=\"form-group\">\r\n              <label for=\"weighting\">Weighting</label>\r\n              <input [(ngModel)]=\"_newCategory.Weighting\" type=\"number\" name=\"weighting\" id=\"new-category-weighting\" class=\"form-control\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <button type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Add</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"col-md-12\" *ngIf=\"matrix.ParamCategories.length > 0\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">Current Categories</h4>\r\n        <table class=\"table table-sm table-bordered\">\r\n          <thead>\r\n            <tr>\r\n              <th>Name</th>\r\n              <th>English Name</th>\r\n              <th>Weighting</th>\r\n              <th class=\"text-center\">Actions</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let category of matrix.ParamCategories\">\r\n              <td>{{ category.Name }}</td>\r\n              <td>{{ category.EnglishName }}</td>\r\n              <td>{{ category.Weighting }}%</td>\r\n              <td class=\"text-center\">\r\n                <div class=\"btn-group\" role=\"group\" aria-label=\"\">\r\n                  <button type=\"button\" class=\"btn btn-success btn-sm\"><i class=\"fa fa-edit\" aria-hidden=\"true\"></i></button>\r\n                  <button type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"row\" *ngIf=\"_categories\">\r\n  <div class=\"col-md-12\" [hidden]=\"false\">\r\n    <h3>Categories</h3>\r\n    <form (ngSubmit)=\"addCategory()\" class=\"card\">\r\n      <div class=\"card-body\">\r\n        <div class=\"row\" id=\"new-category-form\">\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name</label>\r\n              <input [(ngModel)]=\"_newCategory.Name\" type=\"text\" name=\"name\" id=\"new-category-name\" class=\"form-control\" placeholder=\"Category Name\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-5\">\r\n            <div class=\"form-group\">\r\n              <label for=\"english-name\">English Name</label>\r\n              <input [(ngModel)]=\"_newCategory.EnglishName\" type=\"text\" name=\"english-name\" id=\"new-category-name\" class=\"form-control\"\r\n                placeholder=\"English Category Name\">\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <div class=\"form-group\">\r\n              <label for=\"weighting\">Weighting</label>\r\n              <input [(ngModel)]=\"_newCategory.Weighting\" type=\"number\" name=\"weighting\" id=\"new-category-weighting\" class=\"form-control\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <button type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Add</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"col-md-12\" *ngIf=\"_categories.length > 0\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">Current Categories</h4>\r\n        <table class=\"table table-sm table-bordered\">\r\n          <thead>\r\n            <tr>\r\n              <th>Name</th>\r\n              <th>English Name</th>\r\n              <th>Weighting</th>\r\n              <th class=\"text-center\">Actions</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let category of _categories\">\r\n              <td>{{ category.Name }}</td>\r\n              <td>{{ category.EnglishName }}</td>\r\n              <td>{{ category.Weighting }}%</td>\r\n              <td class=\"text-center\">\r\n                <div class=\"btn-group\" role=\"group\" aria-label=\"\">\r\n                  <button type=\"button\" class=\"btn btn-success btn-sm\"><i class=\"fa fa-edit\" aria-hidden=\"true\"></i></button>\r\n                  <button type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -30,9 +30,7 @@ module.exports = "<div class=\"row\" *ngIf=\"matrix\">\r\n  <div class=\"col-md-
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_categories_service__ = __webpack_require__("../../../../../src/app/shared/services/param-categories.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_param_categories_service__ = __webpack_require__("../../../../../src/app/shared/services/param-categories.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamCategoriesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -45,7 +43,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var ParamCategoriesComponent = /** @class */ (function () {
     function ParamCategoriesComponent(_categoriesService) {
         this._categoriesService = _categoriesService;
@@ -53,31 +50,38 @@ var ParamCategoriesComponent = /** @class */ (function () {
     }
     ParamCategoriesComponent.prototype.ngOnInit = function () {
         this._newCategory = {};
-        console.log(this.matrix);
+        this.getCategories();
+    };
+    ParamCategoriesComponent.prototype.getCategories = function () {
+        var _this = this;
+        this._categoriesService.getCategoriesByMatrix(this.matrixID)
+            .subscribe(function (data) {
+            _this._categories = data;
+        });
     };
     ParamCategoriesComponent.prototype.addCategory = function () {
         var _this = this;
-        this._newCategory.ParamMatrixID = this.matrix.ID;
+        this._newCategory.ParamMatrixID = this.matrixID;
         this._categoriesService.createCategory(this._newCategory)
             .subscribe(function (data) {
-            _this.matrix.ParamCategories.push(data);
+            _this._categories.push(data);
             _this._newCategory = {};
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__["ParamMatrix"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_models_params_model__["ParamMatrix"]) === "function" && _a || Object)
-    ], ParamCategoriesComponent.prototype, "matrix", void 0);
+        __metadata("design:type", Number)
+    ], ParamCategoriesComponent.prototype, "matrixID", void 0);
     ParamCategoriesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'param-categories',
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-categories/param-categories.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-categories/param-categories.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_categories_service__["a" /* ParamCategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_categories_service__["a" /* ParamCategoriesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_param_categories_service__["a" /* ParamCategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_param_categories_service__["a" /* ParamCategoriesService */]) === "function" && _a || Object])
     ], ParamCategoriesComponent);
     return ParamCategoriesComponent;
-    var _a, _b;
+    var _a;
 }());
 
 //# sourceMappingURL=param-categories.component.js.map
@@ -137,7 +141,6 @@ var ParamCategoryComponent = /** @class */ (function () {
     }
     ParamCategoryComponent.prototype.ngOnInit = function () {
         this._header = this.category.EnglishName + " / " + this.category.Weighting + " %";
-        console.log(this._header);
     };
     ParamCategoryComponent.prototype.addParam = function () {
         var _this = this;
@@ -159,7 +162,7 @@ var ParamCategoryComponent = /** @class */ (function () {
     ], ParamCategoryComponent.prototype, "tables", void 0);
     ParamCategoryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-param-category',
+            selector: 'param-category',
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-category/param-category.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-category/param-category.component.css")]
         }),
@@ -176,7 +179,7 @@ var ParamCategoryComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/dashboard/params/param-items/param-items.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-param-category *ngFor=\"let category of matrix.ParamCategories\" [category]=\"category\" [tables]=\"_tables\">\r\n</app-param-category>\r\n"
+module.exports = "<param-category *ngFor=\"let category of matrix.ParamCategories\" [category]=\"category\" [tables]=\"_tables\">\r\n</param-category>\r\n"
 
 /***/ }),
 
@@ -255,7 +258,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Risk Matrices</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <app-loading-modal *ngIf=\"!matrices\">\r\n    </app-loading-modal>\r\n    <div class=\"card\" *ngIf=\"matrices\">\r\n      <div class=\"card-header\">\r\n        <div (click)=\"addMatrix()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\"></i> Add</div>\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">All Matrices</h4>\r\n        <table class=\"table table-sm\">\r\n          <thead>\r\n            <tr>\r\n              <th>Code</th>\r\n              <th>Name</th>\r\n              <th>Type</th>\r\n              <th>Description</th>\r\n              <th>Create Date</th>\r\n              <th class=\"text-center\">Actions</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let matrix of matrices\">\r\n              <td>{{ matrix.Code }}</td>\r\n              <td>{{ matrix.Name }}</td>\r\n              <td>{{ matrix.MatrixType.EnglishName }}</td>\r\n              <td>{{ matrix.Description }}</td>\r\n              <td>{{ matrix.CreateDate | date: 'mediumDate' }}</td>\r\n              <td class=\"text-center\">\r\n                <a [routerLink]=\"[matrix.ID]\" class=\"btn btn-sm btn-primary\" placement=\"top\" ngbTooltip=\"Details\">Info <i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i></a>\r\n                <a [routerLink]=\"[matrix.ID, 'Edit']\" class=\"btn btn-sm btn-success\" placement=\"top\" ngbTooltip=\"Edit\">Edit <i class=\"fa fa-edit\" aria-hidden=\"true\"></i></a>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <form (ngSubmit)=\"onSubmit()\" class=\"card\" [hidden]=\"!_showNewMatrix\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">\r\n          New Matrix\r\n        </h4>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-3\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name</label>\r\n              <input type=\"text\" [(ngModel)]=\"newMatrix.Name\" name=\"name\" id=\"name\" class=\"form-control\" placeholder=\"Name\" aria-describedby=\"helpId\">\r\n              <small id=\"helpId\" class=\"text-muted\">Matrix Name</small>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-3\">\r\n            <div class=\"form-group\">\r\n              <label for=\"code\">Code</label>\r\n              <input type=\"text\" [(ngModel)]=\"newMatrix.Code\" name=\"code\" id=\"code\" class=\"form-control\" placeholder=\"Code\" aria-describedby=\"helpId\">\r\n              <small id=\"helpId\" class=\"text-muted\">Matrix Code</small>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <div class=\"form-group\">\r\n              <label for=\"type\">Matrix Type</label>\r\n              <select class=\"form-control custom-select\" [(ngModel)]=\"newMatrix.MatrixTypeID\" name=\"matrix-type\" id=\"matrix-type\" required>\r\n                <option *ngFor=\"let type of matrixTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n              </select>\r\n              <small class=\"text-muted\">Select one</small>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-4\">\r\n            <div class=\"form-group\">\r\n              <label for=\"description\">Description</label>\r\n              <input type=\"text\" [(ngModel)]=\"newMatrix.Description\" name=\"description\" id=\"description\" class=\"form-control\" placeholder=\"Description\"\r\n                aria-describedby=\"helpId\">\r\n              <small id=\"helpId\" class=\"text-muted\">Matrix Description</small>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"card-footer\">\r\n        <button type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-save\" aria-hidden=\"true\"></i> Save</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h3>Risk Matrices</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <app-loading-modal *ngIf=\"!matrices\">\r\n    </app-loading-modal>\r\n    <div class=\"card\" *ngIf=\"matrices\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">All Matrices</h4>\r\n        <table class=\"table table-sm table-squared\">\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">ID</th>\r\n              <th>Code</th>\r\n              <th>Name</th>\r\n              <th>Type</th>\r\n              <th>Description</th>\r\n              <th>Create Date</th>\r\n              <th class=\"text-center\">Actions</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <ng-container *ngFor=\"let matrix of matrices\">\r\n              <tr *ngIf=\"_currentMatrix.ID!=matrix.ID\" (dblclick)=\"selectMatrix(matrix)\">\r\n                <td class=\"text-center\">{{ matrix.ID }}</td>\r\n                <td>{{ matrix.Code }}</td>\r\n                <td>{{ matrix.Name }}</td>\r\n                <td>{{ matrix.MatrixType.EnglishName }}</td>\r\n                <td>{{ matrix.Description }}</td>\r\n                <td>{{ matrix.CreateDate | date: 'mediumDate' }}</td>\r\n                <td class=\"text-center\">\r\n                  <a [routerLink]=\"[matrix.ID]\" placement=\"top\" ngbTooltip=\"Details\">\r\n                    <i class=\"fa fa-bars fa-lg text-primary\" aria-hidden=\"true\"></i>\r\n                  </a>\r\n                  <span (click)=\"selectMatrix(matrix)\" placement=\"top\" ngbTooltip=\"Edit\">\r\n                    <i class=\"fa fa-edit fa-lg text-success\" aria-hidden=\"true\"></i>\r\n                  </span>\r\n                </td>\r\n              </tr>\r\n              <tr class=\"table-info\" *ngIf=\"_currentMatrix.ID==matrix.ID\">\r\n                <td class=\"text-center\">\r\n                  {{ _currentMatrix.ID }}\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Code\" class=\"form-control\" name=\"edit-code\" id=\"new-code\" placeholder=\"Matrix Code\">\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Name\" class=\"form-control\" name=\"edit-name\" id=\"new-name\" placeholder=\"Name\">\r\n                </td>\r\n                <td>\r\n                  <select class=\"form-control custom-select\" [(ngModel)]=\"_currentMatrix.MatrixTypeID\" name=\"matrix-type\" id=\"matrix-type\"\r\n                    required>\r\n                    <option value=\"undefined\" disabled>---Select one---</option>\r\n                    <option *ngFor=\"let type of matrixTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n                  </select>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Description\" class=\"form-control\" name=\"new-description\" id=\"new-description\"\r\n                    placeholder=\"Description\">\r\n                </td>\r\n                <td></td>\r\n                <td class=\"text-center\">\r\n                  <i class=\"fa fa-lock fa-lg text-success\" placement=\"top\" ngbTooltip=\"Save\" aria-hidden=\"true\" (click)=\"updateMatrix()\"></i>\r\n                  <i class=\"fa fa-times fa-lg text-danger\" placement=\"top\" ngbTooltip=\"Cancel\" aria-hidden=\"true\" (click)=\"cancelUpdate()\"></i>\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            <tr>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-certificate fa-lg text-success\" aria-hidden=\"true\"></i>\r\n              </td>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Code\" class=\"form-control form-control-sm\" name=\"new-code\" id=\"new-code\" placeholder=\"Matrix Code\">\r\n              </td>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Name\" class=\"form-control form-control-sm\" name=\"new-name\" id=\"new-name\" placeholder=\"Name\">\r\n              </td>\r\n              <td>\r\n                <select class=\"form-control custom-select\" [(ngModel)]=\"_newMatrix.MatrixTypeID\" name=\"matrix-type\" id=\"matrix-type\" required>\r\n                  <option value=\"undefined\" disabled>---Select one---</option>\r\n                  <option *ngFor=\"let type of matrixTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n                </select>\r\n              </td>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Description\" class=\"form-control form-control-sm\" name=\"new-description\" id=\"new-description\"\r\n                  placeholder=\"Description\">\r\n              </td>\r\n              <td></td>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-plus-square fa-lg text-primary\" placement=\"top\" ngbTooltip=\"Add\" aria-hidden=\"true\" (click)=\"createMatrix()\"></i>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -264,8 +267,10 @@ module.exports = "<h3>Risk Matrices</h3>\r\n<div class=\"row\">\r\n  <div class=
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_param_matrices_service__ = __webpack_require__("../../../../../src/app/shared/services/param-matrices.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_matrix_types_service__ = __webpack_require__("../../../../../src/app/shared/services/matrix-types.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__ = __webpack_require__("../../../../../src/app/shared/services/param-matrices.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__ = __webpack_require__("../../../../../src/app/shared/services/matrix-types.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamMatricesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -279,11 +284,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamMatricesComponent = /** @class */ (function () {
-    function ParamMatricesComponent(_matrixService, _typesService) {
+    function ParamMatricesComponent(_matrixService, _typesService, toastr) {
         this._matrixService = _matrixService;
         this._typesService = _typesService;
-        this.newMatrix = {};
+        this.toastr = toastr;
+        this._newMatrix = {};
+        this._currentMatrix = {};
     }
     ParamMatricesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -298,19 +306,47 @@ var ParamMatricesComponent = /** @class */ (function () {
     };
     ParamMatricesComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.newMatrix.CreateDate = new Date();
-        console.log(this.newMatrix);
-        this._matrixService.createMatrix(this.newMatrix)
+        this._newMatrix.CreateDate = new Date();
+        console.log(this._newMatrix);
+        this._matrixService.createMatrix(this._newMatrix)
             .subscribe(function (data) {
             console.log(data);
             _this.matrices.push(data);
             console.log(_this.matrices);
-            _this.newMatrix = {};
+            _this._newMatrix = {};
         });
+    };
+    ParamMatricesComponent.prototype.createMatrix = function () {
+        var _this = this;
+        this._newMatrix.CreateDate = new Date();
+        console.log(this._newMatrix);
+        this._matrixService.createMatrix(this._newMatrix)
+            .subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Matrix Created');
+            _this.matrices.push(data);
+            _this._newMatrix = {};
+        });
+    };
+    ParamMatricesComponent.prototype.selectMatrix = function (matrix) {
+        this._currentMatrix = matrix;
+        console.log(this._currentMatrix);
+    };
+    ParamMatricesComponent.prototype.updateMatrix = function () {
+        var _this = this;
+        console.log(this._currentMatrix);
+        this._matrixService.updateMatrix(this._currentMatrix.ID, this._currentMatrix)
+            .subscribe(function (data) {
+            _this.toastr.success(_this._currentMatrix.Name, 'Matrix Updated');
+            _this._currentMatrix = {};
+        }, function (error) {
+            _this.toastr.error(error.message, error.name);
+        });
+    };
+    ParamMatricesComponent.prototype.cancelUpdate = function () {
+        this._currentMatrix = {};
     };
     ParamMatricesComponent.prototype.addMatrix = function () {
         this._showNewMatrix = !this._showNewMatrix;
-        console.log(this._showNewMatrix);
     };
     ParamMatricesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -318,10 +354,10 @@ var ParamMatricesComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_matrix_types_service__["a" /* MatrixTypesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_matrix_types_service__["a" /* MatrixTypesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
     ], ParamMatricesComponent);
     return ParamMatricesComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=param-matrices.component.js.map
@@ -349,7 +385,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-matrix-details/param-matrix-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-loading-modal *ngIf=\"!_matrix\"></app-loading-modal>\r\n<h3 *ngIf=\"_matrix\">\r\n  {{ _matrix.Name }} / {{ _matrix.Code }}\r\n  <a [routerLink]=\"['Edit']\" class=\"btn btn-primary\">Edit <i class=\"fa fa-edit\" aria-hidden=\"true\"></i></a>\r\n</h3>\r\n<div *ngIf=\"_matrix\">\r\n  <!--<div class=\"card\" *ngFor=\"let category of _matrix.ParamCategories\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">\r\n        {{ category.EnglishName }} / {{ category.Weighting }}%\r\n      </h4>\r\n      <table class=\"table table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>English Name</th>\r\n            <th>Description</th>\r\n            <th>Table</th>\r\n            <th>Weighting</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let param of category.Params\">\r\n            <td>{{ param.Name }}</td>\r\n            <td>{{ param.EnglishName }}</td>\r\n            <td>{{ param.Description }}</td>\r\n            <td>{{ param.ParamTable.EnglishName}}</td>\r\n            <td>{{ param.Weighting }}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>-->\r\n\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">Risk Matrix</h4>\r\n      <table class=\"table table table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>English Name</th>\r\n            <th>Description</th>\r\n            <th>Table</th>\r\n            <th>Weighting</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <ng-container *ngFor=\"let category of _matrix.ParamCategories\">\r\n            <tr class=\"bg-primary text-white font-weight-bold\">\r\n              <td colspan=\"4\">{{ category.EnglishName }}</td>\r\n              <td>{{ category.Weighting }}%</td>\r\n              </tr>\r\n            <tr *ngFor=\"let param of category.Params\">\r\n              <td>{{ param.Name }}</td>\r\n              <td>{{ param.EnglishName }}</td>\r\n              <td>{{ param.Description }}</td>\r\n              <td>{{ param.ParamTable.EnglishName}}</td>\r\n              <td>{{ param.Weighting }}%</td>\r\n            </tr>\r\n            <tr><td colspan=\"5\"></td></tr>\r\n          </ng-container>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<app-loading-modal *ngIf=\"!_matrix\"></app-loading-modal>\r\n<h3 *ngIf=\"_matrix\">\r\n  {{ _matrix.Name }} / {{ _matrix.Code }}\r\n  <a [routerLink]=\"['edit']\" class=\"btn btn-primary\">Edit <i class=\"fa fa-edit\" aria-hidden=\"true\"></i></a>\r\n</h3>\r\n<div *ngIf=\"_matrix\">\r\n  <!--<div class=\"card\" *ngFor=\"let category of _matrix.ParamCategories\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">\r\n        {{ category.EnglishName }} / {{ category.Weighting }}%\r\n      </h4>\r\n      <table class=\"table table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>English Name</th>\r\n            <th>Description</th>\r\n            <th>Table</th>\r\n            <th>Weighting</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let param of category.Params\">\r\n            <td>{{ param.Name }}</td>\r\n            <td>{{ param.EnglishName }}</td>\r\n            <td>{{ param.Description }}</td>\r\n            <td>{{ param.ParamTable.EnglishName}}</td>\r\n            <td>{{ param.Weighting }}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>-->\r\n\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <h4 class=\"card-title\">Risk Matrix</h4>\r\n      <table class=\"table table table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>English Name</th>\r\n            <th>Description</th>\r\n            <th>Table</th>\r\n            <th>Weighting</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <ng-container *ngFor=\"let category of _matrix.ParamCategories\">\r\n            <tr class=\"bg-primary text-white font-weight-bold\">\r\n              <td colspan=\"4\">{{ category.EnglishName }}</td>\r\n              <td>{{ category.Weighting }}%</td>\r\n              </tr>\r\n            <tr *ngFor=\"let param of category.Params\">\r\n              <td>{{ param.Name }}</td>\r\n              <td>{{ param.EnglishName }}</td>\r\n              <td>{{ param.Description }}</td>\r\n              <td>{{ param.ParamTable.EnglishName}}</td>\r\n              <td>{{ param.Weighting }}%</td>\r\n            </tr>\r\n            <tr><td colspan=\"5\"></td></tr>\r\n          </ng-container>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -427,7 +463,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-matrix/param-matrix.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-loading-modal *ngIf=\"!_matrix\">\r\n</app-loading-modal>\r\n<h3 *ngIf=\"_matrix\">{{ _matrix.Name }} / {{ _matrix.Code }}</h3>\r\n<ngb-tabset type=\"pills\" *ngIf=\"_matrix\">\r\n  <ngb-tab title=\"Categories\">\r\n    <ng-template ngbTabContent>\r\n      <param-categories [matrix]=\"_matrix\"></param-categories>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab title=\"Params\">\r\n    <ng-template ngbTabContent>\r\n      <param-items [matrix]=\"_matrix\"></param-items>\r\n    </ng-template>\r\n  </ngb-tab>\r\n</ngb-tabset>\r\n"
+module.exports = "<app-loading-modal *ngIf=\"!_matrix\">\r\n</app-loading-modal>\r\n<h3 *ngIf=\"_matrix\">{{ _matrix.Name }} / {{ _matrix.Code }}</h3>\r\n<ngb-tabset type=\"pills\" *ngIf=\"_matrix\">\r\n  <ngb-tab title=\"Categories\">\r\n    <ng-template ngbTabContent>\r\n      <param-categories [matrixID]=\"_matrix.ID\"></param-categories>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab title=\"Params\">\r\n    <ng-template ngbTabContent>\r\n      <param-category *ngFor=\"let category of _categories\" [category]=\"category\" [tables]=\"_tables\"></param-category>\r\n    </ng-template>\r\n  </ngb-tab>\r\n</ngb-tabset>\r\n"
 
 /***/ }),
 
@@ -479,11 +515,19 @@ var ParamMatrixComponent = /** @class */ (function () {
             _this._matrixService.getMatrix(params['id'])
                 .subscribe(function (data) {
                 _this._matrix = data;
+                _this.getCategories();
                 console.log(_this._matrix);
                 if (_this._matrix.ParamCategories) {
                     _this.calculatePercent();
                 }
             });
+        });
+    };
+    ParamMatrixComponent.prototype.getCategories = function () {
+        var _this = this;
+        this._categoryService.getCategoriesByMatrix(this._matrix.ID)
+            .subscribe(function (data) {
+            _this._categories = data;
         });
     };
     ParamMatrixComponent.prototype.addCategory = function () {

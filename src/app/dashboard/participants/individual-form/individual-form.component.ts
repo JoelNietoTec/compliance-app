@@ -124,14 +124,14 @@ export class IndividualFormComponent implements OnInit {
       console.log(this._individual);
       this._partServ.createParticipant(this._individual)
         .subscribe(data => {
-          this.toastr.info(`ID: ${data.ID}`, 'Individual Created');
-          this._router.navigate(['Dashboard/Participants', data.ID]);
+          this.toastr.success(`ID: ${data.ID}`, 'Individual Created');
+          this._router.navigate(['dashboard/participants', data.ID]);
         });
     } else {
       this._partServ.updateParticipant(this._individual.ID, this._individual)
         .subscribe(data => {
-          this.toastr.info(`ID: ${this._individual.ID}`, 'Individual Updated');
-          this._router.navigate(['Dashboard/Participants', this._individual.ID]);
+          this.toastr.success(`ID: ${this._individual.ID}`, 'Individual Updated');
+          this._router.navigate(['dashboard/participants', this._individual.ID]);
         });
     }
 
