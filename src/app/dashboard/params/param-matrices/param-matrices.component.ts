@@ -4,6 +4,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ParamMatrix, MatrixType } from '../../../shared/models/params.model';
 import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 import { MatrixTypesService } from '../../../shared/services/matrix-types.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 @Component({
   selector: 'app-param-matrices',
@@ -20,7 +21,8 @@ export class ParamMatricesComponent implements OnInit {
   constructor(
     private _matrixService: ParamMatricesService,
     private _typesService: MatrixTypesService,
-    private toastr: ToastsManager
+    private toastr: ToastsManager,
+    private _util: UtilService
   ) { }
 
   ngOnInit() {
@@ -35,23 +37,12 @@ export class ParamMatricesComponent implements OnInit {
       });
   }
 
-  onSubmit() {
-    this._newMatrix.CreateDate = new Date();
-    console.log(this._newMatrix);
-    this._matrixService.createMatrix(this._newMatrix)
-      .subscribe(data => {
-        console.log(data);
-        this.matrices.push(data);
-        console.log(this.matrices);
-        this._newMatrix = {};
-      });
-  }
-
   createMatrix() {
     this._newMatrix.CreateDate = new Date();
     console.log(this._newMatrix);
     this._matrixService.createMatrix(this._newMatrix)
       .subscribe(data => {
+        data.MatrixType = this._util.filterByID(this.matrixTypes, data.MatrixTypeID);
         this.toastr.success(data.Name, 'Matrix Created');
         this.matrices.push(data);
         this._newMatrix = {};

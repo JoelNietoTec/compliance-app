@@ -271,6 +271,7 @@ module.exports = "<h3>Risk Matrices</h3>\r\n<div class=\"row\">\r\n  <div class=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__ = __webpack_require__("../../../../../src/app/shared/services/param-matrices.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__ = __webpack_require__("../../../../../src/app/shared/services/matrix-types.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamMatricesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -285,11 +286,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamMatricesComponent = /** @class */ (function () {
-    function ParamMatricesComponent(_matrixService, _typesService, toastr) {
+    function ParamMatricesComponent(_matrixService, _typesService, toastr, _util) {
         this._matrixService = _matrixService;
         this._typesService = _typesService;
         this.toastr = toastr;
+        this._util = _util;
         this._newMatrix = {};
         this._currentMatrix = {};
     }
@@ -304,24 +307,13 @@ var ParamMatricesComponent = /** @class */ (function () {
             _this.matrixTypes = data;
         });
     };
-    ParamMatricesComponent.prototype.onSubmit = function () {
-        var _this = this;
-        this._newMatrix.CreateDate = new Date();
-        console.log(this._newMatrix);
-        this._matrixService.createMatrix(this._newMatrix)
-            .subscribe(function (data) {
-            console.log(data);
-            _this.matrices.push(data);
-            console.log(_this.matrices);
-            _this._newMatrix = {};
-        });
-    };
     ParamMatricesComponent.prototype.createMatrix = function () {
         var _this = this;
         this._newMatrix.CreateDate = new Date();
         console.log(this._newMatrix);
         this._matrixService.createMatrix(this._newMatrix)
             .subscribe(function (data) {
+            data.MatrixType = _this._util.filterByID(_this.matrixTypes, data.MatrixTypeID);
             _this.toastr.success(data.Name, 'Matrix Created');
             _this.matrices.push(data);
             _this._newMatrix = {};
@@ -354,10 +346,10 @@ var ParamMatricesComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_matrix_types_service__["a" /* MatrixTypesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _d || Object])
     ], ParamMatricesComponent);
     return ParamMatricesComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=param-matrices.component.js.map
@@ -956,7 +948,7 @@ var ParamTablesComponent = /** @class */ (function () {
         console.log(this.newTable);
         this._tablesService.createtable(this.newTable)
             .subscribe(function (data) {
-            console.log(data);
+            data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
             _this.tables.push(data);
             _this.newTable = {};
             _this._saving = false;

@@ -50,7 +50,7 @@ export class ParamTablesComponent implements OnInit {
     console.log(this.newTable);
     this._tablesService.createtable(this.newTable)
       .subscribe(data => {
-        console.log(data);
+        data.TableType = this._util.filterByID(this._tableTypes, data.TableTypeID);
         this.tables.push(data);
         this.newTable = {};
         this._saving = false;
