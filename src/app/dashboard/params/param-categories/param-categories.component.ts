@@ -15,6 +15,7 @@ export class ParamCategoriesComponent implements OnInit {
   _tables: Array<ParamTable>;
   _categories: Array<ParamCategory>;
   _newCategory: ParamCategory;
+  _currentCategory: ParamCategory;
   _newCategories: ParamCategory[] = [];
 
   constructor(
@@ -31,6 +32,10 @@ export class ParamCategoriesComponent implements OnInit {
       .subscribe(data => {
         this._categories = data;
       });
+  }
+
+  selectCategories(category: ParamCategory) {
+
   }
 
   addCategory() {
