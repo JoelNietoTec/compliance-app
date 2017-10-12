@@ -8,7 +8,6 @@
         <table class="table table-sm">
           <thead>
             <tr>
-              <th class="text-center">ID</th>
               <th>Nombre</th>
               <th>Nombre Inglés</th>
               <th>Tipo</th>
@@ -19,23 +18,21 @@
           </thead>
           <tbody>
             <tr *ngFor="let table of tables">
-              <td class="text-center">{{ table.ID }}</td>
               <td>{{ table.Name }}</td>
               <td>{{ table.EnglishName }}</td>
               <td>{{ table.TableType.Name }}</td>
               <td>{{ table.CreateDate | date:'medium' }}</td>
               <td>{{ table.ModificateDate }}</td>
               <td class="text-center">
-                <a [routerLink]="[table.ID]"><i class="fa fa-bars fa-lg text-primary" placement="top" ngbTooltip="Valores" aria-hidden="true"></i></a>
+                <a [routerLink]="[table.ID]">
+                  <i class="fa fa-bars fa-lg text-primary" placement="top" ngbTooltip="Valores" aria-hidden="true"></i>
+                </a>
               </td>
             </tr>
             <tr>
-              <td class="text-center">
-                <i class="fa fa-certificate fa-lg text-success" aria-hidden="true"></i>
-              </td>
               <td>
-                <input [(ngModel)]="_newTable.Name" type="text" name="name" id="name" class="form-control form-control-sm"
-                  placeholder="Nombre" [disabled]="_saving">
+                <input [(ngModel)]="_newTable.Name" type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Nombre"
+                  [disabled]="_saving">
               </td>
               <td>
                 <input [(ngModel)]="_newTable.EnglishName" type="text" name="english-name" id="english-name" class="form-control form-control-sm"
