@@ -9,22 +9,22 @@
     <div class="col-md-8">
       <div class="card">
         <ngb-tabset type="pills" *ngIf="_participant">
-          <ngb-tab title="Risks Matrix">
+          <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
               <participant-compliance [participant]="_participant"></participant-compliance>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Documents">
+          <ngb-tab title="Documentos">
             <ng-template ngbTabContent>
               <participant-documents [participant]="_participant"></participant-documents>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Relationships">
+          <ngb-tab title="Relaciones">
             <ng-template ngbTabContent>
               <participant-relationships [relationships]="_participant.Relationships" [participant]="_participant"></participant-relationships>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Edit">
+          <ngb-tab title="Editar">
             <ng-template ngbTabContent>
               <div class="form-container">
                 <individual-form *ngIf="_participant.ParticipantTypeID == 1" [individual]="_participant"></individual-form>

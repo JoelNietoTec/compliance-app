@@ -2,12 +2,12 @@
 </app-loading-modal>
 <h3 *ngIf="_matrix">{{ _matrix.Name }} / {{ _matrix.Code }}</h3>
 <ngb-tabset type="pills" *ngIf="_matrix">
-  <ngb-tab title="Categories">
+  <ngb-tab title="Categorías">
     <ng-template ngbTabContent>
       <param-categories [matrixID]="_matrix.ID"></param-categories>
     </ng-template>
   </ngb-tab>
-  <ngb-tab title="Params">
+  <ngb-tab title="Parámetros">
     <ng-template ngbTabContent>
       <param-category *ngFor="let category of _categories" [category]="category" [tables]="_tables"></param-category>
     </ng-template>

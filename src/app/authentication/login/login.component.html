@@ -3,27 +3,34 @@
     <app-card [footer]="false">
       <div card-section="body">
         <h4 class="card-title">
-          Sign In
+          Iniciar Sesión
         </h4>
         <div class="form-group">
-          <label for="email"><span class="typcn typcn-mail" aria-hidden="true"></span> Email  /<span class="typcn typcn-user-outline"></span>User Name  </label>
+          <label for="email">
+            <span class="typcn typcn-mail" aria-hidden="true"></span> Email /
+            <span class="typcn typcn-user-outline"></span>Nombre Usuario </label>
           <input type="email" [(ngModel)]="_login.UserName" class="form-control form-control-lg" name="email" id="email" aria-describedby="emailHelpId"
             placeholder="username@domain.com">
-          <small id="emailHelpId" class="form-text text-muted">User Email</small>
+          <small id="emailHelpId" class="form-text text-muted">Email / Nombre de Usuario </small>
         </div>
         <div class="form-group">
-          <label for="password"><i class="typcn typcn-key-outline" aria-hidden="true"></i> Password</label>
-          <input type="password" [(ngModel)]="_login.Password" class="form-control form-control-lg" name="password" id="password" placeholder="Password">
-          <small class="form-text text-muted">User Password</small>
+          <label for="password">
+            <i class="typcn typcn-key-outline" aria-hidden="true"></i> Contraseñar</label>
+          <input type="password" [(ngModel)]="_login.Password" class="form-control form-control-lg" name="password" id="password" placeholder="Contraseña">
+          <small class="form-text text-muted">Contraseña de Usuario</small>
         </div>
         <div class="form-group" *ngIf="_invalid">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Invalid credentials!</strong> Wrong password or username/email
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Credenciales inválidas!</strong> Contraseña y/o Nombre de Usuario/Email incorrectos
           </div>
         </div>
         <div class="form-group">
-          <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" (click)="signIn()">LOG IN <span class="typcn typcn-power-outline"></span>  </button>
+          <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" (click)="signIn()">INICIAR SESIÓN
+            <span class="typcn typcn-power-outline"></span>
+          </button>
         </div>
       </div>
     </app-card>

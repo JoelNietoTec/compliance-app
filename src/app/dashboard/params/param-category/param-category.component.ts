@@ -25,7 +25,7 @@ export class ParamCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._header = `${this.category.EnglishName} / ${this.category.Weighting} %`;
+    this._header = `${this.category.Name} / ${this.category.Weighting} %`;
   }
 
   addParam() {

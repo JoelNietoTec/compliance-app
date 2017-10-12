@@ -5,6 +5,7 @@ import { ParamMatrix, ParamCategory, ParamTable, ParamValue } from '../../../sha
 import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamCategoriesService } from '../../../shared/services/param-categories.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +27,8 @@ export class ParamMatrixComponent implements OnInit {
     private _route: ActivatedRoute,
     private _matrixService: ParamMatricesService,
     private _categoryService: ParamCategoriesService,
-    private _tableService: ParamTablesService
+    private _tableService: ParamTablesService,
+    private _util: UtilService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class ParamMatrixComponent implements OnInit {
     this._tableService.getTables()
       .subscribe(data => {
         this._tables = data;
+        this._tables = this._util.sortBy(this._tables, 'Name');
       });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/users.model';
@@ -20,10 +21,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _authServ: AuthService,
-    private _router: Router
+    private _router: Router,
+    private toastr: ToastsManager
   ) { }
 
   ngOnInit() {
+    this.toastr.info('Sesión finalizada', 'Adiós');
     this._authServ.authLogout();
   }
 
@@ -33,6 +36,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         console.log(data);
         if (data) {
+          this.toastr.success(this._login.UserName, 'Bienvenido');
           this._router.navigate(['/']);
         } else {
           this._invalid = true;

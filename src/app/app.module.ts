@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 
 // Packages Dependencies
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +43,9 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule
   ],
   providers: [
+    {
+      provide: LOCALE_ID, useValue: 'es-PA'
+    },
     BreadcrumbService,
     {
       provide: LocationStrategy,

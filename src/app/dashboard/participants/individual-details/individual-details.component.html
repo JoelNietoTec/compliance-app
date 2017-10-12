@@ -12,26 +12,26 @@
       <ngb-tab>
         <ng-template ngbTabTitle><i class="typcn typcn-business-card"></i> Info</ng-template>
         <ng-template ngbTabContent>
-          <small class="text-muted">Email address <i class="typcn typcn-mail" aria-hidden="true"></i></small>
+          <small class="text-muted">Email <i class="typcn typcn-mail" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.Email }}</h6>
-          <small class="text-muted">Phone number <i class="typcn typcn-phone-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Número Telefónico <i class="typcn typcn-phone-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.Phone }}</h6>
-          <small class="text-muted">Mobile phone <i class="typcn typcn-device-phone" aria-hidden="true"></i></small>
+          <small class="text-muted">Teléfono Celular <i class="typcn typcn-device-phone" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-          <small class="text-muted">Birth date (age) <i class="typcn typcn-weather-sunny" aria-hidden="true"></i></small>
+          <small class="text-muted">Fecha de nacimiento (edad) <i class="typcn typcn-weather-sunny" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.BirthDate | date: 'shortDate' }} <em>({{ individual.Age }})</em></h6>
-          <small class="text-muted">Gender <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
+          <small class="text-muted">Género <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.Gender.EnglishName }}</h6>
-          <small class="text-muted">WebSite <i class="typcn typcn-globe-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Sitio Web <i class="typcn typcn-globe-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.WebSite }}</h6>
-          <small class="text-muted">Address <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Dirección <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.Address }}</h6>
-          <small class="text-muted">Created By <i class="typcn typcn-user-add-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Creado por <i class="typcn typcn-user-add-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
         </ng-template>
       </ngb-tab>
       <ngb-tab>
-          <ng-template ngbTabTitle><i class="typcn typcn-edit"></i> Tasks</ng-template>
+          <ng-template ngbTabTitle><i class="typcn typcn-edit"></i> Tareas</ng-template>
           <ng-template ngbTabContent>
             <h6>Upload Passport <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>
             <h6>Upload DNI <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>

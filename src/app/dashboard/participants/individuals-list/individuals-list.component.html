@@ -4,7 +4,7 @@
       <div class="form-group">
         <div class="inner-addon left-addon">
           <i class="typcn typcn-zoom text-muted" aria-hidden="true"></i>
-          <input type="search" class="form-control" [(ngModel)]="_searchText" (ngModelChange)="filterIndividuals()" placeholder="Search Individuals">
+          <input type="search" class="form-control" [(ngModel)]="_searchText" (ngModelChange)="filterIndividuals()" placeholder="Buscar Individuos">
         </div>
       </div>
     </div>
@@ -15,25 +15,25 @@
         <th (click)="sort('ID')" class="text-center">ID
           <app-sort-icon *ngIf="_sortTerm.column =='ID'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th (click)="sort('FirstName')">First Name
+        <th (click)="sort('FirstName')">Nombre
           <app-sort-icon *ngIf="_sortTerm.column =='FirstName'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th (click)="sort('ThirdName')">Third Name
+        <th (click)="sort('ThirdName')">Apellido
           <app-sort-icon *ngIf="_sortTerm.column =='ThirdName'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th (click)="sort('BirthDate')">Birth Date
+        <th (click)="sort('BirthDate')">Fecha de Nac.
           <app-sort-icon *ngIf="_sortTerm.column =='BirthDate'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
         <th (click)="sort('Email')">Email
           <app-sort-icon *ngIf="_sortTerm.column =='Email'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th (click)="sort('Score')">Score
+        <th (click)="sort('Score')">Puntación
           <app-sort-icon *ngIf="_sortTerm.column =='Score'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th (click)="sort('Score')">Rate
+        <th (click)="sort('Score')">Calificación
           <app-sort-icon *ngIf="_sortTerm.column =='Score'" [desc]="_sortTerm.desc"></app-sort-icon>
         </th>
-        <th class="text-center">Actions</th>
+        <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -46,7 +46,7 @@
         <td class="font-weight-bold" [ngClass]="{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Score | number: '1.3-3' }}</td>
         <td class="font-weight-bold" [ngClass]="{'text-muted': !individual.Score, 'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Rate }}</td>
         <td class="text-center">
-          <a [routerLink]="[individual.ID]" class="btn btn-outline-primary btn-sm" placement="left" ngbTooltip="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+          <a [routerLink]="[individual.ID]" class="btn btn-outline-primary btn-sm" placement="top" ngbTooltip="Detalles"><i class="fa fa-eye" aria-hidden="true"></i></a>
       </tr>
     </tbody>
   </table>

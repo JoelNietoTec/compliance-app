@@ -4,19 +4,19 @@
 <div *ngIf="_participants" class="card animated fadeIn">
   <ngb-tabset type="pills">
     <ngb-tab>
-      <ng-template ngbTabTitle><i class="typcn typcn-group-outline"></i> Participants</ng-template>
+      <ng-template ngbTabTitle><i class="typcn typcn-group-outline"></i> Individuos</ng-template>
       <ng-template ngbTabContent>
         <individuals-list [individuals]="_individuals"></individuals-list>
       </ng-template>
     </ngb-tab>
     <ngb-tab>
-      <ng-template ngbTabTitle><i class="typcn typcn-briefcase"></i> Entities</ng-template>
+      <ng-template ngbTabTitle><i class="typcn typcn-briefcase"></i> Entidades</ng-template>
       <ng-template ngbTabContent>
         <entities-list [entities]="_entities"></entities-list>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
   <div class="card-body d-flex justify-content-end">
-    <a class="btn btn-primary animated fadeIn" href="#" role="button" [routerLink]="['new']"><i class="typcn typcn-user-add-outline" aria-hidden="true"></i>New</a>
+    <a class="btn btn-primary animated fadeIn" href="#" role="button" [routerLink]="['new']"><i class="typcn typcn-user-add-outline" aria-hidden="true"></i> Nuevo</a>
   </div>
 </div>

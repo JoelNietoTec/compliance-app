@@ -3,41 +3,41 @@
     <label class="custom-control custom-checkbox">
       <input type="checkbox" name="pep" id="pep" [(ngModel)]="_individual.PEP" class="custom-control-input">
       <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Is PEP</span>
+      <span class="custom-control-description">Es PEP?</span>
     </label>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="first-name">First Name</label>
-      <input [(ngModel)]="_individual.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Participant´s First Name"
+      <label for="first-name">Primer Nombre</label>
+      <input [(ngModel)]="_individual.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Primer Nombre Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="second-name">Second Name</label>
-      <input type="text" [(ngModel)]="_individual.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Participant´s Second Name"
+      <label for="second-name">Segundo Nombre</label>
+      <input type="text" [(ngModel)]="_individual.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Segundo Nombre Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="firs-name">Third Name</label>
-      <input type="text" [(ngModel)]="_individual.ThirdName" name="third-name" id="third-name" class="form-control" placeholder="Participant´s Third Name"
+      <label for="firs-name">Apellido</label>
+      <input type="text" [(ngModel)]="_individual.ThirdName" name="third-name" id="third-name" class="form-control" placeholder="Apellido Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="fourth-name">Fourth Name</label>
-      <input type="text" [(ngModel)]="_individual.FourthName" name="fourth-name" id="fourth-name" class="form-control" placeholder="Participant´s Fourth Name"
+      <label for="fourth-name">Segundo Apellido</label>
+      <input type="text" [(ngModel)]="_individual.FourthName" name="fourth-name" id="fourth-name" class="form-control" placeholder="Segundo Apellido Individuo"
         aria-describedby="helpId">
     </div>
   </div>
 
   <div class="col-md-3">
     <div class="form-group">
-      <label for="birthDate">Birth Date</label>
+      <label for="birthDate">Fecha de Nacimiento</label>
       <div class="input-group">
         <input class="form-control" [(ngModel)]="_individual.formBirthDate" [startDate]="_startDate" [maxDate]="_maxDate" [minDate]="_minDate"
           placeholder="YYYY-MM-DD" name="dp" ngbDatepicker #d="ngbDatepicker">
@@ -49,11 +49,11 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="gender">Gender</label>
+      <label for="gender">Género</label>
       <select class="custom-select form-control" [(ngModel)]="_individual.GenderID" name="GenderID" id="GenderID" required>
-                  <option [value]="_default" disabled="true">Select one</option>
-                  <option *ngFor="let gender of _genders" [value]="gender.ID">{{ gender.EnglishName }}</option>
-                </select>
+        <option [value]="_default" disabled="true">---Seleccionar---</option>
+        <option *ngFor="let gender of _genders" [value]="gender.ID">{{ gender.Name }}</option>
+      </select>
     </div>
   </div>
   <div class="col-md-3">
@@ -65,39 +65,41 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="website">WebSite</label>
+      <label for="website">Sitio Web</label>
       <input type="url" class="form-control" [(ngModel)]="_individual.WebSite" name="website" id="website" aria-describedby="helpId"
         placeholder="http://example.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="phone-number">Phone Number</label>
+      <label for="phone-number">Número Telefónico</label>
       <input type="tel" class="form-control" [(ngModel)]="_individual.Phone" name="phone-number" id="phone-number" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="mobile-phone">Mobile Phone Number</label>
+      <label for="mobile-phone">Número Celular</label>
       <input type="tel" class="form-control" [(ngModel)]="_individual.MobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="nationalities">Nationalities</label>
+      <label for="nationalities">Nacionalidades</label>
       <ss-multiselect-dropdown [options]="_nationalities" [settings]="mySettings" [(ngModel)]="_selCountries"></ss-multiselect-dropdown>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="">Address</label>
+      <label for="">Dirección</label>
       <textarea class="form-control" name="" id="" rows="3" [(ngModel)]="_individual.Address"></textarea>
     </div>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
-    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i>Cancel</a>
-    <button type="button" class="btn btn-primary" (click)="saveIndividual()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
+    <a [routerLink]="['/dashboard/participants']" class="btn btn-outline-secondary" role="button">
+      <i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancelar</a>
+    <button type="button" class="btn btn-primary" (click)="saveIndividual()">
+      <i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
   </div>
 </div>

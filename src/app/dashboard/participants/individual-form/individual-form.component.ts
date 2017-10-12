@@ -101,7 +101,7 @@ export class IndividualFormComponent implements OnInit {
       let item: IMultiSelectOption;
       item = {
         id: country.ID,
-        name: this._util.capitalize(country.EnglishName)
+        name: this._util.capitalize(country.Name)
       };
       this._nationalities.push(item);
     });
@@ -124,13 +124,13 @@ export class IndividualFormComponent implements OnInit {
       console.log(this._individual);
       this._partServ.createParticipant(this._individual)
         .subscribe(data => {
-          this.toastr.success(`ID: ${data.ID}`, 'Individual Created');
+          this.toastr.success(`ID: ${data.ID}`, 'Individuo Creado');
           this._router.navigate(['dashboard/participants', data.ID]);
         });
     } else {
       this._partServ.updateParticipant(this._individual.ID, this._individual)
         .subscribe(data => {
-          this.toastr.success(`ID: ${this._individual.ID}`, 'Individual Updated');
+          this.toastr.success(`ID: ${this._individual.ID}`, 'Individuo Actualizado');
           this._router.navigate(['dashboard/participants', this._individual.ID]);
         });
     }

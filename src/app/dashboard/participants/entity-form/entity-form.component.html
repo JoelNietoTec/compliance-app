@@ -1,21 +1,21 @@
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <label for="first-name">Business Name</label>
-      <input [(ngModel)]="_entity.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Entity Business Name"
+      <label for="first-name">Razón Social</label>
+      <input [(ngModel)]="_entity.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Razón Social de Entidad"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="second-name">Commercial Name</label>
-      <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Entity´s Commercial Name"
+      <label for="second-name">Nombre Comercial</label>
+      <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="birthDate">Constitution Date</label>
+      <label for="birthDate">Fecha Constitución</label>
       <div class="input-group">
         <input class="form-control" [(ngModel)]="_entity.formBirthDate" [maxDate]="_maxDate" [minDate]="_minDate" placeholder="YYYY-MM-DD"
           name="dp" ngbDatepicker #d="ngbDatepicker">
@@ -27,9 +27,9 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="representative">Legal Representative</label>
+      <label for="representative">Representante Legal</label>
       <input type="text" class="form-control" [(ngModel)]="_entity.LegalRepresentative" name="representative" id="representative"
-        aria-describedby="helpId" placeholder="Legal Representative">
+        aria-describedby="helpId" placeholder="Represante Legal de la Entidad">
     </div>
   </div>
   <div class="col-md-3">
@@ -40,33 +40,33 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="website">WebSite</label>
+      <label for="website">Sitio Web</label>
       <input type="url" class="form-control" [(ngModel)]="_entity.WebSite" name="website" id="website" aria-describedby="helpId"
         placeholder="http://example.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="phone-number">Phone Number</label>
+      <label for="phone-number">Número Telefónico</label>
       <input type="tel" class="form-control" [(ngModel)]="_entity.Phone" name="phone-number" id="phone-number" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="mobile-phoner">Mobile Phone Number</label>
+      <label for="mobile-phoner">Número Telefónico</label>
       <input type="tel" class="form-control" [(ngModel)]="_entity.MobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label for="address">Address</label>
-      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Entity Address"></textarea>
+      <label for="address">Dirección</label>
+      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad"></textarea>
     </div>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
-    <a [routerLink]="['/Dashboard/Participants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancel</a>
-    <button type="button" class="btn btn-primary" (click)="saveEntity()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
+    <a [routerLink]="['/dashboard/darticipants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancelar</a>
+    <button type="button" class="btn btn-primary" (click)="saveEntity()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
   </div>
 </div>

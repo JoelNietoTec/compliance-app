@@ -46,9 +46,9 @@ export class ParticipantComplianceComponent implements OnInit {
     this._categoriesService.getCategoriesByMatrix(this.participant.ParamMatrixID)
       .subscribe(data => {
         this._categories = data;
-        this._categories = this._util.sortBy(this._categories, 'EnglishName');
+        this._categories = this._util.sortBy(this._categories, 'Name');
         for (let i of this._categories) {
-          i.Params = this._util.sortBy(i.Params, 'EnglishName');
+          i.Params = this._util.sortBy(i.Params, 'Name');
         }
       });
   }

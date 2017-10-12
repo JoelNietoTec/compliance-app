@@ -5,17 +5,17 @@
     </app-loading-modal>
     <div class="card" *ngIf="matrices">
       <div class="card-body">
-        <h4 class="card-title">All Matrices</h4>
+        <h4 class="card-title">Matrices</h4>
         <table class="table table-sm table-squared">
           <thead>
             <tr>
               <th class="text-center">ID</th>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Create Date</th>
-              <th class="text-center">Actions</th>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Fecha Creación</th>
+              <th class="text-center">Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -28,10 +28,10 @@
                 <td>{{ matrix.Description }}</td>
                 <td>{{ matrix.CreateDate | date: 'mediumDate' }}</td>
                 <td class="text-center">
-                  <a [routerLink]="[matrix.ID]" placement="top" ngbTooltip="Details">
+                  <a [routerLink]="[matrix.ID]" placement="top" ngbTooltip="Detalles">
                     <i class="fa fa-bars fa-lg text-primary" aria-hidden="true"></i>
                   </a>
-                  <span (click)="selectMatrix(matrix)" placement="top" ngbTooltip="Edit">
+                  <span (click)="selectMatrix(matrix)" placement="top" ngbTooltip="Editar">
                     <i class="fa fa-edit fa-lg text-success" aria-hidden="true"></i>
                   </span>
                 </td>
@@ -49,18 +49,18 @@
                 <td>
                   <select class="form-control custom-select" [(ngModel)]="_currentMatrix.MatrixTypeID" name="matrix-type" id="matrix-type"
                     required>
-                    <option value="undefined" disabled>---Select one---</option>
+                    <option value="undefined" disabled>---Seleccionar---</option>
                     <option *ngFor="let type of matrixTypes" [value]="type.ID">{{ type.EnglishName }}</option>
                   </select>
                 </td>
                 <td>
                   <input type="text" [(ngModel)]="_currentMatrix.Description" class="form-control" name="new-description" id="new-description"
-                    placeholder="Description">
+                    placeholder="Descripción">
                 </td>
                 <td></td>
                 <td class="text-center">
-                  <i class="fa fa-lock fa-lg text-success" placement="top" ngbTooltip="Save" aria-hidden="true" (click)="updateMatrix()"></i>
-                  <i class="fa fa-times fa-lg text-danger" placement="top" ngbTooltip="Cancel" aria-hidden="true" (click)="cancelUpdate()"></i>
+                  <i class="fa fa-lock fa-lg text-success" placement="top" ngbTooltip="Guardar" aria-hidden="true" (click)="updateMatrix()"></i>
+                  <i class="fa fa-times fa-lg text-danger" placement="top" ngbTooltip="Cancelar" aria-hidden="true" (click)="cancelUpdate()"></i>
                 </td>
               </tr>
             </ng-container>
@@ -69,24 +69,24 @@
                 <i class="fa fa-certificate fa-lg text-success" aria-hidden="true"></i>
               </td>
               <td>
-                <input type="text" [(ngModel)]="_newMatrix.Code" class="form-control form-control-sm" name="new-code" id="new-code" placeholder="Matrix Code">
+                <input type="text" [(ngModel)]="_newMatrix.Code" class="form-control form-control-sm" name="new-code" id="new-code" placeholder="Código de Matrix">
               </td>
               <td>
-                <input type="text" [(ngModel)]="_newMatrix.Name" class="form-control form-control-sm" name="new-name" id="new-name" placeholder="Name">
+                <input type="text" [(ngModel)]="_newMatrix.Name" class="form-control form-control-sm" name="new-name" id="new-name" placeholder="Nombre">
               </td>
               <td>
                 <select class="form-control custom-select" [(ngModel)]="_newMatrix.MatrixTypeID" name="matrix-type" id="matrix-type" required>
-                  <option value="undefined" disabled>---Select one---</option>
-                  <option *ngFor="let type of matrixTypes" [value]="type.ID">{{ type.EnglishName }}</option>
+                  <option value="undefined" disabled>---Seleccionar---</option>
+                  <option *ngFor="let type of matrixTypes" [value]="type.ID">{{ type.Name }}</option>
                 </select>
               </td>
               <td>
                 <input type="text" [(ngModel)]="_newMatrix.Description" class="form-control form-control-sm" name="new-description" id="new-description"
-                  placeholder="Description">
+                  placeholder="Descripción">
               </td>
               <td></td>
               <td class="text-center">
-                <i class="fa fa-plus-square fa-lg text-primary" placement="top" ngbTooltip="Add" aria-hidden="true" (click)="createMatrix()"></i>
+                <i class="fa fa-plus-square fa-lg text-primary" placement="top" ngbTooltip="Añadir" aria-hidden="true" (click)="createMatrix()"></i>
               </td>
             </tr>
           </tbody>

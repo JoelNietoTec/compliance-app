@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <label for="participant-type">Participant Type</label>
+          <label for="participant-type">Tipo de Participante</label>
           <select class="form-control custom-select" name="participant-type" id="participant-type" [(ngModel)]="_type">
-        <option disabled [value]="_default">--- Select Type ----</option>
-        <option *ngFor="let type of _types" [ngValue]="type">{{ type.EnglishName}}</option>
+        <option disabled [value]="_default">--- Seleccionar ----</option>
+        <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name}}</option>
       </select>
         </div>
       </div>
@@ -16,13 +16,13 @@
 <div *ngIf="_type" [ngSwitch]="_type.ID">
   <app-card *ngSwitchCase=1>
     <div card-section="body">
-      <h4 class="card-title">Individual Form</h4>
+      <h4 class="card-title">Formulario de Individuo</h4>
       <individual-form></individual-form>
     </div>
   </app-card>
   <app-card *ngSwitchCase=2>
     <div card-section="body">
-      <h4 class="card-title">Entity Form</h4>
+      <h4 class="card-title">Formulario de Entidad</h4>
       <entity-form></entity-form>
     </div>
   </app-card>

@@ -188,6 +188,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 // Packages Dependencies
 
 
@@ -222,6 +223,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* ReactiveFormsModule */]
             ],
             providers: [
+                {
+                    provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["LOCALE_ID"], useValue: 'es-PA'
+                },
                 __WEBPACK_IMPORTED_MODULE_7_ng2_breadcrumb_ng2_breadcrumb__["a" /* BreadcrumbService */],
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_5__angular_common__["LocationStrategy"],
