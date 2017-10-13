@@ -37,7 +37,6 @@ export class ParamTableComponent implements OnInit {
       this._tableService.getTable(params['id'])
         .subscribe(data => {
           this._table = data;
-          console.log(data);
         });
     });
   }
@@ -48,7 +47,6 @@ export class ParamTableComponent implements OnInit {
     console.log(this._newValue);
     this._tableService.addValue(this._newValue)
       .subscribe(data => {
-        console.log(data);
         this._saving = false;
         this._table.ParamValues.push(data);
         this._newValue = {};
@@ -65,7 +63,6 @@ export class ParamTableComponent implements OnInit {
     this._saving = true;
     this._tableService.editValue(this._currentValue.ID, this._currentValue)
       .subscribe(data => {
-        console.log(data);
         this._saving = false;
         this.initTable();
         this._editing = false;

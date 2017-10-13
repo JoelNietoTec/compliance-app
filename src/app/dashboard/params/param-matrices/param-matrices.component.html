@@ -9,19 +9,17 @@
         <table class="table table-sm table-squared">
           <thead>
             <tr>
-              <th class="text-center">ID</th>
               <th>Código</th>
               <th>Nombre</th>
               <th>Tipo</th>
               <th>Descripción</th>
               <th>Fecha Creación</th>
-              <th class="text-center">Acción</th>
+              <th class="text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngFor="let matrix of matrices">
               <tr *ngIf="_currentMatrix.ID!=matrix.ID" (dblclick)="selectMatrix(matrix)">
-                <td class="text-center">{{ matrix.ID }}</td>
                 <td>{{ matrix.Code }}</td>
                 <td>{{ matrix.Name }}</td>
                 <td>{{ matrix.MatrixType.EnglishName }}</td>
@@ -37,9 +35,6 @@
                 </td>
               </tr>
               <tr class="table-info" *ngIf="_currentMatrix.ID==matrix.ID">
-                <td class="text-center">
-                  {{ _currentMatrix.ID }}
-                </td>
                 <td>
                   <input type="text" [(ngModel)]="_currentMatrix.Code" class="form-control" name="edit-code" id="new-code" placeholder="Matrix Code">
                 </td>
@@ -65,9 +60,6 @@
               </tr>
             </ng-container>
             <tr>
-              <td class="text-center">
-                <i class="fa fa-certificate fa-lg text-success" aria-hidden="true"></i>
-              </td>
               <td>
                 <input type="text" [(ngModel)]="_newMatrix.Code" class="form-control form-control-sm" name="new-code" id="new-code" placeholder="Código de Matrix">
               </td>

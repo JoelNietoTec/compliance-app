@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     this._partServ.getParticipantsbyRisk()
       .subscribe(data => {
         this.byRisk = data;
-        for (let i of this.byRisk) {
+        for (const i of this.byRisk) {
           if (i.Rate === 'Incomplete') {
             i.name = 'Incomplete';
           } else {
@@ -41,9 +41,9 @@ export class HomeComponent implements OnInit {
   }
 
   loadChart() {
-    let labels: string[] = [];
-    let data: number[] = [];
-    for (let i of this.byRisk) {
+    const labels: string[] = [];
+    const data: number[] = [];
+    for (const i of this.byRisk) {
       labels.push(i.Rate);
       data.push(i.Count);
     }
@@ -54,19 +54,19 @@ export class HomeComponent implements OnInit {
     this.pieChartOptions = {
       title: {
         display: true,
-        text: 'Risk Distribution',
-        fontFamily: 'Poppins',
+        text: 'Distribución de Riesgo',
+        fontFamily: 'Roboto',
         fontSize: 16
       },
       legend: {
         position: 'bottom',
         labels: {
-          fontFamily: 'Poppins',
+          fontFamily: 'Roboto',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Roboto',
         bodyFontSize: 14
       }
     };

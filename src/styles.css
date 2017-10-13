@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,500');
 
 body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 13px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 button.form-control {
@@ -116,7 +116,7 @@ a:not([href]):not([tabindex]) {
  */
 
 label {
-  font-weight: 400;
+  font-weight: bold;
 }
 
 h1, h3 {
@@ -262,7 +262,7 @@ ngb-tabset > ul.nav > li.nav-item {
 }
 
 .fa-lg {
-  font-size: 1.5em;
+  font-size: 1.65em;
   cursor: pointer;
 }
 
@@ -458,6 +458,10 @@ select.custom-select {
 
 td {
   vertical-align: middle !important;
+}
+
+.table-sm td, .table-sm th {
+  padding: .3rem .75rem
 }
 
 tr.form-table > td {

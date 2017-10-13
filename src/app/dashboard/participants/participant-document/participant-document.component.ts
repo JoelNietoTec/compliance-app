@@ -4,7 +4,9 @@ import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstra
 import { DocumentType, ParticipantDocument } from '../../../shared/models/documents.models';
 import { Participant } from '../../../shared/models/participants.model';
 import { Country } from '../../../shared/models/country.model';
+import { CountriesService } from '../../../shared/services/countries.service';
 import { DocumentsService } from '../../../shared/services/documents.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 interface FormDocument extends ParticipantDocument {
   formExpeditionDate?: NgbDateStruct;
@@ -26,18 +28,20 @@ export class ParticipantDocumentComponent implements OnInit {
   @Output() addDocument = new EventEmitter();
   @Output() removeDocument = new EventEmitter();
 
-  _countries: Array<Country> = JSON.parse(localStorage.getItem('countries'));
+  _countries: Array<Country>;
   _partDocument: FormDocument = { File: {} };
   _title: string;
 
   constructor(
     private _docServ: DocumentsService,
-    private _dateFormatter: NgbDateParserFormatter
+    private _dateFormatter: NgbDateParserFormatter,
+    private _countryServ: CountriesService,
+    private _util: UtilService
   ) {
   }
 
   ngOnInit() {
-    this._title = `Document ${this.index + 1}`;
+    this._title = `Documento ${this.index + 1}`;
     if (this.doc) {
       this._partDocument = this.doc;
       this._partDocument.formExpeditionDate = this._dateFormatter.parse(this._partDocument.ExpeditionDate.toString());
@@ -45,6 +49,16 @@ export class ParticipantDocumentComponent implements OnInit {
     } else {
       this._partDocument.ParticipantID = this.participant.ID;
     }
+
+    this.getCountries();
+  }
+
+  getCountries() {
+    this._countryServ.getCountries()
+      .subscribe(data => {
+        this._countries = data;
+        this._countries = this._util.sortBy(this._countries, 'Name');
+      });
   }
 
   setFile(file: any) {
@@ -58,9 +72,9 @@ export class ParticipantDocumentComponent implements OnInit {
     this.addDocument.emit(this._partDocument);
   }
 
-  equals(c1, c2): boolean {
-    return c1 && c2 ? c1.ID === c2.ID : c1 === c2;
-  }
+  // equals(c1, c2): boolean {
+  //   return c1 && c2 ? c1.ID === c2.ID : c1 === c2;
+  // }
 
   removeDoc() {
     this.removeDocument.emit(this.doc.ID);

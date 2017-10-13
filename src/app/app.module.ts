@@ -14,6 +14,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr';
 import { ToastOption } from './shared/services/toast-options';
+import { CustomDatepickerI18n, I18n } from './shared/services/datepicker-i18n';
+import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 
 // Main Dependencies
 import { AppComponent } from './app.component';
@@ -54,6 +56,11 @@ import { AppRoutingModule } from './app-routing.module';
     {
       provide: ToastOptions,
       useClass: ToastOption
+    },
+    I18n,
+    {
+      provide: NgbDatepickerI18n,
+      useClass: CustomDatepickerI18n
     },
     AuthGuard
   ],

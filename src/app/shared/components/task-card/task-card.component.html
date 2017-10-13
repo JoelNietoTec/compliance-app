@@ -1,8 +1,8 @@
 <div class="card" [ngClass]="{'to-do border-primary': task.StatusID == 1, 'doing border-success': task.StatusID == 2, 'done': task.StatusID == 3}">
   <div class="card-header">
-    <span>
+    <span class="float-left">
       {{ task.Title }}
-    <div class="span float-right ">
+    <div class="float-right ">
       <ng-container [ngSwitch]="task.StatusID">
         <i *ngSwitchCase=1 class="task-icon fa fa-check-square-o text-muted" placement="top" ngbTooltip="Begin" (click)="progressTask()"></i>
         <i *ngSwitchCase=2 class="task-icon fa fa-check-square-o text-muted" placement="top" ngbTooltip="Complete" (click)="progressTask()"></i>

@@ -117,7 +117,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".nav-item:hover {\r\n    background-color: #34495e;\r\n}\r\n\r\n.nav-item > .nav-link {\r\n    color: #abb2b9;\r\n}\r\n\r\n.nav-item > a.nav-link:hover, .nav-item > a.nav-link.active {\r\n    color: #fff;\r\n}\r\n\r\nul.sub-items {\r\n  list-style: none;\r\n  padding-left: 0;\r\n}\r\n\r\n.sub-items > .sub-item > a {\r\n  padding-left: 30px;\r\n}\r\n\r\n.user-name {\r\n  font-weight: bold;\r\n  font-size: 1.10rem;\r\n  color: #abb2b9;\r\n  padding: 0 13px;\r\n  margin: 0;\r\n}\r\n\r\n.user-name.nav-item > a.nav-link:hover, .user-name > a.nav-item:focus  {\r\n   color: #abb2b9 !important;\r\n}\r\n\r\n.dropdown-menu {\r\n  border-radius: 0;\r\n  right: auto;\r\n}\r\n\r\n.user-email {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.user-email > .nav-link {\r\n  background-color: #2f4050;\r\n}\r\n\r\n\r\n.nav-pills .nav-link.active, .show>.nav-pills .nav-link {\r\n  background-color: #2980b9;\r\n}\r\n", ""]);
+exports.push([module.i, ".nav-item:hover {\r\n    background-color: #34495e;\r\n}\r\n\r\n.nav-item > .nav-link {\r\n    color: #abb2b9;\r\n}\r\n\r\n.nav-item > a.nav-link:hover, .nav-item > a.nav-link.active {\r\n    color: #fff;\r\n}\r\n\r\nul.sub-items {\r\n  list-style: none;\r\n  padding-left: 0;\r\n}\r\n\r\n.sub-items > .sub-item > a {\r\n  padding-left: 50px;\r\n}\r\n\r\n.user-name {\r\n  font-weight: bold;\r\n  font-size: 1.10rem;\r\n  color: #abb2b9;\r\n  padding: 0 13px;\r\n  margin: 0;\r\n}\r\n\r\n.user-name.nav-item > a.nav-link:hover, .user-name > a.nav-item:focus  {\r\n   color: #abb2b9 !important;\r\n}\r\n\r\n.dropdown-menu {\r\n  border-radius: 0;\r\n  right: auto;\r\n}\r\n\r\n.user-email {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.user-email > .nav-link {\r\n  background-color: #2f4050;\r\n}\r\n\r\n\r\n.nav-pills .nav-link.active, .show>.nav-pills .nav-link {\r\n  background-color: #2980b9;\r\n}\r\n", ""]);
 
 // exports
 
@@ -130,7 +130,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-pills flex-column \">\r\n  <h6 class=\"user-name\"><i class=\"typcn typcn-user-outline\" aria-hidden=\"true\"></i> {{ _loggedUser.UserName }}</h6>\r\n  <li class=\"nav-item dropdown user-email\"><a href=\"\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">{{ _loggedUser.Email }}</a>\r\n    <div class=\"dropdown-menu\">\r\n      <a class=\"dropdown-item\"><i class=\"typcn typcn-eject-outline\" aria-hidden=\"true\"></i> Change Password</a>\r\n      <a [routerLink]=\"['/login']\" class=\"dropdown-item\"><i class=\"typcn typcn-power-outline\" aria-hidden=\"true\"></i> Logout</a>\r\n    </div>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['home']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-home-outline\" aria-hidden=\"true\"></i> Inicio</a></li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['participants']\" class=\"nav-link\" routerLinkActive=\"active\"><span class=\"typcn typcn-group\"></span> Participantes</a></li>\r\n  <li class=\"nav-item\">\r\n    <a data-toggle=\"collapse\" href=\"#paramLinks\" class=\"nav-link\">\r\n      <i class=\"typcn typcn-chart-bar-outline\" aria-hidden=\"true\"></i> Parámetros\r\n      </a>\r\n    <ul class=\"nav-pills flex-column sub-items collapse\" id=\"paramLinks\">\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'matrices']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"fa fa-table\" aria-hidden=\"true\"></i> Matrices</a>\r\n      </li>\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'tables']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"fa fa-table\" aria-hidden=\"true\"></i> Tablas</a>\r\n      </li>\r\n    </ul>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['settings']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-spanner-outline\" aria-hidden=\"true\"></i> Ajustes</a></li>\r\n</ul>\r\n"
+module.exports = "<ul class=\"nav nav-pills flex-column \">\r\n  <h6 class=\"user-name\"><i class=\"typcn typcn-user-outline\" aria-hidden=\"true\"></i> {{ _loggedUser.UserName }}</h6>\r\n  <li class=\"nav-item dropdown user-email\"><a href=\"\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">{{ _loggedUser.Email }}</a>\r\n    <div class=\"dropdown-menu\">\r\n      <a class=\"dropdown-item\"><i class=\"typcn typcn-eject-outline\" aria-hidden=\"true\"></i> Change Password</a>\r\n      <a [routerLink]=\"['/login']\" class=\"dropdown-item\"><i class=\"typcn typcn-power-outline\" aria-hidden=\"true\"></i> Logout</a>\r\n    </div>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['home']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-home-outline\" aria-hidden=\"true\"></i> Inicio</a></li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['participants']\" class=\"nav-link\" routerLinkActive=\"active\"><span class=\"typcn typcn-group\"></span> Participantes</a></li>\r\n  <li class=\"nav-item\">\r\n    <a data-toggle=\"collapse\" href=\"#paramLinks\" class=\"nav-link\">\r\n      <i class=\"typcn typcn-chart-bar-outline\" aria-hidden=\"true\"></i> Parámetros\r\n      </a>\r\n    <ul class=\"nav-pills flex-column sub-items collapse\" id=\"paramLinks\">\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'matrices']\" class=\"nav-link\" routerLinkActive=\"active\">Matrices</a>\r\n      </li>\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'tables']\" class=\"nav-link\" routerLinkActive=\"active\">Tablas</a>\r\n      </li>\r\n    </ul>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['settings']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-spanner-outline\" aria-hidden=\"true\"></i> Ajustes</a></li>\r\n</ul>\r\n"
 
 /***/ }),
 
@@ -396,7 +396,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ngb-tabset type=\"pills\">\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-th-large\"></i> Dashboard</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-3\" *ngFor=\"let risk of byRisk\">\r\n          <app-quick-card [icon]=\"risk.Icon\" [value]=\"risk.Count\" [type]=\"risk.ColorType\" [name]=\"risk.name\">\r\n          </app-quick-card>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n          <app-loading-modal *ngIf=\"!chartReady\"></app-loading-modal>\r\n          <app-card [footer]=false *ngIf=chartReady>\r\n            <div card-section=\"body\">\r\n              <canvas baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [chartType]=\"pieChartType\" [options]=\"pieChartOptions\"\r\n                [colors]=\"chartColors\">\r\n              </canvas>\r\n            </div>\r\n          </app-card>\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-input-checked\"></i> Tasks</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <home-tasks></home-tasks>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-calendar\"></i> Schedule</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <home-schedule></home-schedule>\r\n    </ng-template>\r\n  </ngb-tab>\r\n</ngb-tabset>\r\n"
+module.exports = "<ngb-tabset type=\"pills\">\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-th-large\"></i> Dashboard</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-3\" *ngFor=\"let risk of byRisk\">\r\n          <app-quick-card [icon]=\"risk.Icon\" [value]=\"risk.Count\" [type]=\"risk.ColorType\" [name]=\"risk.name\">\r\n          </app-quick-card>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n          <app-loading-modal *ngIf=\"!chartReady\"></app-loading-modal>\r\n          <app-card [footer]=false *ngIf=chartReady>\r\n            <div card-section=\"body\">\r\n              <canvas baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [chartType]=\"pieChartType\" [options]=\"pieChartOptions\"\r\n                [colors]=\"chartColors\">\r\n              </canvas>\r\n            </div>\r\n          </app-card>\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-input-checked\"></i> Tareas</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <home-tasks></home-tasks>\r\n    </ng-template>\r\n  </ngb-tab>\r\n  <ngb-tab>\r\n    <ng-template ngbTabTitle><i class=\"typcn typcn-calendar\"></i> Schedule</ng-template>\r\n    <ng-template ngbTabContent>\r\n      <home-schedule></home-schedule>\r\n    </ng-template>\r\n  </ngb-tab>\r\n</ngb-tabset>\r\n"
 
 /***/ }),
 
@@ -460,19 +460,19 @@ var HomeComponent = /** @class */ (function () {
         this.pieChartOptions = {
             title: {
                 display: true,
-                text: 'Risk Distribution',
-                fontFamily: 'Poppins',
+                text: 'Distribución de Riesgo',
+                fontFamily: 'Roboto',
                 fontSize: 16
             },
             legend: {
                 position: 'bottom',
                 labels: {
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Roboto',
                     boxWidth: 20
                 }
             },
             tooltips: {
-                bodyFontFamily: 'Poppins',
+                bodyFontFamily: 'Roboto',
                 bodyFontSize: 14
             }
         };
@@ -683,7 +683,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/home/tasks/tasks.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div *ngFor=\"let status of taskStatus\" class=\"col-md-3\">\r\n    <h4 class=\"bucket-title\"><i class=\"typcn\" [ngClass]=\"{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}\"></i>      {{ status.EnglishName }}</h4>\r\n    <button *ngIf=\"status.ID == 1\" type=\"button\" (click)=\"open()\" class=\"btn btn-primary btn-block add-button\"><i class=\"typcn typcn-document-add\"></i> New Task</button>\r\n    <div *ngFor=\"let task of _tasks\">\r\n      <task-card *ngIf=\"task.StatusID == status.ID\" [task]=\"task\" (select)=\"selectTask($event)\"></task-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div *ngFor=\"let status of taskStatus\" class=\"col-md-3\">\r\n    <h4 class=\"bucket-title\">\r\n      <i class=\"typcn\" [ngClass]=\"{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}\"></i> {{ status.Name }}</h4>\r\n    <button *ngIf=\"status.ID == 1\" type=\"button\" (click)=\"open()\" class=\"btn btn-primary btn-block add-button\">\r\n      <i class=\"typcn typcn-document-add\"></i> New Task</button>\r\n    <div *ngFor=\"let task of _tasks\">\r\n      <task-card *ngIf=\"task.StatusID == status.ID\" [task]=\"task\" (select)=\"selectTask($event)\"></task-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -747,10 +747,10 @@ var TasksComponent = /** @class */ (function () {
         modalRef.componentInstance.currentTask = this._currentTask;
     };
     TasksComponent.prototype.getDismissReason = function (reason) {
-        if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* ModalDismissReasons */].ESC) {
+        if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* ModalDismissReasons */].ESC) {
             return 'by pressing ESC';
         }
-        else if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* ModalDismissReasons */].BACKDROP_CLICK) {
+        else if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* ModalDismissReasons */].BACKDROP_CLICK) {
             return 'by clicking on a backdrop';
         }
         else {
@@ -814,7 +814,7 @@ var TasksComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/home/tasks/tasks.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/home/tasks/tasks.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* NgbModal */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_tasks_service__["a" /* TasksService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_tasks_service__["a" /* TasksService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbDateParserFormatter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbDateParserFormatter */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_tasks_service__["a" /* TasksService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_tasks_service__["a" /* TasksService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["f" /* NgbDateParserFormatter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["f" /* NgbDateParserFormatter */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
     ], TasksComponent);
     return TasksComponent;
     var _a, _b, _c, _d, _e;

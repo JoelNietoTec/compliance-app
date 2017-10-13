@@ -3,22 +3,22 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <label class="form-control-label" for="">Document Code</label>
+          <label class="form-control-label" for="">Nro. Documento</label>
           <input type="text" [(ngModel)]="_partDocument.DocumentCode"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="doc-type" class="form-control-label">Document Type</label>
-          <select [compareWith]="equals" class="form-control custom-select" [(ngModel)]="_partDocument.DocumentType" name="" id="">
-            <option disabled value="undefined">--- Select one ---</option>
-            <option *ngFor="let type of types" [ngValue]="type">{{ type.EnglishName }}</option>
+          <label for="doc-type" class="form-control-label">Tipo Documento</label>
+          <select class="form-control custom-select" [(ngModel)]="_partDocument.DocumentTypeID" name="" id="">
+            <option disabled value="undefined">--- Seleccionar ---</option>
+            <option *ngFor="let type of types" [value]="type.ID">{{ type.Name }}</option>
           </select>
         </div>
       </div>
       <div class="col-md-4">
        <div class="form-group">
-        <label for="">File</label>
+        <label for="">Documento</label>
         <div class="input-group">
           <input type="file" class="form-control" (change)="setFile($event.target.files[0])">
         </div>
@@ -26,9 +26,9 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="">Issue Date</label>
+          <label for="">Fecha Expedición</label>
           <div class="input-group">
-            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpeditionDate" ngbDatepicker #d="ngbDatepicker" placeholder="">
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpeditionDate" ngbDatepicker #d="ngbDatepicker" placeholder="YYYY-MM-DD">
             <div class="input-group-addon" (click)="d.toggle()">
             <i class="typcn typcn-calendar-outline" aria-hidden="true"></i>
             </div>
@@ -37,9 +37,9 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="">Expiration Date</label>
+          <label for="">Fecha Expiración</label>
           <div class="input-group">
-            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpirationDate" ngbDatepicker #e="ngbDatepicker" placeholder="">
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpirationDate" ngbDatepicker #e="ngbDatepicker" placeholder="YYYY-MM-DD">
             <div class="input-group-addon" (click)="e.toggle()">
             <i class="typcn typcn-calendar-outline" aria-hidden="true"></i>
             </div>
@@ -48,18 +48,18 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="">Issue Country</label>
-          <select [compareWith]="equals" class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.Country" required>
-            <option [value]="undefined" disabled>--- Select One ---</option>
-            <option *ngFor="let country of _countries" [ngValue]="country">
-              {{ country.EnglishName }}
+          <label for="">País Expedición</label>
+          <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.Country" required>
+            <option [value]="undefined" disabled>--- Seleccionar ---</option>
+            <option *ngFor="let country of _countries" [value]="country.ID">
+              {{ country.Name }}
             </option>
           </select>
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-danger" (click)="removeDoc()" role="button"><i class="typcn typcn-trash" aria-hidden="true"></i> Delete</button>
-        <button type="button" class="btn btn-primary" (click)="saveDocument()" ><i class="typcn typcn-download-outline" aria-hidden="true"></i> Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="removeDoc()" role="button"><i class="typcn typcn-trash" aria-hidden="true"></i> Borrar</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()" ><i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
       </div>
     </div>
   </div>
