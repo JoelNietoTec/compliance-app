@@ -46,7 +46,7 @@
         <td class="font-weight-bold" [ngClass]="{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Score | number: '1.3-3' }}</td>
         <td class="font-weight-bold" [ngClass]="{'text-muted': !individual.Score, 'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 5.99, 'text-danger': individual.Score > 5.99 }">{{ individual.Rate }}</td>
         <td class="text-center">
-          <a [routerLink]="[individual.ID]" class="btn btn-outline-primary btn-sm" placement="top" ngbTooltip="Detalles"><i class="fa fa-eye" aria-hidden="true"></i></a>
+          <a [routerLink]="[individual.ID]" placement="top" ngbTooltip="Detalles"><i class="fa fa-search-plus fa-lg text-primary" aria-hidden="true"></i></a>
       </tr>
     </tbody>
   </table>

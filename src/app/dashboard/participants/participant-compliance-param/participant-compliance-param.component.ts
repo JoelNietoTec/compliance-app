@@ -48,18 +48,14 @@ export class ParticipantComplianceParamComponent implements OnInit {
     for (let i of this._values) {
       i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
     }
-    // console.log(this._value);
-
   }
 
   getParam() {
     this._partParam = this.partParams.find(item => item.ParamID === this.param.ID);
-    console.log(this._partParam);
     this._currentValue = this.param.ParamTable.ParamValues.find(item => item.ID === this._partParam.ParamValueID);
     if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
       this._currentSubValue = this._currentValue.ParamSubValues.find(item => item.ID === this._partParam.ParamSubValueID);
     }
-    // console.log(this._currentValue);
     this._value.ID = this._partParam.ParamValueID;
     this._value.Score = this._partParam.Score;
   }

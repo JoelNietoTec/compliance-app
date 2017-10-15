@@ -69,7 +69,7 @@ export class ParticipantDocumentComponent implements OnInit {
   saveDocument() {
     this._partDocument.ExpeditionDate = new Date(this._dateFormatter.format(this._partDocument.formExpeditionDate));
     this._partDocument.ExpirationDate = new Date(this._dateFormatter.format(this._partDocument.formExpirationDate));
-    this.addDocument.emit(this._partDocument);
+    console.log(this._partDocument);
   }
 
   // equals(c1, c2): boolean {

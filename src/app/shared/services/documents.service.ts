@@ -27,9 +27,23 @@ export class DocumentsService {
     this._partURL = _conn.APIUrl + 'participants';
   }
 
-  getTypes(): Observable<Array<ParticipantDocument>> {
+  getTypes(): Observable<Array<DocumentType>> {
     return this._http
       .get(this._docTypeURL)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
+  addType(type: DocumentType): Observable<DocumentType> {
+    return this._http
+      .post(this._docTypeURL, type, { headers: this._headers })
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
+  updateType(id: number, type: DocumentType): Observable<DocumentType> {
+    return this._http
+      .put(`${this._docTypeURL}/${id}`, type, { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }

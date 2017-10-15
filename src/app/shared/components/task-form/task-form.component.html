@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title text-secondary"><i class="typcn typcn-document-add"></i> New task</h4>
+  <h4 class="modal-title text-secondary"><i class="typcn typcn-document-add"></i> Nueva Tarea</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,13 +9,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label for="card-title">Title</label>
+          <label for="card-title">Nombre</label>
           <input type="text" name="title" id="title" [(ngModel)]="currentTask.Title" class="form-control" placeholder="" aria-describedby="helpId">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="birthDate">Begin Date</label>
+          <label for="birthDate">Fecha Inicio</label>
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formBeginDate" name="bd" ngbDatepicker #bd="ngbDatepicker">
             <div class="input-group-addon" (click)="bd.toggle()">
@@ -26,7 +26,7 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="birthDate">Expiration Date</label>
+          <label for="birthDate">Fecha Expedición</label>
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formExpirationDate" name="ed" ngbDatepicker #ed="ngbDatepicker">
             <div class="input-group-addon" (click)="ed.toggle()">
@@ -39,19 +39,19 @@
         <div class="form-group">
           <label for="status">Status</label>
           <select class="form-control custom-select" [(ngModel)]="currentTask.StatusID" name="status" id="status">
-            <option selected disabled value="undefined"> --- Select one --- </option>
-            <option *ngFor="let status of _taskStatus" [value]="status.ID">{{ status.EnglishName }}</option>
+            <option selected disabled value="undefined"> --- Seleccionar --- </option>
+            <option *ngFor="let status of _taskStatus" [value]="status.ID">{{ status.Name }}</option>
           </select>
         </div>
       </div>
       <div class="col-md-12">
         <div class="form-group">
-          <label for="">Description</label>
+          <label for="">Descripción</label>
           <textarea class="form-control" [(ngModel)]="currentTask.Description" rows="3"></textarea>
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary"><i class="typcn typcn-download-outline"></i> Save</button>
+        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary"><i class="typcn typcn-download-outline"></i> Guardar</button>
       </div>
     </div>
   </div>

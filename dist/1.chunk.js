@@ -683,7 +683,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/home/tasks/tasks.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div *ngFor=\"let status of taskStatus\" class=\"col-md-3\">\r\n    <h4 class=\"bucket-title\">\r\n      <i class=\"typcn\" [ngClass]=\"{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}\"></i> {{ status.Name }}</h4>\r\n    <button *ngIf=\"status.ID == 1\" type=\"button\" (click)=\"open()\" class=\"btn btn-primary btn-block add-button\">\r\n      <i class=\"typcn typcn-document-add\"></i> New Task</button>\r\n    <div *ngFor=\"let task of _tasks\">\r\n      <task-card *ngIf=\"task.StatusID == status.ID\" [task]=\"task\" (select)=\"selectTask($event)\"></task-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div *ngFor=\"let status of taskStatus\" class=\"col-md-3\">\r\n    <h4 class=\"bucket-title\">\r\n      <i class=\"typcn\" [ngClass]=\"{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}\"></i> {{ status.Name }}</h4>\r\n    <button *ngIf=\"status.ID == 1\" type=\"button\" (click)=\"open()\" class=\"btn btn-primary btn-block add-button\">\r\n      <i class=\"typcn typcn-document-add\"></i> Nueva Tarea</button>\r\n    <div *ngFor=\"let task of _tasks\">\r\n      <task-card *ngIf=\"task.StatusID == status.ID\" [task]=\"task\" (select)=\"selectTask($event)\"></task-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -845,7 +845,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/document-types/document-types.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-sm table-squared table-bordered table-hover\">\n    <thead>\n      <tr>\n        <th class=\"text-center\">ID</th>\n        <th>Name</th>\n        <th>English Name</th>\n        <th class=\"text-center\">Actions</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let type of _types\">\n        <td class=\"text-center\">{{ type.ID }}</td>\n        <td>{{ type.Name}}</td>\n        <td>{{ type.EnglishName }}</td>\n        <td class=\"text-center\">\n            <div class=\"btn btn-success btn-sm\"><i class=\"typcn typcn-edit\"></i> Edit</div>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-sm table-squared\">\n    <thead>\n      <tr>\n        <th>Nombre</th>\n        <th>Nombre Inglés</th>\n        <th class=\"text-center\">Req. Individuo</th>\n        <th class=\"text-center\">Req. Entidad</th>\n        <th class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <ng-container *ngFor=\"let type of _types\">\n        <tr *ngIf=\"type.ID!=_currentType.ID\" (dblclick)=\"selectType(type)\">\n          <td>{{ type.Name }}</td>\n          <td>{{ type.EnglishName }}</td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-check fa-lg text-success\" aria-hidden=\"true\" *ngIf=\"type.RequiredIndividual\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" aria-hidden=\"true\" *ngIf=\"!type.RequiredIndividual\"></i>\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-check fa-lg text-success\" aria-hidden=\"true\" *ngIf=\"type.RequiredEntity\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" aria-hidden=\"true\" *ngIf=\"!type.RequiredEntity\"></i>\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectType(type)\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n        </tr>\n        <tr *ngIf=\"type.ID==_currentType.ID\" class=\"table-info\">\n          <td>\n            <input class=\"form-control\" type=\"text\" name=\"edit-name\" id=\"edit-name\" [(ngModel)]=\"_currentType.Name\">\n          </td>\n          <td>\n            <input class=\"form-control\" type=\"text\" name=\"edit-name-english\" id=\"edit-name-english\" [(ngModel)]=\"_currentType.EnglishName\">\n          </td>\n          <td class=\"text-center\">\n            <input type=\"checkbox\" name=\"edit-individual\" id=\"edit-individual\" [(ngModel)]=\"_currentType.RequiredIndividual\">\n          </td>\n          <td class=\"text-center\">\n            <input type=\"checkbox\" name=\"new-entity\" id=\"new-entity\" [(ngModel)]=\"_currentType.RequiredEntity\">\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateType()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr>\n        <td>\n          <input class=\"form-control\" type=\"text\" name=\"new-name\" id=\"new-name\" [(ngModel)]=\"_newType.Name\" placeholder=\"Nombre\">\n        </td>\n        <td>\n          <input class=\"form-control\" type=\"text\" name=\"new-name-english\" id=\"new-name-english\" [(ngModel)]=\"_newType.EnglishName\"\n            placeholder=\"Nombre Inglés\">\n        </td>\n        <td class=\"text-center\">\n          <input type=\"checkbox\" name=\"new-individual\" id=\"new-individual\" [(ngModel)]=\"_newType.RequiredIndividual\">\n        </td>\n        <td class=\"text-center\">\n          <input type=\"checkbox\" name=\"new-entity\" id=\"new-entity\" [(ngModel)]=\"_newType.RequiredEntity\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" aria-hidden=\"true\" (click)=\"addType()\" placement=\"top\" ngbTooltip=\"Agregar\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
@@ -854,7 +854,9 @@ module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_documents_service__ = __webpack_require__("../../../../../src/app/shared/services/documents.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_documents_service__ = __webpack_require__("../../../../../src/app/shared/services/documents.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentTypesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -867,9 +869,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var DocumentTypesComponent = /** @class */ (function () {
-    function DocumentTypesComponent(_docServ) {
+    function DocumentTypesComponent(_docServ, toastr) {
         this._docServ = _docServ;
+        this.toastr = toastr;
+        this._currentType = {};
+        this._newType = {};
     }
     DocumentTypesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -878,16 +884,39 @@ var DocumentTypesComponent = /** @class */ (function () {
             _this._types = data;
         });
     };
+    DocumentTypesComponent.prototype.selectType = function (type) {
+        this._currentType = type;
+    };
+    DocumentTypesComponent.prototype.cancelUpdate = function () {
+        this._currentType = {};
+    };
+    DocumentTypesComponent.prototype.addType = function () {
+        var _this = this;
+        this._docServ.addType(this._newType)
+            .subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Tipo Documento Creado');
+            _this._types.push(data);
+            _this._newType = {};
+        });
+    };
+    DocumentTypesComponent.prototype.updateType = function () {
+        var _this = this;
+        this._docServ.updateType(this._currentType.ID, this._currentType)
+            .subscribe(function (data) {
+            _this.toastr.success(_this._currentType.Name, 'Tipo Documento Editado');
+            _this._currentType = {};
+        });
+    };
     DocumentTypesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-document-types',
             template: __webpack_require__("../../../../../src/app/dashboard/settings/document-types/document-types.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/settings/document-types/document-types.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_documents_service__["a" /* DocumentsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_documents_service__["a" /* DocumentsService */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_documents_service__["a" /* DocumentsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_documents_service__["a" /* DocumentsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _b || Object])
     ], DocumentTypesComponent);
     return DocumentTypesComponent;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=document-types.component.js.map
@@ -1036,7 +1065,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/settings.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Relationship Types\">\n      <ng-template ngbTabContent>\n        <app-relationship-types></app-relationship-types>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Document Types\">\n      <ng-template ngbTabContent>\n        <app-document-types></app-document-types>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
+module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Tipo de Relación\">\n      <ng-template ngbTabContent>\n        <app-relationship-types></app-relationship-types>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Tipo de Documento\">\n      <ng-template ngbTabContent>\n        <app-document-types></app-document-types>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
 
 /***/ }),
 

@@ -1,20 +1,65 @@
 <div class="container-fluid">
-  <table class="table table-sm table-squared table-bordered table-hover">
+  <table class="table table-sm table-squared">
     <thead>
       <tr>
-        <th class="text-center">ID</th>
-        <th>Name</th>
-        <th>English Name</th>
-        <th class="text-center">Actions</th>
+        <th>Nombre</th>
+        <th>Nombre Inglés</th>
+        <th class="text-center">Req. Individuo</th>
+        <th class="text-center">Req. Entidad</th>
+        <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let type of _types">
-        <td class="text-center">{{ type.ID }}</td>
-        <td>{{ type.Name}}</td>
-        <td>{{ type.EnglishName }}</td>
+      <ng-container *ngFor="let type of _types">
+        <tr *ngIf="type.ID!=_currentType.ID" (dblclick)="selectType(type)">
+          <td>{{ type.Name }}</td>
+          <td>{{ type.EnglishName }}</td>
+          <td class="text-center">
+            <i class="fa fa-check fa-lg text-success" aria-hidden="true" *ngIf="type.RequiredIndividual"></i>
+            <i class="fa fa-times fa-lg text-danger" aria-hidden="true" *ngIf="!type.RequiredIndividual"></i>
+          </td>
+          <td class="text-center">
+            <i class="fa fa-check fa-lg text-success" aria-hidden="true" *ngIf="type.RequiredEntity"></i>
+            <i class="fa fa-times fa-lg text-danger" aria-hidden="true" *ngIf="!type.RequiredEntity"></i>
+          </td>
+          <td class="text-center">
+            <i class="fa fa-edit fa-lg text-success" (click)="selectType(type)" aria-hidden="true" placement="top" ngbTooltip="Editar"></i>
+        </tr>
+        <tr *ngIf="type.ID==_currentType.ID" class="table-info">
+          <td>
+            <input class="form-control" type="text" name="edit-name" id="edit-name" [(ngModel)]="_currentType.Name">
+          </td>
+          <td>
+            <input class="form-control" type="text" name="edit-name-english" id="edit-name-english" [(ngModel)]="_currentType.EnglishName">
+          </td>
+          <td class="text-center">
+            <input type="checkbox" name="edit-individual" id="edit-individual" [(ngModel)]="_currentType.RequiredIndividual">
+          </td>
+          <td class="text-center">
+            <input type="checkbox" name="new-entity" id="new-entity" [(ngModel)]="_currentType.RequiredEntity">
+          </td>
+          <td class="text-center">
+            <i class="fa fa-lock fa-lg text-success" (click)="updateType()" aria-hidden="true" placement="top" ngbTooltip="Guardar Cambios"></i>
+            <i class="fa fa-times fa-lg text-danger" (click)="cancelUpdate()" aria-hidden="true" placement="top" ngbTooltip="Cancelar"></i>
+          </td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td>
+          <input class="form-control" type="text" name="new-name" id="new-name" [(ngModel)]="_newType.Name" placeholder="Nombre">
+        </td>
+        <td>
+          <input class="form-control" type="text" name="new-name-english" id="new-name-english" [(ngModel)]="_newType.EnglishName"
+            placeholder="Nombre Inglés">
+        </td>
         <td class="text-center">
-            <div class="btn btn-success btn-sm"><i class="typcn typcn-edit"></i> Edit</div>
+          <input type="checkbox" name="new-individual" id="new-individual" [(ngModel)]="_newType.RequiredIndividual">
+        </td>
+        <td class="text-center">
+          <input type="checkbox" name="new-entity" id="new-entity" [(ngModel)]="_newType.RequiredEntity">
+        </td>
+        <td class="text-center">
+          <i class="fa fa-plus-square fa-lg text-primary" aria-hidden="true" (click)="addType()" placement="top" ngbTooltip="Agregar"></i>
         </td>
       </tr>
     </tbody>

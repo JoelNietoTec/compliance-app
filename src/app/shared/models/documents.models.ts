@@ -18,6 +18,8 @@ export interface DocumentType {
   ID?: number;
   Name?: string;
   EnglishName?: string;
+  RequiredIndividual?: Boolean;
+  RequiredEntity?: Boolean;
 }
 
 export interface Document {
