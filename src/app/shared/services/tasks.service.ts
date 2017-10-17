@@ -65,7 +65,6 @@ export class TasksService {
       .post(`${this._taskURL}/${task.ID}/progress`, { headers: this._headers })
       .map(response => {
         task.StatusID = task.StatusID + 1;
-        console.log(task);
         return task;
       });
   }

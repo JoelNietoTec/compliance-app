@@ -5,9 +5,9 @@
         <div class="form-group">
           <label for="participant-type">Tipo de Participante</label>
           <select class="form-control custom-select" name="participant-type" id="participant-type" [(ngModel)]="_type">
-        <option disabled [value]="_default">--- Seleccionar ----</option>
-        <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name}}</option>
-      </select>
+            <option disabled [value]="_default">--- Seleccionar ----</option>
+            <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name}}</option>
+          </select>
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import { UsersComponent } from './users/users.component';
 import { AuthGuard } from '../shared/services/auth.guard';
 import { SettingsModule } from './settings/settings.module';
 import { SettingsComponent } from './settings/settings.component';
+import { DiscardsModule } from './discards/discards.module';
 
 
 export function getParamsModule() {
@@ -51,6 +52,11 @@ export const routes: Routes = [
         path: 'users',
         canActivateChild: [AuthGuard],
         component: UsersComponent
+      },
+      {
+        path: 'discards',
+        canActivateChild: [AuthGuard],
+        loadChildren: './discards/discards.module#DiscardsModule'
       },
       {
         path: 'settings',

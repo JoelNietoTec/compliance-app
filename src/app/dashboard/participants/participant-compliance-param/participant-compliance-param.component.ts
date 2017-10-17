@@ -45,7 +45,7 @@ export class ParticipantComplianceParamComponent implements OnInit {
     this.getParam();
     this._values = this.param.ParamTable.ParamValues;
     this._values = this._util.sortBy(this._values, 'DisplayValue');
-    for (let i of this._values) {
+    for (const i of this._values) {
       i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
     }
   }

@@ -1,4 +1,4 @@
-webpackJsonp([5],{
+webpackJsonp([6],{
 
 /***/ "../../../../../src async recursive":
 /***/ (function(module, exports, __webpack_require__) {
@@ -6,12 +6,16 @@ webpackJsonp([5],{
 var map = {
 	"./authentication/authentication.module": [
 		"../../../../../src/app/authentication/authentication.module.ts",
-		3
+		4
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
 		1,
 		0
+	],
+	"./discards/discards.module": [
+		"../../../../../src/app/dashboard/discards/discards.module.ts",
+		3
 	],
 	"./params/params.module": [
 		"../../../../../src/app/dashboard/params/params.module.ts",
@@ -70,8 +74,8 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -176,6 +180,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_services_auth_guard__ = __webpack_require__("../../../../../src/app/shared/services/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__discards_discards_list_discards_list_component__ = __webpack_require__("../../../../../src/app/discards/discards-list/discards-list.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -205,13 +210,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // Routers
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_13__app_component__["a" /* AppComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__discards_discards_list_discards_list_component__["a" /* DiscardsListComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -379,6 +386,67 @@ var DashboardComponent = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=dashboard.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/discards/discards-list/discards-list.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/discards/discards-list/discards-list.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  discards-list works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/discards/discards-list/discards-list.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DiscardsListComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var DiscardsListComponent = /** @class */ (function () {
+    function DiscardsListComponent() {
+    }
+    DiscardsListComponent.prototype.ngOnInit = function () {
+    };
+    DiscardsListComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-discards-list',
+            template: __webpack_require__("../../../../../src/app/discards/discards-list/discards-list.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/discards/discards-list/discards-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DiscardsListComponent);
+    return DiscardsListComponent;
+}());
+
+//# sourceMappingURL=discards-list.component.js.map
 
 /***/ }),
 
@@ -684,7 +752,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/components/sort-icon/sort-icon.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "   <i class=\"typcn\" [ngClass]=\"{'typcn-arrow-sorted-down': desc, 'typcn-arrow-sorted-up': !desc}\"  aria-hidden=\"true\"></i>\n"
+module.exports = "   <i class=\"fa\" [ngClass]=\"{'fa-sort-desc': desc, 'fa-sort-asc': !desc}\"  aria-hidden=\"true\"></i>\n"
 
 /***/ }),
 
@@ -1948,6 +2016,92 @@ var RelationshipsService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared/services/sanctions.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__connection_service__ = __webpack_require__("../../../../../src/app/shared/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SanctionsService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var SanctionsService = /** @class */ (function () {
+    function SanctionsService(_http, _conn, _partService, _util) {
+        this._http = _http;
+        this._conn = _conn;
+        this._partService = _partService;
+        this._util = _util;
+        this._headers = new Headers({ 'Content-Type': 'application/json' });
+        this._listsURL = _conn.APIUrl + 'lists';
+        this._sanctionsURL = _conn.APIUrl + 'sanctions';
+    }
+    SanctionsService.prototype.getLists = function () {
+        return this._http
+            .get(this._listsURL)
+            .map(function (response) { return response.json(); });
+    };
+    SanctionsService.prototype.getSanctionsByList = function (listID) {
+        return this._http
+            .get(this._listsURL + "/" + listID + "/sanctions")
+            .map(function (response) { return response.json(); });
+    };
+    SanctionsService.prototype.runDiscard = function (sanctions) {
+        var _this = this;
+        var concurrences = [];
+        return new Promise(function (resolve) {
+            _this._partService.getParticipants()
+                .subscribe(function (data) {
+                var participants = data;
+                sanctions.forEach(function (element) {
+                    var terms = element.Term1.toLocaleLowerCase().split(' ');
+                    participants.forEach(function (participant) {
+                        var searchTerm = _this._util.isNullString(participant.FirstName);
+                        searchTerm = searchTerm + _this._util.isNullString(participant.ThirdName);
+                        searchTerm = searchTerm.toLocaleLowerCase();
+                        terms.forEach(function (term) {
+                            if (searchTerm.indexOf(term) >= 0 && term.length > 4) {
+                                concurrences.push(participant);
+                            }
+                        });
+                    });
+                });
+                resolve(concurrences);
+            });
+        });
+    };
+    SanctionsService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__connection_service__["a" /* ConnectionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__participants_service__["a" /* ParticipantsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__util_service__["a" /* UtilService */]) === "function" && _d || Object])
+    ], SanctionsService);
+    return SanctionsService;
+    var _a, _b, _c, _d;
+}());
+
+//# sourceMappingURL=sanctions.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared/services/tasks.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2022,7 +2176,6 @@ var TasksService = /** @class */ (function () {
             .post(this._taskURL + "/" + task.ID + "/progress", { headers: this._headers })
             .map(function (response) {
             task.StatusID = task.StatusID + 1;
-            console.log(task);
             return task;
         });
     };
@@ -2149,7 +2302,9 @@ var UserService = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_underscore__ = __webpack_require__("../../../../underscore/underscore.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_underscore__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UtilService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2160,6 +2315,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 var UtilService = /** @class */ (function () {
     function UtilService() {
@@ -2239,8 +2395,46 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.capitalize = function (str) {
         return str.replace(/\b\w/g, function (l) { return l.toUpperCase(); });
     };
+    UtilService.prototype.paginate = function (itemsCount, currentPage, pageSize) {
+        if (currentPage === void 0) { currentPage = 1; }
+        if (pageSize === void 0) { pageSize = 10; }
+        var totalPages = Math.ceil(itemsCount / pageSize);
+        var startPage, endPage;
+        if (totalPages <= 10) {
+            startPage = 1;
+            endPage = totalPages;
+        }
+        else {
+            if (currentPage <= 6) {
+                startPage = 1;
+                endPage = 10;
+            }
+            else if (currentPage + 4 >= totalPages) {
+                startPage = totalPages - 9;
+                endPage = totalPages;
+            }
+            else {
+                startPage = currentPage - 5;
+                endPage = currentPage + 4;
+            }
+        }
+        var startIndex = (currentPage - 1) * pageSize;
+        var endIndex = Math.min(startIndex + pageSize - 1, itemsCount - 1);
+        var pages = __WEBPACK_IMPORTED_MODULE_0_underscore__["range"](startPage, endPage);
+        return {
+            totalItems: itemsCount,
+            currentPage: currentPage,
+            pageSize: pageSize,
+            totalPages: totalPages,
+            startPage: startPage,
+            endPage: endPage,
+            startIndex: startIndex,
+            endIndex: endIndex,
+            pages: pages
+        };
+    };
     UtilService = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [])
     ], UtilService);
     return UtilService;
@@ -2276,15 +2470,16 @@ var UtilService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_countries_service__ = __webpack_require__("../../../../../src/app/shared/services/countries.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_tasks_service__ = __webpack_require__("../../../../../src/app/shared/services/tasks.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_auth_guard__ = __webpack_require__("../../../../../src/app/shared/services/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_loading_modal_loading_modal_component__ = __webpack_require__("../../../../../src/app/shared/components/loading-modal/loading-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_card_card_component__ = __webpack_require__("../../../../../src/app/shared/components/card/card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_sort_icon_sort_icon_component__ = __webpack_require__("../../../../../src/app/shared/components/sort-icon/sort-icon.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_quick_card_quick_card_component__ = __webpack_require__("../../../../../src/app/shared/components/quick-card/quick-card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_task_card_task_card_component__ = __webpack_require__("../../../../../src/app/shared/components/task-card/task-card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_task_form_task_form_component__ = __webpack_require__("../../../../../src/app/shared/components/task-form/task-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pipes_score_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/score.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_save_button_save_button_component__ = __webpack_require__("../../../../../src/app/shared/components/save-button/save-button.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_sanctions_service__ = __webpack_require__("../../../../../src/app/shared/services/sanctions.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_auth_guard__ = __webpack_require__("../../../../../src/app/shared/services/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_loading_modal_loading_modal_component__ = __webpack_require__("../../../../../src/app/shared/components/loading-modal/loading-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_card_card_component__ = __webpack_require__("../../../../../src/app/shared/components/card/card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_sort_icon_sort_icon_component__ = __webpack_require__("../../../../../src/app/shared/components/sort-icon/sort-icon.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_quick_card_quick_card_component__ = __webpack_require__("../../../../../src/app/shared/components/quick-card/quick-card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_task_card_task_card_component__ = __webpack_require__("../../../../../src/app/shared/components/task-card/task-card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_task_form_task_form_component__ = __webpack_require__("../../../../../src/app/shared/components/task-form/task-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pipes_score_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/score.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_save_button_save_button_component__ = __webpack_require__("../../../../../src/app/shared/components/save-button/save-button.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SharedModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2300,6 +2495,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 // Model Services
+
 
 
 
@@ -2346,18 +2542,18 @@ var SharedModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5_angular_2_dropdown_multiselect__["a" /* MultiselectDropdownModule */]
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_23__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_2_ng2_toasty__["a" /* ToastyModule */],
-                __WEBPACK_IMPORTED_MODULE_24__components_card_card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__pipes_score_pipe__["a" /* ScorePipe */],
-                __WEBPACK_IMPORTED_MODULE_25__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_card_card_component__["a" /* CardComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__pipes_score_pipe__["a" /* ScorePipe */],
+                __WEBPACK_IMPORTED_MODULE_26__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_26__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
                 __WEBPACK_IMPORTED_MODULE_2_ng2_toasty__["a" /* ToastyModule */],
-                __WEBPACK_IMPORTED_MODULE_27__components_task_card_task_card_component__["a" /* TaskCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_task_card_task_card_component__["a" /* TaskCardComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
-                __WEBPACK_IMPORTED_MODULE_28__components_task_form_task_form_component__["a" /* TaskFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__components_task_form_task_form_component__["a" /* TaskFormComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__toverux_ngsweetalert2__["a" /* SweetAlert2Module */],
                 __WEBPACK_IMPORTED_MODULE_5_angular_2_dropdown_multiselect__["a" /* MultiselectDropdownModule */]
             ],
@@ -2377,18 +2573,19 @@ var SharedModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_19__services_countries_service__["a" /* CountriesService */],
                 __WEBPACK_IMPORTED_MODULE_20__services_relationships_service__["a" /* RelationshipsService */],
                 __WEBPACK_IMPORTED_MODULE_21__services_tasks_service__["a" /* TasksService */],
+                __WEBPACK_IMPORTED_MODULE_22__services_sanctions_service__["a" /* SanctionsService */],
                 __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["c" /* NgbActiveModal */],
-                __WEBPACK_IMPORTED_MODULE_22__services_auth_guard__["a" /* AuthGuard */]
+                __WEBPACK_IMPORTED_MODULE_23__services_auth_guard__["a" /* AuthGuard */]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_23__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_card_card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__pipes_score_pipe__["a" /* ScorePipe */],
-                __WEBPACK_IMPORTED_MODULE_25__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__components_task_card_task_card_component__["a" /* TaskCardComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__components_task_form_task_form_component__["a" /* TaskFormComponent */],
-                __WEBPACK_IMPORTED_MODULE_30__components_save_button_save_button_component__["a" /* SaveButtonComponent */]
+                __WEBPACK_IMPORTED_MODULE_24__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_card_card_component__["a" /* CardComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__pipes_score_pipe__["a" /* ScorePipe */],
+                __WEBPACK_IMPORTED_MODULE_26__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_task_card_task_card_component__["a" /* TaskCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__components_task_form_task_form_component__["a" /* TaskFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__components_save_button_save_button_component__["a" /* SaveButtonComponent */]
             ]
         })
     ], SharedModule);

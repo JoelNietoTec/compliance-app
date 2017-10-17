@@ -27,10 +27,12 @@ import { AuthGuard } from './shared/services/auth.guard';
 
 // Routers
 import { AppRoutingModule } from './app-routing.module';
+import { DiscardsListComponent } from './discards/discards-list/discards-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DiscardsListComponent
   ],
   imports: [
     BrowserModule,

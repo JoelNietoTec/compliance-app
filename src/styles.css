@@ -58,7 +58,10 @@ small.text-muted > .typcn {
   font-size: 13px;
 }
 
-.card, .form-control, .input-group, .input-group-addon, .breadcrumb, .card-header, .card-footer, .modal-content, .btn {
+.card, .form-control, .input-group, .input-group-addon, .breadcrumb,
+.card-header, .card-footer, .modal-content, .btn, .pagination,
+.page-item:last-child .page-link, .page-item:first-child .page-link
+{
   border-radius: 0 !important;
 }
 
@@ -96,7 +99,7 @@ small.text-muted > .typcn {
 }
 
 a:not([href]):not([tabindex]) {
-  color: #0275d8 !important
+  color: #0275d8
 }
 .breadcrumb-item  {
   text-transform: uppercase;
@@ -396,7 +399,7 @@ a {
 
 
 a:not([href]):not([tabindex]) {
-  color: #206594 !important;
+  color: #206594;
 }
 
 .dropdown-item.active, .dropdown-item:active,  .dropdown-item:focus {

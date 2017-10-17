@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="list">Lista</label>
+          <select class="form-control custom-select" [(ngModel)]="_currentListID" name="list" id="list" (ngModelChange)="getSanctions()">
+            <option selected disabled [value]="undefined">--- Seleccionar ---</option>
+            <option *ngFor="let list of _lists" [value]="list.ID">{{ list.Name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <h4>
+      Sanciones
+      <button type="button" class="btn btn-primary" (click)="runDiscards()">Ejecutar Descarte</button>
+    </h4>
+    <nav>
+      <ul *ngIf="_pager.pages && _pager.pages.length" class="pagination">
+        <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
+          <a class="page-link" (click)="setPage(1)">Primero</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
+          <a class="page-link" (click)="setPage(_pager.currentPage -1)">Anterior</a>
+        </li>
+        <li class="page-item" *ngFor="let page of _pager.pages" [ngClass]="{active:_pager.currentPage === page}">
+          <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages}">
+          <a class="page-link" (click)="setPage(_pager.currentPage + 1)">Siguiente</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages}">
+          <a class="page-link" (click)="setPage(_pager.totalPages)">Último</a>
+        </li>
+      </ul>
+    </nav>
+    <table class="table table-sm table-striped table-squared">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Término 1</th>
+          <th>Término 2</th>
+          <th>Término 3</th>
+          <th>Término 4</th>
+          <th>Término 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of _pagedSanctions">
+          <td>{{ item.ID }}</td>
+          <td>{{ item.Date | date: 'short' }}</td>
+          <td>{{ item.Term1 }}</td>
+          <td>{{ item.Term2 }}</td>
+          <td>{{ item.Term3 }}</td>
+          <td>{{ item.Term4 }}</td>
+          <td>{{ item.Term5 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

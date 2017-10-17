@@ -6,8 +6,15 @@
       <a [routerLink]="['/login']" class="dropdown-item"><i class="typcn typcn-power-outline" aria-hidden="true"></i> Logout</a>
     </div>
   </li>
-  <li class="nav-item"><a [routerLink]="['home']" class="nav-link" routerLinkActive="active"><i class="typcn typcn-home-outline" aria-hidden="true"></i> Inicio</a></li>
-  <li class="nav-item"><a [routerLink]="['participants']" class="nav-link" routerLinkActive="active"><span class="typcn typcn-group"></span> Participantes</a></li>
+  <li class="nav-item">
+    <a [routerLink]="['home']" class="nav-link" routerLinkActive="active">
+      <i class="typcn typcn-home-outline" aria-hidden="true"></i> Inicio
+    </a>
+  </li>
+  <li class="nav-item">
+    <a [routerLink]="['participants']" class="nav-link" routerLinkActive="active"><span class="typcn typcn-group"></span> Participantes
+    </a>
+  </li>
   <li class="nav-item">
     <a data-toggle="collapse" href="#paramLinks" class="nav-link">
       <i class="typcn typcn-chart-bar-outline" aria-hidden="true"></i> Parámetros
@@ -21,5 +28,13 @@
       </li>
     </ul>
   </li>
-  <li class="nav-item"><a [routerLink]="['settings']" class="nav-link" routerLinkActive="active"><i class="typcn typcn-spanner-outline" aria-hidden="true"></i> Ajustes</a></li>
+  <li class="nav-item">
+    <a [routerLink]="['discards']" class="nav-link" routerLinkActive="active">
+      <i class="typcn typcn-zoom-outline" aria-hidden="true"></i> Descartes
+    </a>
+  </li>
+  <li class="nav-item">
+    <a [routerLink]="['settings']" class="nav-link" routerLinkActive="active">
+    <i class="typcn typcn-spanner-outline" aria-hidden="true"></i> Ajustes</a>
+  </li>
 </ul>

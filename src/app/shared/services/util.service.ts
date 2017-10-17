@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -77,6 +78,45 @@ export class UtilService {
 
   capitalize(str: string): string {
     return str.replace(/\b\w/g, l => l.toUpperCase());
+  }
+
+  paginate(itemsCount: number, currentPage: number = 1, pageSize: number = 10) {
+    const totalPages: number = Math.ceil(itemsCount / pageSize);
+    let startPage: number, endPage: number;
+
+    if (totalPages <= 10) {
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      if (currentPage <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (currentPage + 4 >= totalPages) {
+        startPage = totalPages - 9;
+        endPage = totalPages;
+      } else {
+        startPage = currentPage - 5;
+        endPage = currentPage + 4;
+      }
+    }
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize - 1, itemsCount - 1);
+
+    const pages = _.range(startPage, endPage);
+
+    return {
+      totalItems: itemsCount,
+      currentPage: currentPage,
+      pageSize: pageSize,
+      totalPages: totalPages,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pages: pages
+    };
+
   }
 
 }

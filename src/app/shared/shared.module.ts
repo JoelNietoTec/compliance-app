@@ -25,6 +25,7 @@ import { DocumentsService } from './services/documents.service';
 import { CountriesService } from './services/countries.service';
 import { RelationshipsService } from './services/relationships.service';
 import { TasksService } from './services/tasks.service';
+import { SanctionsService } from './services/sanctions.service';
 import { AuthGuard } from './services/auth.guard';
 
 
@@ -88,6 +89,7 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
     CountriesService,
     RelationshipsService,
     TasksService,
+    SanctionsService,
     NgbActiveModal,
     AuthGuard
   ],

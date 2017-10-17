@@ -28,7 +28,7 @@ var CoreModule = /** @class */ (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */]
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_3__navbar_navbar_component__["a" /* NavbarComponent */], __WEBPACK_IMPORTED_MODULE_4__sidebar_sidebar_component__["a" /* SidebarComponent */]
@@ -130,7 +130,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-pills flex-column \">\r\n  <h6 class=\"user-name\"><i class=\"typcn typcn-user-outline\" aria-hidden=\"true\"></i> {{ _loggedUser.UserName }}</h6>\r\n  <li class=\"nav-item dropdown user-email\"><a href=\"\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">{{ _loggedUser.Email }}</a>\r\n    <div class=\"dropdown-menu\">\r\n      <a class=\"dropdown-item\"><i class=\"typcn typcn-eject-outline\" aria-hidden=\"true\"></i> Change Password</a>\r\n      <a [routerLink]=\"['/login']\" class=\"dropdown-item\"><i class=\"typcn typcn-power-outline\" aria-hidden=\"true\"></i> Logout</a>\r\n    </div>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['home']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-home-outline\" aria-hidden=\"true\"></i> Inicio</a></li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['participants']\" class=\"nav-link\" routerLinkActive=\"active\"><span class=\"typcn typcn-group\"></span> Participantes</a></li>\r\n  <li class=\"nav-item\">\r\n    <a data-toggle=\"collapse\" href=\"#paramLinks\" class=\"nav-link\">\r\n      <i class=\"typcn typcn-chart-bar-outline\" aria-hidden=\"true\"></i> Parámetros\r\n      </a>\r\n    <ul class=\"nav-pills flex-column sub-items collapse\" id=\"paramLinks\">\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'matrices']\" class=\"nav-link\" routerLinkActive=\"active\">Matrices</a>\r\n      </li>\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'tables']\" class=\"nav-link\" routerLinkActive=\"active\">Tablas</a>\r\n      </li>\r\n    </ul>\r\n  </li>\r\n  <li class=\"nav-item\"><a [routerLink]=\"['settings']\" class=\"nav-link\" routerLinkActive=\"active\"><i class=\"typcn typcn-spanner-outline\" aria-hidden=\"true\"></i> Ajustes</a></li>\r\n</ul>\r\n"
+module.exports = "<ul class=\"nav nav-pills flex-column \">\r\n  <h6 class=\"user-name\"><i class=\"typcn typcn-user-outline\" aria-hidden=\"true\"></i> {{ _loggedUser.UserName }}</h6>\r\n  <li class=\"nav-item dropdown user-email\"><a href=\"\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">{{ _loggedUser.Email }}</a>\r\n    <div class=\"dropdown-menu\">\r\n      <a class=\"dropdown-item\"><i class=\"typcn typcn-eject-outline\" aria-hidden=\"true\"></i> Change Password</a>\r\n      <a [routerLink]=\"['/login']\" class=\"dropdown-item\"><i class=\"typcn typcn-power-outline\" aria-hidden=\"true\"></i> Logout</a>\r\n    </div>\r\n  </li>\r\n  <li class=\"nav-item\">\r\n    <a [routerLink]=\"['home']\" class=\"nav-link\" routerLinkActive=\"active\">\r\n      <i class=\"typcn typcn-home-outline\" aria-hidden=\"true\"></i> Inicio\r\n    </a>\r\n  </li>\r\n  <li class=\"nav-item\">\r\n    <a [routerLink]=\"['participants']\" class=\"nav-link\" routerLinkActive=\"active\"><span class=\"typcn typcn-group\"></span> Participantes\r\n    </a>\r\n  </li>\r\n  <li class=\"nav-item\">\r\n    <a data-toggle=\"collapse\" href=\"#paramLinks\" class=\"nav-link\">\r\n      <i class=\"typcn typcn-chart-bar-outline\" aria-hidden=\"true\"></i> Parámetros\r\n      </a>\r\n    <ul class=\"nav-pills flex-column sub-items collapse\" id=\"paramLinks\">\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'matrices']\" class=\"nav-link\" routerLinkActive=\"active\">Matrices</a>\r\n      </li>\r\n      <li class=\"nav-item sub-item\">\r\n        <a [routerLink]=\"['params', 'tables']\" class=\"nav-link\" routerLinkActive=\"active\">Tablas</a>\r\n      </li>\r\n    </ul>\r\n  </li>\r\n  <li class=\"nav-item\">\r\n    <a [routerLink]=\"['discards']\" class=\"nav-link\" routerLinkActive=\"active\">\r\n      <i class=\"typcn typcn-zoom-outline\" aria-hidden=\"true\"></i> Descartes\r\n    </a>\r\n  </li>\r\n  <li class=\"nav-item\">\r\n    <a [routerLink]=\"['settings']\" class=\"nav-link\" routerLinkActive=\"active\">\r\n    <i class=\"typcn typcn-spanner-outline\" aria-hidden=\"true\"></i> Ajustes</a>\r\n  </li>\r\n</ul>\r\n"
 
 /***/ }),
 
@@ -247,6 +247,11 @@ var routes = [
                 component: __WEBPACK_IMPORTED_MODULE_7__users_users_component__["a" /* UsersComponent */]
             },
             {
+                path: 'discards',
+                canActivateChild: [__WEBPACK_IMPORTED_MODULE_8__shared_services_auth_guard__["a" /* AuthGuard */]],
+                loadChildren: './discards/discards.module#DiscardsModule'
+            },
+            {
                 path: 'settings',
                 canActivateChild: [__WEBPACK_IMPORTED_MODULE_8__shared_services_auth_guard__["a" /* AuthGuard */]],
                 component: __WEBPACK_IMPORTED_MODULE_9__settings_settings_component__["a" /* SettingsComponent */]
@@ -259,8 +264,8 @@ var DashboardRoutingModule = /** @class */ (function () {
     }
     DashboardRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], DashboardRoutingModule);
     return DashboardRoutingModule;
@@ -363,8 +368,8 @@ var HomeRoutingModule = /** @class */ (function () {
     }
     HomeRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], HomeRoutingModule);
     return HomeRoutingModule;
@@ -1032,8 +1037,8 @@ var SettingsRoutingModule = /** @class */ (function () {
     }
     SettingsRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], SettingsRoutingModule);
     return SettingsRoutingModule;
@@ -1356,8 +1361,8 @@ var UsersRoutingModule = /** @class */ (function () {
     }
     UsersRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], UsersRoutingModule);
     return UsersRoutingModule;

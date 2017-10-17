@@ -426,7 +426,7 @@ var ParamMatrixDetailsComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-matrix-details/param-matrix-details.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-matrix-details/param-matrix-details.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object])
     ], ParamMatrixDetailsComponent);
     return ParamMatrixDetailsComponent;
     var _a, _b;
@@ -564,7 +564,7 @@ var ParamMatrixComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-matrix/param-matrix.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-matrix/param-matrix.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_param_categories_service__["a" /* ParamCategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_param_categories_service__["a" /* ParamCategoriesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_matrices_service__["a" /* ParamMatricesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_param_categories_service__["a" /* ParamCategoriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_param_categories_service__["a" /* ParamCategoriesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
     ], ParamMatrixComponent);
     return ParamMatrixComponent;
     var _a, _b, _c, _d, _e;
@@ -896,7 +896,7 @@ var ParamTableComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-table/param-table.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-table/param-table.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object])
     ], ParamTableComponent);
     return ParamTableComponent;
     var _a, _b;
@@ -1189,8 +1189,8 @@ var ParamsRoutingModule = /** @class */ (function () {
     }
     ParamsRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
         })
     ], ParamsRoutingModule);
     return ParamsRoutingModule;
