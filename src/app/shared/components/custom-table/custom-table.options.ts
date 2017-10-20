@@ -17,4 +17,5 @@ export interface Column {
   sortable?: boolean;
   filterable?: boolean;
   pipe?: string;
+  hidden?: boolean;
 }

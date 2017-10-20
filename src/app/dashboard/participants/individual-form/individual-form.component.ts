@@ -124,6 +124,7 @@ export class IndividualFormComponent implements OnInit {
       console.log(this._individual);
       this._partServ.createParticipant(this._individual)
         .subscribe(data => {
+          console.log(data);
           this.toastr.success(`ID: ${data.ID}`, 'Individuo Creado');
           this._router.navigate(['dashboard/participants', data.ID]);
         });

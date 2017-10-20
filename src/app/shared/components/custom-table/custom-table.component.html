@@ -13,7 +13,7 @@
     <div class="col-md-4">
       <span class="align-bottom items-count">{{ _filteredItems.length }} elementos recuperados</span>
     </div>
-    <div class="col-md-4">
+    <div *ngIf="options.editable" class="col-md-4">
       <button type="button" class="btn btn-primary pull-right">Nuevo elemento</button>
     </div>
   </div>
@@ -32,15 +32,32 @@
       </tr>
     </thead>
     <tbody>
+      <tr *ngIf="!_pagedItems.length">
+        <td class="text-center" [colSpan]="options.columns.length + 1">
+          Sin elementos disponibles
+        </td>
+      </tr>
       <ng-container *ngFor="let item of _pagedItems">
         <tr *ngIf="item.ID != _selectedItem.ID" (dblclick)="selectItem(item)">
           <td *ngFor="let col of options.columns">
-            {{ item | column: col.name }}
+            <ng-container [ngSwitch]="col.type">
+              <ng-container *ngSwitchCase="'date'">
+                {{ item | column: col.name | date: 'mediumDate' }}
+              </ng-container>
+              <ng-container *ngSwitchCase="'decimal'">
+                {{ item | column: col.name | number: '1.3-3' }}
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ item | column: col.name }}
+              </ng-container>
+            </ng-container>
           </td>
           <td class="text-center">
-            <a *ngIf="options.detailsURL" class="fa fa-search-plus fa-lg text-primary" [routerLink]="getDetailsURL(item.ID)" placement="top" ngbTooltip="Detalles"></a>
-            <i class="fa fa-edit fa-lg text-success" (click)="selectItem(item)" placement="top" ngbTooltip="Editar"></i>
-            <i class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar"></i>
+            <i *ngIf="options.detailsURL" class="fa fa-search-plus fa-lg text-primary" [routerLink]="getDetailsURL(item.ID)" placement="top"
+              ngbTooltip="Detalles"></i>
+            <i *ngIf="options.editable" class="fa fa-edit fa-lg text-success" (click)="selectItem(item)" placement="top" ngbTooltip="Editar"></i>
+            <i *ngIf="options.editable" class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)"
+              placement="top" ngbTooltip="Eliminar"></i>
           </td>
         </tr>
         <tr class="table-info" *ngIf="item.ID === _selectedItem.ID">
@@ -53,7 +70,7 @@
           </td>
         </tr>
       </ng-container>
-      <tr>
+      <tr *ngIf="options.editable">
         <td *ngFor="let col of options.columns">
           <input class="form-control" type="{{ col.type }}" [(ngModel)]="_newItem[col.name]" placeholder="{{ col.title }}">
         </td>
@@ -63,7 +80,7 @@
       </tr>
     </tbody>
   </table>
-  <ng-container *ngIf="items">
+  <ng-container *ngIf="items && options.pageable">
     <app-paginator *ngIf="options.pageable" [itemsCount]="_filteredItems.length" (paginate)="setPage($event)"></app-paginator>
   </ng-container>
 </div>

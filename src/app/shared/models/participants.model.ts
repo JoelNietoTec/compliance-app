@@ -33,6 +33,8 @@ export interface Participant {
   CreatedByUser?: User;
   PEP?: Boolean;
   Nationalities?: Array<Country>;
+  FullName?: string;
+  ShortName?: string;
 }
 
 export interface ParticipantParam {

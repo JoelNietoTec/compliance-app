@@ -2,54 +2,41 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Participant } from '../../../shared/models/participants.model';
 import { ParticipantsService } from '../../../shared/services/participants.service';
-import { UtilService } from '../../../shared/services/util.service';
+import { TableOptions, Column } from '../../../shared/components/custom-table/custom-table.options';
 
 @Component({
   selector: 'individuals-list',
   templateUrl: './individuals-list.component.html',
   styleUrls: ['./individuals-list.component.css']
 })
-
 export class IndividualsListComponent implements OnInit {
+  @Input() individuals: Array<Participant>;
 
-  @Input() individuals: Participant[];
+  _table: TableOptions = {};
+  _columns: Array<Column>;
 
-  _filterIndividuals: Participant[] = [];
-  _searchText: string;
-  _sortTerm: any = {
-    column: '',
-    desc: true
-  };
-  _searchColumns: Array<string> = [
-    'FirstName',
-    'SecondName',
-    'ThirdName',
-    'FourthName'
-  ];
-
-
-  constructor(
-    private _util: UtilService,
-    private _partServ: ParticipantsService
-  ) { }
+  constructor(private _partServ: ParticipantsService) {}
 
   ngOnInit() {
-    this._filterIndividuals = this.individuals;
-    for (let i of this._filterIndividuals) {
+    this._table.columns = [
+      { name: 'ID', title: '#', type: 'number', sortable: true },
+      { name: 'FullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
+      { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
+      { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
+      { name: 'Rate', title: 'Calificación', type: 'text', sortable: true }
+    ];
+
+    this._table.style = 'table table-sm table-striped table-squared';
+
+    this._table.pageable = true;
+
+    this._table.detailsURL = [];
+
+    for (let i of this.individuals) {
       i.Rate = this._partServ.getRate(i);
     }
+
   }
 
-  filterIndividuals() {
-    this._filterIndividuals = this._util.searchFilter(this.individuals, this._searchColumns, this._searchText);
-    // this._filterIndividuals = this._partServ.searchParticipant(this.individuals, this._searchText)
-  }
-
-  sort(column: string) {
-    this._sortTerm = {
-      column: column,
-      desc: !this._sortTerm.desc
-    };
-    this._filterIndividuals = this._util.sortBy(this._filterIndividuals, column, this._sortTerm.desc);
-  }
 }

@@ -3,48 +3,38 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Participant } from '../../../shared/models/participants.model';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 
 @Component({
   selector: 'entities-list',
   templateUrl: './entities-list.component.html',
   styleUrls: ['./entities-list.component.css']
 })
-
 export class EntitiesListComponent implements OnInit {
+  @Input() entities: Array<Participant>;
 
-  @Input() entities: Participant[];
+  _table: TableOptions = {};
 
-  _filterEntities: Participant[] = [];
-  _searchText: string;
-  _searchColumns: Array<string> = ['FirstName', 'SecondName'];
-
-  _sortTerm: any = {
-    column: '',
-    desc: true
-  };
-
-  constructor(
-    private _util: UtilService,
-    private _partServ: ParticipantsService
-  ) { }
+  constructor(private _util: UtilService, private _partServ: ParticipantsService) {}
 
   ngOnInit() {
-    this._filterEntities = this.entities;
-    for (let i of this._filterEntities) {
+    this._table.columns = [
+      { name: 'ID', title: '#', type: 'number', sortable: true },
+      { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
+      { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
+      { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
+      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
+    ];
+
+    this._table.style = 'table table-sm table-striped table-squared';
+
+    this._table.pageable = true;
+
+    this._table.detailsURL = [];
+
+    for (let i of this.entities) {
       i.Rate = this._partServ.getRate(i);
     }
   }
-
-  filterEntities() {
-    this._filterEntities = this._util.searchFilter(this.entities, this._searchColumns , this._searchText);
-  }
-
-  sort(column: string) {
-    this._sortTerm = {
-      column: column,
-      desc: !this._sortTerm.desc
-    };
-    this._filterEntities = this._util.sortBy(this._filterEntities, column, this._sortTerm.desc);
-  }
-
 }
