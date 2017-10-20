@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastyModule } from 'ng2-toasty';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
-
 
 // Model Services
 import { GendersService } from './services/genders.service';
@@ -28,7 +28,6 @@ import { TasksService } from './services/tasks.service';
 import { SanctionsService } from './services/sanctions.service';
 import { AuthGuard } from './services/auth.guard';
 
-
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
 import { CardComponent } from './components/card/card.component';
@@ -46,12 +45,12 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
     ToastyModule.forRoot(),
     FormsModule,
+    RouterModule,
     NgbModule.forRoot(),
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
@@ -113,4 +112,4 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     ColumnPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

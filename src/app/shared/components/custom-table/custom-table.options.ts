@@ -7,7 +7,7 @@ export interface TableOptions {
   editable?: boolean;
   deletable?: boolean;
   creatable?: boolean;
-  detailable?: boolean;
+  detailsURL?: Array<string>;
 }
 
 export interface Column {

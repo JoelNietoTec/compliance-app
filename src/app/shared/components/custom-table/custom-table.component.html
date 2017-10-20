@@ -38,6 +38,7 @@
             {{ item | column: col.name }}
           </td>
           <td class="text-center">
+            <a *ngIf="options.detailsURL" class="fa fa-search-plus fa-lg text-primary" [routerLink]="getDetailsURL(item.ID)" placement="top" ngbTooltip="Detalles"></a>
             <i class="fa fa-edit fa-lg text-success" (click)="selectItem(item)" placement="top" ngbTooltip="Editar"></i>
             <i class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar"></i>
           </td>

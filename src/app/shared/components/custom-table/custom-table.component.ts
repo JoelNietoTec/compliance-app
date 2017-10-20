@@ -62,6 +62,12 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
     this.pageItems();
   }
 
+  getDetailsURL(ID: number): Array<string> {
+    let URL = this.options.detailsURL.slice();
+    URL.push(ID.toString());
+    return URL;
+  }
+
   setPage(pager: any) {
     this._currentPage.startIndex = pager.startIndex;
     this._currentPage.endIndex = pager.endIndex;

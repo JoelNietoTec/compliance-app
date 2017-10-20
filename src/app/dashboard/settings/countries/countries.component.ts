@@ -28,6 +28,8 @@ export class CountriesComponent implements OnInit {
 
     this._options.style = 'table table-sm table-squared';
 
+    this._options.detailsURL = [];
+
     this._options.pageable = true;
 
     this._countryServ.getCountries().subscribe(data => {
