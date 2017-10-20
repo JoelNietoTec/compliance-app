@@ -1,3 +1,5 @@
+import { Participant } from './participants.model';
+
 export interface List {
   ID?: number;
   Name?: String;
@@ -12,5 +14,22 @@ export interface Sanction {
   Term3: String;
   Term4: String;
   Term5: String;
+}
 
+export interface Discard {
+  ID?: number;
+  ListID?: number;
+  List?: List;
+  Date?: Date;
+}
+
+export interface DiscardMatch {
+  ID?: number;
+  DiscardID?: number;
+  SanctionID?: number;
+  Sanction?: Sanction;
+  ParticipantID?: number;
+  Participant?: Participant;
+  Pending?: Boolean;
+  Valid?: Boolean;
 }

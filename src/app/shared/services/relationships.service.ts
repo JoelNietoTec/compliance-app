@@ -28,27 +28,33 @@ export class RelationshipsService {
   getRelationships(participantID: number): Observable<Array<ParticipantRelationship>> {
     return this._http
       .get(`${this._participantsURL}/${participantID}/relationships`)
-      .map(response => {
-        return response.json();
-      });
+      .map((response: Response) => response.json());
   }
 
   getTypes(): Observable<Array<RelationshipType>> {
     return this._http
       .get(this._typesURL)
-      .map(response => {
-        this._types = response.json();
-        return this._types;
-      });
+      .map((response: Response) => response.json());
   }
 
-  createType(type: RelationshipType) {
+  createType(type: RelationshipType): Observable<RelationshipType> {
     return this._http
       .post(this._typesURL, JSON.stringify(type), { headers: this._headers })
-      .map(response => {
-        this._newType = response.json();
-        return this._newType;
-      });
+      .map((response: Response) => response.json())
+      .catch((err: Error) => Observable.throw(console.log(err.message)));
+  }
+
+  updateType(id: number, type: RelationshipType): Observable<RelationshipType> {
+    return this._http
+      .put(`${this._typesURL}/${id}`, JSON.stringify(type), { headers: this._headers })
+      .map((response: Response) => response.json())
+      .catch((err: Error) => Observable.throw(console.log(err.message)));
+  }
+
+  deleteType(id: number) {
+    return this._http
+      .delete(`${this._typesURL}/${id}`, { headers: this._headers })
+      .map((response: Response) => response.json());
   }
 
 }

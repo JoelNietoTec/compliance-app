@@ -39,9 +39,13 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
+import { ColumnPipe } from './pipes/column.pipe';
 
 // Directives
 import { SaveButtonComponent } from './components/save-button/save-button.component';
+import { CustomTableComponent } from './components/custom-table/custom-table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+
 
 @NgModule({
   imports: [
@@ -71,7 +75,9 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
     NgbModule,
     TaskFormComponent,
     SweetAlert2Module,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    CustomTableComponent,
+    ColumnPipe
   ],
   providers: [
     GendersService,
@@ -101,7 +107,10 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
     QuickCardComponent,
     TaskCardComponent,
     TaskFormComponent,
-    SaveButtonComponent
+    SaveButtonComponent,
+    CustomTableComponent,
+    PaginatorComponent,
+    ColumnPipe
   ]
 })
 export class SharedModule { }

@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500');
 
 body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 14px;
 }
@@ -270,16 +270,15 @@ ngb-tabset > ul.nav > li.nav-item {
 }
 
 /* style icon */
-.inner-addon .typcn {
+.inner-addon .fa{
   position: absolute;
-  padding: 3px 10px 10px 10px;
+  padding: 10px;
   pointer-events: none;
-  font-size: 1.5em;
 }
 
 /* align icon */
-.left-addon .typcn { left:  0px;}
-.right-addon .typcn { right: 0px;}
+.left-addon .fa { left:  0px;}
+.right-addon .fa { right: 0px;}
 
 /* add padding  */
 .left-addon input  { padding-left:  30px; }

@@ -829,6 +829,95 @@ var TasksComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/dashboard/settings/countries/countries.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/settings/countries/countries.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_countries\" [items]=\"_countries\" [options]=\"_options\"></app-custom-table>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/settings/countries/countries.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_countries_service__ = __webpack_require__("../../../../../src/app/shared/services/countries.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CountriesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CountriesComponent = /** @class */ (function () {
+    function CountriesComponent(_countryServ, toastr) {
+        this._countryServ = _countryServ;
+        this.toastr = toastr;
+        this._options = {};
+    }
+    CountriesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._options.columns = [
+            { name: 'Name', title: 'Nombre', type: 'text', filterable: true },
+            { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', filterable: true },
+            { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true }
+        ];
+        this._options.title = 'Países';
+        this._options.style = 'table table-sm table-squared';
+        this._options.pageable = true;
+        this._countryServ.getCountries().subscribe(function (data) {
+            _this._countries = data;
+        });
+    };
+    CountriesComponent.prototype.addCountry = function (country) {
+        var _this = this;
+        return this._countryServ.addCountry(country).subscribe(function (data) {
+            _this.toastr.success(data.Name, 'País añadido');
+            _this._countries.push(data);
+        });
+    };
+    CountriesComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-countries',
+            template: __webpack_require__("../../../../../src/app/dashboard/settings/countries/countries.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/dashboard/settings/countries/countries.component.css")]
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_countries_service__["a" /* CountriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_countries_service__["a" /* CountriesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _b || Object])
+    ], CountriesComponent);
+    return CountriesComponent;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=countries.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/dashboard/settings/document-types/document-types.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -949,7 +1038,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-sm table-squared table-bordered table-hover\">\n    <thead>\n      <tr>\n        <th class=\"text-center\">ID</th>\n        <th>Name</th>\n        <th>English Name</th>\n        <th class=\"text-center\">Actions</th>\n      </tr>\n    </thead>\n    <tbody>\n      <ng-container *ngFor=\"let type of _types\">\n        <tr>\n          <td class=\"text-center\">{{ type.ID }}</td>\n          <td>{{ type.Name }}</td>\n          <td>{{ type.EnglishName }}</td>\n          <td class=\"text-center\">\n            <div class=\"btn btn-success btn-sm\"><i class=\"typcn typcn-edit\"></i> Edit</div>\n          </td>\n        </tr>\n        <!-- <tr>\n              <td></td>\n              <td><input type=\"text\" [(ngModel)]=\"_selType.Name\" class=\"form-control form-control-sm\" name=\"name\"></td>\n              <td><input type=\"text\" [(ngModel)]=\"_selType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\"></td>\n              <td class=\"text-center\">\n                <div class=\"btn btn-primary btn-sm\" (click)=\"addType()\"><i class=\"typcn typcn-plus-outline\"></i> Add</div>\n              </td>\n            </tr> -->\n      </ng-container>\n      <tr class=\"border-primary\">\n        <td></td>\n        <td><input type=\"text\" [(ngModel)]=\"_newType.Name\" class=\"form-control form-control-sm\" name=\"name\"></td>\n        <td><input type=\"text\" [(ngModel)]=\"_newType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\"></td>\n        <td class=\"text-center\">\n          <div class=\"btn btn-primary btn-sm\" (click)=\"addType()\"><i class=\"typcn typcn-plus-outline\"></i> Add</div>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-sm table-squared\">\n    <thead>\n      <tr>\n        <th>Nombre</th>\n        <th>Nombre Inglés</th>\n        <th class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <ng-container *ngFor=\"let type of _types\">\n        <tr *ngIf=\"type.ID!=_currentType.ID\" (dblclick)=\"selectType(type)\">\n          <td>{{ type.Name }}</td>\n          <td>{{ type.EnglishName }}</td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-edit fa-lg text-success\" aria-hidden=\"true\" (click)=\"selectType(type)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n            <i class=\"fa fa-trash-o fa-lg text-danger\" aria-hidden=\"true\" [swal]=\"['Eliminar', 'No puede ser reversado', 'warning']\" (confirm)=\"deleteType(type.ID)\" placement=\"top\" ngbTooltip=\"Borrar\"></i>\n          </td>\n        </tr>\n        <tr class=\"table-info\" *ngIf=\"type.ID==_currentType.ID\" >\n          <td>\n            <input type=\"text\" [(ngModel)]=\"_currentType.Name\" class=\"form-control form-control-sm\" name=\"name\">\n          </td>\n          <td>\n            <input type=\"text\" [(ngModel)]=\"_currentType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\">\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateType()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr class=\"border-primary\">\n        <td>\n          <input type=\"text\" [(ngModel)]=\"_newType.Name\" class=\"form-control form-control-sm\" name=\"name\" placeholder=\"Nombre Relación\">\n        </td>\n        <td>\n          <input type=\"text\" [(ngModel)]=\"_newType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\" placeholder=\"Nombre Inglés\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"addType()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Agregar\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
@@ -958,7 +1047,9 @@ module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RelationshipTypesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -971,11 +1062,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var RelationshipTypesComponent = /** @class */ (function () {
-    function RelationshipTypesComponent(_relService) {
+    function RelationshipTypesComponent(_relService, toastr) {
         this._relService = _relService;
+        this.toastr = toastr;
         this._newType = {};
-        this._selType = {};
+        this._currentType = {};
     }
     RelationshipTypesComponent.prototype.ngOnInit = function () {
         this.getTypes();
@@ -991,8 +1084,32 @@ var RelationshipTypesComponent = /** @class */ (function () {
         var _this = this;
         this._relService.createType(this._newType)
             .subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Tipo creado');
             _this._types.push(data);
             _this._newType = {};
+        });
+    };
+    RelationshipTypesComponent.prototype.selectType = function (type) {
+        this._currentType = type;
+    };
+    RelationshipTypesComponent.prototype.cancelUpdate = function () {
+        this._currentType = {};
+    };
+    RelationshipTypesComponent.prototype.deleteType = function (typeId) {
+        var _this = this;
+        this._relService.deleteType(typeId)
+            .subscribe(function (data) {
+            _this.toastr.info('Tipo eliminado');
+        }, function (err) {
+            _this.toastr.error(err.message, err.name);
+        });
+    };
+    RelationshipTypesComponent.prototype.updateType = function () {
+        var _this = this;
+        this._relService.updateType(this._currentType.ID, this._currentType)
+            .subscribe(function (data) {
+            _this.toastr.success(_this._currentType.Name, 'Tipo editado');
+            _this._currentType = {};
         });
     };
     RelationshipTypesComponent = __decorate([
@@ -1001,10 +1118,10 @@ var RelationshipTypesComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_relationships_service__["a" /* RelationshipsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_relationships_service__["a" /* RelationshipsService */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_relationships_service__["a" /* RelationshipsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_relationships_service__["a" /* RelationshipsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _b || Object])
     ], RelationshipTypesComponent);
     return RelationshipTypesComponent;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=relationship-types.component.js.map
@@ -1070,7 +1187,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/settings.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Tipo de Relación\">\n      <ng-template ngbTabContent>\n        <app-relationship-types></app-relationship-types>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Tipo de Documento\">\n      <ng-template ngbTabContent>\n        <app-document-types></app-document-types>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
+module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Tipo de Relación\">\n      <ng-template ngbTabContent>\n        <app-relationship-types></app-relationship-types>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Tipo de Documento\">\n      <ng-template ngbTabContent>\n        <app-document-types></app-document-types>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Países\">\n      <ng-template ngbTabContent>\n        <app-countries></app-countries>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
 
 /***/ }),
 
@@ -1123,6 +1240,7 @@ var SettingsComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__settings_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/settings/settings-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__relationship_types_relationship_types_component__ = __webpack_require__("../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__document_types_document_types_component__ = __webpack_require__("../../../../../src/app/dashboard/settings/document-types/document-types.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__countries_countries_component__ = __webpack_require__("../../../../../src/app/dashboard/settings/countries/countries.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1130,6 +1248,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1152,7 +1271,7 @@ var SettingsModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
                 __WEBPACK_IMPORTED_MODULE_6__settings_routing_module__["a" /* SettingsRoutingModule */]
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_5__settings_component__["a" /* SettingsComponent */], __WEBPACK_IMPORTED_MODULE_7__relationship_types_relationship_types_component__["a" /* RelationshipTypesComponent */], __WEBPACK_IMPORTED_MODULE_8__document_types_document_types_component__["a" /* DocumentTypesComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_5__settings_component__["a" /* SettingsComponent */], __WEBPACK_IMPORTED_MODULE_7__relationship_types_relationship_types_component__["a" /* RelationshipTypesComponent */], __WEBPACK_IMPORTED_MODULE_8__document_types_document_types_component__["a" /* DocumentTypesComponent */], __WEBPACK_IMPORTED_MODULE_9__countries_countries_component__["a" /* CountriesComponent */]]
         })
     ], SettingsModule);
     return SettingsModule;

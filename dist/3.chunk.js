@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/discards/discards-list/discards-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <div class=\"form-group\">\n          <label for=\"list\">Lista</label>\n          <select class=\"form-control custom-select\" [(ngModel)]=\"_currentListID\" name=\"list\" id=\"list\" (ngModelChange)=\"getSanctions()\">\n            <option selected disabled [value]=\"undefined\">--- Seleccionar ---</option>\n            <option *ngFor=\"let list of _lists\" [value]=\"list.ID\">{{ list.Name }}</option>\n          </select>\n        </div>\n      </div>\n    </div>\n    <h4>\n      Sanciones\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"runDiscards()\">Ejecutar Descarte</button>\n    </h4>\n    <nav>\n      <ul *ngIf=\"_pager.pages && _pager.pages.length\" class=\"pagination\">\n        <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n          <a class=\"page-link\" (click)=\"setPage(1)\">Primero</a>\n        </li>\n        <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n          <a class=\"page-link\" (click)=\"setPage(_pager.currentPage -1)\">Anterior</a>\n        </li>\n        <li class=\"page-item\" *ngFor=\"let page of _pager.pages\" [ngClass]=\"{active:_pager.currentPage === page}\">\n          <a class=\"page-link\" (click)=\"setPage(page)\">{{ page }}</a>\n        </li>\n        <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n          <a class=\"page-link\" (click)=\"setPage(_pager.currentPage + 1)\">Siguiente</a>\n        </li>\n        <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n          <a class=\"page-link\" (click)=\"setPage(_pager.totalPages)\">Último</a>\n        </li>\n      </ul>\n    </nav>\n    <table class=\"table table-sm table-striped table-squared\">\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Fecha</th>\n          <th>Término 1</th>\n          <th>Término 2</th>\n          <th>Término 3</th>\n          <th>Término 4</th>\n          <th>Término 5</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of _pagedSanctions\">\n          <td>{{ item.ID }}</td>\n          <td>{{ item.Date | date: 'short' }}</td>\n          <td>{{ item.Term1 }}</td>\n          <td>{{ item.Term2 }}</td>\n          <td>{{ item.Term3 }}</td>\n          <td>{{ item.Term4 }}</td>\n          <td>{{ item.Term5 }}</td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <h4 class=\"card-title\">Sanciones</h4>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentListID\" name=\"list\" id=\"list\" (ngModelChange)=\"getSanctions()\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar Lista ---</option>\n          <option *ngFor=\"let list of _lists\" [value]=\"list.ID\">{{ list.Name }}</option>\n        </select>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"runDiscards()\" [disabled]=\"!_pagedSanctions\">Ejecutar Descarte</button>\n      </div>\n    </div>\n  </div>\n  <table class=\"table table-sm table-striped table-squared\" *ngIf=\"_pagedSanctions\">\n    <thead>\n      <tr>\n        <th>ID</th>\n        <th>Fecha</th>\n        <th>Término 1</th>\n        <th>Término 2</th>\n        <th>Término 3</th>\n        <th>Término 4</th>\n        <th>Término 5</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of _pagedSanctions\">\n        <td>{{ item.ID }}</td>\n        <td>{{ item.Date | date: 'short' }}</td>\n        <td>{{ item.Term1 }}</td>\n        <td>{{ item.Term2 }}</td>\n        <td>{{ item.Term3 }}</td>\n        <td>{{ item.Term4 }}</td>\n        <td>{{ item.Term5 }}</td>\n      </tr>\n    </tbody>\n  </table>\n  <nav>\n    <ul *ngIf=\"_pager.pages && _pager.pages.length\" class=\"pagination\">\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n        <a class=\"page-link\" (click)=\"setPage(1)\">Primero</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.currentPage -1)\">Anterior</a>\n      </li>\n      <li class=\"page-item\" *ngFor=\"let page of _pager.pages\" [ngClass]=\"{active:_pager.currentPage === page}\">\n        <a class=\"page-link\" (click)=\"setPage(page)\">{{ page }}</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.currentPage + 1)\">Siguiente</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.totalPages)\">Último</a>\n      </li>\n    </ul>\n  </nav>\n</div>\n"
 
 /***/ }),
 
@@ -57,25 +57,33 @@ var DiscardsListComponent = /** @class */ (function () {
     }
     DiscardsListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._sanctionServ.getLists()
-            .subscribe(function (data) {
+        this._sanctionServ.getLists().subscribe(function (data) {
             _this._lists = data;
         });
     };
     DiscardsListComponent.prototype.getSanctions = function () {
         var _this = this;
-        this._sanctionServ.getSanctionsByList(this._currentListID)
-            .subscribe(function (data) {
+        this._sanctionServ.getSanctionsByList(this._currentListID).subscribe(function (data) {
             _this._sanctions = data;
             _this.setPage(1);
         });
     };
     DiscardsListComponent.prototype.runDiscards = function () {
         var _this = this;
-        this._sanctionServ.runDiscard(this._sanctions)
-            .then(function (data) {
-            console.log(data);
-            _this.toastr.success(data.length + " concurrencias encontradas", 'Comparación ejecutada');
+        this._sanctionServ.addDiscard(this._currentListID).subscribe(function (discard) {
+            _this._sanctionServ.runDiscard(discard.ID, _this._sanctions).then(function (matches) {
+                _this.toastr.success(matches.length + " concurrencias encontradas", 'Comparación ejecutada');
+                _this._matches = matches;
+                _this.saveMatches(discard, _this._matches.shift());
+            });
+        });
+    };
+    DiscardsListComponent.prototype.saveMatches = function (discard, match) {
+        var _this = this;
+        this._sanctionServ.saveMatches(discard.ID, match.sanctionID, match.participantID).subscribe(function (result) {
+            if (_this._matches.length) {
+                _this.saveMatches(discard, _this._matches.shift());
+            }
         });
     };
     DiscardsListComponent.prototype.setPage = function (page) {
@@ -160,7 +168,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/discards/discards.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Listas\">\n      <ng-template ngbTabContent>\n        <discards-list></discards-list>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Historial\">\n      <ng-template ngbTabContent>\n        <p>Historial</p>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
+module.exports = "<div class=\"card\">\n  <ngb-tabset type=\"pills\">\n    <ngb-tab title=\"Listas\">\n      <ng-template ngbTabContent>\n        <discards-list></discards-list>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Descartes\">\n      <ng-template ngbTabContent>\n        <discard-matches></discard-matches>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n"
 
 /***/ }),
 
@@ -211,6 +219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__discards_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/discards/discards-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__discards_list_discards_list_component__ = __webpack_require__("../../../../../src/app/dashboard/discards/discards-list/discards-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__matches_matches_component__ = __webpack_require__("../../../../../src/app/dashboard/discards/matches/matches.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscardsModule", function() { return DiscardsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -218,6 +227,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -234,13 +244,106 @@ var DiscardsModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__discards_routing_module__["a" /* DiscardsRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_4__shared_shared_module__["a" /* SharedModule */]
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__discards_component__["a" /* DiscardsComponent */], __WEBPACK_IMPORTED_MODULE_5__discards_list_discards_list_component__["a" /* DiscardsListComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__discards_component__["a" /* DiscardsComponent */], __WEBPACK_IMPORTED_MODULE_5__discards_list_discards_list_component__["a" /* DiscardsListComponent */], __WEBPACK_IMPORTED_MODULE_6__matches_matches_component__["a" /* MatchesComponent */]]
         })
     ], DiscardsModule);
     return DiscardsModule;
 }());
 
 //# sourceMappingURL=discards.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/discards/matches/matches.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/discards/matches/matches.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid\">\n  <h4 class=\"card-title\">Descartes</h4>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentDiscardID\" (ngModelChange)=\"getMatches()\" name=\"discard\" id=\"discard\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar descarte ---</option>\n          <option *ngFor=\"let discard of _discards\" [value]=\"discard.ID\">\n            {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}\n          </option>\n        </select>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <app-custom-table *ngIf=\"_matches.length\" [items]=\"_matches\" [options]=\"_table\"></app-custom-table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/discards/matches/matches.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_sanctions_service__ = __webpack_require__("../../../../../src/app/shared/services/sanctions.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MatchesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MatchesComponent = /** @class */ (function () {
+    function MatchesComponent(_sanctionServ, _util) {
+        this._sanctionServ = _sanctionServ;
+        this._util = _util;
+        this._discards = [];
+        this._matches = [];
+        this._table = {};
+    }
+    MatchesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._sanctionServ.getDiscards().subscribe(function (data) {
+            _this._discards = _this._util.sortBy(data, 'Date', true);
+        });
+        this._table.columns = [
+            { name: 'Participant.FirstName', title: 'Nombre', filterable: true },
+            { name: 'Participant.ThirdName', title: 'Apellido', filterable: true },
+            { name: 'Sanction.Term1', title: 'Sancionado', filterable: true },
+            { name: 'Pending', title: 'Pendiente' },
+            { name: 'Valid', title: 'Válida' }
+        ];
+        this._table.title = 'Coincidencias';
+        this._table.style = 'table table-sm table-squared';
+        this._table.pageable = true;
+        this._table.searcheable = true;
+    };
+    MatchesComponent.prototype.getMatches = function () {
+        var _this = this;
+        this._sanctionServ.getMatches(this._currentDiscardID).subscribe(function (data) {
+            console.log(data);
+            _this._matches = data;
+        });
+    };
+    MatchesComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'discard-matches',
+            template: __webpack_require__("../../../../../src/app/dashboard/discards/matches/matches.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/dashboard/discards/matches/matches.component.css")]
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_services_sanctions_service__["a" /* SanctionsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_services_sanctions_service__["a" /* SanctionsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_util_service__["a" /* UtilService */]) === "function" && _b || Object])
+    ], MatchesComponent);
+    return MatchesComponent;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=matches.component.js.map
 
 /***/ })
 

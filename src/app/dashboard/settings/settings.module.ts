@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { RelationshipTypesComponent } from './relationship-types/relationship-types.component';
 import { DocumentTypesComponent } from './document-types/document-types.component';
+import { CountriesComponent } from './countries/countries.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { DocumentTypesComponent } from './document-types/document-types.componen
     NgbModule,
     SettingsRoutingModule
   ],
-  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent]
+  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent, CountriesComponent]
 })
 export class SettingsModule { }

@@ -81,7 +81,7 @@ export class UtilService {
   }
 
   paginate(itemsCount: number, currentPage: number = 1, pageSize: number = 10) {
-    const totalPages: number = Math.ceil(itemsCount / pageSize);
+    const totalPages: number = Math.ceil(itemsCount / pageSize) + 1;
     let startPage: number, endPage: number;
 
     if (totalPages <= 10) {

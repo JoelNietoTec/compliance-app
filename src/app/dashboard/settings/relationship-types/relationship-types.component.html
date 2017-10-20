@@ -1,38 +1,44 @@
 <div class="container-fluid">
-  <table class="table table-sm table-squared table-bordered table-hover">
+  <table class="table table-sm table-squared">
     <thead>
       <tr>
-        <th class="text-center">ID</th>
-        <th>Name</th>
-        <th>English Name</th>
-        <th class="text-center">Actions</th>
+        <th>Nombre</th>
+        <th>Nombre Inglés</th>
+        <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngFor="let type of _types">
-        <tr>
-          <td class="text-center">{{ type.ID }}</td>
+        <tr *ngIf="type.ID!=_currentType.ID" (dblclick)="selectType(type)">
           <td>{{ type.Name }}</td>
           <td>{{ type.EnglishName }}</td>
           <td class="text-center">
-            <div class="btn btn-success btn-sm"><i class="typcn typcn-edit"></i> Edit</div>
+            <i class="fa fa-edit fa-lg text-success" aria-hidden="true" (click)="selectType(type)" placement="top" ngbTooltip="Editar"></i>
+            <i class="fa fa-trash-o fa-lg text-danger" aria-hidden="true" [swal]="['Eliminar', 'No puede ser reversado', 'warning']" (confirm)="deleteType(type.ID)" placement="top" ngbTooltip="Borrar"></i>
           </td>
         </tr>
-        <!-- <tr>
-              <td></td>
-              <td><input type="text" [(ngModel)]="_selType.Name" class="form-control form-control-sm" name="name"></td>
-              <td><input type="text" [(ngModel)]="_selType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
-              <td class="text-center">
-                <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
-              </td>
-            </tr> -->
+        <tr class="table-info" *ngIf="type.ID==_currentType.ID" >
+          <td>
+            <input type="text" [(ngModel)]="_currentType.Name" class="form-control form-control-sm" name="name">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="_currentType.EnglishName" class="form-control form-control-sm" name="english-name">
+          </td>
+          <td class="text-center">
+            <i class="fa fa-lock fa-lg text-success" (click)="updateType()" aria-hidden="true" placement="top" ngbTooltip="Guardar Cambios"></i>
+            <i class="fa fa-times fa-lg text-danger" (click)="cancelUpdate()" aria-hidden="true" placement="top" ngbTooltip="Cancelar"></i>
+          </td>
+        </tr>
       </ng-container>
       <tr class="border-primary">
-        <td></td>
-        <td><input type="text" [(ngModel)]="_newType.Name" class="form-control form-control-sm" name="name"></td>
-        <td><input type="text" [(ngModel)]="_newType.EnglishName" class="form-control form-control-sm" name="english-name"></td>
+        <td>
+          <input type="text" [(ngModel)]="_newType.Name" class="form-control form-control-sm" name="name" placeholder="Nombre Relación">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="_newType.EnglishName" class="form-control form-control-sm" name="english-name" placeholder="Nombre Inglés">
+        </td>
         <td class="text-center">
-          <div class="btn btn-primary btn-sm" (click)="addType()"><i class="typcn typcn-plus-outline"></i> Add</div>
+          <i class="fa fa-plus-square fa-lg text-primary" (click)="addType()" aria-hidden="true" placement="top" ngbTooltip="Agregar"></i>
         </td>
       </tr>
     </tbody>

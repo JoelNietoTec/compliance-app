@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiscardsListComponent } from './discards-list.component';
+import { CustomTableComponent } from './custom-table.component';
 
-describe('DiscardsListComponent', () => {
-  let component: DiscardsListComponent;
-  let fixture: ComponentFixture<DiscardsListComponent>;
+describe('CustomTableComponent', () => {
+  let component: CustomTableComponent;
+  let fixture: ComponentFixture<CustomTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiscardsListComponent ]
+      declarations: [ CustomTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiscardsListComponent);
+    fixture = TestBed.createComponent(CustomTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

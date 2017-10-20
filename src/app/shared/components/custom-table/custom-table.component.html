@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <h4>{{ options.title }}</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="inner-addon left-addon">
+          <i class="fa fa-search text-muted" aria-hidden="true"></i>
+          <input type="text" class="form-control" name="filter" id="filter" [(ngModel)]="_searchText" (ngModelChange)="filterItems()"
+            placeholder="Búsqueda">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <span class="align-bottom items-count">{{ _filteredItems.length }} elementos recuperados</span>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn btn-primary pull-right">Nuevo elemento</button>
+    </div>
+  </div>
+  <table [ngClass]="options.style" *ngIf="_pagedItems">
+    <thead>
+      <tr>
+        <th *ngFor="let header of options.columns" (click)="sortByColumn(header)">
+          {{ header.title }}
+          <i class="fa" [ngClass]="{
+            'fa-sort': _sortColumn != header.name,
+            'fa-sort-desc': _sortColumn === header.name && _sortDesc,
+            'fa-sort-asc': _sortColumn === header.name && !_sortDesc
+          }" aria-hidden="true"></i>
+        </th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of _pagedItems">
+        <tr *ngIf="item.ID != _selectedItem.ID" (dblclick)="selectItem(item)">
+          <td *ngFor="let col of options.columns">
+            {{ item | column: col.name }}
+          </td>
+          <td class="text-center">
+            <i class="fa fa-edit fa-lg text-success" (click)="selectItem(item)" placement="top" ngbTooltip="Editar"></i>
+            <i class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar"></i>
+          </td>
+        </tr>
+        <tr class="table-info" *ngIf="item.ID === _selectedItem.ID">
+          <td *ngFor="let col of options.columns">
+            <input class="form-control" type="{{ col.type }}" [(ngModel)]="_selectedItem[col.name]" placeholder="{{ col.title }}">
+          </td>
+          <td class="text-center">
+            <i class="fa fa-lock fa-lg text-success" aria-hidden="true" placement="top" ngbTooltip="Guardar Cambios"></i>
+            <i class="fa fa-times fa-lg text-danger" (click)="cancelSelect()" aria-hidden="true" placement="top" ngbTooltip="Cancelar"></i>
+          </td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td *ngFor="let col of options.columns">
+          <input class="form-control" type="{{ col.type }}" [(ngModel)]="_newItem[col.name]" placeholder="{{ col.title }}">
+        </td>
+        <td class="text-center">
+          <i class="fa fa-plus-square fa-lg text-primary" aria-hidden="true"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-container *ngIf="items">
+    <app-paginator *ngIf="options.pageable" [itemsCount]="_filteredItems.length" (paginate)="setPage($event)"></app-paginator>
+  </ng-container>
+</div>
