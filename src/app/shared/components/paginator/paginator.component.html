@@ -1,5 +1,5 @@
-<nav>
-  <ul *ngIf="_pager.pages && _pager.pages.length"  class="pagination">
+<nav class="paginator">
+  <ul *ngIf="_pager.pages && _pager.pages.length" class="pagination">
     <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
       <a class="page-link" (click)="setPage(1)">
         Primero
@@ -27,3 +27,8 @@
     </li>
   </ul>
 </nav>
+<span>Mostrando
+  <select class="form-control custom-select" name="page-size" [(ngModel)]="_pageSize" (ngModelChange)="setPage(_pager.currentPage)">
+    <option *ngFor="let val of _sizes" [value]=val>{{val}}</option>
+  </select>
+  elementos de {{ itemsCount }}</span>

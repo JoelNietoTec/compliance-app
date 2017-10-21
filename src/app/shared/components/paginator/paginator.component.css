@@ -1,0 +1,9 @@
+.paginator {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.custom-select {
+  margin: 0 5px;
+  width: inherit;
+}

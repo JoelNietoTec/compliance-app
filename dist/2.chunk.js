@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/entities-list/entities-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-custom-table [items]=\"entities\" [options]=\"_table\"></app-custom-table>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [items]=\"entities\" [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -63,6 +63,7 @@ var EntitiesListComponent = /** @class */ (function () {
         this._table.style = 'table table-sm table-striped table-squared';
         this._table.pageable = true;
         this._table.detailsURL = [];
+        this._table.newURL = ['new'];
         for (var _i = 0, _a = this.entities; _i < _a.length; _i++) {
             var i = _a[_i];
             i.Rate = this._partServ.getRate(i);
@@ -480,7 +481,6 @@ var IndividualFormComponent = /** @class */ (function () {
             console.log(this._individual);
             this._partServ.createParticipant(this._individual)
                 .subscribe(function (data) {
-                console.log(data);
                 _this.toastr.success("ID: " + data.ID, 'Individuo Creado');
                 _this._router.navigate(['dashboard/participants', data.ID]);
             });
@@ -534,7 +534,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/individuals-list/individuals-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-custom-table [items]=\"individuals\" [options]=\"_table\">\r\n</app-custom-table>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [items]=\"individuals\" [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -568,11 +568,12 @@ var IndividualsListComponent = /** @class */ (function () {
             { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
             { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
             { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
-            { name: 'Rate', title: 'Calificación', type: 'text', sortable: true }
+            { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
         ];
         this._table.style = 'table table-sm table-striped table-squared';
         this._table.pageable = true;
         this._table.detailsURL = [];
+        this._table.newURL = ['new'];
         for (var _i = 0, _a = this.individuals; _i < _a.length; _i++) {
             var i = _a[_i];
             i.Rate = this._partServ.getRate(i);
@@ -1641,7 +1642,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participants-list/participants-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row d-flex justify-content-center animated fadeIn\" *ngIf=\"!_participants\">\r\n  <img src=\"assets/img/spinner.gif\" class=\"spinner\">\r\n</div>\r\n<div *ngIf=\"_participants\" class=\"card animated fadeIn\">\r\n  <ngb-tabset type=\"pills\">\r\n    <ngb-tab>\r\n      <ng-template ngbTabTitle><i class=\"typcn typcn-group-outline\"></i> Individuos</ng-template>\r\n      <ng-template ngbTabContent>\r\n        <individuals-list [individuals]=\"_individuals\"></individuals-list>\r\n      </ng-template>\r\n    </ngb-tab>\r\n    <ngb-tab>\r\n      <ng-template ngbTabTitle><i class=\"typcn typcn-briefcase\"></i> Entidades</ng-template>\r\n      <ng-template ngbTabContent>\r\n        <entities-list [entities]=\"_entities\"></entities-list>\r\n      </ng-template>\r\n    </ngb-tab>\r\n  </ngb-tabset>\r\n  <div class=\"card-body d-flex justify-content-end\">\r\n    <a class=\"btn btn-primary animated fadeIn\" href=\"#\" role=\"button\" [routerLink]=\"['new']\"><i class=\"typcn typcn-user-add-outline\" aria-hidden=\"true\"></i> Nuevo</a>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row d-flex justify-content-center animated fadeIn\" *ngIf=\"!_participants\">\r\n  <img src=\"assets/img/spinner.gif\" class=\"spinner\">\r\n</div>\r\n<div *ngIf=\"_participants\" class=\"card animated fadeIn\">\r\n  <ngb-tabset type=\"pills\">\r\n    <ngb-tab>\r\n      <ng-template ngbTabTitle><i class=\"typcn typcn-group-outline\"></i> Individuos</ng-template>\r\n      <ng-template ngbTabContent>\r\n        <individuals-list [individuals]=\"_individuals\"></individuals-list>\r\n      </ng-template>\r\n    </ngb-tab>\r\n    <ngb-tab>\r\n      <ng-template ngbTabTitle><i class=\"typcn typcn-briefcase\"></i> Entidades</ng-template>\r\n      <ng-template ngbTabContent>\r\n        <entities-list [entities]=\"_entities\"></entities-list>\r\n      </ng-template>\r\n    </ngb-tab>\r\n  </ngb-tabset>\r\n</div>\r\n"
 
 /***/ }),
 

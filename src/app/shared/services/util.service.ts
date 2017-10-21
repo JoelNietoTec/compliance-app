@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class UtilService {
-
-  constructor() { }
+  constructor() {}
 
   sortBy(array: Array<any>, args: string, desc?: boolean): Array<any> {
     if (desc) {
@@ -56,7 +55,7 @@ export class UtilService {
     for (let item of array) {
       let term = '';
       for (let col of args) {
-        term = term + this.isNullString(item[col]);
+        term = term + this.isNullString(this.getProperty(item, col));
       }
       term = term.toLocaleLowerCase();
       if (term.indexOf(searchText) >= 0) {
@@ -116,7 +115,13 @@ export class UtilService {
       endIndex: endIndex,
       pages: pages
     };
-
   }
 
+  getProperty(item: any, property: string): any {
+
+    property.split('.').forEach(e => {
+      item = item[e];
+    });
+    return item;
+  }
 }

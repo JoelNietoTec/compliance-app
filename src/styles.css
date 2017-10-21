@@ -299,7 +299,7 @@ ngb-tabset > ul.nav > li.nav-item {
 
 
 /* Button Primary*/
-.btn-primary {
+.btn-primary, .page-item.active .page-link {
   background-color: #287FB9 !important;
   border-color: #287FB9 !important;
 }
@@ -315,7 +315,7 @@ ngb-tabset > ul.nav > li.nav-item {
 }
 
 .btn-outline-primary:hover, .btn-outline-primary:active,
-.btn-outline-primary:focus {
+.btn-outline-primary:focus, .page-item.active .page-link:hover {
   color: #fff !important;
   background-color: #287FB9 !important;
   border-color: #287FB9 !important;

@@ -13,10 +13,14 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   _pager: any = {};
   private _count: number;
+  _pageSize;
+  _sizes: Array<number>;
 
   constructor(private _util: UtilService) {}
 
   ngOnInit() {
+    this._sizes = [5, 10, 15, 20];
+    this._pageSize = 10;
     this.setPage(1);
   }
 
@@ -31,7 +35,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
       return;
     }
 
-    this._pager = this._util.paginate(this._count, page);
+    this._pager = this._util.paginate(this._count, page, parseInt(this._pageSize));
 
     this.paginate.emit(this._pager);
   }

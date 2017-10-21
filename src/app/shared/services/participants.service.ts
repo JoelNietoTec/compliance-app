@@ -54,11 +54,7 @@ export class ParticipantsService {
     part.CreatedBy = _user.ID; // set User ID
     return this._http
       .post(this._partURL, JSON.stringify(part), { headers: this._headers })
-      .map((response: Response) => {
-        this._newParticipant = response.json();
-        this._newParticipant.CreatedByUser = _user; // set Created By User
-        return this._newParticipant;
-      });
+      .map((response: Response) => response.json());
   }
 
   updateParticipant(_id: number, _part: Participant): Observable<Participant> {

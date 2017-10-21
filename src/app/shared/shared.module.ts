@@ -44,6 +44,7 @@ import { ColumnPipe } from './pipes/column.pipe';
 import { SaveButtonComponent } from './components/save-button/save-button.component';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { BooleanPipe } from './pipes/boolean.pipe';
 
 @NgModule({
   imports: [
@@ -55,8 +56,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
-      confirmButtonClass: 'btn btn-lg btn-primary',
-      cancelButtonClass: 'btn btn-lg btn-outline-danger'
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-outline-danger'
     }),
     MultiselectDropdownModule
   ],
@@ -109,7 +110,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     SaveButtonComponent,
     CustomTableComponent,
     PaginatorComponent,
-    ColumnPipe
+    ColumnPipe,
+    BooleanPipe
   ]
 })
 export class SharedModule {}

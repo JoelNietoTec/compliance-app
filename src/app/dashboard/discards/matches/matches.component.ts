@@ -24,11 +24,10 @@ export class MatchesComponent implements OnInit {
     });
 
     this._table.columns = [
-      { name: 'Participant.FirstName', title: 'Nombre', filterable: true },
-      { name: 'Participant.ThirdName', title: 'Apellido', filterable: true },
+      { name: 'Participant.FullName', title: 'Participante', filterable: true },
       { name: 'Sanction.Term1', title: 'Sancionado', filterable: true },
-      { name: 'Pending', title: 'Pendiente' },
-      { name: 'Valid', title: 'Válida' }
+      { name: 'Pending', title: 'Pendiente', type: 'boolean' },
+      { name: 'Valid', title: 'Válida', type: 'boolean' }
     ];
 
     this._table.title = 'Coincidencias';

@@ -275,7 +275,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/discards/matches/matches.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <h4 class=\"card-title\">Descartes</h4>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentDiscardID\" (ngModelChange)=\"getMatches()\" name=\"discard\" id=\"discard\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar descarte ---</option>\n          <option *ngFor=\"let discard of _discards\" [value]=\"discard.ID\">\n            {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}\n          </option>\n        </select>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <app-custom-table *ngIf=\"_matches.length\" [items]=\"_matches\" [options]=\"_table\"></app-custom-table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentDiscardID\" (ngModelChange)=\"getMatches()\" name=\"discard\"\n          id=\"discard\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar descarte ---</option>\n          <option *ngFor=\"let discard of _discards\" [value]=\"discard.ID\">\n            {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}\n          </option>\n        </select>\n      </div>\n    </div>\n  </div>\n  <app-custom-table *ngIf=\"_matches.length\" [items]=\"_matches\" [options]=\"_table\"></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -313,11 +313,10 @@ var MatchesComponent = /** @class */ (function () {
             _this._discards = _this._util.sortBy(data, 'Date', true);
         });
         this._table.columns = [
-            { name: 'Participant.FirstName', title: 'Nombre', filterable: true },
-            { name: 'Participant.ThirdName', title: 'Apellido', filterable: true },
+            { name: 'Participant.FullName', title: 'Participante', filterable: true },
             { name: 'Sanction.Term1', title: 'Sancionado', filterable: true },
-            { name: 'Pending', title: 'Pendiente' },
-            { name: 'Valid', title: 'Válida' }
+            { name: 'Pending', title: 'Pendiente', type: 'boolean' },
+            { name: 'Valid', title: 'Válida', type: 'boolean' }
         ];
         this._table.title = 'Coincidencias';
         this._table.style = 'table table-sm table-squared';

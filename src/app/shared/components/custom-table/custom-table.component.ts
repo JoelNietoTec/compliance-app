@@ -18,11 +18,11 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
 
   _newItem: any = {};
   _selectedItem: any = {};
-  _sortColumn = '';
+  _sortColumn: string;
   _sortDesc = true;
   _pagedItems: Array<any> = [];
   _currentPage: any = {};
-  _searchText: string = '';
+  _searchText: string;
   _filteredItems: Array<any> = [];
   _searchColumns: Array<string> = [];
   _pageSizes: Array<number> = [5, 10, 15, 20, 25];
@@ -41,7 +41,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
   }
 
   selectItem(item: any) {
-    this._selectedItem = item;
+    if (this.options.editable) {
+      this._selectedItem = item;
+    }
   }
 
   cancelSelect() {
@@ -63,7 +65,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
   }
 
   getDetailsURL(ID: number): Array<string> {
-    let URL = this.options.detailsURL.slice();
+    const URL = this.options.detailsURL.slice();
     URL.push(ID.toString());
     return URL;
   }

@@ -8,6 +8,7 @@ export interface TableOptions {
   deletable?: boolean;
   creatable?: boolean;
   detailsURL?: Array<string>;
+  newURL?: Array<string>;
 }
 
 export interface Column {

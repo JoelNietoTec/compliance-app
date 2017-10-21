@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h4 class="card-title">Descartes</h4>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <select class="form-control custom-select" [(ngModel)]="_currentDiscardID" (ngModelChange)="getMatches()" name="discard" id="discard">
+        <select class="form-control custom-select" [(ngModel)]="_currentDiscardID" (ngModelChange)="getMatches()" name="discard"
+          id="discard">
           <option selected disabled [value]="undefined">--- Seleccionar descarte ---</option>
           <option *ngFor="let discard of _discards" [value]="discard.ID">
             {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}
@@ -12,7 +12,5 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <app-custom-table *ngIf="_matches.length" [items]="_matches" [options]="_table"></app-custom-table>
-  </div>
+  <app-custom-table *ngIf="_matches.length" [items]="_matches" [options]="_table"></app-custom-table>
 </div>
