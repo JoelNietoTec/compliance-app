@@ -175,17 +175,17 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.signIn = function () {
         var _this = this;
-        this._authServ.authLogin(this._login)
-            .subscribe(function (data) {
+        this._authServ.authLogin(this._login).subscribe(function (data) {
             console.log(data);
             if (data) {
-                _this.toastr.success(_this._login.UserName, 'Bienvenido');
+                var _user = _this._authServ.getUserInfo();
+                _this.toastr.success(_user.UserName, 'Bienvenido');
                 _this._router.navigate(['/']);
             }
             else {
                 _this._invalid = true;
             }
-        }, function (err) { return _this._invalid = true; });
+        }, function (err) { return (_this._invalid = true); });
     };
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

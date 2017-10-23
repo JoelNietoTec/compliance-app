@@ -43,6 +43,7 @@ export class MatchesComponent implements OnInit {
     this._sanctionServ.getMatches(this._currentDiscardID).subscribe(data => {
       console.log(data);
       this._matches = data;
+      this._table.items = this._matches;
     });
   }
 }

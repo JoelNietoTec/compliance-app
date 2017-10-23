@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/discards/discards-list/discards-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <h4 class=\"card-title\">Sanciones</h4>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentListID\" name=\"list\" id=\"list\" (ngModelChange)=\"getSanctions()\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar Lista ---</option>\n          <option *ngFor=\"let list of _lists\" [value]=\"list.ID\">{{ list.Name }}</option>\n        </select>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"runDiscards()\" [disabled]=\"!_pagedSanctions\">Ejecutar Descarte</button>\n      </div>\n    </div>\n  </div>\n  <table class=\"table table-sm table-striped table-squared\" *ngIf=\"_pagedSanctions\">\n    <thead>\n      <tr>\n        <th>ID</th>\n        <th>Fecha</th>\n        <th>Término 1</th>\n        <th>Término 2</th>\n        <th>Término 3</th>\n        <th>Término 4</th>\n        <th>Término 5</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of _pagedSanctions\">\n        <td>{{ item.ID }}</td>\n        <td>{{ item.Date | date: 'short' }}</td>\n        <td>{{ item.Term1 }}</td>\n        <td>{{ item.Term2 }}</td>\n        <td>{{ item.Term3 }}</td>\n        <td>{{ item.Term4 }}</td>\n        <td>{{ item.Term5 }}</td>\n      </tr>\n    </tbody>\n  </table>\n  <nav>\n    <ul *ngIf=\"_pager.pages && _pager.pages.length\" class=\"pagination\">\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n        <a class=\"page-link\" (click)=\"setPage(1)\">Primero</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === 1}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.currentPage -1)\">Anterior</a>\n      </li>\n      <li class=\"page-item\" *ngFor=\"let page of _pager.pages\" [ngClass]=\"{active:_pager.currentPage === page}\">\n        <a class=\"page-link\" (click)=\"setPage(page)\">{{ page }}</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.currentPage + 1)\">Siguiente</a>\n      </li>\n      <li class=\"page-item\" [ngClass]=\"{disabled:_pager.currentPage === _pager.totalPages}\">\n        <a class=\"page-link\" (click)=\"setPage(_pager.totalPages)\">Último</a>\n      </li>\n    </ul>\n  </nav>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <h4 class=\"card-title\">Sanciones</h4>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentListID\" name=\"list\" id=\"list\" (ngModelChange)=\"getSanctions()\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar Lista ---</option>\n          <option *ngFor=\"let list of _lists\" [value]=\"list.ID\">{{ list.Name }}</option>\n        </select>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"runDiscards()\" [disabled]=\"!_pagedSanctions\">Ejecutar Descarte</button>\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_currentListID\" [options]=\"_table\"></app-custom-table>\n</div>\n\n"
 
 /***/ }),
 
@@ -54,9 +54,22 @@ var DiscardsListComponent = /** @class */ (function () {
         this._util = _util;
         this.toastr = toastr;
         this._pager = {};
+        this._table = {};
     }
     DiscardsListComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this._table.columns = [
+            { name: 'ID', title: '#', type: 'number' },
+            { name: 'Date', title: 'Fecha', type: 'date', sortable: true },
+            { name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true },
+            { name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true },
+            { name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true },
+            { name: 'Term4', title: 'Term. 4', type: 'text', sortable: true, filterable: true },
+            { name: 'Term5', title: 'Term. 5', type: 'text', sortable: true, filterable: true }
+        ];
+        this._table.pageable = true;
+        this._table.searcheable = true;
+        this._table.style = 'table table-sm table-squared';
         this._sanctionServ.getLists().subscribe(function (data) {
             _this._lists = data;
         });
@@ -65,6 +78,7 @@ var DiscardsListComponent = /** @class */ (function () {
         var _this = this;
         this._sanctionServ.getSanctionsByList(this._currentListID).subscribe(function (data) {
             _this._sanctions = data;
+            _this._table.items = _this._sanctions;
             _this.setPage(1);
         });
     };
@@ -275,7 +289,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/discards/matches/matches.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentDiscardID\" (ngModelChange)=\"getMatches()\" name=\"discard\"\n          id=\"discard\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar descarte ---</option>\n          <option *ngFor=\"let discard of _discards\" [value]=\"discard.ID\">\n            {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}\n          </option>\n        </select>\n      </div>\n    </div>\n  </div>\n  <app-custom-table *ngIf=\"_matches.length\" [items]=\"_matches\" [options]=\"_table\"></app-custom-table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"form-group\">\n        <select class=\"form-control custom-select\" [(ngModel)]=\"_currentDiscardID\" (ngModelChange)=\"getMatches()\" name=\"discard\"\n          id=\"discard\">\n          <option selected disabled [value]=\"undefined\">--- Seleccionar descarte ---</option>\n          <option *ngFor=\"let discard of _discards\" [value]=\"discard.ID\">\n            {{ discard.List.Name }} | {{ discard.Date | date: 'short' }}\n          </option>\n        </select>\n      </div>\n    </div>\n  </div>\n  <app-custom-table *ngIf=\"_currentDiscardID\" [options]=\"_table\"></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -328,6 +342,7 @@ var MatchesComponent = /** @class */ (function () {
         this._sanctionServ.getMatches(this._currentDiscardID).subscribe(function (data) {
             console.log(data);
             _this._matches = data;
+            _this._table.items = _this._matches;
         });
     };
     MatchesComponent = __decorate([

@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/entities-list/entities-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [items]=\"entities\" [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -63,6 +63,7 @@ var EntitiesListComponent = /** @class */ (function () {
         this._table.style = 'table table-sm table-striped table-squared';
         this._table.pageable = true;
         this._table.searcheable = true;
+        this._table.items = this.entities;
         this._table.detailsURL = [];
         this._table.newURL = ['new'];
         for (var _i = 0, _a = this.entities; _i < _a.length; _i++) {
@@ -535,7 +536,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/individuals-list/individuals-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [items]=\"individuals\" [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <app-custom-table [options]=\"_table\"></app-custom-table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -574,6 +575,7 @@ var IndividualsListComponent = /** @class */ (function () {
         this._table.style = 'table table-sm table-striped table-squared';
         this._table.pageable = true;
         this._table.searcheable = true;
+        this._table.items = this.individuals;
         this._table.detailsURL = [];
         this._table.newURL = ['new'];
         for (var _i = 0, _a = this.individuals; _i < _a.length; _i++) {
@@ -830,7 +832,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-compliance/participant-compliance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"_categories\">\r\n  <div class=\"card\" *ngFor=\"let category of _categories\">\r\n    <div class=\"card-header\">{{ category.Name }}</div>\r\n    <div class=\"card-body row\">\r\n      <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n        <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\"></compliance-param>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- <div class=\"container\" *ngIf=\"participant && participant.Score\">\r\n  <participant-compliance-details [participant]=\"participant\"></participant-compliance-details>\r\n</div> -->\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"_categories\">\r\n  <div class=\"card\" *ngFor=\"let category of _categories\">\r\n    <div class=\"card-header\">{{ category.Name }}</div>\r\n    <div class=\"card-body row\">\r\n      <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n        <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\"></compliance-param>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 

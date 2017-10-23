@@ -1,4 +1,5 @@
 export interface TableOptions {
+  items?: Array<any>;
   columns?: Array<Column>;
   style?: string;
   title?: string;
@@ -19,4 +20,6 @@ export interface Column {
   filterable?: boolean;
   pipe?: string;
   hidden?: boolean;
+  style?: string;
+  editable?: boolean;
 }

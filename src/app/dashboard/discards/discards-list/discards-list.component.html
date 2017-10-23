@@ -15,47 +15,8 @@
       </div>
     </div>
   </div>
-  <table class="table table-sm table-striped table-squared" *ngIf="_pagedSanctions">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fecha</th>
-        <th>Término 1</th>
-        <th>Término 2</th>
-        <th>Término 3</th>
-        <th>Término 4</th>
-        <th>Término 5</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of _pagedSanctions">
-        <td>{{ item.ID }}</td>
-        <td>{{ item.Date | date: 'short' }}</td>
-        <td>{{ item.Term1 }}</td>
-        <td>{{ item.Term2 }}</td>
-        <td>{{ item.Term3 }}</td>
-        <td>{{ item.Term4 }}</td>
-        <td>{{ item.Term5 }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <nav>
-    <ul *ngIf="_pager.pages && _pager.pages.length" class="pagination">
-      <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
-        <a class="page-link" (click)="setPage(1)">Primero</a>
-      </li>
-      <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
-        <a class="page-link" (click)="setPage(_pager.currentPage -1)">Anterior</a>
-      </li>
-      <li class="page-item" *ngFor="let page of _pager.pages" [ngClass]="{active:_pager.currentPage === page}">
-        <a class="page-link" (click)="setPage(page)">{{ page }}</a>
-      </li>
-      <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages}">
-        <a class="page-link" (click)="setPage(_pager.currentPage + 1)">Siguiente</a>
-      </li>
-      <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages}">
-        <a class="page-link" (click)="setPage(_pager.totalPages)">Último</a>
-      </li>
-    </ul>
-  </nav>
 </div>
+<div class="container-fluid">
+  <app-custom-table *ngIf="_currentListID" [options]="_table"></app-custom-table>
+</div>
+

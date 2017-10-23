@@ -33,6 +33,8 @@ export class EntitiesListComponent implements OnInit {
 
     this._table.searcheable = true;
 
+    this._table.items = this.entities;
+
     this._table.detailsURL = [];
 
     this._table.newURL = ['new'];

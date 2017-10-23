@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { SanctionsService } from '../../../shared/services/sanctions.service';
+import {TableOptions} from '../../../shared/components/custom-table/custom-table.options';
 import { UtilService } from '../../../shared/services/util.service';
 import { Sanction, List } from '../../../shared/models/sanctions.model';
 
@@ -17,10 +18,25 @@ export class DiscardsListComponent implements OnInit {
   _currentListID: number;
   _matches: Array<any>;
   _pager: any = {};
+  _table: TableOptions = {};
 
   constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastsManager) {}
 
   ngOnInit() {
+    this._table.columns = [
+      {name: 'ID', title: '#', type: 'number'},
+      {name: 'Date', title: 'Fecha', type: 'date', sortable: true },
+      {name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true},
+      {name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true},
+      {name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true},
+      {name: 'Term4', title: 'Term. 4', type: 'text', sortable: true, filterable: true},
+      {name: 'Term5', title: 'Term. 5', type: 'text', sortable: true, filterable: true}
+    ];
+
+    this._table.pageable = true;
+    this._table.searcheable = true;
+    this._table.style = 'table table-sm table-squared';
+
     this._sanctionServ.getLists().subscribe(data => {
       this._lists = data;
     });
@@ -29,6 +45,7 @@ export class DiscardsListComponent implements OnInit {
   getSanctions() {
     this._sanctionServ.getSanctionsByList(this._currentListID).subscribe(data => {
       this._sanctions = data;
+      this._table.items = this._sanctions;
       this.setPage(1);
     });
   }

@@ -476,7 +476,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/components/custom-table/custom-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4>{{ options.title }}</h4>\n<div class=\"row justify-content-between justify-content-end top-bar\">\n  <div *ngIf=\"options.searcheable\" class=\"col-md-4\">\n    <div class=\"form-group search-form\">\n      <div class=\"inner-addon left-addon\">\n        <i class=\"fa fa-search text-muted\" aria-hidden=\"true\"></i>\n        <input type=\"text\" class=\"form-control\" name=\"filter\" id=\"filter\" [(ngModel)]=\"_searchText\" (ngModelChange)=\"filterItems()\"\n          placeholder=\"Búsqueda\">\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"options.newURL\" class=\"col-md-4\">\n    <a [routerLink]=\"options.newURL\" class=\"btn btn-outline-primary pull-right\">Nuevo elemento</a>\n  </div>\n</div>\n<table [ngClass]=\"options.style\" *ngIf=\"_pagedItems\">\n  <thead>\n    <tr>\n      <th *ngFor=\"let header of options.columns\" (click)=\"sortByColumn(header)\">\n        {{ header.title }}\n        <i class=\"fa\" [ngClass]=\"{\n            'fa-sort': _sortColumn != header.name,\n            'fa-sort-desc': _sortColumn === header.name && _sortDesc,\n            'fa-sort-asc': _sortColumn === header.name && !_sortDesc\n          }\" aria-hidden=\"true\"></i>\n      </th>\n      <th class=\"text-center\">Acciones</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngIf=\"!_pagedItems.length\">\n      <td class=\"text-center\" [colSpan]=\"options.columns.length + 1\">\n        Sin elementos disponibles\n      </td>\n    </tr>\n    <ng-container *ngFor=\"let item of _pagedItems\">\n      <tr *ngIf=\"item.ID != _selectedItem.ID\" (dblclick)=\"selectItem(item)\">\n        <td *ngFor=\"let col of options.columns\">\n          <ng-container [ngSwitch]=\"col.type\">\n            <ng-container *ngSwitchCase=\"'date'\">\n              {{ item | column: col.name | date: 'mediumDate' }}\n            </ng-container>\n            <ng-container *ngSwitchCase=\"'decimal'\">\n              {{ item | column: col.name | number: '1.3-3' }}\n            </ng-container>\n            <ng-container *ngSwitchCase=\"'boolean'\">\n              <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n            </ng-container>\n            <ng-container *ngSwitchDefault>\n              {{ item | column: col.name }}\n            </ng-container>\n          </ng-container>\n        </td>\n        <td class=\"text-center\">\n          <i *ngIf=\"options.detailsURL\" class=\"fa fa-search-plus fa-lg text-primary\" [routerLink]=\"getDetailsURL(item.ID)\" placement=\"top\"\n            ngbTooltip=\"Detalles\"></i>\n          <i *ngIf=\"options.editable\" class=\"fa fa-edit fa-lg text-success\" (click)=\"selectItem(item)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n          <i *ngIf=\"removeItem.observers.length\" class=\"fa fa-trash-o fa-lg text-danger\" [swal]=\"_deleteMessage\" (confirm)=\"deleteItem(item.ID)\"\n            placement=\"top\" ngbTooltip=\"Eliminar\"></i>\n        </td>\n      </tr>\n      <tr class=\"table-info\" *ngIf=\"item.ID === _selectedItem.ID\">\n        <td *ngFor=\"let col of options.columns\">\n          <input class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_selectedItem[col.name]\" placeholder=\"{{ col.title }}\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateItem()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n          <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelSelect()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n        </td>\n      </tr>\n    </ng-container>\n    <tr *ngIf=\"options.editable\">\n      <td *ngFor=\"let col of options.columns\">\n        <input class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_newItem[col.name]\" placeholder=\"{{ col.title }}\">\n      </td>\n      <td class=\"text-center\">\n        <i class=\"fa fa-plus-square fa-lg text-primary\" aria-hidden=\"true\"></i>\n      </td>\n    </tr>\n  </tbody>\n</table>\n<ng-container *ngIf=\"items && options.pageable\">\n  <app-paginator *ngIf=\"options.pageable\" [itemsCount]=\"_filteredItems.length\" (paginate)=\"setPage($event)\"></app-paginator>\n</ng-container>\n"
+module.exports = "<app-loading-modal *ngIf=\"!options.items\"></app-loading-modal>\n<ng-container *ngIf=\"options.items\">\n  <h4>{{ options.title }}</h4>\n  <div class=\"row justify-content-between justify-content-end top-bar\">\n    <div *ngIf=\"options.searcheable\" class=\"col-md-4\">\n      <div class=\"form-group search-form\">\n        <div class=\"inner-addon left-addon\">\n          <i class=\"fa fa-search text-muted\" aria-hidden=\"true\"></i>\n          <input type=\"text\" class=\"form-control\" name=\"filter\" id=\"filter\" [(ngModel)]=\"_searchText\" (ngModelChange)=\"filterItems()\"\n            placeholder=\"Búsqueda\">\n        </div>\n      </div>\n    </div>\n    <div *ngIf=\"options.newURL\" class=\"col-md-4\">\n      <a [routerLink]=\"options.newURL\" class=\"btn btn-outline-primary pull-right\">Nuevo elemento</a>\n    </div>\n  </div>\n  <table [ngClass]=\"options.style\" *ngIf=\"_pagedItems\">\n    <thead>\n      <tr>\n        <th *ngFor=\"let header of options.columns\" (click)=\"sortByColumn(header)\">\n          {{ header.title }}\n          <i class=\"fa\" [ngClass]=\"{\n              'fa-sort': _sortColumn != header.name,\n              'fa-sort-desc': _sortColumn === header.name && _sortDesc,\n              'fa-sort-asc': _sortColumn === header.name && !_sortDesc\n            }\" aria-hidden=\"true\"></i>\n        </th>\n        <th *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"!_pagedItems.length\">\n        <td class=\"text-center\" [colSpan]=\"options.columns.length + 1\">\n          Sin elementos disponibles\n        </td>\n      </tr>\n      <ng-container *ngFor=\"let item of _pagedItems\">\n        <tr *ngIf=\"item.ID != _selectedItem.ID\" (dblclick)=\"selectItem(item)\">\n          <td *ngFor=\"let col of options.columns\" [ngClass]=\"'col.style'\">\n            <ng-container [ngSwitch]=\"col.type\">\n              <ng-container *ngSwitchCase=\"'date'\">\n                {{ item | column: col.name | date: 'mediumDate' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'decimal'\">\n                {{ item | column: col.name | number: '1.3-3' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'boolean'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchDefault>\n                {{ item | column: col.name }}\n              </ng-container>\n            </ng-container>\n          </td>\n          <td *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">\n            <i *ngIf=\"options.detailsURL\" class=\"fa fa-search-plus fa-lg text-primary\" [routerLink]=\"getDetailsURL(item.ID)\" placement=\"top\"\n              ngbTooltip=\"Detalles\"></i>\n            <i *ngIf=\"options.editable\" class=\"fa fa-edit fa-lg text-success\" (click)=\"selectItem(item)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n            <i *ngIf=\"removeItem.observers.length\" class=\"fa fa-trash-o fa-lg text-danger\" [swal]=\"_deleteMessage\" (confirm)=\"deleteItem(item.ID)\"\n              placement=\"top\" ngbTooltip=\"Eliminar\"></i>\n          </td>\n        </tr>\n        <tr class=\"table-info\" *ngIf=\"item.ID === _selectedItem.ID\">\n          <td *ngFor=\"let col of options.columns\">\n            <input class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_selectedItem[col.name]\" placeholder=\"{{ col.title }}\">\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateItem()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelSelect()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr *ngIf=\"options.editable\">\n        <td *ngFor=\"let col of options.columns\">\n          <input class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_newItem[col.name]\" placeholder=\"{{ col.title }}\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" aria-hidden=\"true\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n  <ng-container *ngIf=\"options.pageable\">\n    <app-paginator [itemsCount]=\"_itemsCount\" (paginate)=\"setPage($event)\"></app-paginator>\n  </ng-container>\n</ng-container>\n"
 
 /***/ }),
 
@@ -516,20 +516,29 @@ var CustomTableComponent = /** @class */ (function () {
         this._sortDesc = true;
         this._pagedItems = [];
         this._currentPage = {};
-        this._filteredItems = [];
+        this._searchText = '';
         this._searchColumns = [];
         this._pageSizes = [5, 10, 15, 20, 25];
         this._deleteMessage = ['Eliminar elemento?', 'No podrá ser cancelado', 'question'];
     }
-    CustomTableComponent.prototype.ngOnInit = function () {
+    CustomTableComponent.prototype.ngOnInit = function () { };
+    CustomTableComponent.prototype.ngDoCheck = function () {
         var _this = this;
-        this._filteredItems = this.items;
-        this.setPage(1);
-        this.options.columns.forEach(function (column) {
-            if (column.filterable) {
-                _this._searchColumns.push(column.name);
+        if (this.options.items) {
+            if (!this.options.pageable) {
+                this._filteredItems = this.options.items;
+                this._pagedItems = this._filteredItems;
             }
-        });
+            else if (!this._filteredItems) {
+                this._filteredItems = this.options.items;
+                this.filterItems();
+            }
+            this.options.columns.forEach(function (column) {
+                if (column.filterable) {
+                    _this._searchColumns.push(column.name);
+                }
+            });
+        }
     };
     CustomTableComponent.prototype.selectItem = function (item) {
         if (this.options.editable) {
@@ -558,18 +567,19 @@ var CustomTableComponent = /** @class */ (function () {
     CustomTableComponent.prototype.setPage = function (pager) {
         this._currentPage.startIndex = pager.startIndex;
         this._currentPage.endIndex = pager.endIndex;
-        this.pageItems();
-    };
-    CustomTableComponent.prototype.pageItems = function () {
         if (this.options.pageable) {
-            this._pagedItems = this._filteredItems.slice(this._currentPage.startIndex, this._currentPage.endIndex + 1);
+            this.pageItems();
         }
         else {
             this._pagedItems = this._filteredItems;
         }
     };
+    CustomTableComponent.prototype.pageItems = function () {
+        this._pagedItems = this._filteredItems.slice(this._currentPage.startIndex, this._currentPage.endIndex + 1);
+    };
     CustomTableComponent.prototype.filterItems = function () {
-        this._filteredItems = this._util.searchFilter(this.items, this._searchColumns, this._searchText);
+        this._filteredItems = this._util.searchFilter(this.options.items, this._searchColumns, this._searchText);
+        this._itemsCount = this._filteredItems.length;
         this.pageItems();
     };
     CustomTableComponent.prototype.updateItem = function () {
@@ -578,13 +588,9 @@ var CustomTableComponent = /** @class */ (function () {
     };
     CustomTableComponent.prototype.deleteItem = function (id) {
         this.removeItem.emit(id);
-        this.items = this._util.removeByID(this.items, id);
+        this.options.items = this._util.removeByID(this.options.items, id);
         this.filterItems();
     };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", Object)
-    ], CustomTableComponent.prototype, "items", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__custom_table_options__["TableOptions"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__custom_table_options__["TableOptions"]) === "function" && _a || Object)
@@ -1467,7 +1473,6 @@ var AuthService = /** @class */ (function () {
     }
     AuthService.prototype.authLogin = function (login) {
         var _this = this;
-        console.log(login);
         return this._http
             .post(this._loginURL, JSON.stringify(login), { headers: this._headers })
             .map(function (response) {
@@ -1497,16 +1502,13 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.initLocalInfo = function () {
         var _this = this;
         if (!localStorage.getItem('countries')) {
-            this._countryServ.getCountries()
-                .subscribe(function (data) {
+            this._countryServ.getCountries().subscribe(function (data) {
                 _this._countries = data;
                 localStorage.setItem('countries', JSON.stringify(_this._countries));
             });
         }
         if (!localStorage.getItem('taskStatus')) {
-            console.log(localStorage.getItem('taskStatus'));
-            this._taskService.getStatus()
-                .subscribe(function (data) {
+            this._taskService.getStatus().subscribe(function (data) {
                 _this._taskStatus = data;
                 localStorage.setItem('taskStatus', JSON.stringify(_this._taskStatus));
             });

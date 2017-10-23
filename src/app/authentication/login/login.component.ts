@@ -11,7 +11,6 @@ import { User } from '../../shared/models/users.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   _login: any = {
     UserName: '',
     Password: ''
@@ -19,11 +18,7 @@ export class LoginComponent implements OnInit {
 
   _invalid: Boolean = false;
 
-  constructor(
-    private _authServ: AuthService,
-    private _router: Router,
-    private toastr: ToastsManager
-  ) { }
+  constructor(private _authServ: AuthService, private _router: Router, private toastr: ToastsManager) {}
 
   ngOnInit() {
     this.toastr.info('Sesión finalizada', 'Adiós');
@@ -31,19 +26,15 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this._authServ.authLogin(this._login)
-      .subscribe(
-      (data) => {
-        console.log(data);
-        if (data) {
-          this.toastr.success(this._login.UserName, 'Bienvenido');
-          this._router.navigate(['/']);
-        } else {
-          this._invalid = true;
-        }
-      },
-      (err) => this._invalid = true
-      );
+    this._authServ.authLogin(this._login).subscribe(data => {
+      console.log(data);
+      if (data) {
+        const _user = this._authServ.getUserInfo();
+        this.toastr.success(_user.UserName, 'Bienvenido');
+        this._router.navigate(['/']);
+      } else {
+        this._invalid = true;
+      }
+    }, err => (this._invalid = true));
   }
-
 }

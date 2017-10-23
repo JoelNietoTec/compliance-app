@@ -14,7 +14,6 @@ import { TasksService } from './tasks.service';
 
 @Injectable()
 export class AuthService {
-
   private _loginURL: string;
   private _login: any = {
     UserName: '',
@@ -36,7 +35,6 @@ export class AuthService {
   }
 
   authLogin(login: any): Observable<Boolean> {
-    console.log(login);
     return this._http
       .post(this._loginURL, JSON.stringify(login), { headers: this._headers })
       .map((response: Response) => {
@@ -67,21 +65,17 @@ export class AuthService {
 
   initLocalInfo(): void {
     if (!localStorage.getItem('countries')) {
-      this._countryServ.getCountries()
-        .subscribe(data => {
-          this._countries = data;
-          localStorage.setItem('countries', JSON.stringify(this._countries));
-        });
+      this._countryServ.getCountries().subscribe(data => {
+        this._countries = data;
+        localStorage.setItem('countries', JSON.stringify(this._countries));
+      });
     }
 
     if (!localStorage.getItem('taskStatus')) {
-      console.log(localStorage.getItem('taskStatus'));
-      this._taskService.getStatus()
-        .subscribe(data => {
-          this._taskStatus = data;
-          localStorage.setItem('taskStatus', JSON.stringify(this._taskStatus));
-        });
+      this._taskService.getStatus().subscribe(data => {
+        this._taskStatus = data;
+        localStorage.setItem('taskStatus', JSON.stringify(this._taskStatus));
+      });
     }
   }
-
 }

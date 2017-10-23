@@ -34,6 +34,7 @@ export class CountriesComponent implements OnInit {
 
     this._countryServ.getCountries().subscribe(data => {
       this._countries = data;
+      this._options.items = this._countries;
     });
   }
 

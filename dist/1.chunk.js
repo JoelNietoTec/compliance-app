@@ -850,7 +850,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/countries/countries.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_countries\" [items]=\"_countries\" [options]=\"_options\" (editItem)=\"updateCountry($event)\"></app-custom-table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <app-custom-table [options]=\"_options\" (editItem)=\"updateCountry($event)\"></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -894,6 +894,7 @@ var CountriesComponent = /** @class */ (function () {
         this._options.editable = true;
         this._countryServ.getCountries().subscribe(function (data) {
             _this._countries = data;
+            _this._options.items = _this._countries;
         });
     };
     CountriesComponent.prototype.addCountry = function (country) {
@@ -1045,7 +1046,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_types\" [items]=\"_types\" [options]=\"_table\" (editItem)=\"updateType($event)\" ></app-custom-table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <app-custom-table [options]=\"_table\" (editItem)=\"updateType($event)\" (removeItem)=\"deleteType($event)\"></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -1088,6 +1089,7 @@ var RelationshipTypesComponent = /** @class */ (function () {
         this._table.style = 'table table-sm table-squared';
         this._relService.getTypes().subscribe(function (data) {
             _this._types = data;
+            _this._table.items = _this._types;
         });
     };
     RelationshipTypesComponent.prototype.addType = function () {
