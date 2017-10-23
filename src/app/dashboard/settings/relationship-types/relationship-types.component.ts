@@ -3,6 +3,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { RelationshipType } from '../../../shared/models/relationships.model';
 import { RelationshipsService } from '../../../shared/services/relationships.service';
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 
 @Component({
   selector: 'app-relationship-types',
@@ -10,34 +11,34 @@ import { RelationshipsService } from '../../../shared/services/relationships.ser
   styleUrls: ['./relationship-types.component.css']
 })
 export class RelationshipTypesComponent implements OnInit {
-
   _types: Array<RelationshipType>;
   _newType: RelationshipType = {};
   _currentType: RelationshipType = {};
+  _table: TableOptions = {};
 
-  constructor(
-    private _relService: RelationshipsService,
-    private toastr: ToastsManager
-  ) { }
+  constructor(private _relService: RelationshipsService, private toastr: ToastsManager) {}
 
   ngOnInit() {
-    this.getTypes();
-  }
+    this._table.columns = [
+      { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
+      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true }
+    ];
 
-  getTypes() {
-    this._relService.getTypes()
-      .subscribe(data => {
-        this._types = data;
-      });
+    this._table.editable = true;
+
+    this._table.style = 'table table-sm table-squared';
+
+    this._relService.getTypes().subscribe(data => {
+      this._types = data;
+    });
   }
 
   addType() {
-    this._relService.createType(this._newType)
-      .subscribe(data => {
-        this.toastr.success(data.Name, 'Tipo creado');
-        this._types.push(data);
-        this._newType = {};
-      });
+    this._relService.createType(this._newType).subscribe(data => {
+      this.toastr.success(data.Name, 'Tipo creado');
+      this._types.push(data);
+      this._newType = {};
+    });
   }
 
   selectType(type: RelationshipType) {
@@ -49,20 +50,25 @@ export class RelationshipTypesComponent implements OnInit {
   }
 
   deleteType(typeId: number) {
-    this._relService.deleteType(typeId)
-      .subscribe(data => {
+    this._relService.deleteType(typeId).subscribe(
+      data => {
         this.toastr.info('Tipo eliminado');
-      }, (err: Error) => {
+      },
+      (err: Error) => {
         this.toastr.error(err.message, err.name);
-      });
+      }
+    );
   }
 
-  updateType() {
-    this._relService.updateType(this._currentType.ID, this._currentType)
-      .subscribe(data => {
-        this.toastr.success(this._currentType.Name, 'Tipo editado');
+  updateType(type: RelationshipType) {
+    this._relService.updateType(type.ID, type).subscribe(
+      data => {
+        this.toastr.success(data.Name, 'Tipo editado');
         this._currentType = {};
-      });
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, 'Error en la actualización');
+      }
+    );
   }
-
 }

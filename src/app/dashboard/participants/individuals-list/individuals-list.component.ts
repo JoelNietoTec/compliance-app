@@ -31,6 +31,8 @@ export class IndividualsListComponent implements OnInit {
 
     this._table.pageable = true;
 
+    this._table.searcheable = true;
+
     this._table.detailsURL = [];
 
     this._table.newURL = ['new'];

@@ -35,6 +35,7 @@ export interface Participant {
   Nationalities?: Array<Country>;
   FullName?: string;
   ShortName?: string;
+  MatrixReady?: boolean;
 }
 
 export interface ParticipantParam {
@@ -65,4 +66,12 @@ export interface ParticipantContact {
   Email?: number;
   MobilePhone?: number;
   Fax?: number;
+}
+
+export interface PendingDocument {
+  ID?: number;
+  ParticipantID?: number;
+  Name?: string;
+  EnglishName?: string;
+  Uploaded?: number;
 }

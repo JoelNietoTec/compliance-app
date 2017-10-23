@@ -45,6 +45,7 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
+import { TableFormComponent } from './components/table-form/table-form.component';
 
 @NgModule({
   imports: [
@@ -111,7 +112,8 @@ import { BooleanPipe } from './pipes/boolean.pipe';
     CustomTableComponent,
     PaginatorComponent,
     ColumnPipe,
-    BooleanPipe
+    BooleanPipe,
+    TableFormComponent
   ]
 })
 export class SharedModule {}

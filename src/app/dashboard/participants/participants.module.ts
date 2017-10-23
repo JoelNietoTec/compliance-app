@@ -23,6 +23,7 @@ import { ParticipantDocumentsComponent } from './participant-documents/participa
 import { ParticipantRelationshipsComponent } from './participant-relationships/participant-relationships.component';
 import { ParticipantRelationshipComponent } from './participant-relationship/participant-relationship.component';
 import { ParticipantRelationshipFormComponent } from './participant-relationship-form/participant-relationship-form.component';
+import { ParticipantTasksComponent } from './participant-tasks/participant-tasks.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { ParticipantRelationshipFormComponent } from './participant-relationship
     ParticipantRelationshipsComponent,
     ParticipantRelationshipComponent,
     ParticipantDocumentsComponent,
-    ParticipantRelationshipFormComponent
+    ParticipantRelationshipFormComponent,
+    ParticipantTasksComponent
   ],
   entryComponents: [
     ParticipantRelationshipComponent

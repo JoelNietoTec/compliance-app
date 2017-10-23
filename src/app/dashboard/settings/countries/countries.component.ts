@@ -24,13 +24,13 @@ export class CountriesComponent implements OnInit {
       { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true }
     ];
 
-    this._options.title = 'Países';
-
     this._options.style = 'table table-sm table-squared';
 
-    this._options.detailsURL = [];
-
     this._options.pageable = true;
+
+    this._options.searcheable = true;
+
+    this._options.editable = true;
 
     this._countryServ.getCountries().subscribe(data => {
       this._countries = data;
@@ -41,6 +41,12 @@ export class CountriesComponent implements OnInit {
     return this._countryServ.addCountry(country).subscribe(data => {
       this.toastr.success(data.Name, 'País añadido');
       this._countries.push(data);
+    });
+  }
+
+  updateCountry(country: Country) {
+    this._countryServ.editCountry(country.ID, country).subscribe(data => {
+      this.toastr.success(country.Name, 'País editado');
     });
   }
 }

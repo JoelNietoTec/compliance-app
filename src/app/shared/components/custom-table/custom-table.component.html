@@ -1,16 +1,13 @@
 <h4>{{ options.title }}</h4>
-<div class="row">
-  <div class="col-md-4">
-    <div class="form-group">
+<div class="row justify-content-between justify-content-end top-bar">
+  <div *ngIf="options.searcheable" class="col-md-4">
+    <div class="form-group search-form">
       <div class="inner-addon left-addon">
         <i class="fa fa-search text-muted" aria-hidden="true"></i>
         <input type="text" class="form-control" name="filter" id="filter" [(ngModel)]="_searchText" (ngModelChange)="filterItems()"
           placeholder="Búsqueda">
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <span class="align-bottom items-count">{{ _filteredItems.length }} elementos recuperados</span>
   </div>
   <div *ngIf="options.newURL" class="col-md-4">
     <a [routerLink]="options.newURL" class="btn btn-outline-primary pull-right">Nuevo elemento</a>
@@ -58,7 +55,7 @@
           <i *ngIf="options.detailsURL" class="fa fa-search-plus fa-lg text-primary" [routerLink]="getDetailsURL(item.ID)" placement="top"
             ngbTooltip="Detalles"></i>
           <i *ngIf="options.editable" class="fa fa-edit fa-lg text-success" (click)="selectItem(item)" placement="top" ngbTooltip="Editar"></i>
-          <i *ngIf="options.editable" class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)"
+          <i *ngIf="removeItem.observers.length" class="fa fa-trash-o fa-lg text-danger" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)"
             placement="top" ngbTooltip="Eliminar"></i>
         </td>
       </tr>
@@ -67,7 +64,7 @@
           <input class="form-control" type="{{ col.type }}" [(ngModel)]="_selectedItem[col.name]" placeholder="{{ col.title }}">
         </td>
         <td class="text-center">
-          <i class="fa fa-lock fa-lg text-success" aria-hidden="true" placement="top" ngbTooltip="Guardar Cambios"></i>
+          <i class="fa fa-lock fa-lg text-success" (click)="updateItem()" aria-hidden="true" placement="top" ngbTooltip="Guardar Cambios"></i>
           <i class="fa fa-times fa-lg text-danger" (click)="cancelSelect()" aria-hidden="true" placement="top" ngbTooltip="Cancelar"></i>
         </td>
       </tr>

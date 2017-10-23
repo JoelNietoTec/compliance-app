@@ -850,7 +850,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/countries/countries.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_countries\" [items]=\"_countries\" [options]=\"_options\"></app-custom-table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_countries\" [items]=\"_countries\" [options]=\"_options\" (editItem)=\"updateCountry($event)\"></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -888,10 +888,10 @@ var CountriesComponent = /** @class */ (function () {
             { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', filterable: true },
             { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true }
         ];
-        this._options.title = 'Países';
         this._options.style = 'table table-sm table-squared';
-        this._options.detailsURL = [];
         this._options.pageable = true;
+        this._options.searcheable = true;
+        this._options.editable = true;
         this._countryServ.getCountries().subscribe(function (data) {
             _this._countries = data;
         });
@@ -901,6 +901,12 @@ var CountriesComponent = /** @class */ (function () {
         return this._countryServ.addCountry(country).subscribe(function (data) {
             _this.toastr.success(data.Name, 'País añadido');
             _this._countries.push(data);
+        });
+    };
+    CountriesComponent.prototype.updateCountry = function (country) {
+        var _this = this;
+        this._countryServ.editCountry(country.ID, country).subscribe(function (data) {
+            _this.toastr.success(country.Name, 'País editado');
         });
     };
     CountriesComponent = __decorate([
@@ -1039,7 +1045,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/settings/relationship-types/relationship-types.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <table class=\"table table-sm table-squared\">\n    <thead>\n      <tr>\n        <th>Nombre</th>\n        <th>Nombre Inglés</th>\n        <th class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <ng-container *ngFor=\"let type of _types\">\n        <tr *ngIf=\"type.ID!=_currentType.ID\" (dblclick)=\"selectType(type)\">\n          <td>{{ type.Name }}</td>\n          <td>{{ type.EnglishName }}</td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-edit fa-lg text-success\" aria-hidden=\"true\" (click)=\"selectType(type)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n            <i class=\"fa fa-trash-o fa-lg text-danger\" aria-hidden=\"true\" [swal]=\"['Eliminar', 'No puede ser reversado', 'warning']\" (confirm)=\"deleteType(type.ID)\" placement=\"top\" ngbTooltip=\"Borrar\"></i>\n          </td>\n        </tr>\n        <tr class=\"table-info\" *ngIf=\"type.ID==_currentType.ID\" >\n          <td>\n            <input type=\"text\" [(ngModel)]=\"_currentType.Name\" class=\"form-control form-control-sm\" name=\"name\">\n          </td>\n          <td>\n            <input type=\"text\" [(ngModel)]=\"_currentType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\">\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateType()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr class=\"border-primary\">\n        <td>\n          <input type=\"text\" [(ngModel)]=\"_newType.Name\" class=\"form-control form-control-sm\" name=\"name\" placeholder=\"Nombre Relación\">\n        </td>\n        <td>\n          <input type=\"text\" [(ngModel)]=\"_newType.EnglishName\" class=\"form-control form-control-sm\" name=\"english-name\" placeholder=\"Nombre Inglés\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"addType()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Agregar\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <app-custom-table *ngIf=\"_types\" [items]=\"_types\" [options]=\"_table\" (editItem)=\"updateType($event)\" ></app-custom-table>\n</div>\n"
 
 /***/ }),
 
@@ -1070,21 +1076,23 @@ var RelationshipTypesComponent = /** @class */ (function () {
         this.toastr = toastr;
         this._newType = {};
         this._currentType = {};
+        this._table = {};
     }
     RelationshipTypesComponent.prototype.ngOnInit = function () {
-        this.getTypes();
-    };
-    RelationshipTypesComponent.prototype.getTypes = function () {
         var _this = this;
-        this._relService.getTypes()
-            .subscribe(function (data) {
+        this._table.columns = [
+            { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
+            { name: 'EnglishName', title: 'Nombre Inglés', sortable: true }
+        ];
+        this._table.editable = true;
+        this._table.style = 'table table-sm table-squared';
+        this._relService.getTypes().subscribe(function (data) {
             _this._types = data;
         });
     };
     RelationshipTypesComponent.prototype.addType = function () {
         var _this = this;
-        this._relService.createType(this._newType)
-            .subscribe(function (data) {
+        this._relService.createType(this._newType).subscribe(function (data) {
             _this.toastr.success(data.Name, 'Tipo creado');
             _this._types.push(data);
             _this._newType = {};
@@ -1098,19 +1106,19 @@ var RelationshipTypesComponent = /** @class */ (function () {
     };
     RelationshipTypesComponent.prototype.deleteType = function (typeId) {
         var _this = this;
-        this._relService.deleteType(typeId)
-            .subscribe(function (data) {
+        this._relService.deleteType(typeId).subscribe(function (data) {
             _this.toastr.info('Tipo eliminado');
         }, function (err) {
             _this.toastr.error(err.message, err.name);
         });
     };
-    RelationshipTypesComponent.prototype.updateType = function () {
+    RelationshipTypesComponent.prototype.updateType = function (type) {
         var _this = this;
-        this._relService.updateType(this._currentType.ID, this._currentType)
-            .subscribe(function (data) {
-            _this.toastr.success(_this._currentType.Name, 'Tipo editado');
+        this._relService.updateType(type.ID, type).subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Tipo editado');
             _this._currentType = {};
+        }, function (err) {
+            _this.toastr.error(err.message, 'Error en la actualización');
         });
     };
     RelationshipTypesComponent = __decorate([

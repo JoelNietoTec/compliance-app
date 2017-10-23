@@ -94,7 +94,7 @@ small.text-muted > .typcn {
   margin: 0;
 }
 
-.card, .breadcrumb, .navbar, .dropdown-menu, .btn {
+.card, .breadcrumb, .navbar, .dropdown-menu {
   box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
 }
 

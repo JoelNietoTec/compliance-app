@@ -33,14 +33,7 @@
       <ngb-tab>
           <ng-template ngbTabTitle><i class="typcn typcn-edit"></i> Tareas</ng-template>
           <ng-template ngbTabContent>
-            <h6>Upload Passport <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>
-            <h6>Upload DNI <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>
-            <h6>Add Relationships <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>
-            <h6>Resolve list matching <span class="float-right"><i class="typcn typcn-input-checked-outline text-muted"></i></span></h6>
-            <h6 class="text-muted completed">Complete Matrix <span class="float-right"><i class="typcn typcn-input-checked text-success"></i></span></h6>
-            <h6></h6>
-            <h6></h6>
-            <h6></h6>
+            <participant-tasks [participant]="individual"></participant-tasks>
           </ng-template>
         </ngb-tab>
     </ngb-tabset>

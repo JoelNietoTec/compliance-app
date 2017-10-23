@@ -14,7 +14,6 @@ import { ParticipantRelationshipComponent } from '../participant-relationship/pa
 })
 
 export class ParticipantRelationshipsComponent implements OnInit {
-  @Input() relationships: Array<ParticipantRelationship>;
   @Input() participant: Participant;
 
   _currentRelationship: ParticipantRelationship = {};

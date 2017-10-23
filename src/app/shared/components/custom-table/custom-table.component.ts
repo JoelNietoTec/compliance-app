@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, AfterViewChecked, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { TableOptions, Column } from './custom-table.options';
@@ -28,7 +30,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
   _pageSizes: Array<number> = [5, 10, 15, 20, 25];
   _deleteMessage = ['Eliminar elemento?', 'No podrá ser cancelado', 'question'];
 
-  constructor(private _util: UtilService, private _cdr: ChangeDetectorRef) {}
+  constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
 
   ngOnInit() {
     this._filteredItems = this.items;
@@ -77,7 +79,11 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
   }
 
   pageItems() {
-    this._pagedItems = this._filteredItems.slice(this._currentPage.startIndex, this._currentPage.endIndex + 1);
+    if (this.options.pageable) {
+      this._pagedItems = this._filteredItems.slice(this._currentPage.startIndex, this._currentPage.endIndex + 1);
+    } else {
+      this._pagedItems = this._filteredItems;
+    }
   }
 
   filterItems() {
@@ -87,9 +93,12 @@ export class CustomTableComponent implements OnInit, AfterViewChecked {
 
   updateItem() {
     this.editItem.emit(this._selectedItem);
+    this._selectedItem = {};
   }
 
   deleteItem(id: number) {
     this.removeItem.emit(id);
+    this.items = this._util.removeByID(this.items, id);
+    this.filterItems();
   }
 }
