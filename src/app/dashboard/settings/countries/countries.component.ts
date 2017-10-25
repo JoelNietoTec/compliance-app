@@ -32,6 +32,8 @@ export class CountriesComponent implements OnInit {
 
     this._options.editable = true;
 
+    this._options.addMethod = 'inline';
+
     this._countryServ.getCountries().subscribe(data => {
       this._countries = data;
       this._options.items = this._countries;

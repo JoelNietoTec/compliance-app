@@ -10,21 +10,21 @@ import { ParamTable, ParamValue } from '../../../shared/models/params.model';
   templateUrl: './param-table-simple.component.html',
   styleUrls: ['./param-table-simple.component.css']
 })
-
 export class ParamTableSimpleComponent implements OnInit {
-  @Input() _table: ParamTable;
+  @Input() table: ParamTable;
 
   _newValue: ParamValue;
   _currentValue: ParamValue;
   _saving: Boolean = false;
   _editing: Boolean;
+  _values: Array<ParamValue>;
 
-  constructor(
-    private _tableService: ParamTablesService,
-    private toastr: ToastsManager
-  ) { }
+  constructor(private _tableService: ParamTablesService, private toastr: ToastsManager) {}
 
   ngOnInit() {
+    this._tableService.getValuesByTable(this.table.ID).subscribe(data => {
+      this._values = data;
+    });
     this._newValue = {};
     this._currentValue = {};
     this._editing = false;
@@ -32,27 +32,25 @@ export class ParamTableSimpleComponent implements OnInit {
 
   onSubmit() {
     this._saving = true;
-    this._newValue.ParamTableID = this._table.ID;
+    this._newValue.ParamTableID = this.table.ID;
     console.log(this._newValue);
-    this._tableService.addValue(this._newValue)
-      .subscribe(data => {
-        this.toastr.success(data.EnglishDisplayValue, 'Value created');
-        this._saving = false;
-        this._table.ParamValues.push(data);
-        this._newValue = {};
-      });
+    this._tableService.addValue(this._newValue).subscribe(data => {
+      this.toastr.success(data.EnglishDisplayValue, 'Value created');
+      this._saving = false;
+      this._values.push(data);
+      this._newValue = {};
+    });
   }
 
   createValue() {
     this._saving = true;
-    this._newValue.ParamTableID = this._table.ID;
-    this._tableService.addValue(this._newValue)
-      .subscribe(data => {
-        this.toastr.success(data.EnglishDisplayValue, 'Value created');
-        this._saving = false;
-        this._table.ParamValues.push(data);
-        this._newValue = {};
-      });
+    this._newValue.ParamTableID = this.table.ID;
+    this._tableService.addValue(this._newValue).subscribe(data => {
+      this.toastr.success(data.EnglishDisplayValue, 'Value created');
+      this._saving = false;
+      this._values.push(data);
+      this._newValue = {};
+    });
   }
 
   selectValue(val: ParamValue) {
@@ -62,13 +60,12 @@ export class ParamTableSimpleComponent implements OnInit {
 
   onSaveValue() {
     this._saving = true;
-    this._tableService.editValue(this._currentValue.ID, this._currentValue)
-      .subscribe(data => {
-        console.log(data);
-        this._saving = false;
-        this._editing = false;
-        this._currentValue = {};
-      });
+    this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(data => {
+      console.log(data);
+      this._saving = false;
+      this._editing = false;
+      this._currentValue = {};
+    });
   }
 
   cancelUpdate() {
@@ -77,13 +74,11 @@ export class ParamTableSimpleComponent implements OnInit {
 
   updateValue() {
     this._saving = true;
-    this._tableService.editValue(this._currentValue.ID, this._currentValue)
-      .subscribe(data => {
-        this.toastr.success(this._currentValue.EnglishDisplayValue, 'Value updated');
-        this._saving = false;
-        this._editing = false;
-        this._currentValue = {};
-      });
+    this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(data => {
+      this.toastr.success(this._currentValue.EnglishDisplayValue, 'Value updated');
+      this._saving = false;
+      this._editing = false;
+      this._currentValue = {};
+    });
   }
-
 }

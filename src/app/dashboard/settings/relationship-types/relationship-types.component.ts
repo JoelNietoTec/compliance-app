@@ -26,7 +26,8 @@ export class RelationshipTypesComponent implements OnInit {
 
     this._table.editable = true;
 
-    this._table.style = 'table table-sm table-squared';
+    this._table.style = 'table-sm table-squared';
+    this._table.addMethod = 'inline';
 
     this._relService.getTypes().subscribe(data => {
       this._types = data;
@@ -34,8 +35,8 @@ export class RelationshipTypesComponent implements OnInit {
     });
   }
 
-  addType() {
-    this._relService.createType(this._newType).subscribe(data => {
+  addType(type: RelationshipType) {
+    this._relService.createType(type).subscribe(data => {
       this.toastr.success(data.Name, 'Tipo creado');
       this._types.push(data);
       this._newType = {};

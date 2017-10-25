@@ -713,8 +713,9 @@ module.exports = "<div class=\"form-group\">\r\n  <div class=\"form-group\" [ngC
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParticipantComplianceParamComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -732,10 +733,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParticipantComplianceParamComponent = /** @class */ (function () {
-    function ParticipantComplianceParamComponent(_util, _partService, toastr, _router) {
+    function ParticipantComplianceParamComponent(_util, _partService, _tableServ, toastr, _router) {
         this._util = _util;
         this._partService = _partService;
+        this._tableServ = _tableServ;
         this.toastr = toastr;
         this._router = _router;
         this._default = undefined;
@@ -745,19 +748,22 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
         };
     }
     ParticipantComplianceParamComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // this._partParam = this._util.filterByID(this.partParams, this.param.ID);
-        this.getParam();
-        this._values = this.param.ParamTable.ParamValues;
-        this._values = this._util.sortBy(this._values, 'DisplayValue');
-        for (var _i = 0, _a = this._values; _i < _a.length; _i++) {
-            var i = _a[_i];
-            i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
-        }
+        this._tableServ.getValuesByTable(this.param.ParamTableID).subscribe(function (data) {
+            _this._values = data;
+            _this._values = _this._util.sortBy(_this._values, 'DisplayValue');
+            for (var _i = 0, _a = _this._values; _i < _a.length; _i++) {
+                var i = _a[_i];
+                i.ParamSubValues = _this._util.sortBy(i.ParamSubValues, 'DisplayValue');
+            }
+            _this.getParam();
+        });
     };
     ParticipantComplianceParamComponent.prototype.getParam = function () {
         var _this = this;
         this._partParam = this.partParams.find(function (item) { return item.ParamID === _this.param.ID; });
-        this._currentValue = this.param.ParamTable.ParamValues.find(function (item) { return item.ID === _this._partParam.ParamValueID; });
+        this._currentValue = this._values.find(function (item) { return item.ID === _this._partParam.ParamValueID; });
         if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
             this._currentSubValue = this._currentValue.ParamSubValues.find(function (item) { return item.ID === _this._partParam.ParamSubValueID; });
         }
@@ -778,8 +784,7 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
             this._partParam.ParamValue = this._currentValue;
             this._partParam.Score = this._currentValue.Score;
         }
-        this._partService.updateParam(this._partParam.ID, this._partParam)
-            .subscribe(function (data) {
+        this._partService.updateParam(this._partParam.ID, this._partParam).subscribe(function (data) {
             _this.toastr.success(_this.param.EnglishName, 'Updated Parameter');
         });
     };
@@ -789,7 +794,7 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
     ], ParticipantComplianceParamComponent.prototype, "participant", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", Array)
+        __metadata("design:type", Object)
     ], ParticipantComplianceParamComponent.prototype, "partParams", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -801,10 +806,10 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance-param/participant-compliance-param.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance-param/participant-compliance-param.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _g || Object])
     ], ParticipantComplianceParamComponent);
     return ParticipantComplianceParamComponent;
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=participant-compliance-param.component.js.map

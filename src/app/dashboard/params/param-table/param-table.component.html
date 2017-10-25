@@ -3,6 +3,6 @@
   <div class="col-md-12">
     <h3>Tabla: {{ _table.Name }}</h3>
   </div>
-  <param-table-simple *ngIf="_table.TableTypeID == 1" [_table]="_table" ></param-table-simple>
-  <param-table-complex *ngIf="_table.TableTypeID == 2" [_table]="_table"></param-table-complex>
+  <param-table-simple *ngIf="_table.TableTypeID == 1" [table]="_table" ></param-table-simple>
+  <param-table-complex *ngIf="_table.TableTypeID == 2" [table]="_table"></param-table-complex>
 </div>

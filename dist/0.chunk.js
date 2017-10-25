@@ -633,18 +633,18 @@ var ParamTableComplexComponent = /** @class */ (function () {
     };
     ParamTableComplexComponent.prototype.onSubmit = function () {
         var _this = this;
-        this._newValue.ParamTableID = this._table.ID;
+        this._newValue.ParamTableID = this.table.ID;
         this._tableService.addValue(this._newValue)
             .subscribe(function (data) {
             _this.toastr.success(data.EnglishDisplayValue, 'Category created');
-            _this._table.ParamValues.push(data);
+            // this._table.ParamValues.push(data);
             _this._newValue = {};
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
-    ], ParamTableComplexComponent.prototype, "_table", void 0);
+    ], ParamTableComplexComponent.prototype, "table", void 0);
     ParamTableComplexComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'param-table-complex',
@@ -682,7 +682,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Valores</h4>\r\n    <table class=\"table table-sm table-squared\">\r\n      <thead>\r\n        <tr>\r\n          <th>Nombre</th>\r\n          <th>Nombre Inglés</th>\r\n          <th class=\"text-center\">Puntaje</th>\r\n          <th class=\"text-center\">Acciones</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let value of _table.ParamValues\">\r\n          <tr *ngIf=\"value.ID!=_currentValue.ID\" (dblclick)=\"selectValue(value)\">\r\n            <td>{{ value.DisplayValue }}</td>\r\n            <td>{{ value.EnglishDisplayValue }}</td>\r\n            <td class=\"text-center\">{{ value.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(value)\" placement=\"top\" ngbTooltip=\"Edit\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"value.ID==_currentValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n                [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n                placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"number\" [(ngModel)]=\"_currentValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" placement=\"top\" ngbTooltip=\"Guardar\" aria-hidden=\"true\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" placement=\"top\" ngbTooltip=\"Cancelar\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n        <tr>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre Inglés\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"number\" [(ngModel)]=\"_newValue.Score\" name=\"score\" id=\"score\" class=\"form-control form-control-sm\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createValue()\" placement=\"top\" ngbTooltip=\"Añadir\" aria-hidden=\"true\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Valores</h4>\r\n    <table class=\"table table-sm table-squared\">\r\n      <thead>\r\n        <tr>\r\n          <th>Nombre</th>\r\n          <th>Nombre Inglés</th>\r\n          <th class=\"text-center\">Puntaje</th>\r\n          <th class=\"text-center\">Acciones</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let value of _values\">\r\n          <tr *ngIf=\"value.ID!=_currentValue.ID\" (dblclick)=\"selectValue(value)\">\r\n            <td>{{ value.DisplayValue }}</td>\r\n            <td>{{ value.EnglishDisplayValue }}</td>\r\n            <td class=\"text-center\">{{ value.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(value)\" placement=\"top\" ngbTooltip=\"Edit\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"value.ID==_currentValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n                [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n                placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"number\" [(ngModel)]=\"_currentValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" placement=\"top\" ngbTooltip=\"Guardar\" aria-hidden=\"true\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" placement=\"top\" ngbTooltip=\"Cancelar\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n        <tr>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre Inglés\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"number\" [(ngModel)]=\"_newValue.Score\" name=\"score\" id=\"score\" class=\"form-control form-control-sm\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createValue()\" placement=\"top\" ngbTooltip=\"Añadir\" aria-hidden=\"true\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -717,6 +717,10 @@ var ParamTableSimpleComponent = /** @class */ (function () {
         this._saving = false;
     }
     ParamTableSimpleComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._tableService.getValuesByTable(this.table.ID).subscribe(function (data) {
+            _this._values = data;
+        });
         this._newValue = {};
         this._currentValue = {};
         this._editing = false;
@@ -724,25 +728,23 @@ var ParamTableSimpleComponent = /** @class */ (function () {
     ParamTableSimpleComponent.prototype.onSubmit = function () {
         var _this = this;
         this._saving = true;
-        this._newValue.ParamTableID = this._table.ID;
+        this._newValue.ParamTableID = this.table.ID;
         console.log(this._newValue);
-        this._tableService.addValue(this._newValue)
-            .subscribe(function (data) {
+        this._tableService.addValue(this._newValue).subscribe(function (data) {
             _this.toastr.success(data.EnglishDisplayValue, 'Value created');
             _this._saving = false;
-            _this._table.ParamValues.push(data);
+            _this._values.push(data);
             _this._newValue = {};
         });
     };
     ParamTableSimpleComponent.prototype.createValue = function () {
         var _this = this;
         this._saving = true;
-        this._newValue.ParamTableID = this._table.ID;
-        this._tableService.addValue(this._newValue)
-            .subscribe(function (data) {
+        this._newValue.ParamTableID = this.table.ID;
+        this._tableService.addValue(this._newValue).subscribe(function (data) {
             _this.toastr.success(data.EnglishDisplayValue, 'Value created');
             _this._saving = false;
-            _this._table.ParamValues.push(data);
+            _this._values.push(data);
             _this._newValue = {};
         });
     };
@@ -753,8 +755,7 @@ var ParamTableSimpleComponent = /** @class */ (function () {
     ParamTableSimpleComponent.prototype.onSaveValue = function () {
         var _this = this;
         this._saving = true;
-        this._tableService.editValue(this._currentValue.ID, this._currentValue)
-            .subscribe(function (data) {
+        this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(function (data) {
             console.log(data);
             _this._saving = false;
             _this._editing = false;
@@ -767,8 +768,7 @@ var ParamTableSimpleComponent = /** @class */ (function () {
     ParamTableSimpleComponent.prototype.updateValue = function () {
         var _this = this;
         this._saving = true;
-        this._tableService.editValue(this._currentValue.ID, this._currentValue)
-            .subscribe(function (data) {
+        this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(function (data) {
             _this.toastr.success(_this._currentValue.EnglishDisplayValue, 'Value updated');
             _this._saving = false;
             _this._editing = false;
@@ -778,7 +778,7 @@ var ParamTableSimpleComponent = /** @class */ (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
-    ], ParamTableSimpleComponent.prototype, "_table", void 0);
+    ], ParamTableSimpleComponent.prototype, "table", void 0);
     ParamTableSimpleComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'param-table-simple',
@@ -816,7 +816,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-table/param-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-loading-modal *ngIf=\"!_table\"></app-loading-modal>\r\n<div *ngIf=\"_table\">\r\n  <div class=\"col-md-12\">\r\n    <h3>Tabla: {{ _table.Name }}</h3>\r\n  </div>\r\n  <param-table-simple *ngIf=\"_table.TableTypeID == 1\" [_table]=\"_table\" ></param-table-simple>\r\n  <param-table-complex *ngIf=\"_table.TableTypeID == 2\" [_table]=\"_table\"></param-table-complex>\r\n</div>\r\n"
+module.exports = "<app-loading-modal *ngIf=\"!_table\"></app-loading-modal>\r\n<div *ngIf=\"_table\">\r\n  <div class=\"col-md-12\">\r\n    <h3>Tabla: {{ _table.Name }}</h3>\r\n  </div>\r\n  <param-table-simple *ngIf=\"_table.TableTypeID == 1\" [table]=\"_table\" ></param-table-simple>\r\n  <param-table-complex *ngIf=\"_table.TableTypeID == 2\" [table]=\"_table\"></param-table-complex>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -862,34 +862,6 @@ var ParamTableComponent = /** @class */ (function () {
             });
         });
     };
-    ParamTableComponent.prototype.onSubmit = function () {
-        var _this = this;
-        this._saving = true;
-        this._newValue.ParamTableID = this._table.ID;
-        console.log(this._newValue);
-        this._tableService.addValue(this._newValue)
-            .subscribe(function (data) {
-            _this._saving = false;
-            _this._table.ParamValues.push(data);
-            _this._newValue = {};
-        });
-    };
-    ParamTableComponent.prototype.editValue = function (val) {
-        this._editing = true;
-        this._currentValue = val;
-        window.scroll(0, 0);
-    };
-    ParamTableComponent.prototype.onSaveValue = function () {
-        var _this = this;
-        this._saving = true;
-        this._tableService.editValue(this._currentValue.ID, this._currentValue)
-            .subscribe(function (data) {
-            _this._saving = false;
-            _this.initTable();
-            _this._editing = false;
-            _this._currentValue = {};
-        });
-    };
     ParamTableComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-param-table',
@@ -927,7 +899,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-tables/param-tables.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Tablas de Parámetros</h3>\r\n<app-loading-modal *ngIf=\"!tables\"></app-loading-modal>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">Tablas</h4>\r\n        <table class=\"table table-sm table-squared\">\r\n          <thead>\r\n            <tr>\r\n              <th>Nombre</th>\r\n              <th>Nombre Inglés</th>\r\n              <th>Tipo</th>\r\n              <th>Fecha Creación</th>\r\n              <th>Fecha Modificación</th>\r\n              <th class=\"text-center\">Acciones</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let table of tables\">\r\n              <td>{{ table.Name }}</td>\r\n              <td>{{ table.EnglishName }}</td>\r\n              <td>{{ table.TableType.Name }}</td>\r\n              <td>{{ table.CreateDate | date:'medium' }}</td>\r\n              <td>{{ table.ModificateDate }}</td>\r\n              <td class=\"text-center\">\r\n                <a [routerLink]=\"[table.ID]\">\r\n                  <i class=\"fa fa-bars fa-lg text-primary\" placement=\"top\" ngbTooltip=\"Valores\" aria-hidden=\"true\"></i>\r\n                </a>\r\n              </td>\r\n            </tr>\r\n            <tr>\r\n              <td>\r\n                <input [(ngModel)]=\"_newTable.Name\" type=\"text\" name=\"name\" id=\"name\" class=\"form-control form-control-sm\" placeholder=\"Nombre\"\r\n                  [disabled]=\"_saving\">\r\n              </td>\r\n              <td>\r\n                <input [(ngModel)]=\"_newTable.EnglishName\" type=\"text\" name=\"english-name\" id=\"english-name\" class=\"form-control form-control-sm\"\r\n                  placeholder=\"Nombre Inglés\" [disabled]=\"_saving\">\r\n              </td>\r\n              <td>\r\n                <select [(ngModel)]=\"_newTable.TableTypeID\" class=\"custom-select form-control form-control-sm\" name=\"table-type\" id=\"table-type\">\r\n                  <option value=\"undefined\" disabled> ---Seleccionar--- </option>\r\n                  <option *ngFor=\"let type of _tableTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n                </select>\r\n              </td>\r\n              <td></td>\r\n              <td></td>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createTable()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Añadir\"></i>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h3>Tablas de Parámetros</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-body\">\r\n        <app-custom-table [options]=\"_table\"></app-custom-table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -959,11 +931,18 @@ var ParamTablesComponent = /** @class */ (function () {
         this._tablesService = _tablesService;
         this._util = _util;
         this.toastr = toastr;
+        this._table = {};
         this._newTable = {};
         this._saving = false;
     }
     ParamTablesComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this._table.title = 'Tablas';
+        this._table.editable = true;
+        this._table.creatable = true;
+        this._table.detailsURL = [];
+        this._table.addMethod = 'inline';
+        this._table.style = 'table-sm table-squared';
         this._tableTypes = [
             {
                 ID: 1,
@@ -976,9 +955,25 @@ var ParamTablesComponent = /** @class */ (function () {
                 EnglishName: 'Complex'
             }
         ];
-        this._tablesService.getTables()
-            .subscribe(function (data) {
-            _this.tables = _this._util.sortBy(data, 'Name');
+        this._table.columns = [
+            { name: 'Name', title: 'Nombre', sortable: true, type: 'text', filterable: true },
+            { name: 'EnglishName', title: 'Nombre Inglés', sortable: true, type: 'text' },
+            {
+                name: 'TableType',
+                title: 'Tipo',
+                sortable: true,
+                type: 'object',
+                list: this._tableTypes,
+                listID: 'ID',
+                listDisplay: 'Name',
+                objectColumn: 'TableType.Name',
+                objectID: 'TableTypeID'
+            },
+            { name: 'CreateDate', title: 'FechaCreación', sortable: true, type: 'date', readonly: true }
+        ];
+        this._tablesService.getTables().subscribe(function (data) {
+            _this.tables = data;
+            _this._table.items = _this.tables;
         });
     };
     ParamTablesComponent.prototype.onSubmit = function () {
@@ -987,8 +982,7 @@ var ParamTablesComponent = /** @class */ (function () {
         this._newTable.CreateDate = new Date();
         this._newTable.TableTypeID = this._newTable.TableType.ID;
         console.log(this._newTable);
-        this._tablesService.createtable(this._newTable)
-            .subscribe(function (data) {
+        this._tablesService.createtable(this._newTable).subscribe(function (data) {
             data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
             _this.tables.push(data);
             _this._newTable = {};
@@ -999,8 +993,7 @@ var ParamTablesComponent = /** @class */ (function () {
         var _this = this;
         this._saving = true;
         this._newTable.CreateDate = new Date();
-        this._tablesService.createtable(this._newTable)
-            .subscribe(function (data) {
+        this._tablesService.createtable(this._newTable).subscribe(function (data) {
             _this.toastr.success(data.EnglishName, 'Table Created');
             data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
             _this.tables.push(data);

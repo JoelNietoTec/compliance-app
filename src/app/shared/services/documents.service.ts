@@ -9,7 +9,6 @@ import { DocumentType, ParticipantDocument } from '../models/documents.models';
 
 @Injectable()
 export class DocumentsService {
-
   private _documentURL: string;
   private _docTypeURL: string;
   private _partDocURL: string;
@@ -17,10 +16,7 @@ export class DocumentsService {
   private _headers = new Headers({ 'Content-Type': 'application/json' });
   private _types: Array<DocumentType>;
 
-  constructor(
-    private _http: Http,
-    private _conn: ConnectionService
-  ) {
+  constructor(private _http: Http, private _conn: ConnectionService) {
     this._docTypeURL = _conn.APIUrl + 'documenttypes';
     this._documentURL = _conn.APIUrl + 'documents';
     this._partDocURL = _conn.APIUrl + 'participantdocuments';
@@ -46,6 +42,10 @@ export class DocumentsService {
       .put(`${this._docTypeURL}/${id}`, type, { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
+  }
+
+  deleteType(id: number) {
+    return this._http.delete(`${this._docTypeURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
   }
 
   getDocByParticipant(participantID: number): Observable<Array<ParticipantDocument>> {

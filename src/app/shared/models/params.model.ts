@@ -6,7 +6,6 @@ export interface ParamTable {
   ModificateDate?: Date;
   TableTypeID?: number;
   TableType?: TableType;
-  ParamValues?: ParamValue[];
 }
 
 export interface ParamCategory {

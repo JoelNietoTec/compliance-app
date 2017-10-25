@@ -44,7 +44,13 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
 
   constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.options.columns.forEach(column => {
+      if (column.filterable) {
+        this._searchColumns.push(column.name);
+      }
+    });
+  }
 
   ngDoCheck() {
     if (this.options.items) {
@@ -55,11 +61,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
         this._filteredItems = this.options.items;
         this.filterItems();
       }
-      this.options.columns.forEach(column => {
-        if (column.filterable) {
-          this._searchColumns.push(column.name);
-        }
-      });
     }
   }
 
@@ -110,8 +111,20 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
 
   filterItems() {
     this._filteredItems = this._util.searchFilter(this.options.items, this._searchColumns, this._searchText);
-    this._itemsCount = this._filteredItems.length;
-    this.pageItems();
+    if (this.options.pageable) {
+      this._itemsCount = this._filteredItems.length;
+
+      this.pageItems();
+    } else {
+
+      this._pagedItems = this._filteredItems;
+      console.log(this._pagedItems);
+    }
+  }
+
+  createItem() {
+    this.addItem.emit(this._newItem);
+    this._newItem = {};
   }
 
   updateItem() {

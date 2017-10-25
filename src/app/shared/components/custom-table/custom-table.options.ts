@@ -8,18 +8,24 @@ export interface TableOptions {
   editable?: boolean;
   deletable?: boolean;
   creatable?: boolean;
+  addMethod?: string;
   detailsURL?: Array<string>;
   newURL?: Array<string>;
 }
 
 export interface Column {
-  name?: string;
-  title?: string;
+  name: string;
+  title: string;
   type?: string;
   sortable?: boolean;
   filterable?: boolean;
   pipe?: string;
   hidden?: boolean;
   style?: string;
-  editable?: boolean;
+  readonly?: boolean;
+  list?: Array<any>;
+  listID?: any;
+  listDisplay?: any;
+  objectColumn?: string;
+  objectID?: string;
 }

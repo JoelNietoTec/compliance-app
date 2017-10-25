@@ -8,7 +8,6 @@ import { ParamTable, ParamValue, ParamSubValue } from './../models/params.model'
 
 @Injectable()
 export class ParamTablesService {
-
   private _tablesURL: string;
   private _valuesURL: string;
   private _subValuesURL: string;
@@ -19,25 +18,22 @@ export class ParamTablesService {
   private _newSubValue: ParamSubValue;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(
-    private _http: Http,
-    private _conn: ConnectionService
-  ) {
+  constructor(private _http: Http, private _conn: ConnectionService) {
     this._tablesURL = _conn.APIUrl + 'paramtables';
     this._valuesURL = _conn.APIUrl + 'paramvalues';
     this._subValuesURL = _conn.APIUrl + 'paramsubvalues';
   }
 
   getTables(): Observable<Array<ParamTable>> {
-    return this._http
-      .get(this._tablesURL)
-      .map((response: Response) => response.json());
+    return this._http.get(this._tablesURL).map((response: Response) => response.json());
   }
 
   getTable(_id: number): Observable<ParamTable> {
-    return this._http
-      .get(`${this._tablesURL}/${_id}`)
-      .map((response: Response) => response.json());
+    return this._http.get(`${this._tablesURL}/${_id}`).map((response: Response) => response.json());
+  }
+
+  getValuesByTable(id: number): Observable<Array<ParamValue>> {
+    return this._http.get(`${this._tablesURL}/${id}/values`).map((response: Response) => response.json());
   }
 
   createtable(tab: ParamTable): Observable<ParamTable> {
@@ -45,6 +41,10 @@ export class ParamTablesService {
       .post(this._tablesURL, JSON.stringify(tab), { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
+  }
+
+  deleteTable(id: number) {
+    return this._http.delete(`${this._tablesURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
   }
 
   addValue(val: ParamValue): Observable<ParamValue> {
@@ -74,5 +74,4 @@ export class ParamTablesService {
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }
-
 }

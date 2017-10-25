@@ -6,6 +6,7 @@ import { Param, ParamValue, ParamSubValue, ParamTable } from '../../../shared/mo
 
 import { UtilService } from '../../../shared/services/util.service';
 import { ParticipantsService } from '../../../shared/services/participants.service';
+import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -13,10 +14,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   templateUrl: './participant-compliance-param.component.html',
   styleUrls: ['./participant-compliance-param.component.css']
 })
-
 export class ParticipantComplianceParamComponent implements OnInit {
   @Input() participant: Participant;
-  @Input() partParams: ParticipantParam[];
+  @Input() partParams: Array<ParticipantParam>;
   @Input() param: Param;
 
   _partParam: ParticipantParam;
@@ -28,31 +28,32 @@ export class ParticipantComplianceParamComponent implements OnInit {
   _currentValue: ParamValue;
   _currentSubValue: ParamSubValue;
 
-  _values: ParamValue[];
-  _subvalues: ParamSubValue[];
+  _values: Array<ParamValue>;
+  _subvalues: Array<ParamSubValue>;
 
   constructor(
     private _util: UtilService,
     private _partService: ParticipantsService,
+    private _tableServ: ParamTablesService,
     private toastr: ToastsManager,
     private _router: Router
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     // this._partParam = this._util.filterByID(this.partParams, this.param.ID);
-    this.getParam();
-    this._values = this.param.ParamTable.ParamValues;
-    this._values = this._util.sortBy(this._values, 'DisplayValue');
-    for (const i of this._values) {
-      i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
-    }
+    this._tableServ.getValuesByTable(this.param.ParamTableID).subscribe(data => {
+      this._values = data;
+      this._values = this._util.sortBy(this._values, 'DisplayValue');
+      for (const i of this._values) {
+        i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
+      }
+      this.getParam();
+    });
   }
 
   getParam() {
     this._partParam = this.partParams.find(item => item.ParamID === this.param.ID);
-    this._currentValue = this.param.ParamTable.ParamValues.find(item => item.ID === this._partParam.ParamValueID);
+    this._currentValue = this._values.find(item => item.ID === this._partParam.ParamValueID);
     if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
       this._currentSubValue = this._currentValue.ParamSubValues.find(item => item.ID === this._partParam.ParamSubValueID);
     }
@@ -73,12 +74,8 @@ export class ParticipantComplianceParamComponent implements OnInit {
       this._partParam.Score = this._currentValue.Score;
     }
 
-    this._partService.updateParam(this._partParam.ID, this._partParam)
-      .subscribe(data => {
-        this.toastr.success(
-          this.param.EnglishName,
-          'Updated Parameter'
-        );
-      });
+    this._partService.updateParam(this._partParam.ID, this._partParam).subscribe(data => {
+      this.toastr.success(this.param.EnglishName, 'Updated Parameter');
+    });
   }
 }

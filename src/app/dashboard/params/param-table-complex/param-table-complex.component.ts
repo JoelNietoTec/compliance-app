@@ -12,7 +12,7 @@ import { ParamTable, ParamValue, ParamSubValue } from '../../../shared/models/pa
 })
 
 export class ParamTableComplexComponent implements OnInit {
-  @Input() _table: ParamTable;
+  @Input() table: ParamTable;
 
   _newValue: ParamValue;
   _currentValue: ParamValue;
@@ -29,11 +29,11 @@ export class ParamTableComplexComponent implements OnInit {
   }
 
   onSubmit() {
-    this._newValue.ParamTableID = this._table.ID;
+    this._newValue.ParamTableID = this.table.ID;
     this._tableService.addValue(this._newValue)
     .subscribe(data => {
       this.toastr.success(data.EnglishDisplayValue, 'Category created');
-      this._table.ParamValues.push(data);
+      // this._table.ParamValues.push(data);
       this._newValue = {};
     });
   }

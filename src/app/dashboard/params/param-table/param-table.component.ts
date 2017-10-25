@@ -14,6 +14,7 @@ import { ParamTable, ParamValue } from '../../../shared/models/params.model';
 export class ParamTableComponent implements OnInit {
 
   _table: ParamTable;
+  _values: Array<ParamValue>;
   _newValue: ParamValue;
   _currentValue: ParamValue;
   _saving: boolean = false;
@@ -41,32 +42,4 @@ export class ParamTableComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this._saving = true;
-    this._newValue.ParamTableID = this._table.ID;
-    console.log(this._newValue);
-    this._tableService.addValue(this._newValue)
-      .subscribe(data => {
-        this._saving = false;
-        this._table.ParamValues.push(data);
-        this._newValue = {};
-      });
-  }
-
-  editValue(val: ParamValue) {
-    this._editing = true;
-    this._currentValue = val;
-    window.scroll(0, 0);
-  }
-
-  onSaveValue() {
-    this._saving = true;
-    this._tableService.editValue(this._currentValue.ID, this._currentValue)
-      .subscribe(data => {
-        this._saving = false;
-        this.initTable();
-        this._editing = false;
-        this._currentValue = {};
-      });
-  }
 }
