@@ -32,26 +32,21 @@ export class ParamTablesService {
     return this._http.get(`${this._tablesURL}/${_id}`).map((response: Response) => response.json());
   }
 
-  getValuesByTable(id: number): Observable<Array<ParamValue>> {
-    return this._http.get(`${this._tablesURL}/${id}/values`).map((response: Response) => response.json());
-  }
-
-  createtable(tab: ParamTable): Observable<ParamTable> {
+  createTable(tab: ParamTable): Observable<ParamTable> {
     return this._http
       .post(this._tablesURL, JSON.stringify(tab), { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }
 
-  deleteTable(id: number) {
-    return this._http.delete(`${this._tablesURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
+  editTable(id: number, table: ParamTable): Observable<ParamTable> {
+    return this._http
+      .put(`${this._tablesURL}/${id}`, JSON.stringify(table), { headers: this._headers })
+      .map((response: Response) => response.json());
   }
 
-  addValue(val: ParamValue): Observable<ParamValue> {
-    return this._http
-      .post(this._valuesURL, JSON.stringify(val), { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+  deleteTable(id: number) {
+    return this._http.delete(`${this._tablesURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
   }
 
   addSubValue(val: ParamSubValue): Observable<ParamSubValue> {
@@ -64,13 +59,6 @@ export class ParamTablesService {
   editSubValue(id: number, val: ParamSubValue): Observable<ParamSubValue> {
     return this._http
       .put(`${this._subValuesURL}/${id}`, JSON.stringify(val), { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
-  }
-
-  editValue(id: number, val: ParamValue): Observable<ParamValue> {
-    return this._http
-      .put(`${this._valuesURL}/${id}`, JSON.stringify(val), { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }

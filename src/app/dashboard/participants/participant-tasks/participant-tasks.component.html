@@ -1,8 +1,8 @@
-<h6 [ngClass]="{'text-muted completed': !participant.MatrixReady}">Completar Matrix
+<h6 [ngClass]="{'text-muted completed': participant.MatrixReady}">Completar Matrix
   <span class="float-right">
     <i class="typcn" [ngClass]="{
-      'typcn-input-checked text-success': !participant.MatrixReady,
-      'typcn-input-checked-outline text-muted': participant.MatrixReady
+      'typcn-input-checked text-success': participant.MatrixReady,
+      'typcn-input-checked-outline text-muted': !participant.MatrixReady
     }"></i>
   </span>
 </h6>

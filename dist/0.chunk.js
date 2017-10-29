@@ -260,7 +260,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-matrices/param-matrices.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Risk Matrices</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <app-loading-modal *ngIf=\"!matrices\">\r\n    </app-loading-modal>\r\n    <div class=\"card\" *ngIf=\"matrices\">\r\n      <div class=\"card-body\">\r\n        <h4 class=\"card-title\">Matrices</h4>\r\n        <table class=\"table table-sm table-squared\">\r\n          <thead>\r\n            <tr>\r\n              <th>Código</th>\r\n              <th>Nombre</th>\r\n              <th>Tipo</th>\r\n              <th>Descripción</th>\r\n              <th>Fecha Creación</th>\r\n              <th class=\"text-center\">Acciones</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <ng-container *ngFor=\"let matrix of matrices\">\r\n              <tr *ngIf=\"_currentMatrix.ID!=matrix.ID\" (dblclick)=\"selectMatrix(matrix)\">\r\n                <td>{{ matrix.Code }}</td>\r\n                <td>{{ matrix.Name }}</td>\r\n                <td>{{ matrix.MatrixType.EnglishName }}</td>\r\n                <td>{{ matrix.Description }}</td>\r\n                <td>{{ matrix.CreateDate | date: 'mediumDate' }}</td>\r\n                <td class=\"text-center\">\r\n                  <a [routerLink]=\"[matrix.ID]\" placement=\"top\" ngbTooltip=\"Detalles\">\r\n                    <i class=\"fa fa-bars fa-lg text-primary\" aria-hidden=\"true\"></i>\r\n                  </a>\r\n                  <span (click)=\"selectMatrix(matrix)\" placement=\"top\" ngbTooltip=\"Editar\">\r\n                    <i class=\"fa fa-edit fa-lg text-success\" aria-hidden=\"true\"></i>\r\n                  </span>\r\n                </td>\r\n              </tr>\r\n              <tr class=\"table-info\" *ngIf=\"_currentMatrix.ID==matrix.ID\">\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Code\" class=\"form-control\" name=\"edit-code\" id=\"new-code\" placeholder=\"Matrix Code\">\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Name\" class=\"form-control\" name=\"edit-name\" id=\"new-name\" placeholder=\"Name\">\r\n                </td>\r\n                <td>\r\n                  <select class=\"form-control custom-select\" [(ngModel)]=\"_currentMatrix.MatrixTypeID\" name=\"matrix-type\" id=\"matrix-type\"\r\n                    required>\r\n                    <option value=\"undefined\" disabled>---Seleccionar---</option>\r\n                    <option *ngFor=\"let type of matrixTypes\" [value]=\"type.ID\">{{ type.EnglishName }}</option>\r\n                  </select>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"_currentMatrix.Description\" class=\"form-control\" name=\"new-description\" id=\"new-description\"\r\n                    placeholder=\"Descripción\">\r\n                </td>\r\n                <td></td>\r\n                <td class=\"text-center\">\r\n                  <i class=\"fa fa-lock fa-lg text-success\" placement=\"top\" ngbTooltip=\"Guardar\" aria-hidden=\"true\" (click)=\"updateMatrix()\"></i>\r\n                  <i class=\"fa fa-times fa-lg text-danger\" placement=\"top\" ngbTooltip=\"Cancelar\" aria-hidden=\"true\" (click)=\"cancelUpdate()\"></i>\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            <tr>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Code\" class=\"form-control form-control-sm\" name=\"new-code\" id=\"new-code\" placeholder=\"Código de Matrix\">\r\n              </td>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Name\" class=\"form-control form-control-sm\" name=\"new-name\" id=\"new-name\" placeholder=\"Nombre\">\r\n              </td>\r\n              <td>\r\n                <select class=\"form-control custom-select\" [(ngModel)]=\"_newMatrix.MatrixTypeID\" name=\"matrix-type\" id=\"matrix-type\" required>\r\n                  <option value=\"undefined\" disabled>---Seleccionar---</option>\r\n                  <option *ngFor=\"let type of matrixTypes\" [value]=\"type.ID\">{{ type.Name }}</option>\r\n                </select>\r\n              </td>\r\n              <td>\r\n                <input type=\"text\" [(ngModel)]=\"_newMatrix.Description\" class=\"form-control form-control-sm\" name=\"new-description\" id=\"new-description\"\r\n                  placeholder=\"Descripción\">\r\n              </td>\r\n              <td></td>\r\n              <td class=\"text-center\">\r\n                <i class=\"fa fa-plus-square fa-lg text-primary\" placement=\"top\" ngbTooltip=\"Añadir\" aria-hidden=\"true\" (click)=\"createMatrix()\"></i>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h3>Matrices de Riesgo</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"_matrices\">\r\n      <div class=\"card-body\">\r\n        <app-custom-table [options]=\"_table\" (addItem)=\"createMatrix($event)\" (editItem)=\"updateMatrix($event)\"></app-custom-table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -295,52 +295,66 @@ var ParamMatricesComponent = /** @class */ (function () {
         this._typesService = _typesService;
         this.toastr = toastr;
         this._util = _util;
-        this._newMatrix = {};
-        this._currentMatrix = {};
+        this._table = {};
     }
     ParamMatricesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._matrixService.getMatrices()
-            .subscribe(function (data) {
-            _this.matrices = data;
-        });
-        this._typesService.getMatrixTypes()
-            .subscribe(function (data) {
-            _this.matrixTypes = data;
+        this._table.addMethod = 'inline';
+        this._table.creatable = true;
+        this._table.editable = true;
+        this._table.detailsURL = [];
+        this._table.style = 'table-sm table-squared';
+        this._table.title = 'Matrices';
+        this._matrixTypes = [
+            {
+                ID: 1,
+                Name: 'Individuos',
+                EnglishName: 'Individuals'
+            },
+            {
+                ID: 2,
+                Name: 'Entidades',
+                EnglishName: 'Entities'
+            }
+        ];
+        this._table.columns = [
+            { name: 'Code', title: 'Código', type: 'text', sortable: true },
+            { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
+            {
+                name: 'MatrixType',
+                title: 'Tipo',
+                sortable: true,
+                type: 'object',
+                list: this._matrixTypes,
+                listID: 'ID',
+                listDisplay: 'Name',
+                objectColumn: 'MatrixType.Name',
+                objectID: 'MatrixTypeID'
+            },
+            { name: 'Description', title: 'Descripción', type: 'text', sortable: true },
+            { name: 'CreateDate', title: 'Fec. Creación', type: 'date', readonly: true }
+        ];
+        this._matrixService.getMatrices().subscribe(function (data) {
+            _this._matrices = data;
+            _this._table.items = _this._matrices;
         });
     };
-    ParamMatricesComponent.prototype.createMatrix = function () {
+    ParamMatricesComponent.prototype.createMatrix = function (matrix) {
         var _this = this;
-        this._newMatrix.CreateDate = new Date();
-        console.log(this._newMatrix);
-        this._matrixService.createMatrix(this._newMatrix)
-            .subscribe(function (data) {
-            data.MatrixType = _this._util.filterByID(_this.matrixTypes, data.MatrixTypeID);
-            _this.toastr.success(data.Name, 'Matrix Created');
-            _this.matrices.push(data);
-            _this._newMatrix = {};
+        matrix.CreateDate = new Date();
+        this._matrixService.createMatrix(matrix).subscribe(function (data) {
+            data.MatrixType = _this._util.filterByID(_this._matrixTypes, data.MatrixTypeID);
+            _this.toastr.success(data.Name, 'Matriz creada');
+            _this._matrices.push(data);
         });
     };
-    ParamMatricesComponent.prototype.selectMatrix = function (matrix) {
-        this._currentMatrix = matrix;
-        console.log(this._currentMatrix);
-    };
-    ParamMatricesComponent.prototype.updateMatrix = function () {
+    ParamMatricesComponent.prototype.updateMatrix = function (matrix) {
         var _this = this;
-        console.log(this._currentMatrix);
-        this._matrixService.updateMatrix(this._currentMatrix.ID, this._currentMatrix)
-            .subscribe(function (data) {
-            _this.toastr.success(_this._currentMatrix.Name, 'Matrix Updated');
-            _this._currentMatrix = {};
+        this._matrixService.updateMatrix(matrix.ID, matrix).subscribe(function (data) {
+            _this.toastr.success(matrix.Name, 'Matrix Updated');
         }, function (error) {
             _this.toastr.error(error.message, error.name);
         });
-    };
-    ParamMatricesComponent.prototype.cancelUpdate = function () {
-        this._currentMatrix = {};
-    };
-    ParamMatricesComponent.prototype.addMatrix = function () {
-        this._showNewMatrix = !this._showNewMatrix;
     };
     ParamMatricesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -595,7 +609,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-table-complex/param-table-complex.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form (ngSubmit)=\"onSubmit()\" class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Nuevo Grupo\r\n    </h4>\r\n    <div action=\"\" class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"display\">Nombre</label>\r\n          <input [(ngModel)]=\"_newValue.DisplayValue\" type=\"text\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Group Display Value\">\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"display\">Nombre Inglés</label>\r\n          <input [(ngModel)]=\"_newValue.EnglishDisplayValue\" type=\"text\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Group English Display Value\">\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card-footer\">\r\n    <button type=\"submit\" class=\"btn btn-primary\">Agregar <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i></button>\r\n  </div>\r\n</form>\r\n<param-value *ngFor=\"let value of _table.ParamValues\" [_value]=\"value\"></param-value>\r\n"
+module.exports = "<form (ngSubmit)=\"onSubmit()\" class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Nuevo Grupo\r\n    </h4>\r\n    <div action=\"\" class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"display\">Nombre</label>\r\n          <input [(ngModel)]=\"_newValue.DisplayValue\" type=\"text\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Group Display Value\">\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"display\">Nombre Inglés</label>\r\n          <input [(ngModel)]=\"_newValue.EnglishDisplayValue\" type=\"text\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Group English Display Value\">\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card-footer\">\r\n    <button type=\"submit\" class=\"btn btn-primary\">Agregar <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i></button>\r\n  </div>\r\n</form>\r\n<param-value *ngFor=\"let value of _values\" [_value]=\"value\"></param-value>\r\n"
 
 /***/ }),
 
@@ -607,8 +621,9 @@ module.exports = "<form (ngSubmit)=\"onSubmit()\" class=\"card\">\r\n  <div clas
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_models_params_model__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamTableComplexComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -623,27 +638,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamTableComplexComponent = /** @class */ (function () {
-    function ParamTableComplexComponent(_tableService, toastr) {
+    function ParamTableComplexComponent(_tableService, _valueService, toastr) {
         this._tableService = _tableService;
+        this._valueService = _valueService;
         this.toastr = toastr;
+        this._newValue = {};
     }
     ParamTableComplexComponent.prototype.ngOnInit = function () {
-        this._newValue = {};
+        var _this = this;
+        this._valueService.getValuesByTable(this.table.ID).subscribe(function (data) {
+            _this._values = data;
+        });
     };
     ParamTableComplexComponent.prototype.onSubmit = function () {
         var _this = this;
         this._newValue.ParamTableID = this.table.ID;
-        this._tableService.addValue(this._newValue)
-            .subscribe(function (data) {
-            _this.toastr.success(data.EnglishDisplayValue, 'Category created');
-            // this._table.ParamValues.push(data);
+        this._valueService.addValue(this._newValue).subscribe(function (data) {
+            _this.toastr.success(data.DisplayValue, 'Categoría creada');
+            _this._values.push(data);
             _this._newValue = {};
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
     ], ParamTableComplexComponent.prototype, "table", void 0);
     ParamTableComplexComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -651,10 +671,10 @@ var ParamTableComplexComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-table-complex/param-table-complex.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-table-complex/param-table-complex.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__["a" /* ParamValuesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__["a" /* ParamValuesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _d || Object])
     ], ParamTableComplexComponent);
     return ParamTableComplexComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=param-table-complex.component.js.map
@@ -682,7 +702,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Valores</h4>\r\n    <table class=\"table table-sm table-squared\">\r\n      <thead>\r\n        <tr>\r\n          <th>Nombre</th>\r\n          <th>Nombre Inglés</th>\r\n          <th class=\"text-center\">Puntaje</th>\r\n          <th class=\"text-center\">Acciones</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let value of _values\">\r\n          <tr *ngIf=\"value.ID!=_currentValue.ID\" (dblclick)=\"selectValue(value)\">\r\n            <td>{{ value.DisplayValue }}</td>\r\n            <td>{{ value.EnglishDisplayValue }}</td>\r\n            <td class=\"text-center\">{{ value.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(value)\" placement=\"top\" ngbTooltip=\"Edit\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"value.ID==_currentValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control\" placeholder=\"Display Value\"\r\n                [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"text\" [(ngModel)]=\"_currentValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control\"\r\n                placeholder=\"English Display Value\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td>\r\n              <input type=\"number\" [(ngModel)]=\"_currentValue.Score\" name=\"score\" id=\"score\" class=\"form-control\" [disabled]=\"_saving\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" placement=\"top\" ngbTooltip=\"Guardar\" aria-hidden=\"true\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" placement=\"top\" ngbTooltip=\"Cancelar\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n        <tr>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.DisplayValue\" name=\"display\" id=\"display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"text\" [(ngModel)]=\"_newValue.EnglishDisplayValue\" name=\"english-display\" id=\"english-display\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre Inglés\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td>\r\n            <input type=\"number\" [(ngModel)]=\"_newValue.Score\" name=\"score\" id=\"score\" class=\"form-control form-control-sm\" [disabled]=\"_saving\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createValue()\" placement=\"top\" ngbTooltip=\"Añadir\" aria-hidden=\"true\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">Valores</h4>\r\n    <app-custom-table [options]=\"_customTable\" (addItem)=\"addValue($event)\" (editItem)=\"editValue($event)\" (removeItem)=\"deleteValue($event)\"></app-custom-table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -694,8 +714,10 @@ module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__shared_models_params_model__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamTableSimpleComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -710,74 +732,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ParamTableSimpleComponent = /** @class */ (function () {
-    function ParamTableSimpleComponent(_tableService, toastr) {
+    function ParamTableSimpleComponent(_tableService, _valueServ, toastr, _util) {
         this._tableService = _tableService;
+        this._valueServ = _valueServ;
         this.toastr = toastr;
-        this._saving = false;
+        this._util = _util;
+        this._customTable = {};
     }
     ParamTableSimpleComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._tableService.getValuesByTable(this.table.ID).subscribe(function (data) {
+        this._customTable.addMethod = 'inline';
+        this._customTable.editable = true;
+        this._customTable.creatable = true;
+        this._customTable.deletable = true;
+        this._customTable.pageable = true;
+        this._customTable.searcheable = true;
+        this._customTable.style = 'table-sm table-squared';
+        this._customTable.columns = [
+            { name: 'DisplayValue', title: 'Nombre', sortable: true, type: 'text', filterable: true },
+            { name: 'EnglishDisplayValue', title: 'Nombre Inglés', sortable: true, type: 'text', filterable: true },
+            { name: 'Score', title: 'Puntaje', sortable: true, type: 'number' }
+        ];
+        this._valueServ.getValuesByTable(this.table.ID).subscribe(function (data) {
             _this._values = data;
+            _this._customTable.items = _this._values;
         });
-        this._newValue = {};
-        this._currentValue = {};
-        this._editing = false;
     };
-    ParamTableSimpleComponent.prototype.onSubmit = function () {
+    ParamTableSimpleComponent.prototype.addValue = function (value) {
         var _this = this;
-        this._saving = true;
-        this._newValue.ParamTableID = this.table.ID;
-        console.log(this._newValue);
-        this._tableService.addValue(this._newValue).subscribe(function (data) {
-            _this.toastr.success(data.EnglishDisplayValue, 'Value created');
-            _this._saving = false;
+        value.ParamTableID = this.table.ID;
+        this._valueServ.addValue(value).subscribe(function (data) {
+            _this.toastr.success(data.DisplayValue, 'Valor creado');
             _this._values.push(data);
-            _this._newValue = {};
+        }, function (err) {
+            _this.toastr.error(err.message, 'No se pudo crear el valor');
         });
     };
-    ParamTableSimpleComponent.prototype.createValue = function () {
+    ParamTableSimpleComponent.prototype.editValue = function (value) {
         var _this = this;
-        this._saving = true;
-        this._newValue.ParamTableID = this.table.ID;
-        this._tableService.addValue(this._newValue).subscribe(function (data) {
-            _this.toastr.success(data.EnglishDisplayValue, 'Value created');
-            _this._saving = false;
-            _this._values.push(data);
-            _this._newValue = {};
+        this._valueServ.editValue(value.ID, value).subscribe(function (data) {
+            _this.toastr.success(data.DisplayValue, 'Valor editado');
         });
     };
-    ParamTableSimpleComponent.prototype.selectValue = function (val) {
-        this._editing = true;
-        this._currentValue = val;
-    };
-    ParamTableSimpleComponent.prototype.onSaveValue = function () {
+    ParamTableSimpleComponent.prototype.deleteValue = function (id) {
         var _this = this;
-        this._saving = true;
-        this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(function (data) {
-            console.log(data);
-            _this._saving = false;
-            _this._editing = false;
-            _this._currentValue = {};
-        });
-    };
-    ParamTableSimpleComponent.prototype.cancelUpdate = function () {
-        this._currentValue = {};
-    };
-    ParamTableSimpleComponent.prototype.updateValue = function () {
-        var _this = this;
-        this._saving = true;
-        this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(function (data) {
-            _this.toastr.success(_this._currentValue.EnglishDisplayValue, 'Value updated');
-            _this._saving = false;
-            _this._editing = false;
-            _this._currentValue = {};
+        this._valueServ.deleteValue(id).subscribe(function (data) {
+            _this.toastr.info('Valor eliminado');
+            _this._values = _this._util.removeByID(_this._values, id);
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__shared_models_params_model__["ParamTable"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_models_params_model__["ParamTable"]) === "function" && _a || Object)
     ], ParamTableSimpleComponent.prototype, "table", void 0);
     ParamTableSimpleComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -785,10 +794,10 @@ var ParamTableSimpleComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-table-simple/param-table-simple.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__["a" /* ParamValuesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_values_service__["a" /* ParamValuesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object])
     ], ParamTableSimpleComponent);
     return ParamTableSimpleComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=param-table-simple.component.js.map
@@ -899,7 +908,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-tables/param-tables.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Tablas de Parámetros</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-body\">\r\n        <app-custom-table [options]=\"_table\"></app-custom-table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h3>Tablas de Parámetros</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card\" *ngIf=\"tables\">\r\n      <div class=\"card-body\">\r\n        <app-custom-table [options]=\"_table\" (addItem)=\"addTable($event)\" (editItem)=\"editTable($event)\" (removeItem)=\"deleteTable($event)\"></app-custom-table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -932,8 +941,6 @@ var ParamTablesComponent = /** @class */ (function () {
         this._util = _util;
         this.toastr = toastr;
         this._table = {};
-        this._newTable = {};
-        this._saving = false;
     }
     ParamTablesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -969,40 +976,32 @@ var ParamTablesComponent = /** @class */ (function () {
                 objectColumn: 'TableType.Name',
                 objectID: 'TableTypeID'
             },
-            { name: 'CreateDate', title: 'FechaCreación', sortable: true, type: 'date', readonly: true }
+            { name: 'CreateDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
         ];
         this._tablesService.getTables().subscribe(function (data) {
             _this.tables = data;
             _this._table.items = _this.tables;
         });
     };
-    ParamTablesComponent.prototype.onSubmit = function () {
+    ParamTablesComponent.prototype.addTable = function (table) {
         var _this = this;
-        this._saving = true;
-        this._newTable.CreateDate = new Date();
-        this._newTable.TableTypeID = this._newTable.TableType.ID;
-        console.log(this._newTable);
-        this._tablesService.createtable(this._newTable).subscribe(function (data) {
-            data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
+        this._tablesService.createTable(table).subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Tabla Creada');
             _this.tables.push(data);
-            _this._newTable = {};
-            _this._saving = false;
         });
     };
-    ParamTablesComponent.prototype.createTable = function () {
+    ParamTablesComponent.prototype.editTable = function (table) {
         var _this = this;
-        this._saving = true;
-        this._newTable.CreateDate = new Date();
-        this._tablesService.createtable(this._newTable).subscribe(function (data) {
-            _this.toastr.success(data.EnglishName, 'Table Created');
-            data.TableType = _this._util.filterByID(_this._tableTypes, data.TableTypeID);
-            _this.tables.push(data);
-            _this._newTable = {};
-            _this._saving = false;
+        this._tablesService.editTable(table.ID, table).subscribe(function (data) {
+            _this.toastr.success(data.Name, 'Tabla Editada');
         });
     };
-    ParamTablesComponent.prototype.addTable = function () {
-        this._showNewTable = !this._showNewTable;
+    ParamTablesComponent.prototype.deleteTable = function (id) {
+        var _this = this;
+        this._tablesService.deleteTable(id).subscribe(function (data) {
+            _this.toastr.info('Tabla eliminada');
+            _this.tables = _this._util.removeByID(_this.tables, id);
+        });
     };
     ParamTablesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1041,7 +1040,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/params/param-value/param-value.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Grupo: {{ _value.DisplayValue }}\r\n    </h4>\r\n    <table class=\"table table-sm table-squared\">\r\n      <thead>\r\n        <tr>\r\n          <th>Nombre</th>\r\n          <th>Nombre Inglés</th>\r\n          <th>Valor</th>\r\n          <th class=\"text-center\">Acciones</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <ng-container *ngFor=\"let item of _value.ParamSubValues\">\r\n          <tr *ngIf=\"item.ID!=_currentSubValue.ID\" (dblclick)=\"selectValue(item)\">\r\n            <td>{{ item.DisplayValue }}</td>\r\n            <td>{{ item.EnglishDisplayValue}}</td>\r\n            <td>{{ item.Score | number: '1.2-2' }}</td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-edit fa-lg text-success\" (click)=\"selectValue(item)\" placement=\"top\" ngbTooltip=\"Editar\" aria-hidden=\"true\"></i>\r\n            </td>\r\n          </tr>\r\n          <tr *ngIf=\"item.ID==_currentSubValue.ID\" class=\"table-info\">\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.DisplayValue\" class=\"form-control form-control-sm\" name=\"name\" type=\"text\">\r\n            </td>\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.EnglishDisplayValue\" type=\"text\" name=\"english-name\" class=\"form-control form-control-sm\">\r\n            </td>\r\n            <td>\r\n              <input [(ngModel)]=\"_currentSubValue.Score\" type=\"number\" class=\"form-control form-control-sm\" name=\"score\">\r\n            </td>\r\n            <td class=\"text-center\">\r\n              <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateValue()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar\"></i>\r\n              <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelUpdate()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\r\n            </td>\r\n          </tr>\r\n        </ng-container>\r\n        <tr>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.DisplayValue\" class=\"form-control form-control-sm\" name=\"name\" type=\"text\" placeholder=\"Nombre\">\r\n          </td>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.EnglishDisplayValue\" type=\"text\" name=\"english-name\" class=\"form-control form-control-sm\"\r\n              placeholder=\"Nombre Inglés\">\r\n          </td>\r\n          <td>\r\n            <input [(ngModel)]=\"_newSubValue.Score\" type=\"number\" class=\"form-control form-control-sm\" name=\"score\">\r\n          </td>\r\n          <td class=\"text-center\">\r\n            <i class=\"fa fa-plus-square fa-lg text-primary\" aria-hidden=\"true\" (click)=\"addValue()\" placement=\"top\" ngbTooltip=\"Añadir\"></i>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4 class=\"card-title\">\r\n      Grupo: {{ _value.DisplayValue }}\r\n    </h4>\r\n    <app-custom-table [options]=\"_table\" (addItem)=\"addValue($event)\" (editItem)=\"updateValue($event)\" (removeItem)=\"deleteValue($event)\"></app-custom-table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1054,7 +1053,8 @@ module.exports = "<div class=\"card\">\r\n  <div class=\"card-body\">\r\n    <h4
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__ = __webpack_require__("../../../../../src/app/shared/models/params.model.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_params_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_models_params_model__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_param_sub_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-sub-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamValueComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1069,37 +1069,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParamValueComponent = /** @class */ (function () {
-    function ParamValueComponent(_tableService, toastr) {
-        this._tableService = _tableService;
+    function ParamValueComponent(_util, _subValService, toastr) {
+        this._util = _util;
+        this._subValService = _subValService;
         this.toastr = toastr;
-        this._currentSubValue = {};
-        this._saving = false;
-        this._newSubValue = {};
+        this._table = {};
     }
-    ParamValueComponent.prototype.ngOnInit = function () { };
-    ParamValueComponent.prototype.addValue = function () {
+    ParamValueComponent.prototype.ngOnInit = function () {
+        this._table.addMethod = 'inline';
+        this._table.creatable = true;
+        this._table.deletable = true;
+        this._table.editable = true;
+        this._table.style = 'table-sm table-squared';
+        this._table.searcheable = true;
+        this._table.pageable = true;
+        this._table.columns = [
+            { name: 'DisplayValue', title: 'Nombre', type: 'text', sortable: true, filterable: true },
+            { name: 'EnglishDisplayValue', title: 'Nombre Inglés', type: 'text', sortable: true, filterable: true },
+            { name: 'Score', title: 'Valor', type: 'number', sortable: true }
+        ];
+        this._table.items = this._value.ParamSubValues;
+    };
+    ParamValueComponent.prototype.addValue = function (value) {
         var _this = this;
-        this._newSubValue.ParamValueID = this._value.ID;
-        this._tableService.addSubValue(this._newSubValue)
-            .subscribe(function (data) {
-            _this.toastr.success(data.EnglishDisplayValue, 'Value added');
-            _this._value.ParamSubValues.push(data);
-            _this._newSubValue = {};
+        value.ParamValueID = this._value.ID;
+        this._subValService.addSubValue(value).subscribe(function (data) {
+            _this.toastr.success(data.DisplayValue, 'Valor creado');
+            _this._table.items.push(data);
         });
     };
-    ParamValueComponent.prototype.selectValue = function (value) {
-        this._currentSubValue = value;
-    };
-    ParamValueComponent.prototype.cancelUpdate = function () {
-        this._currentSubValue = {};
-    };
-    ParamValueComponent.prototype.updateValue = function () {
+    ParamValueComponent.prototype.updateValue = function (value) {
         var _this = this;
-        this._tableService.editSubValue(this._currentSubValue.ID, this._currentSubValue)
-            .subscribe(function (data) {
-            _this.toastr.success(_this._currentSubValue.EnglishDisplayValue, 'Value updated');
-            _this._currentSubValue = {};
+        this._subValService.editSubValue(value.ID, value).subscribe(function (data) {
+            _this.toastr.success(data.DisplayValue, 'Valor editado');
+        });
+    };
+    ParamValueComponent.prototype.deleteValue = function (id) {
+        var _this = this;
+        this._subValService.deleteSubValue(id).subscribe(function (data) {
+            _this.toastr.info('Valor eliminado');
         });
     };
     __decorate([
@@ -1112,10 +1122,10 @@ var ParamValueComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/params/param-value/param-value.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/params/param-value/param-value.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_param_sub_values_service__["a" /* ParamSubValuesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_param_sub_values_service__["a" /* ParamSubValuesService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _d || Object])
     ], ParamValueComponent);
     return ParamValueComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=param-value.component.js.map

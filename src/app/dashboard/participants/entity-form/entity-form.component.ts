@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -19,10 +19,9 @@ const NOW = new Date();
   templateUrl: './entity-form.component.html',
   styleUrls: ['./entity-form.component.css']
 })
-
 export class EntityFormComponent implements OnInit {
-
   @Input() entity?: Entity;
+  @Output() updateParticipant = new EventEmitter();
 
   _entity: Entity;
   private birthdate: string;
@@ -62,17 +61,15 @@ export class EntityFormComponent implements OnInit {
   saveEntity() {
     this._entity.BirthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
     if (!this.entity) {
-      this._partServ.createParticipant(this._entity)
-        .subscribe(data => {
-          this.toastr.success(`ID: ${data.ID}`, 'Entity Created');
-          this._router.navigate(['/dashboard/participants', data.ID]);
-        });
+      this._partServ.createParticipant(this._entity).subscribe(data => {
+        this.toastr.success(data.ShortName, 'Entidad creada');
+        this._router.navigate(['/dashboard/participants', data.ID]);
+      });
     } else {
-      this._partServ.updateParticipant(this._entity.ID, this._entity)
-        .subscribe(data => {
-          this.toastr.success(`ID: ${this._entity.ID}`, 'Entity Updated');
-          this._router.navigate(['/dashboard/participants', this._entity.ID]);
-        });
+      this._partServ.updateParticipant(this._entity.ID, this._entity).subscribe(data => {
+        this.toastr.success(data.ShortName, 'Entidad actualizada');
+        this.updateParticipant.emit();
+      });
     }
   }
 }

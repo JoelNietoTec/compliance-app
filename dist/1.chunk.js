@@ -432,7 +432,7 @@ var HomeComponent = /** @class */ (function () {
         this._util = _util;
         this.pieChartLabels = []; // ['High', 'Medium', 'Low', 'Incomplete'];
         this.pieChartData = []; // = [200, 600, 400, 300];
-        this.pieChartType = 'doughnut';
+        this.pieChartType = 'pie';
         this.chartReady = false;
         this._partServ.getParticipantsbyRisk()
             .subscribe(function (data) {
@@ -466,18 +466,18 @@ var HomeComponent = /** @class */ (function () {
             title: {
                 display: true,
                 text: 'Distribución de Riesgo',
-                fontFamily: 'Roboto',
+                fontFamily: 'Poppins',
                 fontSize: 16
             },
             legend: {
                 position: 'bottom',
                 labels: {
-                    fontFamily: 'Roboto',
+                    fontFamily: 'Poppins',
                     boxWidth: 20
                 }
             },
             tooltips: {
-                bodyFontFamily: 'Roboto',
+                bodyFontFamily: 'Poppins',
                 bodyFontSize: 14
             }
         };

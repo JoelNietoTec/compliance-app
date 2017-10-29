@@ -1,17 +1,33 @@
 <div class="container">
-  <div class="row">
+  <app-loading-modal *ngIf="!_relationships"></app-loading-modal>
+  <div *ngIf="_relationships" class="row">
     <div *ngFor="let relation of _relationships" class="col-md-4">
       <app-card>
-        <div card-section="body">
+        <div card-section="body" class="border-primary">
           <h4 class="card-title">
-            <a [routerLink]="['/Dashboard/Participants', relation.RelatedParticipantID]">
-              {{ relation.RelatedParticipant.FirstName }} {{ relation.RelatedParticipant.ThirdName }}
+            <a *ngIf="relation.ParticipantID == participant.ID" [routerLink]="['/dashboard/participants', relation.RelatedParticipantID]">
+              {{ relation.RelatedParticipant.ShortName }}
             </a>
+            <a *ngIf="relation.RelatedParticipantID == participant.ID" [routerLink]="['/dashboard/participants', relation.ParticipantID]">
+              {{ relation.Participant.ShortName }}
+            </a>
+            <small *ngIf="relation.ParticipantID == participant.ID" class="score pull-right" [ngClass]="{
+              'text-success': relation.RelatedParticipant.Score < 3,
+              'text-warning': relation.RelatedParticipant.Score > 2.99 && relation.RelatedParticipant.Score < 6,
+              'text-danger': relation.RelatedParticipant.Score >= 6 }">
+              {{ relation.RelatedParticipant.Score | number: '1.2-2' }}
+            </small>
+            <small *ngIf="relation.RelatedParticipantID == participant.ID" class="score pull-right" [ngClass]="{
+              'text-success': relation.Participant.Score < 3,
+              'text-warning': relation.Participant.Score > 2.99 && relation.Participant.Score < 6,
+              'text-danger': relation.Participant.Score >= 6 }">
+              {{ relation.Participant.Score | number: '1.2-2' }}
+            </small>
           </h4>
-          <p>{{ relation.Type.EnglishName }}</p>
+          <p class="card-text">{{ relation.Type.Name }}</p>
           <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-outline-danger btn-sm"><i class="typcn typcn-trash"></i> Delete</button>
-            <button type="button" class="btn btn-primary btn-sm"><i class="typcn typcn-edit"></i> Edit</button>
+            <button type="button" class="btn btn-outline-danger btn-sm">
+              <i class="fa fa-trash-o"></i> Borrar</button>
           </div>
         </div>
       </app-card>
@@ -19,6 +35,7 @@
   </div>
 
   <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-primary add-link" (click)="open()"><i class="typcn typcn-user-add-outline"></i> Add Relationship</button>
+    <button type="button" class="btn btn-primary add-link" (click)="open()">
+      <i class="fa fa-connectdevelop"></i> Agregar Relaciones</button>
   </div>
 </div>

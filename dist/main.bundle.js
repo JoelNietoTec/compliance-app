@@ -476,7 +476,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/components/custom-table/custom-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-loading-modal *ngIf=\"!options.items\"></app-loading-modal>\n<ng-container *ngIf=\"options.items\">\n  <h4>{{ options.title }}</h4>\n  <div class=\"row justify-content-between justify-content-end top-bar\">\n    <div *ngIf=\"options.searcheable\" class=\"col-md-4\">\n      <div class=\"form-group search-form\">\n        <div class=\"inner-addon left-addon\">\n          <i class=\"fa fa-search text-muted\" aria-hidden=\"true\"></i>\n          <input type=\"text\" class=\"form-control\" name=\"filter\" id=\"filter\" [(ngModel)]=\"_searchText\" (ngModelChange)=\"filterItems()\"\n            placeholder=\"Búsqueda\">\n        </div>\n      </div>\n    </div>\n    <div *ngIf=\"options.newURL\" class=\"col-md-4\">\n      <a [routerLink]=\"options.newURL\" class=\"btn btn-outline-primary pull-right\">Nuevo elemento</a>\n    </div>\n  </div>\n  <table class=\"table\" [ngClass]=\"options.style\" *ngIf=\"_pagedItems\">\n    <thead>\n      <tr>\n        <th *ngFor=\"let header of options.columns\" (click)=\"sortByColumn(header)\" [ngClass]=\"{'text-center': header.type == 'checkbox'}\">\n          {{ header.title }}\n          <i class=\"fa\" [ngClass]=\"{\n              'fa-sort': _sortColumn != header.name,\n              'fa-sort-desc': _sortColumn === header.name && _sortDesc,\n              'fa-sort-asc': _sortColumn === header.name && !_sortDesc\n            }\" aria-hidden=\"true\"></i>\n        </th>\n        <th *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"!_pagedItems.length\">\n        <td class=\"text-center\" [colSpan]=\"options.columns.length + 1\">\n          Sin elementos disponibles\n        </td>\n      </tr>\n      <ng-container *ngFor=\"let item of _pagedItems\">\n        <tr *ngIf=\"item.ID != _selectedItem.ID\" (dblclick)=\"selectItem(item)\">\n          <td *ngFor=\"let col of options.columns\" [ngClass]=\"{'text-center': col.type == 'checkbox'}\">\n            <ng-container [ngSwitch]=\"col.type\">\n              <ng-container *ngSwitchCase=\"'date'\">\n                {{ item | column: col.name | date: 'mediumDate' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'decimal'\">\n                {{ item | column: col.name | number: '1.3-3' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'boolean'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'checkbox'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'object'\">\n                {{ item | column: col.objectColumn }}\n              </ng-container>\n              <ng-container *ngSwitchDefault>\n                {{ item | column: col.name }}\n              </ng-container>\n            </ng-container>\n          </td>\n          <td *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">\n            <i *ngIf=\"options.detailsURL\" class=\"fa fa-search-plus fa-lg text-primary\" [routerLink]=\"getDetailsURL(item.ID)\" placement=\"top\"\n              ngbTooltip=\"Detalles\"></i>\n            <i *ngIf=\"options.editable\" class=\"fa fa-edit fa-lg text-success\" (click)=\"selectItem(item)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n            <i *ngIf=\"removeItem.observers.length\" class=\"fa fa-trash-o fa-lg text-danger\" [swal]=\"_deleteMessage\" (confirm)=\"deleteItem(item.ID)\"\n              placement=\"top\" ngbTooltip=\"Eliminar\"></i>\n          </td>\n        </tr>\n        <tr class=\"table-info\" *ngIf=\"item.ID === _selectedItem.ID\">\n          <td *ngFor=\"let col of options.columns\" [ngClass]=\"{'text-center': col.type == 'checkbox'}\">\n            <ng-container *ngIf=\"!col.readonly\" [ngSwitch]=\"col.type\">\n                <input *ngSwitchCase=\"'checkbox'\" [checked]=\"_selectedItem[col.name]\" class=\"form-control\" type=\"{{ col.type }}\" (change)=\"_selectedItem[col.name] = !_selectedItem[col.name]\">\n                <input  *ngSwitchDefault class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_selectedItem[col.name]\" placeholder=\"{{ col.title }}\">\n                <select *ngSwitchCase=\"'object'\" class=\"form-control custom-select\" [(ngModel)]=\"_selectedItem[col.objectID]\" [name]=\"col.name\" [id]=\"col.name\">\n                  <option *ngFor=\"let val of col.list\" [value]=\"val[col.listID]\">\n                    {{ val[col.listDisplay] }}\n                  </option>\n                </select>\n            </ng-container>\n            <ng-container *ngIf=\"col.readonly\" [ngSwitch]=\"col.type\">\n              <ng-container *ngSwitchCase=\"'date'\">\n                {{ item | column: col.name | date: 'mediumDate' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'decimal'\">\n                {{ item | column: col.name | number: '1.3-3' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'boolean'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'checkbox'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'object'\">\n                {{ item | column: col.objectColumn }}\n              </ng-container>\n              <ng-container *ngSwitchDefault>\n                {{ item | column: col.name }}\n              </ng-container>\n            </ng-container>\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateItem()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelSelect()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr *ngIf=\"options.editable && options.addMethod == 'inline'\">\n        <td *ngFor=\"let col of options.columns\">\n          <input *ngIf=\"!col.readonly\" class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_newItem[col.name]\" placeholder=\"{{ col.title }}\">\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createItem()\" placement=\"top\" ngbTooltip=\"Agregar elemento\" aria-hidden=\"true\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n  <ng-container *ngIf=\"options.pageable\">\n    <app-paginator [itemsCount]=\"_itemsCount\" (paginate)=\"setPage($event)\"></app-paginator>\n  </ng-container>\n</ng-container>\n"
+module.exports = "<app-loading-modal *ngIf=\"!options.items\"></app-loading-modal>\n<ng-container *ngIf=\"options.items\">\n  <h4>{{ options.title }}</h4>\n  <div class=\"row justify-content-between justify-content-end top-bar\">\n    <div *ngIf=\"options.searcheable\" class=\"col-md-4\">\n      <div class=\"form-group search-form\">\n        <div class=\"inner-addon left-addon\">\n          <i class=\"fa fa-search text-muted\" aria-hidden=\"true\"></i>\n          <input type=\"text\" class=\"form-control\" name=\"filter\" id=\"filter\" [(ngModel)]=\"_searchText\" (ngModelChange)=\"filterItems()\"\n            placeholder=\"Búsqueda\">\n        </div>\n      </div>\n    </div>\n    <div *ngIf=\"options.newURL\" class=\"col-md-4\">\n      <a [routerLink]=\"options.newURL\" class=\"btn btn-outline-primary pull-right\">Nuevo elemento</a>\n    </div>\n  </div>\n  <table class=\"table\" [ngClass]=\"options.style\" *ngIf=\"_pagedItems\">\n    <thead>\n      <tr>\n        <th *ngFor=\"let header of options.columns\" (click)=\"sortByColumn(header)\" [ngClass]=\"{'text-center': header.type == 'checkbox'}\">\n          {{ header.title }}\n          <i class=\"fa\" [ngClass]=\"{\n              'fa-sort': _sortColumn != header.name,\n              'fa-sort-desc': _sortColumn === header.name && _sortDesc,\n              'fa-sort-asc': _sortColumn === header.name && !_sortDesc\n            }\" aria-hidden=\"true\"></i>\n        </th>\n        <th *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">Acciones</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"!_pagedItems.length\">\n        <td class=\"text-center\" [colSpan]=\"options.columns.length + 1\">\n          Sin elementos disponibles\n        </td>\n      </tr>\n      <ng-container *ngFor=\"let item of _pagedItems\">\n        <tr *ngIf=\"item.ID != _selectedItem.ID\" (dblclick)=\"selectItem(item)\">\n          <td *ngFor=\"let col of options.columns\" [ngClass]=\"{'text-center': col.type == 'checkbox'}\">\n            <ng-container [ngSwitch]=\"col.type\">\n              <ng-container *ngSwitchCase=\"'date'\">\n                {{ item | column: col.name | date: 'mediumDate' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'decimal'\">\n                {{ item | column: col.name | number: '1.3-3' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'number'\">\n                {{ item | column: col.name | number: '1.2-2' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'boolean'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'checkbox'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'object'\">\n                {{ item | column: col.objectColumn }}\n              </ng-container>\n              <ng-container *ngSwitchDefault>\n                {{ item | column: col.name }}\n              </ng-container>\n            </ng-container>\n          </td>\n          <td *ngIf=\"options.editable || options.detailsURL\" class=\"text-center\">\n            <i *ngIf=\"options.detailsURL\" class=\"fa fa-search-plus fa-lg text-primary\" [routerLink]=\"getDetailsURL(item.ID)\" placement=\"top\"\n              ngbTooltip=\"Detalles\"></i>\n            <i *ngIf=\"options.editable\" class=\"fa fa-edit fa-lg text-success\" (click)=\"selectItem(item)\" placement=\"top\" ngbTooltip=\"Editar\"></i>\n            <i *ngIf=\"removeItem.observers.length\" class=\"fa fa-trash-o fa-lg text-danger\" [swal]=\"_deleteMessage\" (confirm)=\"deleteItem(item.ID)\"\n              placement=\"top\" ngbTooltip=\"Eliminar\"></i>\n          </td>\n        </tr>\n        <tr class=\"table-info\" *ngIf=\"item.ID === _selectedItem.ID\">\n          <td *ngFor=\"let col of options.columns\" [ngClass]=\"{'text-center': col.type == 'checkbox'}\">\n            <ng-container *ngIf=\"!col.readonly\" [ngSwitch]=\"col.type\">\n              <input *ngSwitchCase=\"'checkbox'\" [checked]=\"_selectedItem[col.name]\" class=\"form-control\" type=\"{{ col.type }}\" (change)=\"_selectedItem[col.name] = !_selectedItem[col.name]\">\n              <input *ngSwitchDefault class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_selectedItem[col.name]\" placeholder=\"{{ col.title }}\">\n              <select *ngSwitchCase=\"'object'\" class=\"form-control custom-select\" [(ngModel)]=\"_selectedItem[col.objectID]\" [name]=\"col.name\"\n                [id]=\"col.name\">\n                <option *ngFor=\"let val of col.list\" [value]=\"val[col.listID]\">\n                  {{ val[col.listDisplay] }}\n                </option>\n              </select>\n            </ng-container>\n            <ng-container *ngIf=\"col.readonly\" [ngSwitch]=\"col.type\">\n              <ng-container *ngSwitchCase=\"'date'\">\n                {{ item | column: col.name | date: 'mediumDate' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'decimal'\">\n                {{ item | column: col.name | number: '1.3-3' }}\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'boolean'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'checkbox'\">\n                <span [innerHTML]=\"item | column: col.name | boolean\"></span>\n              </ng-container>\n              <ng-container *ngSwitchCase=\"'object'\">\n                {{ item | column: col.objectColumn }}\n              </ng-container>\n              <ng-container *ngSwitchDefault>\n                {{ item | column: col.name }}\n              </ng-container>\n            </ng-container>\n          </td>\n          <td class=\"text-center\">\n            <i class=\"fa fa-lock fa-lg text-success\" (click)=\"updateItem()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Guardar Cambios\"></i>\n            <i class=\"fa fa-times fa-lg text-danger\" (click)=\"cancelSelect()\" aria-hidden=\"true\" placement=\"top\" ngbTooltip=\"Cancelar\"></i>\n          </td>\n        </tr>\n      </ng-container>\n      <tr *ngIf=\"options.editable && options.addMethod == 'inline'\">\n        <td *ngFor=\"let col of options.columns\">\n          <ng-container *ngIf=\"!col.readonly\" [ngSwitch]=\"col.type\">\n            <select *ngSwitchCase=\"'object'\" class=\"form-control custom-select\" [(ngModel)]=\"_newItem[col.objectID]\" [name]=\"col.name\"\n              [id]=\"col.name\">\n              <option value=\"undefined\" disabled>--- Seleccionar ---</option>\n              <option *ngFor=\"let val of col.list\" [value]=\"val[col.listID]\">\n                {{ val[col.listDisplay] }}\n              </option>\n            </select>\n            <input *ngSwitchDefault class=\"form-control\" type=\"{{ col.type }}\" [(ngModel)]=\"_newItem[col.name]\" placeholder=\"{{ col.title }}\">\n          </ng-container>\n        </td>\n        <td class=\"text-center\">\n          <i class=\"fa fa-plus-square fa-lg text-primary\" (click)=\"createItem()\" placement=\"top\" ngbTooltip=\"Agregar elemento\" aria-hidden=\"true\"></i>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n  <ng-container *ngIf=\"options.pageable\">\n    <app-paginator [itemsCount]=\"_itemsCount\" (paginate)=\"setPage($event)\"></app-paginator>\n  </ng-container>\n</ng-container>\n"
 
 /***/ }),
 
@@ -2021,6 +2021,62 @@ var ParamMatricesService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared/services/param-sub-values.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connection_service__ = __webpack_require__("../../../../../src/app/shared/services/connection.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamSubValuesService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ParamSubValuesService = /** @class */ (function () {
+    function ParamSubValuesService(_http, _conn) {
+        this._http = _http;
+        this._conn = _conn;
+        this._headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
+        this._valuesURL = _conn.APIUrl + 'paramvalues';
+        this._subValuesURL = _conn.APIUrl + 'paramsubvalues';
+    }
+    ParamSubValuesService.prototype.addSubValue = function (val) {
+        return this._http
+            .post(this._subValuesURL, JSON.stringify(val), { headers: this._headers })
+            .map(function (response) { return response.json(); });
+    };
+    ParamSubValuesService.prototype.editSubValue = function (id, val) {
+        return this._http
+            .put(this._subValuesURL + "/" + id, JSON.stringify(val), { headers: this._headers })
+            .map(function (response) { return response.json(); });
+    };
+    ParamSubValuesService.prototype.deleteSubValue = function (id) {
+        return this._http.delete(this._subValuesURL + "/" + id, { headers: this._headers }).map(function (response) { return response.json(); });
+    };
+    ParamSubValuesService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */]) === "function" && _b || Object])
+    ], ParamSubValuesService);
+    return ParamSubValuesService;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=param-sub-values.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared/services/param-tables.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2059,23 +2115,19 @@ var ParamTablesService = /** @class */ (function () {
     ParamTablesService.prototype.getTable = function (_id) {
         return this._http.get(this._tablesURL + "/" + _id).map(function (response) { return response.json(); });
     };
-    ParamTablesService.prototype.getValuesByTable = function (id) {
-        return this._http.get(this._tablesURL + "/" + id + "/values").map(function (response) { return response.json(); });
-    };
-    ParamTablesService.prototype.createtable = function (tab) {
+    ParamTablesService.prototype.createTable = function (tab) {
         return this._http
             .post(this._tablesURL, JSON.stringify(tab), { headers: this._headers })
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };
+    ParamTablesService.prototype.editTable = function (id, table) {
+        return this._http
+            .put(this._tablesURL + "/" + id, JSON.stringify(table), { headers: this._headers })
+            .map(function (response) { return response.json(); });
+    };
     ParamTablesService.prototype.deleteTable = function (id) {
         return this._http.delete(this._tablesURL + "/" + id, { headers: this._headers }).map(function (response) { return response.json(); });
-    };
-    ParamTablesService.prototype.addValue = function (val) {
-        return this._http
-            .post(this._valuesURL, JSON.stringify(val), { headers: this._headers })
-            .map(function (response) { return response.json(); })
-            .catch(function (err) { return err.message; });
     };
     ParamTablesService.prototype.addSubValue = function (val) {
         return this._http
@@ -2089,12 +2141,6 @@ var ParamTablesService = /** @class */ (function () {
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };
-    ParamTablesService.prototype.editValue = function (id, val) {
-        return this._http
-            .put(this._valuesURL + "/" + id, JSON.stringify(val), { headers: this._headers })
-            .map(function (response) { return response.json(); })
-            .catch(function (err) { return err.message; });
-    };
     ParamTablesService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */]) === "function" && _b || Object])
@@ -2104,6 +2150,67 @@ var ParamTablesService = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=param-tables.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/services/param-values.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connection_service__ = __webpack_require__("../../../../../src/app/shared/services/connection.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParamValuesService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ParamValuesService = /** @class */ (function () {
+    function ParamValuesService(_http, _conn) {
+        this._http = _http;
+        this._conn = _conn;
+        this._headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
+        this._tablesURL = _conn.APIUrl + 'paramtables';
+        this._valuesURL = _conn.APIUrl + 'paramvalues';
+    }
+    ParamValuesService.prototype.getValuesByTable = function (id) {
+        return this._http.get(this._tablesURL + "/" + id + "/values").map(function (response) { return response.json(); });
+    };
+    ParamValuesService.prototype.addValue = function (val) {
+        return this._http
+            .post(this._valuesURL, JSON.stringify(val), { headers: this._headers })
+            .map(function (response) { return response.json(); })
+            .catch(function (err) { return err.message; });
+    };
+    ParamValuesService.prototype.editValue = function (id, val) {
+        return this._http
+            .put(this._valuesURL + "/" + id, JSON.stringify(val), { headers: this._headers })
+            .map(function (response) { return response.json(); })
+            .catch(function (err) { return err.message; });
+    };
+    ParamValuesService.prototype.deleteValue = function (id) {
+        return this._http.delete(this._valuesURL + "/" + id, { headers: this._headers }).map(function (response) { return response.json(); });
+    };
+    ParamValuesService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__connection_service__["a" /* ConnectionService */]) === "function" && _b || Object])
+    ], ParamValuesService);
+    return ParamValuesService;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=param-values.service.js.map
 
 /***/ }),
 
@@ -2242,6 +2349,9 @@ var ParticipantsService = /** @class */ (function () {
             return response.json();
         });
     };
+    ParticipantsService.prototype.getParticipantParam = function (participantID, paramID) {
+        return this._http.get(this._partURL + "/" + participantID + "/params/" + paramID).map(function (response) { return response.json(); });
+    };
     ParticipantsService.prototype.updateParam = function (_id, _param) {
         var _this = this;
         return this._http.put(this._paramURL + '/' + _id, JSON.stringify(_param), { headers: this._headers }).map(function (response) {
@@ -2274,11 +2384,6 @@ var ParticipantsService = /** @class */ (function () {
             .get(this._partURL + "/" + id + "/pending")
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
-    };
-    ParticipantsService.prototype.addRelationship = function (relationship) {
-        return this._http
-            .post(this._partURL + '/relationships', JSON.stringify(relationship), { headers: this._headers })
-            .map(function (response) { return response.json(); });
     };
     ParticipantsService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -2327,17 +2432,14 @@ var RelationshipsService = /** @class */ (function () {
         this._conn = _conn;
         this._headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this._typesURL = _conn.APIUrl + 'relationshiptypes';
+        this._relationshipsURL = _conn.APIUrl + 'participantrelationships';
         this._participantsURL = _conn.APIUrl + 'participants';
     }
     RelationshipsService.prototype.getRelationships = function (participantID) {
-        return this._http
-            .get(this._participantsURL + "/" + participantID + "/relationships")
-            .map(function (response) { return response.json(); });
+        return this._http.get(this._participantsURL + "/" + participantID + "/relationships").map(function (response) { return response.json(); });
     };
     RelationshipsService.prototype.getTypes = function () {
-        return this._http
-            .get(this._typesURL)
-            .map(function (response) { return response.json(); });
+        return this._http.get(this._typesURL).map(function (response) { return response.json(); });
     };
     RelationshipsService.prototype.createType = function (type) {
         return this._http
@@ -2352,9 +2454,15 @@ var RelationshipsService = /** @class */ (function () {
             .catch(function (err) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(console.log(err.message)); });
     };
     RelationshipsService.prototype.deleteType = function (id) {
+        return this._http.delete(this._typesURL + "/" + id, { headers: this._headers }).map(function (response) { return response.json(); });
+    };
+    RelationshipsService.prototype.addRelationship = function (relationship) {
         return this._http
-            .delete(this._typesURL + "/" + id, { headers: this._headers })
+            .post(this._relationshipsURL, JSON.stringify(relationship), { headers: this._headers })
             .map(function (response) { return response.json(); });
+    };
+    RelationshipsService.prototype.deleteRelationship = function (id) {
+        return this._http.delete(this._relationshipsURL + "/" + id, { headers: this._headers }).map(function (response) { return response.json(); });
     };
     RelationshipsService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -2865,20 +2973,22 @@ var UtilService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_tasks_service__ = __webpack_require__("../../../../../src/app/shared/services/tasks.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_sanctions_service__ = __webpack_require__("../../../../../src/app/shared/services/sanctions.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_auth_guard__ = __webpack_require__("../../../../../src/app/shared/services/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_loading_modal_loading_modal_component__ = __webpack_require__("../../../../../src/app/shared/components/loading-modal/loading-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_card_card_component__ = __webpack_require__("../../../../../src/app/shared/components/card/card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_sort_icon_sort_icon_component__ = __webpack_require__("../../../../../src/app/shared/components/sort-icon/sort-icon.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_quick_card_quick_card_component__ = __webpack_require__("../../../../../src/app/shared/components/quick-card/quick-card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_task_card_task_card_component__ = __webpack_require__("../../../../../src/app/shared/components/task-card/task-card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_task_form_task_form_component__ = __webpack_require__("../../../../../src/app/shared/components/task-form/task-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pipes_score_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/score.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pipes_column_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/column.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_save_button_save_button_component__ = __webpack_require__("../../../../../src/app/shared/components/save-button/save-button.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_custom_table_custom_table_component__ = __webpack_require__("../../../../../src/app/shared/components/custom-table/custom-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_paginator_paginator_component__ = __webpack_require__("../../../../../src/app/shared/components/paginator/paginator.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pipes_boolean_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/boolean.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_table_form_table_form_component__ = __webpack_require__("../../../../../src/app/shared/components/table-form/table-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_param_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_param_sub_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-sub-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_auth_guard__ = __webpack_require__("../../../../../src/app/shared/services/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_loading_modal_loading_modal_component__ = __webpack_require__("../../../../../src/app/shared/components/loading-modal/loading-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_card_card_component__ = __webpack_require__("../../../../../src/app/shared/components/card/card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_sort_icon_sort_icon_component__ = __webpack_require__("../../../../../src/app/shared/components/sort-icon/sort-icon.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_quick_card_quick_card_component__ = __webpack_require__("../../../../../src/app/shared/components/quick-card/quick-card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_task_card_task_card_component__ = __webpack_require__("../../../../../src/app/shared/components/task-card/task-card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_task_form_task_form_component__ = __webpack_require__("../../../../../src/app/shared/components/task-form/task-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pipes_score_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/score.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pipes_column_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/column.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_save_button_save_button_component__ = __webpack_require__("../../../../../src/app/shared/components/save-button/save-button.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_custom_table_custom_table_component__ = __webpack_require__("../../../../../src/app/shared/components/custom-table/custom-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_paginator_paginator_component__ = __webpack_require__("../../../../../src/app/shared/components/paginator/paginator.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__pipes_boolean_pipe__ = __webpack_require__("../../../../../src/app/shared/pipes/boolean.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_table_form_table_form_component__ = __webpack_require__("../../../../../src/app/shared/components/table-form/table-form.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SharedModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2895,6 +3005,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 // Model Services
+
+
 
 
 
@@ -2948,22 +3060,22 @@ var SharedModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6_angular_2_dropdown_multiselect__["a" /* MultiselectDropdownModule */]
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_25__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastyModule */],
-                __WEBPACK_IMPORTED_MODULE_26__components_card_card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_31__pipes_score_pipe__["a" /* ScorePipe */],
-                __WEBPACK_IMPORTED_MODULE_27__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_card_card_component__["a" /* CardComponent */],
+                __WEBPACK_IMPORTED_MODULE_33__pipes_score_pipe__["a" /* ScorePipe */],
+                __WEBPACK_IMPORTED_MODULE_29__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_28__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
                 __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastyModule */],
-                __WEBPACK_IMPORTED_MODULE_29__components_task_card_task_card_component__["a" /* TaskCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__components_task_card_task_card_component__["a" /* TaskCardComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
-                __WEBPACK_IMPORTED_MODULE_30__components_task_form_task_form_component__["a" /* TaskFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__components_task_form_task_form_component__["a" /* TaskFormComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__toverux_ngsweetalert2__["a" /* SweetAlert2Module */],
                 __WEBPACK_IMPORTED_MODULE_6_angular_2_dropdown_multiselect__["a" /* MultiselectDropdownModule */],
-                __WEBPACK_IMPORTED_MODULE_34__components_custom_table_custom_table_component__["a" /* CustomTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__pipes_column_pipe__["a" /* ColumnPipe */]
+                __WEBPACK_IMPORTED_MODULE_36__components_custom_table_custom_table_component__["a" /* CustomTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__pipes_column_pipe__["a" /* ColumnPipe */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_8__services_genders_service__["a" /* GendersService */],
@@ -2981,24 +3093,26 @@ var SharedModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_20__services_countries_service__["a" /* CountriesService */],
                 __WEBPACK_IMPORTED_MODULE_21__services_relationships_service__["a" /* RelationshipsService */],
                 __WEBPACK_IMPORTED_MODULE_22__services_tasks_service__["a" /* TasksService */],
+                __WEBPACK_IMPORTED_MODULE_24__services_param_values_service__["a" /* ParamValuesService */],
+                __WEBPACK_IMPORTED_MODULE_25__services_param_sub_values_service__["a" /* ParamSubValuesService */],
                 __WEBPACK_IMPORTED_MODULE_23__services_sanctions_service__["a" /* SanctionsService */],
                 __WEBPACK_IMPORTED_MODULE_5__ng_bootstrap_ng_bootstrap__["c" /* NgbActiveModal */],
-                __WEBPACK_IMPORTED_MODULE_24__services_auth_guard__["a" /* AuthGuard */]
+                __WEBPACK_IMPORTED_MODULE_26__services_auth_guard__["a" /* AuthGuard */]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_25__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_card_card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_31__pipes_score_pipe__["a" /* ScorePipe */],
-                __WEBPACK_IMPORTED_MODULE_27__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__components_task_card_task_card_component__["a" /* TaskCardComponent */],
-                __WEBPACK_IMPORTED_MODULE_30__components_task_form_task_form_component__["a" /* TaskFormComponent */],
-                __WEBPACK_IMPORTED_MODULE_33__components_save_button_save_button_component__["a" /* SaveButtonComponent */],
-                __WEBPACK_IMPORTED_MODULE_34__components_custom_table_custom_table_component__["a" /* CustomTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_35__components_paginator_paginator_component__["a" /* PaginatorComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__pipes_column_pipe__["a" /* ColumnPipe */],
-                __WEBPACK_IMPORTED_MODULE_36__pipes_boolean_pipe__["a" /* BooleanPipe */],
-                __WEBPACK_IMPORTED_MODULE_37__components_table_form_table_form_component__["a" /* TableFormComponent */]
+                __WEBPACK_IMPORTED_MODULE_27__components_loading_modal_loading_modal_component__["a" /* LoadingModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_card_card_component__["a" /* CardComponent */],
+                __WEBPACK_IMPORTED_MODULE_33__pipes_score_pipe__["a" /* ScorePipe */],
+                __WEBPACK_IMPORTED_MODULE_29__components_sort_icon_sort_icon_component__["a" /* SortIconComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__components_quick_card_quick_card_component__["a" /* QuickCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__components_task_card_task_card_component__["a" /* TaskCardComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__components_task_form_task_form_component__["a" /* TaskFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_35__components_save_button_save_button_component__["a" /* SaveButtonComponent */],
+                __WEBPACK_IMPORTED_MODULE_36__components_custom_table_custom_table_component__["a" /* CustomTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_37__components_paginator_paginator_component__["a" /* PaginatorComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__pipes_column_pipe__["a" /* ColumnPipe */],
+                __WEBPACK_IMPORTED_MODULE_38__pipes_boolean_pipe__["a" /* BooleanPipe */],
+                __WEBPACK_IMPORTED_MODULE_39__components_table_form_table_form_component__["a" /* TableFormComponent */]
             ]
         })
     ], SharedModule);

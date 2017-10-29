@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title text-secondary"><i class="typcn typcn-group-outline"></i> New relationship</h4>
+  <h4 class="modal-title text-secondary"><i class="typcn typcn-group-outline"></i> Nueva Relación</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -12,17 +12,17 @@
           <ng-template #rt let-r="result" let-t="term">
             {{ r.FirstName }} {{ r.ThirdName }}
           </ng-template>
-          <label for="participant">Participant</label>
-          <input type="text" class="form-control" [(ngModel)]="relation.RelatedParticipant" name="" id="" aria-describedby="helpId"
-            placeholder="" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter">
+          <label for="participant">Participante</label>
+          <input type="text" class="form-control" [(ngModel)]="relation.RelatedParticipant" name="" id=""
+            placeholder="Buscar" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="type">Type</label>
+          <label for="type">Tipo de relación</label>
           <select class="form-control custom-select" [(ngModel)]="relation.Type" name="type" id="type">
-            <option disabled value="undefined">--- Select one ---</option>
-            <option *ngFor="let type of _types" [ngValue]="type">{{ type.EnglishName }}</option>
+            <option disabled value="undefined">--- Seleccionar ---</option>
+            <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name }}</option>
           </select>
         </div>
       </div>

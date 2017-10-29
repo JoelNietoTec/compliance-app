@@ -1,10 +1,14 @@
 <div class="container" *ngIf="_categories">
-  <div class="card" *ngFor="let category of _categories">
-    <div class="card-header">{{ category.Name }}</div>
-    <div class="card-body row">
-      <div class="col-md-6" *ngFor="let param of category.Params">
-        <compliance-param [param]="param" [participant]="participant" [partParams]="_partParams"></compliance-param>
+  <ng-container *ngFor="let category of _categories">
+    <div class="card" *ngIf="category">
+      <div class="card-header">{{ category.Name }}</div>
+      <div class="card-body row">
+        <div class="col-md-6" *ngFor="let param of category.Params">
+          <ng-container *ngIf="_partParams">
+            <compliance-param [param]="param" [participant]="participant" [partParams]="_partParams" (update)="updateRate($event)" ></compliance-param>
+          </ng-container>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>

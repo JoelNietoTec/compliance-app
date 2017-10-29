@@ -53,7 +53,6 @@ var EntitiesListComponent = /** @class */ (function () {
     }
     EntitiesListComponent.prototype.ngOnInit = function () {
         this._table.columns = [
-            { name: 'ID', title: '#', type: 'number', sortable: true },
             { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
             { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
             { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
@@ -216,6 +215,7 @@ var EntityFormComponent = /** @class */ (function () {
         this._dateFormatter = _dateFormatter;
         this.toastr = toastr;
         this._router = _router;
+        this.updateParticipant = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this._default = undefined;
         this._maxDate = {
             year: NOW.getFullYear() + 1,
@@ -242,17 +242,15 @@ var EntityFormComponent = /** @class */ (function () {
         var _this = this;
         this._entity.BirthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
         if (!this.entity) {
-            this._partServ.createParticipant(this._entity)
-                .subscribe(function (data) {
-                _this.toastr.success("ID: " + data.ID, 'Entity Created');
+            this._partServ.createParticipant(this._entity).subscribe(function (data) {
+                _this.toastr.success(data.ShortName, 'Entidad creada');
                 _this._router.navigate(['/dashboard/participants', data.ID]);
             });
         }
         else {
-            this._partServ.updateParticipant(this._entity.ID, this._entity)
-                .subscribe(function (data) {
-                _this.toastr.success("ID: " + _this._entity.ID, 'Entity Updated');
-                _this._router.navigate(['/dashboard/participants', _this._entity.ID]);
+            this._partServ.updateParticipant(this._entity.ID, this._entity).subscribe(function (data) {
+                _this.toastr.success(data.ShortName, 'Entidad actualizada');
+                _this.updateParticipant.emit();
             });
         }
     };
@@ -260,6 +258,10 @@ var EntityFormComponent = /** @class */ (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Object)
     ], EntityFormComponent.prototype, "entity", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], EntityFormComponent.prototype, "updateParticipant", void 0);
     EntityFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'entity-form',
@@ -297,7 +299,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/individual-details/individual-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n  <div class=\"card-body text-center\">\r\n    <img src=\"assets/img/user.jpg\" alt=\"\" class=\"img-fluid img-circle user-img\">\r\n    <h4 class=\"user-name\">\r\n      {{ individual.ThirdName }}, {{ individual.FirstName }}\r\n    </h4>\r\n    <h5 *ngIf=\"individual.Score\" class=\"font-weight-bold\" [ngClass]=\"{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 6, 'text-danger': individual.Score >= 6 }\">\r\n      <i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i> {{ individual.Score }}</h5>\r\n  </div>\r\n  <div class=\"card-body section-block\">\r\n    <ngb-tabset type=\"pills\" [justify]=\"'center'\">\r\n      <ngb-tab>\r\n        <ng-template ngbTabTitle><i class=\"typcn typcn-business-card\"></i> Info</ng-template>\r\n        <ng-template ngbTabContent>\r\n          <small class=\"text-muted\">Email <i class=\"fa fa-envelope-o\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Email }}</h6>\r\n          <small class=\"text-muted\">Número Telefónico <i class=\"typcn typcn-phone-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Phone }}</h6>\r\n          <small class=\"text-muted\">Teléfono Celular <i class=\"typcn typcn-device-phone\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.MobilePhone }}</h6>\r\n          <small class=\"text-muted\">Fecha de nacimiento (edad) <i class=\"typcn typcn-weather-sunny\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.BirthDate | date: 'shortDate' }} <em>({{ individual.Age }})</em></h6>\r\n          <small class=\"text-muted\">Género <i class=\"fa fa-venus-mars\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Gender.EnglishName }}</h6>\r\n          <small class=\"text-muted\">Sitio Web <i class=\"typcn typcn-globe-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.WebSite }}</h6>\r\n          <small class=\"text-muted\">Dirección <i class=\"typcn typcn-location-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Address }}</h6>\r\n          <small class=\"text-muted\">Creado por <i class=\"typcn typcn-user-add-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>\r\n        </ng-template>\r\n      </ngb-tab>\r\n      <ngb-tab>\r\n          <ng-template ngbTabTitle><i class=\"typcn typcn-edit\"></i> Tareas</ng-template>\r\n          <ng-template ngbTabContent>\r\n            <participant-tasks [participant]=\"individual\"></participant-tasks>\r\n          </ng-template>\r\n        </ngb-tab>\r\n    </ngb-tabset>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\">\r\n  <div class=\"card-body text-center\">\r\n    <img src=\"assets/img/user.jpg\" alt=\"\" class=\"img-fluid img-circle user-img\">\r\n    <h4 class=\"user-name\">\r\n      {{ individual.FullName }}\r\n    </h4>\r\n    <h5 *ngIf=\"individual.Score\" class=\"font-weight-bold\" [ngClass]=\"{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 6, 'text-danger': individual.Score >= 6 }\">\r\n      <i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i> {{ individual.Score | number: '1.3-3' }}</h5>\r\n  </div>\r\n  <div class=\"card-body section-block\">\r\n    <ngb-tabset type=\"pills\" [justify]=\"'center'\">\r\n      <ngb-tab>\r\n        <ng-template ngbTabTitle><i class=\"typcn typcn-business-card\"></i> Info</ng-template>\r\n        <ng-template ngbTabContent>\r\n          <small class=\"text-muted\">Email <i class=\"fa fa-envelope-o\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Email }}</h6>\r\n          <small class=\"text-muted\">Número Telefónico <i class=\"typcn typcn-phone-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Phone }}</h6>\r\n          <small class=\"text-muted\">Teléfono Celular <i class=\"typcn typcn-device-phone\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.MobilePhone }}</h6>\r\n          <small *ngIf=\"individual.ParticipantTypeID == 1\" class=\"text-muted\">Fecha de nacimiento (edad)  <i class=\"fa fa-birthday-cake\" aria-hidden=\"true\"></i> </small>\r\n          <h6 *ngIf=\"individual.ParticipantTypeID == 1\" class=\"participant-info\">{{ individual.BirthDate | date: 'mediumDate' }} <em>({{ individual.Age }})</em></h6>\r\n          <small *ngIf=\"individual.ParticipantTypeID == 2\" class=\"text-muted\">Fecha de constitución  <i class=\"fa fa-building\" aria-hidden=\"true\"></i> </small>\r\n          <h6 *ngIf=\"individual.ParticipantTypeID == 2\" class=\"participant-info\">{{ individual.BirthDate | date: 'mediumDate' }}</h6>\r\n          <small *ngIf=\"individual.ParticipantTypeID == 1\" class=\"text-muted\">Género <i class=\"fa fa-venus-mars\" aria-hidden=\"true\"></i></small>\r\n          <h6 *ngIf=\"individual.ParticipantTypeID == 1\" class=\"participant-info\">{{ individual.Gender.EnglishName }}</h6>\r\n          <small class=\"text-muted\">Sitio Web <i class=\"typcn typcn-globe-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.WebSite }}</h6>\r\n          <small class=\"text-muted\">Dirección <i class=\"typcn typcn-location-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.Address }}</h6>\r\n          <small class=\"text-muted\">Creado por <i class=\"typcn typcn-user-add-outline\" aria-hidden=\"true\"></i></small>\r\n          <h6 class=\"participant-info\">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>\r\n        </ng-template>\r\n      </ngb-tab>\r\n      <ngb-tab>\r\n          <ng-template ngbTabTitle><i class=\"typcn typcn-edit\"></i> Tareas</ng-template>\r\n          <ng-template ngbTabContent>\r\n            <participant-tasks [participant]=\"individual\"></participant-tasks>\r\n          </ng-template>\r\n        </ngb-tab>\r\n    </ngb-tabset>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -404,6 +406,7 @@ var IndividualFormComponent = /** @class */ (function () {
         this._util = _util;
         this.toastr = toastr;
         this._router = _router;
+        this.updateParticipant = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this._default = undefined;
         this._countries = JSON.parse(localStorage.getItem('countries'));
         this._nationalities = [];
@@ -483,15 +486,15 @@ var IndividualFormComponent = /** @class */ (function () {
             console.log(this._individual);
             this._partServ.createParticipant(this._individual)
                 .subscribe(function (data) {
-                _this.toastr.success("ID: " + data.ID, 'Individuo Creado');
+                _this.toastr.success(data.ShortName, 'Individuo Creado');
                 _this._router.navigate(['dashboard/participants', data.ID]);
             });
         }
         else {
             this._partServ.updateParticipant(this._individual.ID, this._individual)
                 .subscribe(function (data) {
-                _this.toastr.success("ID: " + _this._individual.ID, 'Individuo Actualizado');
-                _this._router.navigate(['dashboard/participants', _this._individual.ID]);
+                _this.toastr.success(data.ShortName, 'Individuo Actualizado');
+                _this.updateParticipant.emit();
             });
         }
     };
@@ -499,6 +502,10 @@ var IndividualFormComponent = /** @class */ (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Object)
     ], IndividualFormComponent.prototype, "individual", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], IndividualFormComponent.prototype, "updateParticipant", void 0);
     IndividualFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'individual-form',
@@ -565,7 +572,6 @@ var IndividualsListComponent = /** @class */ (function () {
     }
     IndividualsListComponent.prototype.ngOnInit = function () {
         this._table.columns = [
-            { name: 'ID', title: '#', type: 'number', sortable: true },
             { name: 'FullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
             { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
             { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
@@ -697,7 +703,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-compliance-param/participant-compliance-param.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n  <div class=\"form-group\" [ngClass]=\"{'has-danger': !_currentValue && !_currentSubValue, 'has-success': _currentValue || _currentSubValue}\">\r\n    <label class=\"form-control-label\" for=\"\">{{ param.Name }} </label>\r\n    <ng-container [ngSwitch]=\"param.ParamTable.TableTypeID\">\r\n      <select [ngClass]=\"{'is-invalid': !_currentValue, 'is-valid': _currentValue}\" *ngSwitchCase=\"1\" class=\"form-control custom-select\" name=\"\" id=\"\" [(ngModel)]=\"_currentValue\" (ngModelChange)=\"updateParam($event)\" >\r\n        <option selected disabled [value]=\"_default\">--- Seleccionar ---</option>\r\n        <option *ngFor=\"let value of _values\" [ngValue]=\"value\">{{ value.DisplayValue }}</option>\r\n      </select>\r\n      <select [ngClass]=\"{'is-invalid': !_currentValue && !_currentSubValue, 'is-valid': _currentValue || _currentSubValue}\" *ngSwitchCase=\"2\" name=\"\" id=\"\" class=\"form-control custom-select\" [(ngModel)]=\"_currentSubValue\" (ngModelChange)=\"updateParam($event)\">\r\n        <option selected disabled [value]=\"_default\">--- Select one ---</option>\r\n        <optgroup *ngFor=\"let val of _values\" label=\"{{ val.DisplayValue }}\">\r\n          <option *ngFor=\"let subval of val.ParamSubValues\" [ngValue]=\"subval\">{{ subval.DisplayValue }}</option>\r\n        </optgroup>\r\n      </select>\r\n    </ng-container>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<app-loading-modal *ngIf=\"!_partParam\"></app-loading-modal>\r\n<div *ngIf=\"_partParam\" class=\"form-group\" >\r\n  <div class=\"form-group\" [ngClass]=\"{'has-danger': !_currentValue && !_currentSubValue, 'has-success': _currentValue || _currentSubValue}\">\r\n    <label class=\"form-control-label\" for=\"\">{{ param.Name }} </label>\r\n    <ng-container [ngSwitch]=\"param.ParamTable.TableTypeID\">\r\n      <select [ngClass]=\"{'is-invalid': !_currentValue, 'is-valid': _currentValue}\" *ngSwitchCase=\"1\" class=\"form-control custom-select\" name=\"\" id=\"\" [(ngModel)]=\"_currentValue\" (ngModelChange)=\"updateParam($event)\" >\r\n        <option selected disabled [value]=\"_default\">--- Seleccionar ---</option>\r\n        <option *ngFor=\"let value of _values\" [ngValue]=\"value\">{{ value.DisplayValue }}</option>\r\n      </select>\r\n      <select [ngClass]=\"{'is-invalid': !_currentValue && !_currentSubValue, 'is-valid': _currentValue || _currentSubValue}\" *ngSwitchCase=\"2\" name=\"\" id=\"\" class=\"form-control custom-select\" [(ngModel)]=\"_currentSubValue\" (ngModelChange)=\"updateParam($event)\">\r\n        <option selected disabled [value]=\"_default\">--- Select one ---</option>\r\n        <optgroup *ngFor=\"let val of _values\" label=\"{{ val.DisplayValue }}\">\r\n          <option *ngFor=\"let subval of val.ParamSubValues\" [ngValue]=\"subval\">{{ subval.DisplayValue }}</option>\r\n        </optgroup>\r\n      </select>\r\n    </ng-container>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -714,8 +720,9 @@ module.exports = "<div class=\"form-group\">\r\n  <div class=\"form-group\" [ngC
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__ = __webpack_require__("../../../../../src/app/shared/services/param-tables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_services_param_values_service__ = __webpack_require__("../../../../../src/app/shared/services/param-values.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_ng2_toastr_ng2_toastr__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParticipantComplianceParamComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -734,13 +741,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ParticipantComplianceParamComponent = /** @class */ (function () {
-    function ParticipantComplianceParamComponent(_util, _partService, _tableServ, toastr, _router) {
+    function ParticipantComplianceParamComponent(_util, _partService, _valService, _tableServ, toastr, _router) {
         this._util = _util;
         this._partService = _partService;
+        this._valService = _valService;
         this._tableServ = _tableServ;
         this.toastr = toastr;
         this._router = _router;
+        this.update = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this._default = undefined;
         this._value = {
             ID: null,
@@ -748,9 +758,10 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
         };
     }
     ParticipantComplianceParamComponent.prototype.ngOnInit = function () {
-        var _this = this;
         // this._partParam = this._util.filterByID(this.partParams, this.param.ID);
-        this._tableServ.getValuesByTable(this.param.ParamTableID).subscribe(function (data) {
+        // console.log(this.param);
+        var _this = this;
+        this._valService.getValuesByTable(this.param.ParamTableID).subscribe(function (data) {
             _this._values = data;
             _this._values = _this._util.sortBy(_this._values, 'DisplayValue');
             for (var _i = 0, _a = _this._values; _i < _a.length; _i++) {
@@ -763,7 +774,7 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
     ParticipantComplianceParamComponent.prototype.getParam = function () {
         var _this = this;
         this._partParam = this.partParams.find(function (item) { return item.ParamID === _this.param.ID; });
-        this._currentValue = this._values.find(function (item) { return item.ID === _this._partParam.ParamValueID; });
+        this._currentValue = this._util.filterByID(this._values, this._partParam.ParamValueID);
         if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
             this._currentSubValue = this._currentValue.ParamSubValues.find(function (item) { return item.ID === _this._partParam.ParamSubValueID; });
         }
@@ -785,7 +796,8 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
             this._partParam.Score = this._currentValue.Score;
         }
         this._partService.updateParam(this._partParam.ID, this._partParam).subscribe(function (data) {
-            _this.toastr.success(_this.param.EnglishName, 'Updated Parameter');
+            _this.toastr.success(_this.param.Name, 'Parámetro actualizado');
+            _this.update.emit(_this._partParam);
         });
     };
     __decorate([
@@ -800,16 +812,20 @@ var ParticipantComplianceParamComponent = /** @class */ (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["Param"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_params_model__["Param"]) === "function" && _b || Object)
     ], ParticipantComplianceParamComponent.prototype, "param", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], ParticipantComplianceParamComponent.prototype, "update", void 0);
     ParticipantComplianceParamComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'compliance-param',
             template: __webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance-param/participant-compliance-param.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/participants/participant-compliance-param/participant-compliance-param.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_util_service__["a" /* UtilService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__shared_services_param_values_service__["a" /* ParamValuesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_services_param_values_service__["a" /* ParamValuesService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_services_param_tables_service__["a" /* ParamTablesService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _h || Object])
     ], ParticipantComplianceParamComponent);
     return ParticipantComplianceParamComponent;
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=participant-compliance-param.component.js.map
@@ -837,7 +853,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-compliance/participant-compliance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"_categories\">\r\n  <div class=\"card\" *ngFor=\"let category of _categories\">\r\n    <div class=\"card-header\">{{ category.Name }}</div>\r\n    <div class=\"card-body row\">\r\n      <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n        <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\"></compliance-param>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"_categories\">\r\n  <ng-container *ngFor=\"let category of _categories\">\r\n    <div class=\"card\" *ngIf=\"category\">\r\n      <div class=\"card-header\">{{ category.Name }}</div>\r\n      <div class=\"card-body row\">\r\n        <div class=\"col-md-6\" *ngFor=\"let param of category.Params\">\r\n          <ng-container *ngIf=\"_partParams\">\r\n            <compliance-param [param]=\"param\" [participant]=\"participant\" [partParams]=\"_partParams\" (update)=\"updateRate($event)\" ></compliance-param>\r\n          </ng-container>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -874,23 +890,24 @@ var ParticipantComplianceComponent = /** @class */ (function () {
         this._partService = _partService;
         this._categoriesService = _categoriesService;
         this._util = _util;
+        this.updateScore = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     ParticipantComplianceComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.getCategories();
-        this._partService.getParams(this.participant.ID)
-            .subscribe(function (data) {
+        this._partService.getParams(this.participant.ID).subscribe(function (data) {
             _this._partParams = data;
         });
-        this._matrixService.getMatrix(this.participant.ParamMatrixID)
-            .subscribe(function (data) {
+        this._matrixService.getMatrix(this.participant.ParamMatrixID).subscribe(function (data) {
             _this._matrix = data;
         });
     };
+    ParticipantComplianceComponent.prototype.updateRate = function () {
+        this.updateScore.emit('Update');
+    };
     ParticipantComplianceComponent.prototype.getCategories = function () {
         var _this = this;
-        this._categoriesService.getCategoriesByMatrix(this.participant.ParamMatrixID)
-            .subscribe(function (data) {
+        this._categoriesService.getCategoriesByMatrix(this.participant.ParamMatrixID).subscribe(function (data) {
             _this._categories = data;
             _this._categories = _this._util.sortBy(_this._categories, 'Name');
             for (var _i = 0, _a = _this._categories; _i < _a.length; _i++) {
@@ -903,6 +920,10 @@ var ParticipantComplianceComponent = /** @class */ (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_models_participants_model__["Participant"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_models_participants_model__["Participant"]) === "function" && _a || Object)
     ], ParticipantComplianceComponent.prototype, "participant", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], ParticipantComplianceComponent.prototype, "updateScore", void 0);
     ParticipantComplianceComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'participant-compliance',
@@ -940,7 +961,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-details/participant-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"_participant\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n      <ng-container [ngSwitch]=\"_participant.ParticipantTypeID\">\r\n        <individual-details *ngSwitchCase=1 [individual]=\"_participant\"></individual-details>\r\n        <entity-details *ngSwitchCase=2 [entity]=\"_participant\"></entity-details>\r\n      </ng-container>\r\n    </div>\r\n    <div class=\"col-md-8\">\r\n      <div class=\"card\">\r\n        <ngb-tabset type=\"pills\" *ngIf=\"_participant\">\r\n          <ngb-tab title=\"Matrix de Riesgo\">\r\n            <ng-template ngbTabContent>\r\n              <participant-compliance [participant]=\"_participant\"></participant-compliance>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Documentos\">\r\n            <ng-template ngbTabContent>\r\n              <participant-documents [participant]=\"_participant\"></participant-documents>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Relaciones\">\r\n            <ng-template ngbTabContent>\r\n              <participant-relationships [participant]=\"_participant\"></participant-relationships>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Editar\">\r\n            <ng-template ngbTabContent>\r\n              <div class=\"form-container\">\r\n                <individual-form *ngIf=\"_participant.ParticipantTypeID == 1\" [individual]=\"_participant\"></individual-form>\r\n              </div>\r\n              <div class=\"form-container\">\r\n                <entity-form *ngIf=\"_participant.ParticipantTypeID == 2\" [entity]=\"_participant\"></entity-form>\r\n              </div>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<app-loading-modal *ngIf=\"!_participant\"></app-loading-modal>\r\n<div *ngIf=\"_participant\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n      <ng-container>\r\n        <individual-details [individual]=\"_participant\"></individual-details>\r\n      </ng-container>\r\n    </div>\r\n    <div class=\"col-md-8\">\r\n      <div class=\"card\">\r\n        <ngb-tabset #t type=\"pills\" *ngIf=\"_participant\">\r\n          <ngb-tab title=\"Matrix de Riesgo\">\r\n            <ng-template ngbTabContent>\r\n              <participant-compliance [participant]=\"_participant\" (updateScore)=\"getParticipant()\"></participant-compliance>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Documentos\">\r\n            <ng-template ngbTabContent>\r\n              <participant-documents [participant]=\"_participant\"></participant-documents>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Relaciones\">\r\n            <ng-template ngbTabContent>\r\n              <participant-relationships [participant]=\"_participant\"></participant-relationships>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Editar\">\r\n            <ng-template ngbTabContent>\r\n              <div class=\"form-container\">\r\n                <individual-form *ngIf=\"_participant.ParticipantTypeID == 1\" [individual]=\"_participantCopy\" (updateParticipant)=\"getParticipant()\"></individual-form>\r\n              </div>\r\n              <div class=\"form-container\">\r\n                <entity-form *ngIf=\"_participant.ParticipantTypeID == 2\" [entity]=\"_participantCopy\" (updateParticipant)=\"getParticipant()\"></entity-form>\r\n              </div>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -973,13 +994,15 @@ var ParticipantDetailsComponent = /** @class */ (function () {
         this._util = _util;
     }
     ParticipantDetailsComponent.prototype.ngOnInit = function () {
+        this.getParticipant();
+    };
+    ParticipantDetailsComponent.prototype.getParticipant = function () {
         var _this = this;
         this._route.params.subscribe(function (params) {
-            _this._partServ.getParticipant(params['id'])
-                .subscribe(function (data) {
+            _this._partServ.getParticipant(params['id']).subscribe(function (data) {
                 _this._participant = data;
+                _this._participantCopy = Object.assign({}, _this._participant, data);
                 _this._participant.Age = _this._util.getAge(_this._participant.BirthDate);
-                // console.log(this._participant.ParticipantTypeID);
             });
         });
     };
@@ -1411,7 +1434,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-relationship/participant-relationship.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\">\r\n  <h4 class=\"modal-title text-secondary\"><i class=\"typcn typcn-group-outline\"></i> New relationship</h4>\r\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <ng-template #rt let-r=\"result\" let-t=\"term\">\r\n            {{ r.FirstName }} {{ r.ThirdName }}\r\n          </ng-template>\r\n          <label for=\"participant\">Participant</label>\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"relation.RelatedParticipant\" name=\"\" id=\"\" aria-describedby=\"helpId\"\r\n            placeholder=\"\" [ngbTypeahead]=\"search\" [resultTemplate]=\"rt\" [inputFormatter]=\"formatter\">\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"type\">Type</label>\r\n          <select class=\"form-control custom-select\" [(ngModel)]=\"relation.Type\" name=\"type\" id=\"type\">\r\n            <option disabled value=\"undefined\">--- Select one ---</option>\r\n            <option *ngFor=\"let type of _types\" [ngValue]=\"type\">{{ type.EnglishName }}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <div class=\"col-md-12 d-flex justify-content-end\">\r\n    <button type=\"button\" (click)=\"activeModal.close('Close click')\" class=\"btn btn-outline-primary\"><i class=\"typcn typcn-download-outline\"></i> Save</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"modal-header\">\r\n  <h4 class=\"modal-title text-secondary\"><i class=\"typcn typcn-group-outline\"></i> Nueva Relación</h4>\r\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <ng-template #rt let-r=\"result\" let-t=\"term\">\r\n            {{ r.FirstName }} {{ r.ThirdName }}\r\n          </ng-template>\r\n          <label for=\"participant\">Participante</label>\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"relation.RelatedParticipant\" name=\"\" id=\"\"\r\n            placeholder=\"Buscar\" [ngbTypeahead]=\"search\" [resultTemplate]=\"rt\" [inputFormatter]=\"formatter\">\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <div class=\"form-group\">\r\n          <label for=\"type\">Tipo de relación</label>\r\n          <select class=\"form-control custom-select\" [(ngModel)]=\"relation.Type\" name=\"type\" id=\"type\">\r\n            <option disabled value=\"undefined\">--- Seleccionar ---</option>\r\n            <option *ngFor=\"let type of _types\" [ngValue]=\"type\">{{ type.Name }}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <div class=\"col-md-12 d-flex justify-content-end\">\r\n    <button type=\"button\" (click)=\"activeModal.close('Close click')\" class=\"btn btn-outline-primary\"><i class=\"typcn typcn-download-outline\"></i> Save</button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1458,27 +1481,19 @@ var ParticipantRelationshipComponent = /** @class */ (function () {
         this._relService = _relService;
         this._util = _util;
         this.activeModal = activeModal;
-        this._searchColumns = [
-            'FirstName',
-            'SecondName',
-            'ThirdName',
-            'FourthName'
-        ];
+        this._searchColumns = ['FirstName', 'SecondName', 'ThirdName', 'FourthName'];
         this.search = function (text$) {
             return text$
                 .debounceTime(200)
                 .distinctUntilChanged()
-                .map(function (term) { return term.length < 2 ? []
-                : _this._util.searchFilter(_this._participants, _this._searchColumns, term); });
+                .map(function (term) { return (term.length < 2 ? [] : _this._util.searchFilter(_this._participants, _this._searchColumns, term)); });
         };
         this.formatter = function (x) { return x.FirstName + ' ' + x.ThirdName; };
-        _partService.getParticipants()
-            .subscribe(function (data) {
-            _this._participants = data;
+        _partService.getParticipants().subscribe(function (data) {
+            _this._participants = _this._util.sortBy(data, 'Name');
         });
-        _relService.getTypes()
-            .subscribe(function (data) {
-            _this._types = data;
+        _relService.getTypes().subscribe(function (data) {
+            _this._types = _this._util.sortBy(data, 'Name');
         });
     }
     ParticipantRelationshipComponent.prototype.ngOnInit = function () { };
@@ -1510,7 +1525,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".add-link {\r\n  font-size: 1.15em;\r\n  margin-bottom: 20px;\r\n  display: block;\r\n}\r\n\r\n.card-title {\r\n  font-size: 1.25em;\r\n}\r\n", ""]);
+exports.push([module.i, ".add-link {\r\n  font-size: 1.15em;\r\n  margin-bottom: 20px;\r\n  display: block;\r\n}\r\n\r\n.card-title {\r\n  font-size: 1.25em;\r\n  margin-bottom: 6px;\r\n}\r\n\r\n.card-text {\r\n  margin-bottom: 5px;\r\n}\r\n\r\n.score {\r\n  font-weight: bold;\r\n  font-size: .85em;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1523,7 +1538,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-relationships/participant-relationships.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div *ngFor=\"let relation of _relationships\" class=\"col-md-4\">\r\n      <app-card>\r\n        <div card-section=\"body\">\r\n          <h4 class=\"card-title\">\r\n            <a [routerLink]=\"['/Dashboard/Participants', relation.RelatedParticipantID]\">\r\n              {{ relation.RelatedParticipant.FirstName }} {{ relation.RelatedParticipant.ThirdName }}\r\n            </a>\r\n          </h4>\r\n          <p>{{ relation.Type.EnglishName }}</p>\r\n          <div class=\"d-flex justify-content-end\">\r\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm\"><i class=\"typcn typcn-trash\"></i> Delete</button>\r\n            <button type=\"button\" class=\"btn btn-primary btn-sm\"><i class=\"typcn typcn-edit\"></i> Edit</button>\r\n          </div>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"d-flex justify-content-end\">\r\n    <button type=\"button\" class=\"btn btn-primary add-link\" (click)=\"open()\"><i class=\"typcn typcn-user-add-outline\"></i> Add Relationship</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <app-loading-modal *ngIf=\"!_relationships\"></app-loading-modal>\r\n  <div *ngIf=\"_relationships\" class=\"row\">\r\n    <div *ngFor=\"let relation of _relationships\" class=\"col-md-4\">\r\n      <app-card>\r\n        <div card-section=\"body\" class=\"border-primary\">\r\n          <h4 class=\"card-title\">\r\n            <a *ngIf=\"relation.ParticipantID == participant.ID\" [routerLink]=\"['/dashboard/participants', relation.RelatedParticipantID]\">\r\n              {{ relation.RelatedParticipant.ShortName }}\r\n            </a>\r\n            <a *ngIf=\"relation.RelatedParticipantID == participant.ID\" [routerLink]=\"['/dashboard/participants', relation.ParticipantID]\">\r\n              {{ relation.Participant.ShortName }}\r\n            </a>\r\n            <small *ngIf=\"relation.ParticipantID == participant.ID\" class=\"score pull-right\" [ngClass]=\"{\r\n              'text-success': relation.RelatedParticipant.Score < 3,\r\n              'text-warning': relation.RelatedParticipant.Score > 2.99 && relation.RelatedParticipant.Score < 6,\r\n              'text-danger': relation.RelatedParticipant.Score >= 6 }\">\r\n              {{ relation.RelatedParticipant.Score | number: '1.2-2' }}\r\n            </small>\r\n            <small *ngIf=\"relation.RelatedParticipantID == participant.ID\" class=\"score pull-right\" [ngClass]=\"{\r\n              'text-success': relation.Participant.Score < 3,\r\n              'text-warning': relation.Participant.Score > 2.99 && relation.Participant.Score < 6,\r\n              'text-danger': relation.Participant.Score >= 6 }\">\r\n              {{ relation.Participant.Score | number: '1.2-2' }}\r\n            </small>\r\n          </h4>\r\n          <p class=\"card-text\">{{ relation.Type.Name }}</p>\r\n          <div class=\"d-flex justify-content-end\">\r\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm\">\r\n              <i class=\"fa fa-trash-o\"></i> Borrar</button>\r\n          </div>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"d-flex justify-content-end\">\r\n    <button type=\"button\" class=\"btn btn-primary add-link\" (click)=\"open()\">\r\n      <i class=\"fa fa-connectdevelop\"></i> Agregar Relaciones</button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1533,11 +1548,14 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_participants_model__ = __webpack_require__("../../../../../src/app/shared/models/participants.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_participants_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_models_participants_model__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__participant_relationship_participant_relationship_component__ = __webpack_require__("../../../../../src/app/dashboard/participants/participant-relationship/participant-relationship.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_participants_model__ = __webpack_require__("../../../../../src/app/shared/models/participants.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_models_participants_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_models_participants_model__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__ = __webpack_require__("../../../../../src/app/shared/services/participants.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_relationships_service__ = __webpack_require__("../../../../../src/app/shared/services/relationships.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_services_util_service__ = __webpack_require__("../../../../../src/app/shared/services/util.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__participant_relationship_participant_relationship_component__ = __webpack_require__("../../../../../src/app/dashboard/participants/participant-relationship/participant-relationship.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParticipantRelationshipsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1554,34 +1572,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ParticipantRelationshipsComponent = /** @class */ (function () {
-    function ParticipantRelationshipsComponent(modalService, _partService, _relService) {
+    function ParticipantRelationshipsComponent(modalService, _partService, _relService, _util, toastr) {
         this.modalService = modalService;
         this._partService = _partService;
         this._relService = _relService;
+        this._util = _util;
+        this.toastr = toastr;
         this._currentRelationship = {};
     }
     ParticipantRelationshipsComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this._currentRelationship.Participant = this.participant;
-        this._relService.getRelationships(this.participant.ID)
-            .subscribe(function (data) {
+    };
+    ParticipantRelationshipsComponent.prototype.ngOnChanges = function (changes) {
+        for (var propName in changes) {
+            if (propName === 'participant') {
+                this.getRelationships();
+            }
+        }
+    };
+    ParticipantRelationshipsComponent.prototype.getRelationships = function () {
+        var _this = this;
+        this._relService.getRelationships(this.participant.ID).subscribe(function (data) {
             _this._relationships = data;
         });
     };
     ParticipantRelationshipsComponent.prototype.open = function () {
         var _this = this;
-        // this.modalService.open(content).result.then((result) => {
-        //   this.closeResult = `Closed with: ${result}`;
-        //   console.log(this.closeResult);
-        //   this.addRelationShip();
-        // }, (reason) => {
-        //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        //   console.log(this.closeResult);
-        // });
-        var modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_5__participant_relationship_participant_relationship_component__["a" /* ParticipantRelationshipComponent */]);
-        modalRef.result
-            .then(function (result) {
+        var modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_7__participant_relationship_participant_relationship_component__["a" /* ParticipantRelationshipComponent */]);
+        modalRef.result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
             _this.addRelationShip();
         }, function (reason) {
@@ -1601,14 +1622,27 @@ var ParticipantRelationshipsComponent = /** @class */ (function () {
         }
     };
     ParticipantRelationshipsComponent.prototype.addRelationShip = function () {
-        this._partService.addRelationship(this._currentRelationship)
-            .subscribe(function (data) {
-            console.log(data);
+        var _this = this;
+        var relationship = {};
+        relationship.RelationshipTypeID = this._currentRelationship.Type.ID;
+        relationship.ParticipantID = this._currentRelationship.Participant.ID;
+        relationship.RelatedParticipantID = this._currentRelationship.RelatedParticipant.ID;
+        // console.log(relationship);
+        this._relService.addRelationship(relationship).subscribe(function (data) {
+            _this.toastr.success(data.RelatedParticipant.ShortName, 'Relación agregada');
+            _this._relationships.push(data);
+        });
+    };
+    ParticipantRelationshipsComponent.prototype.removeRelation = function (id) {
+        var _this = this;
+        this._relService.deleteRelationship(id).subscribe(function (data) {
+            _this.toastr.info('Relación eliminada');
+            _this._relationships = _this._util.removeByID(_this._relationships, id);
         });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_models_participants_model__["Participant"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_models_participants_model__["Participant"]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_models_participants_model__["Participant"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_models_participants_model__["Participant"]) === "function" && _a || Object)
     ], ParticipantRelationshipsComponent.prototype, "participant", void 0);
     ParticipantRelationshipsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1616,10 +1650,10 @@ var ParticipantRelationshipsComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/participants/participant-relationships/participant-relationships.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/participants/participant-relationships/participant-relationships.component.css")]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_relationships_service__["a" /* RelationshipsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_relationships_service__["a" /* RelationshipsService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["e" /* NgbModal */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__["a" /* ParticipantsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_services_participants_service__["a" /* ParticipantsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__shared_services_relationships_service__["a" /* RelationshipsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_services_relationships_service__["a" /* RelationshipsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__shared_services_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_services_util_service__["a" /* UtilService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _f || Object])
     ], ParticipantRelationshipsComponent);
     return ParticipantRelationshipsComponent;
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=participant-relationships.component.js.map
@@ -1647,7 +1681,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/participants/participant-tasks/participant-tasks.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h6 [ngClass]=\"{'text-muted completed': !participant.MatrixReady}\">Completar Matrix\n  <span class=\"float-right\">\n    <i class=\"typcn\" [ngClass]=\"{\n      'typcn-input-checked text-success': !participant.MatrixReady,\n      'typcn-input-checked-outline text-muted': participant.MatrixReady\n    }\"></i>\n  </span>\n</h6>\n<ng-container *ngFor=\"let doc of _pending\">\n  <h6 *ngIf=\"doc.Uploaded == 0\">{{ doc.Name }}\n    <span class=\"float-right\">\n      <i class=\"typcn typcn-input-checked-outline text-muted\"></i>\n    </span>\n  </h6>\n</ng-container>\n<ng-container *ngFor=\"let doc of _pending\">\n  <h6 *ngIf=\"doc.Uploaded > 0\" class=\"text-muted completed\">{{ doc.Name }}\n    <span class=\"float-right\">\n      <i class=\"typcn typcn-input-checked text-success\"></i>\n    </span>\n  </h6>\n</ng-container>\n"
+module.exports = "<h6 [ngClass]=\"{'text-muted completed': participant.MatrixReady}\">Completar Matrix\n  <span class=\"float-right\">\n    <i class=\"typcn\" [ngClass]=\"{\n      'typcn-input-checked text-success': participant.MatrixReady,\n      'typcn-input-checked-outline text-muted': !participant.MatrixReady\n    }\"></i>\n  </span>\n</h6>\n<ng-container *ngFor=\"let doc of _pending\">\n  <h6 *ngIf=\"doc.Uploaded == 0\">{{ doc.Name }}\n    <span class=\"float-right\">\n      <i class=\"typcn typcn-input-checked-outline text-muted\"></i>\n    </span>\n  </h6>\n</ng-container>\n<ng-container *ngFor=\"let doc of _pending\">\n  <h6 *ngIf=\"doc.Uploaded > 0\" class=\"text-muted completed\">{{ doc.Name }}\n    <span class=\"float-right\">\n      <i class=\"typcn typcn-input-checked text-success\"></i>\n    </span>\n  </h6>\n</ng-container>\n"
 
 /***/ }),
 

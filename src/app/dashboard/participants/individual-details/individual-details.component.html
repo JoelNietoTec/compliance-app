@@ -2,10 +2,10 @@
   <div class="card-body text-center">
     <img src="assets/img/user.jpg" alt="" class="img-fluid img-circle user-img">
     <h4 class="user-name">
-      {{ individual.ThirdName }}, {{ individual.FirstName }}
+      {{ individual.FullName }}
     </h4>
     <h5 *ngIf="individual.Score" class="font-weight-bold" [ngClass]="{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 6, 'text-danger': individual.Score >= 6 }">
-      <i class="fa fa-tachometer" aria-hidden="true"></i> {{ individual.Score }}</h5>
+      <i class="fa fa-tachometer" aria-hidden="true"></i> {{ individual.Score | number: '1.3-3' }}</h5>
   </div>
   <div class="card-body section-block">
     <ngb-tabset type="pills" [justify]="'center'">
@@ -18,10 +18,12 @@
           <h6 class="participant-info">{{ individual.Phone }}</h6>
           <small class="text-muted">Teléfono Celular <i class="typcn typcn-device-phone" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-          <small class="text-muted">Fecha de nacimiento (edad) <i class="typcn typcn-weather-sunny" aria-hidden="true"></i></small>
-          <h6 class="participant-info">{{ individual.BirthDate | date: 'shortDate' }} <em>({{ individual.Age }})</em></h6>
-          <small class="text-muted">Género <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
-          <h6 class="participant-info">{{ individual.Gender.EnglishName }}</h6>
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Fecha de nacimiento (edad)  <i class="fa fa-birthday-cake" aria-hidden="true"></i> </small>
+          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }} <em>({{ individual.Age }})</em></h6>
+          <small *ngIf="individual.ParticipantTypeID == 2" class="text-muted">Fecha de constitución  <i class="fa fa-building" aria-hidden="true"></i> </small>
+          <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}</h6>
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Género <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
+          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.Gender.EnglishName }}</h6>
           <small class="text-muted">Sitio Web <i class="typcn typcn-globe-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.WebSite }}</h6>
           <small class="text-muted">Dirección <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>

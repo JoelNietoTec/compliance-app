@@ -1,4 +1,5 @@
-<div class="form-group">
+<app-loading-modal *ngIf="!_partParam"></app-loading-modal>
+<div *ngIf="_partParam" class="form-group" >
   <div class="form-group" [ngClass]="{'has-danger': !_currentValue && !_currentSubValue, 'has-success': _currentValue || _currentSubValue}">
     <label class="form-control-label" for="">{{ param.Name }} </label>
     <ng-container [ngSwitch]="param.ParamTable.TableTypeID">

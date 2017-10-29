@@ -16,19 +16,11 @@ import { UtilService } from '../../../shared/services/util.service';
   templateUrl: './participant-relationship.component.html',
   styleUrls: ['./participant-relationship.component.css']
 })
-
 export class ParticipantRelationshipComponent implements OnInit {
-
   @Input() relation: ParticipantRelationship;
   _participants: Array<Participant>;
   _types: Array<RelationshipType>;
-  _searchColumns: Array<string> = [
-    'FirstName',
-    'SecondName',
-    'ThirdName',
-    'FourthName'
-  ];
-
+  _searchColumns: Array<string> = ['FirstName', 'SecondName', 'ThirdName', 'FourthName'];
 
   constructor(
     private _partService: ParticipantsService,
@@ -36,27 +28,22 @@ export class ParticipantRelationshipComponent implements OnInit {
     private _util: UtilService,
     public activeModal: NgbActiveModal
   ) {
-    _partService.getParticipants()
-      .subscribe(data => {
-        this._participants = data;
-      });
+    _partService.getParticipants().subscribe(data => {
+      this._participants = this._util.sortBy(data, 'Name');
+    });
 
-    _relService.getTypes()
-      .subscribe(data => {
-        this._types = data;
-      });
+    _relService.getTypes().subscribe(data => {
+      this._types = this._util.sortBy(data, 'Name');
+    });
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
-      .map(term => term.length < 2 ? []
-        : this._util.searchFilter(this._participants, this._searchColumns, term)
-      );
-
+      .map(term => (term.length < 2 ? [] : this._util.searchFilter(this._participants, this._searchColumns, term)));
 
   formatter = (x: { FirstName: string; ThirdName: string }) => x.FirstName + ' ' + x.ThirdName;
 }

@@ -1,17 +1,17 @@
+<app-loading-modal *ngIf="!_participant"></app-loading-modal>
 <div *ngIf="_participant">
   <div class="row">
     <div class="col-md-4">
-      <ng-container [ngSwitch]="_participant.ParticipantTypeID">
-        <individual-details *ngSwitchCase=1 [individual]="_participant"></individual-details>
-        <entity-details *ngSwitchCase=2 [entity]="_participant"></entity-details>
+      <ng-container>
+        <individual-details [individual]="_participant"></individual-details>
       </ng-container>
     </div>
     <div class="col-md-8">
       <div class="card">
-        <ngb-tabset type="pills" *ngIf="_participant">
+        <ngb-tabset #t type="pills" *ngIf="_participant">
           <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
-              <participant-compliance [participant]="_participant"></participant-compliance>
+              <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Documentos">
@@ -27,10 +27,10 @@
           <ngb-tab title="Editar">
             <ng-template ngbTabContent>
               <div class="form-container">
-                <individual-form *ngIf="_participant.ParticipantTypeID == 1" [individual]="_participant"></individual-form>
+                <individual-form *ngIf="_participant.ParticipantTypeID == 1" [individual]="_participantCopy" (updateParticipant)="getParticipant()"></individual-form>
               </div>
               <div class="form-container">
-                <entity-form *ngIf="_participant.ParticipantTypeID == 2" [entity]="_participant"></entity-form>
+                <entity-form *ngIf="_participant.ParticipantTypeID == 2" [entity]="_participantCopy" (updateParticipant)="getParticipant()"></entity-form>
               </div>
             </ng-template>
           </ngb-tab>

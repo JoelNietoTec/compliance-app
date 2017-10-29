@@ -16,28 +16,23 @@ interface ParticipantData extends Participant {
   templateUrl: './participant-details.component.html',
   styleUrls: ['./participant-details.component.css']
 })
-
 export class ParticipantDetailsComponent implements OnInit {
-
   _participant: ParticipantData;
+  _participantCopy: Participant;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _partServ: ParticipantsService,
-    private _util: UtilService
-  ) {
-
-  }
+  constructor(private _route: ActivatedRoute, private _partServ: ParticipantsService, private _util: UtilService) {}
 
   ngOnInit() {
+    this.getParticipant();
+  }
 
+  getParticipant() {
     this._route.params.subscribe(params => {
-      this._partServ.getParticipant(params['id'])
-        .subscribe(data => {
-          this._participant = data;
-          this._participant.Age = this._util.getAge(this._participant.BirthDate);
-          // console.log(this._participant.ParticipantTypeID);
-        });
+      this._partServ.getParticipant(params['id']).subscribe(data => {
+        this._participant = data;
+        this._participantCopy = Object.assign({}, this._participant, data);
+        this._participant.Age = this._util.getAge(this._participant.BirthDate);
+      });
     });
   }
 }

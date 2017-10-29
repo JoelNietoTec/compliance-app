@@ -13,11 +13,8 @@ import { UtilService } from '../../../shared/services/util.service';
 })
 export class ParamTablesComponent implements OnInit {
   _table: TableOptions = {};
-  tables: ParamTable[];
-  _tableTypes: TableType[];
-  _showNewTable: boolean;
-  _newTable: ParamTable = {};
-  _saving: boolean = false;
+  tables: Array<ParamTable>;
+  _tableTypes: Array<TableType>;
 
   constructor(private _tablesService: ParamTablesService, private _util: UtilService, private toastr: ToastsManager) {}
 
@@ -56,7 +53,7 @@ export class ParamTablesComponent implements OnInit {
         objectColumn: 'TableType.Name',
         objectID: 'TableTypeID'
       },
-      { name: 'CreateDate', title: 'FechaCreación', sortable: true, type: 'date', readonly: true }
+      { name: 'CreateDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
     ];
 
     this._tablesService.getTables().subscribe(data => {
@@ -65,32 +62,23 @@ export class ParamTablesComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this._saving = true;
-    this._newTable.CreateDate = new Date();
-    this._newTable.TableTypeID = this._newTable.TableType.ID;
-    console.log(this._newTable);
-    this._tablesService.createtable(this._newTable).subscribe(data => {
-      data.TableType = this._util.filterByID(this._tableTypes, data.TableTypeID);
+  addTable(table: ParamTable) {
+    this._tablesService.createTable(table).subscribe(data => {
+      this.toastr.success(data.Name, 'Tabla Creada');
       this.tables.push(data);
-      this._newTable = {};
-      this._saving = false;
     });
   }
 
-  createTable() {
-    this._saving = true;
-    this._newTable.CreateDate = new Date();
-    this._tablesService.createtable(this._newTable).subscribe(data => {
-      this.toastr.success(data.EnglishName, 'Table Created');
-      data.TableType = this._util.filterByID(this._tableTypes, data.TableTypeID);
-      this.tables.push(data);
-      this._newTable = {};
-      this._saving = false;
+  editTable(table: ParamTable) {
+    this._tablesService.editTable(table.ID, table).subscribe(data => {
+      this.toastr.success(data.Name, 'Tabla Editada');
     });
   }
 
-  addTable() {
-    this._showNewTable = !this._showNewTable;
+  deleteTable(id: number) {
+    this._tablesService.deleteTable(id).subscribe(data => {
+      this.toastr.info('Tabla eliminada');
+      this.tables = this._util.removeByID(this.tables, id);
+    });
   }
 }

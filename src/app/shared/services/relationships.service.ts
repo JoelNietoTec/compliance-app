@@ -9,7 +9,6 @@ import { RelationshipType, ParticipantRelationship } from '../models/relationshi
 
 @Injectable()
 export class RelationshipsService {
-
   private _typesURL: string;
   private _participantsURL: string;
   private _relationshipsURL: string;
@@ -17,24 +16,18 @@ export class RelationshipsService {
   private _newType: RelationshipType;
   private _headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(
-    private _http: Http,
-    private _conn: ConnectionService
-  ) {
+  constructor(private _http: Http, private _conn: ConnectionService) {
     this._typesURL = _conn.APIUrl + 'relationshiptypes';
+    this._relationshipsURL = _conn.APIUrl + 'participantrelationships';
     this._participantsURL = _conn.APIUrl + 'participants';
   }
 
   getRelationships(participantID: number): Observable<Array<ParticipantRelationship>> {
-    return this._http
-      .get(`${this._participantsURL}/${participantID}/relationships`)
-      .map((response: Response) => response.json());
+    return this._http.get(`${this._participantsURL}/${participantID}/relationships`).map((response: Response) => response.json());
   }
 
   getTypes(): Observable<Array<RelationshipType>> {
-    return this._http
-      .get(this._typesURL)
-      .map((response: Response) => response.json());
+    return this._http.get(this._typesURL).map((response: Response) => response.json());
   }
 
   createType(type: RelationshipType): Observable<RelationshipType> {
@@ -52,9 +45,16 @@ export class RelationshipsService {
   }
 
   deleteType(id: number) {
+    return this._http.delete(`${this._typesURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
+  }
+
+  addRelationship(relationship: ParticipantRelationship): Observable<ParticipantRelationship> {
     return this._http
-      .delete(`${this._typesURL}/${id}`, { headers: this._headers })
+      .post(this._relationshipsURL, JSON.stringify(relationship), { headers: this._headers })
       .map((response: Response) => response.json());
   }
 
+  deleteRelationship(id: number) {
+    return this._http.delete(`${this._relationshipsURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
+  }
 }

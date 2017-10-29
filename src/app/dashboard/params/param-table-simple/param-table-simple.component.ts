@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
+import { ParamValuesService } from '../../../shared/services/param-values.service';
+import { UtilService } from '../../../shared/services/util.service';
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamTable, ParamValue } from '../../../shared/models/params.model';
 
 @Component({
@@ -13,72 +16,59 @@ import { ParamTable, ParamValue } from '../../../shared/models/params.model';
 export class ParamTableSimpleComponent implements OnInit {
   @Input() table: ParamTable;
 
-  _newValue: ParamValue;
-  _currentValue: ParamValue;
-  _saving: Boolean = false;
-  _editing: Boolean;
   _values: Array<ParamValue>;
+  _customTable: TableOptions = {};
 
-  constructor(private _tableService: ParamTablesService, private toastr: ToastsManager) {}
+  constructor(
+    private _tableService: ParamTablesService,
+    private _valueServ: ParamValuesService,
+    private toastr: ToastsManager,
+    private _util: UtilService
+  ) {}
 
   ngOnInit() {
-    this._tableService.getValuesByTable(this.table.ID).subscribe(data => {
+    this._customTable.addMethod = 'inline';
+    this._customTable.editable = true;
+    this._customTable.creatable = true;
+    this._customTable.deletable = true;
+    this._customTable.pageable = true;
+    this._customTable.searcheable = true;
+    this._customTable.style = 'table-sm table-squared';
+    this._customTable.columns = [
+      { name: 'DisplayValue', title: 'Nombre', sortable: true, type: 'text', filterable: true },
+      { name: 'EnglishDisplayValue', title: 'Nombre Inglés', sortable: true, type: 'text', filterable: true },
+      { name: 'Score', title: 'Puntaje', sortable: true, type: 'number' }
+    ];
+
+    this._valueServ.getValuesByTable(this.table.ID).subscribe(data => {
       this._values = data;
-    });
-    this._newValue = {};
-    this._currentValue = {};
-    this._editing = false;
-  }
-
-  onSubmit() {
-    this._saving = true;
-    this._newValue.ParamTableID = this.table.ID;
-    console.log(this._newValue);
-    this._tableService.addValue(this._newValue).subscribe(data => {
-      this.toastr.success(data.EnglishDisplayValue, 'Value created');
-      this._saving = false;
-      this._values.push(data);
-      this._newValue = {};
+      this._customTable.items = this._values;
     });
   }
 
-  createValue() {
-    this._saving = true;
-    this._newValue.ParamTableID = this.table.ID;
-    this._tableService.addValue(this._newValue).subscribe(data => {
-      this.toastr.success(data.EnglishDisplayValue, 'Value created');
-      this._saving = false;
-      this._values.push(data);
-      this._newValue = {};
+  addValue(value: ParamValue) {
+    value.ParamTableID = this.table.ID;
+    this._valueServ.addValue(value).subscribe(
+      data => {
+        this.toastr.success(data.DisplayValue, 'Valor creado');
+        this._values.push(data);
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, 'No se pudo crear el valor');
+      }
+    );
+  }
+
+  editValue(value: ParamValue) {
+    this._valueServ.editValue(value.ID, value).subscribe(data => {
+      this.toastr.success(data.DisplayValue, 'Valor editado');
     });
   }
 
-  selectValue(val: ParamValue) {
-    this._editing = true;
-    this._currentValue = val;
-  }
-
-  onSaveValue() {
-    this._saving = true;
-    this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(data => {
-      console.log(data);
-      this._saving = false;
-      this._editing = false;
-      this._currentValue = {};
-    });
-  }
-
-  cancelUpdate() {
-    this._currentValue = {};
-  }
-
-  updateValue() {
-    this._saving = true;
-    this._tableService.editValue(this._currentValue.ID, this._currentValue).subscribe(data => {
-      this.toastr.success(this._currentValue.EnglishDisplayValue, 'Value updated');
-      this._saving = false;
-      this._editing = false;
-      this._currentValue = {};
+  deleteValue(id: number) {
+    this._valueServ.deleteValue(id).subscribe(data => {
+      this.toastr.info('Valor eliminado');
+      this._values = this._util.removeByID(this._values, id);
     });
   }
 }

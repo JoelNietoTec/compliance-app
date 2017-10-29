@@ -1,55 +1,60 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { ParamTable, ParamSubValue, ParamValue } from '../../../shared/models/params.model';
-import { ParamTablesService } from '../../../shared/services/param-tables.service';
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
+import { ParamSubValue, ParamValue } from '../../../shared/models/params.model';
+import { ParamSubValuesService } from '../../../shared/services/param-sub-values.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 @Component({
   selector: 'param-value',
   templateUrl: './param-value.component.html',
   styleUrls: ['./param-value.component.css']
 })
-
 export class ParamValueComponent implements OnInit {
   @Input() _value: ParamValue;
-
-  _newSubValue: ParamSubValue;
-  _currentSubValue: ParamSubValue = {};
-  _saving: Boolean = false;
+  _table: TableOptions = {};
 
   constructor(
-    private _tableService: ParamTablesService,
+    private _util: UtilService,
+    private _subValService: ParamSubValuesService,
     private toastr: ToastsManager
-  ) {
-    this._newSubValue = {};
+  ) {}
+
+  ngOnInit() {
+    this._table.addMethod = 'inline';
+    this._table.creatable = true;
+    this._table.deletable = true;
+    this._table.editable = true;
+    this._table.style = 'table-sm table-squared';
+    this._table.searcheable = true;
+    this._table.pageable = true;
+    this._table.columns = [
+      { name: 'DisplayValue', title: 'Nombre', type: 'text', sortable: true, filterable: true },
+      { name: 'EnglishDisplayValue', title: 'Nombre Inglés', type: 'text', sortable: true, filterable: true },
+      { name: 'Score', title: 'Valor', type: 'number', sortable: true }
+    ];
+    this._table.items = this._value.ParamSubValues;
+
   }
 
-  ngOnInit() { }
-
-  addValue() {
-    this._newSubValue.ParamValueID = this._value.ID;
-    this._tableService.addSubValue(this._newSubValue)
-      .subscribe(data => {
-        this.toastr.success(data.EnglishDisplayValue, 'Value added');
-        this._value.ParamSubValues.push(data);
-        this._newSubValue = {};
-      });
+  addValue(value: ParamSubValue) {
+    value.ParamValueID = this._value.ID;
+    this._subValService.addSubValue(value).subscribe(data => {
+      this.toastr.success(data.DisplayValue, 'Valor creado');
+      this._table.items.push(data);
+    });
   }
 
-  selectValue(value: ParamSubValue) {
-    this._currentSubValue = value;
+  updateValue(value: ParamSubValue) {
+    this._subValService.editSubValue(value.ID, value).subscribe(data => {
+      this.toastr.success(data.DisplayValue, 'Valor editado');
+    });
   }
 
-  cancelUpdate() {
-    this._currentSubValue = {};
+  deleteValue(id: number) {
+    this._subValService.deleteSubValue(id).subscribe(data => {
+      this.toastr.info('Valor eliminado');
+    });
   }
-
-  updateValue() {
-    this._tableService.editSubValue(this._currentSubValue.ID, this._currentSubValue)
-      .subscribe(data => {
-        this.toastr.success(this._currentSubValue.EnglishDisplayValue, 'Value updated');
-        this._currentSubValue = {};
-      });
-  }
-
 }

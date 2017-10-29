@@ -19,7 +19,6 @@ export class EntitiesListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'ID', title: '#', type: 'number', sortable: true },
       { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
       { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },

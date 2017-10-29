@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
@@ -25,6 +25,8 @@ const NOW = new Date();
 export class IndividualFormComponent implements OnInit {
 
   @Input() individual?: Individual;
+  @Output() updateParticipant = new EventEmitter();
+
   _individual: Individual;
   private birthdate: string;
   _genders: Array<Gender>;
@@ -124,14 +126,14 @@ export class IndividualFormComponent implements OnInit {
       console.log(this._individual);
       this._partServ.createParticipant(this._individual)
         .subscribe(data => {
-          this.toastr.success(`ID: ${data.ID}`, 'Individuo Creado');
+          this.toastr.success(data.ShortName, 'Individuo Creado');
           this._router.navigate(['dashboard/participants', data.ID]);
         });
     } else {
       this._partServ.updateParticipant(this._individual.ID, this._individual)
         .subscribe(data => {
-          this.toastr.success(`ID: ${this._individual.ID}`, 'Individuo Actualizado');
-          this._router.navigate(['dashboard/participants', this._individual.ID]);
+          this.toastr.success(data.ShortName, 'Individuo Actualizado');
+          this.updateParticipant.emit();
         });
     }
 

@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   public pieChartLabels: Array<string> = []; // ['High', 'Medium', 'Low', 'Incomplete'];
   public pieChartData: Array<number> = []; // = [200, 600, 400, 300];
-  public pieChartType: string = 'doughnut';
+  public pieChartType: string = 'pie';
   public pieChartOptions: any;
   public chartColors: Array<any>;
   public chartReady: Boolean = false;
@@ -55,18 +55,18 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Distribución de Riesgo',
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
         fontSize: 16
       },
       legend: {
         position: 'bottom',
         labels: {
-          fontFamily: 'Roboto',
+          fontFamily: 'Poppins',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Roboto',
+        bodyFontFamily: 'Poppins',
         bodyFontSize: 14
       }
     };

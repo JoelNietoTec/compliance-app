@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Participant, ParticipantParam } from '../../../shared/models/participants.model';
@@ -7,6 +7,7 @@ import { Param, ParamValue, ParamSubValue, ParamTable } from '../../../shared/mo
 import { UtilService } from '../../../shared/services/util.service';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
+import { ParamValuesService } from '../../../shared/services/param-values.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -18,6 +19,8 @@ export class ParticipantComplianceParamComponent implements OnInit {
   @Input() participant: Participant;
   @Input() partParams: Array<ParticipantParam>;
   @Input() param: Param;
+  @Output() update = new EventEmitter();
+
 
   _partParam: ParticipantParam;
   _default: any = undefined;
@@ -34,6 +37,7 @@ export class ParticipantComplianceParamComponent implements OnInit {
   constructor(
     private _util: UtilService,
     private _partService: ParticipantsService,
+    private _valService: ParamValuesService,
     private _tableServ: ParamTablesService,
     private toastr: ToastsManager,
     private _router: Router
@@ -41,7 +45,9 @@ export class ParticipantComplianceParamComponent implements OnInit {
 
   ngOnInit() {
     // this._partParam = this._util.filterByID(this.partParams, this.param.ID);
-    this._tableServ.getValuesByTable(this.param.ParamTableID).subscribe(data => {
+    // console.log(this.param);
+
+    this._valService.getValuesByTable(this.param.ParamTableID).subscribe(data => {
       this._values = data;
       this._values = this._util.sortBy(this._values, 'DisplayValue');
       for (const i of this._values) {
@@ -53,7 +59,7 @@ export class ParticipantComplianceParamComponent implements OnInit {
 
   getParam() {
     this._partParam = this.partParams.find(item => item.ParamID === this.param.ID);
-    this._currentValue = this._values.find(item => item.ID === this._partParam.ParamValueID);
+    this._currentValue = this._util.filterByID(this._values, this._partParam.ParamValueID);
     if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
       this._currentSubValue = this._currentValue.ParamSubValues.find(item => item.ID === this._partParam.ParamSubValueID);
     }
@@ -75,7 +81,8 @@ export class ParticipantComplianceParamComponent implements OnInit {
     }
 
     this._partService.updateParam(this._partParam.ID, this._partParam).subscribe(data => {
-      this.toastr.success(this.param.EnglishName, 'Updated Parameter');
+      this.toastr.success(this.param.Name, 'Parámetro actualizado');
+      this.update.emit(this._partParam);
     });
   }
 }

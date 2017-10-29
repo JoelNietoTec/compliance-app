@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamMatrix, MatrixType } from '../../../shared/models/params.model';
 import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 import { MatrixTypesService } from '../../../shared/services/matrix-types.service';
@@ -12,65 +13,79 @@ import { UtilService } from '../../../shared/services/util.service';
   styleUrls: ['./param-matrices.component.css']
 })
 export class ParamMatricesComponent implements OnInit {
-  _showNewMatrix: boolean;
-  matrices: ParamMatrix[];
-  _newMatrix: ParamMatrix = {};
-  _currentMatrix: ParamMatrix = {};
-  matrixTypes: MatrixType[];
+  _matrices: ParamMatrix[];
+  _matrixTypes: MatrixType[];
+  _table: TableOptions = {};
 
   constructor(
     private _matrixService: ParamMatricesService,
     private _typesService: MatrixTypesService,
     private toastr: ToastsManager,
     private _util: UtilService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this._matrixService.getMatrices()
-      .subscribe(data => {
-        this.matrices = data;
-      });
+    this._table.addMethod = 'inline';
+    this._table.creatable = true;
+    this._table.editable = true;
+    this._table.detailsURL = [];
+    this._table.style = 'table-sm table-squared';
+    this._table.title = 'Matrices';
 
-    this._typesService.getMatrixTypes()
-      .subscribe(data => {
-        this.matrixTypes = data;
-      });
+    this._matrixTypes = [
+      {
+        ID: 1,
+        Name: 'Individuos',
+        EnglishName: 'Individuals'
+      },
+      {
+        ID: 2,
+        Name: 'Entidades',
+        EnglishName: 'Entities'
+      }
+    ];
+
+    this._table.columns = [
+      { name: 'Code', title: 'Código', type: 'text', sortable: true },
+      { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
+      {
+        name: 'MatrixType',
+        title: 'Tipo',
+        sortable: true,
+        type: 'object',
+        list: this._matrixTypes,
+        listID: 'ID',
+        listDisplay: 'Name',
+        objectColumn: 'MatrixType.Name',
+        objectID: 'MatrixTypeID'
+      },
+      { name: 'Description', title: 'Descripción', type: 'text', sortable: true },
+      { name: 'CreateDate', title: 'Fec. Creación', type: 'date', readonly: true }
+    ];
+
+    this._matrixService.getMatrices().subscribe(data => {
+      this._matrices = data;
+      this._table.items = this._matrices;
+    });
   }
 
-  createMatrix() {
-    this._newMatrix.CreateDate = new Date();
-    console.log(this._newMatrix);
-    this._matrixService.createMatrix(this._newMatrix)
-      .subscribe(data => {
-        data.MatrixType = this._util.filterByID(this.matrixTypes, data.MatrixTypeID);
-        this.toastr.success(data.Name, 'Matrix Created');
-        this.matrices.push(data);
-        this._newMatrix = {};
-      });
+  createMatrix(matrix: ParamMatrix) {
+    matrix.CreateDate = new Date();
+    this._matrixService.createMatrix(matrix).subscribe(data => {
+      data.MatrixType = this._util.filterByID(this._matrixTypes, data.MatrixTypeID);
+      this.toastr.success(data.Name, 'Matriz creada');
+      this._matrices.push(data);
+    });
   }
 
-  selectMatrix(matrix: ParamMatrix) {
-    this._currentMatrix = matrix;
-    console.log(this._currentMatrix);
-  }
-
-  updateMatrix() {
-    console.log(this._currentMatrix);
-    this._matrixService.updateMatrix(this._currentMatrix.ID, this._currentMatrix)
-      .subscribe(data => {
-        this.toastr.success(this._currentMatrix.Name, 'Matrix Updated');
-        this._currentMatrix = {};
+  updateMatrix(matrix: ParamMatrix) {
+    this._matrixService.updateMatrix(matrix.ID, matrix).subscribe(
+      data => {
+        this.toastr.success(matrix.Name, 'Matrix Updated');
       },
       (error: Error) => {
         this.toastr.error(error.message, error.name);
-      });
-  }
-
-  cancelUpdate() {
-    this._currentMatrix = {};
-  }
-
-  addMatrix() {
-    this._showNewMatrix = !this._showNewMatrix;
+      }
+    );
   }
 }

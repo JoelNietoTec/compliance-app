@@ -26,6 +26,8 @@ import { CountriesService } from './services/countries.service';
 import { RelationshipsService } from './services/relationships.service';
 import { TasksService } from './services/tasks.service';
 import { SanctionsService } from './services/sanctions.service';
+import { ParamValuesService } from './services/param-values.service';
+import { ParamSubValuesService } from './services/param-sub-values.service';
 import { AuthGuard } from './services/auth.guard';
 
 // Components
@@ -96,6 +98,8 @@ import { TableFormComponent } from './components/table-form/table-form.component
     CountriesService,
     RelationshipsService,
     TasksService,
+    ParamValuesService,
+    ParamSubValuesService,
     SanctionsService,
     NgbActiveModal,
     AuthGuard

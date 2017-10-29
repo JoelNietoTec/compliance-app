@@ -78,6 +78,10 @@ export class ParticipantsService {
     });
   }
 
+  getParticipantParam(participantID: number, paramID: number): Observable<ParticipantParam> {
+    return this._http.get(`${this._partURL}/${participantID}/params/${paramID}`).map((response: Response) => response.json());
+  }
+
   updateParam(_id: number, _param: ParticipantParam): Observable<ParticipantParam> {
     return this._http.put(this._paramURL + '/' + _id, JSON.stringify(_param), { headers: this._headers }).map(response => {
       this._newParam = response.json();
@@ -109,11 +113,5 @@ export class ParticipantsService {
       .get(`${this._partURL}/${id}/pending`)
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
-  }
-
-  addRelationship(relationship: ParticipantRelationship): Observable<ParticipantRelationship> {
-    return this._http
-      .post(this._partURL + '/relationships', JSON.stringify(relationship), { headers: this._headers })
-      .map((response: Response) => response.json());
   }
 }
