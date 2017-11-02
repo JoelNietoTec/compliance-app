@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Task, TaskStatus } from '../../../shared/models/tasks.model';
 import { TasksService } from '../../../shared/services/tasks.service';
@@ -35,7 +36,8 @@ export class TasksComponent implements OnInit {
     private modalService: NgbModal,
     private _taskService: TasksService,
     private _dateFormatter: NgbDateParserFormatter,
-    private _util: UtilService
+    private _util: UtilService,
+    private toastr: ToastsManager
   ) { }
 
   ngOnInit() {
@@ -103,6 +105,7 @@ export class TasksComponent implements OnInit {
   addTask() {
     this._taskService.createTasks(this._currentTask)
       .subscribe(data => {
+        this.toastr.success(data.Title, 'Tarea agregada');
         this._tasks.push(data);
         this.sortTask();
         this._currentTask = {};
@@ -112,7 +115,7 @@ export class TasksComponent implements OnInit {
   updateTask() {
     this._taskService.updateTask(this._currentTask.ID, this._currentTask)
       .subscribe(data => {
-
+        this.toastr.success(data.Title, 'Tarea editada');
         const oldItem = this._util.filterByID(this._tasks, this._currentTask.ID);
         const index = this._tasks.indexOf(oldItem);
 
