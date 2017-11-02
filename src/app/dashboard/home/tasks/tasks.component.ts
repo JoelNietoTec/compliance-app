@@ -111,6 +111,7 @@ export class TasksComponent implements OnInit {
       const index = this._tasks.indexOf(oldItem);
 
       this._tasks[index] = this._currentTask;
+      this._currentTask = {};
     });
   }
 }

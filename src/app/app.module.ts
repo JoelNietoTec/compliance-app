@@ -9,7 +9,6 @@ import { LOCALE_ID } from '@angular/core';
 // Packages Dependencies
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
-import { ToastyModule } from 'ng2-toasty';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr';

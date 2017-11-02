@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastyModule } from 'ng2-toasty';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
@@ -52,7 +51,6 @@ import { TableFormComponent } from './components/table-form/table-form.component
 @NgModule({
   imports: [
     CommonModule,
-    ToastyModule.forRoot(),
     FormsModule,
     RouterModule,
     NgbModule.forRoot(),
@@ -66,14 +64,12 @@ import { TableFormComponent } from './components/table-form/table-form.component
   ],
   exports: [
     LoadingModalComponent,
-    ToastyModule,
     CardComponent,
     ScorePipe,
     SortIconComponent,
     FormsModule,
     CommonModule,
     QuickCardComponent,
-    ToastyModule,
     TaskCardComponent,
     NgbModule,
     TaskFormComponent,
