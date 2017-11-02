@@ -467,7 +467,7 @@ td > input, td > .form-control {
 }
 
 select.custom-select {
-  padding: 8px 28px 8px 12px !important;
+  /* padding: 8px 28px 8px 12px !important; */
   height: 34px !important;
 }
 
