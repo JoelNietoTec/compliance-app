@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   // apiURL: 'http://localhost:53212/api/'
   // apiURL: 'http://localhost:65175/api/'
-  apiURL: 'http://complianceapi.azurewebsites.net/api/'
+  // apiURL: 'http://complianceapi.azurewebsites.net/api/'
 };
