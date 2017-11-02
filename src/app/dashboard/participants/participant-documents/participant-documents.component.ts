@@ -41,7 +41,7 @@ export class ParticipantDocumentsComponent implements OnInit {
     this._docServ.saveDoc(doc).subscribe(
       data => {
         this.toastr.success(data.DocumentType.Name, 'Documento Creado');
-        this._documents.push(doc);
+        this._documents.push(data);
         this._toggleForm();
       },
       (err: Error) => console.log(err.message)
