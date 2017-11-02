@@ -18,13 +18,9 @@ interface FormTask extends Task {
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-
 export class TasksComponent implements OnInit {
-
   @Input() taskStatus: Array<TaskStatus>;
-  @ViewChild(TaskFormComponent)
-
-  private taskForm: TaskFormComponent;
+  @ViewChild(TaskFormComponent) private taskForm: TaskFormComponent;
 
   closeResult: string;
 
@@ -38,31 +34,28 @@ export class TasksComponent implements OnInit {
     private _dateFormatter: NgbDateParserFormatter,
     private _util: UtilService,
     private toastr: ToastsManager
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.taskStatus = JSON.parse(localStorage.getItem('taskStatus'));
-    this._taskService.getTasks()
-      .subscribe(data => {
-        this._tasks = data;
-        this.sortTask();
-      });
+    this._taskService.getTasks().subscribe(data => {
+      this._tasks = data;
+      this.sortTask();
+    });
   }
-
 
   open() {
     const modalRef = this.modalService.open(TaskFormComponent, { size: 'lg' });
-    modalRef.result
-      .then((result) => {
+    modalRef.result.then(
+      result => {
         this.closeResult = `Closed with: ${result}`;
-        console.log(this._currentTask);
         this.saveTask();
-        console.log(this.closeResult);
-      }, (reason) => {
+      },
+      reason => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         this._currentTask = {};
-        console.log(this.closeResult);
-      });
+      }
+    );
 
     modalRef.componentInstance.currentTask = this._currentTask;
   }
@@ -81,10 +74,10 @@ export class TasksComponent implements OnInit {
     this._currentTask = Object.assign({}, this._currentTask, selectedTask);
     if (this._currentTask.BeginDate) {
       this._currentTask.formBeginDate = this._dateFormatter.parse(this._currentTask.BeginDate.toString());
-    };
+    }
     if (selectedTask.ExpirationDate) {
       this._currentTask.formExpirationDate = this._dateFormatter.parse(this._currentTask.ExpirationDate.toString());
-    };
+    }
     this.open();
   }
 
@@ -103,27 +96,21 @@ export class TasksComponent implements OnInit {
   }
 
   addTask() {
-    this._taskService.createTasks(this._currentTask)
-      .subscribe(data => {
-        this.toastr.success(data.Title, 'Tarea agregada');
-        this._tasks.push(data);
-        this.sortTask();
-        this._currentTask = {};
-      });
+    this._taskService.createTasks(this._currentTask).subscribe(data => {
+      this.toastr.success(data.Title, 'Tarea agregada');
+      this._tasks.push(data);
+      this.sortTask();
+      this._currentTask = {};
+    });
   }
 
   updateTask() {
-    this._taskService.updateTask(this._currentTask.ID, this._currentTask)
-      .subscribe(data => {
-        this.toastr.success(data.Title, 'Tarea editada');
-        const oldItem = this._util.filterByID(this._tasks, this._currentTask.ID);
-        const index = this._tasks.indexOf(oldItem);
+    this._taskService.updateTask(this._currentTask.ID, this._currentTask).subscribe(data => {
+      this.toastr.success(data.Title, 'Tarea editada');
+      const oldItem = this._util.filterByID(this._tasks, this._currentTask.ID);
+      const index = this._tasks.indexOf(oldItem);
 
-        this._tasks[index] = this._currentTask;
-      });
+      this._tasks[index] = this._currentTask;
+    });
   }
-
-
-
-
 }
