@@ -30,6 +30,13 @@ export class DocumentsService {
       .catch((err: Error) => err.message);
   }
 
+  getTypesByParticipant(id: number): Observable<Array<DocumentType>> {
+    return this._http
+      .get(`${this._docTypeURL}/type/${id}`)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
   addType(type: DocumentType): Observable<DocumentType> {
     return this._http
       .post(this._docTypeURL, type, { headers: this._headers })
@@ -55,9 +62,9 @@ export class DocumentsService {
       .catch((err: Error) => err.message);
   }
 
-  saveDoc(doc: ParticipantDocument): Observable<ParticipantDocument> {
+  saveDoc(doc: ParticipantDocument) {
     return this._http
-      .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
+      .post(this._documentURL, JSON.stringify(doc.File), { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }

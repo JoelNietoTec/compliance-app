@@ -10,48 +10,37 @@ import { DocumentsService } from '../../../shared/services/documents.service';
   templateUrl: './participant-documents.component.html',
   styleUrls: ['./participant-documents.component.css']
 })
-
 export class ParticipantDocumentsComponent implements OnInit {
-
   @Input() participant: Participant;
 
   _types: Array<DocumentType>;
   _showForm: Boolean = false;
   _documents: Array<ParticipantDocument>;
 
-  constructor(
-    private _docServ: DocumentsService,
-    private _util: UtilService
-  ) {
-    _docServ.getTypes()
-      .subscribe(data => {
-        this._types = data;
-      });
-  }
+  constructor(private _docServ: DocumentsService, private _util: UtilService) {}
 
   ngOnInit() {
-    console.log("hit");
-    this._docServ.getDocByParticipant(this.participant.ID)
-      .subscribe(data => {
-        this._documents = data;
-        console.log(this._documents);
-      });
+    this._docServ.getTypesByParticipant(this.participant.ParticipantTypeID).subscribe(data => {
+      this._types = this._util.sortBy(data, 'Name');
+    });
+
+    this._docServ.getDocByParticipant(this.participant.ID).subscribe(data => {
+      this._documents = data;
+    });
   }
 
   removeDoc(id: number) {
-    this._docServ.deleteDoc(id)
-      .subscribe(data => {
-        this._documents = this._util.removeByID(this._documents, id);
-      });
+    this._docServ.deleteDoc(id).subscribe(data => {
+      this._documents = this._util.removeByID(this._documents, id);
+    });
   }
 
   addDoc(doc: ParticipantDocument) {
     console.log(doc);
-    this._docServ.saveDoc(doc)
-      .subscribe(data => {
-        this._documents.push(doc);
-        this._toggleForm();
-      });
+    this._docServ.saveDoc(doc).subscribe(data => {
+      this._documents.push(doc);
+      this._toggleForm();
+    });
   }
 
   _toggleForm() {

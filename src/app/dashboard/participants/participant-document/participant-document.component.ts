@@ -79,7 +79,7 @@ export class ParticipantDocumentComponent implements OnInit {
     this._partDocument.ExpirationDate = new Date(
       this._dateFormatter.format(this._partDocument.formExpirationDate)
     );
-    console.log(this._partDocument);
+    this.addDocument.emit(this._partDocument);
   }
 
   // equals(c1, c2): boolean {

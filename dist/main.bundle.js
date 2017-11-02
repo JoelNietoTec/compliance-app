@@ -328,7 +328,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".sidebar {\r\n  background-color:  #2c3e50;\r\n}\r\n", ""]);
+exports.push([module.i, ".sidebar {\r\n  background-color: #2c3e50;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  .sidebar {\r\n    -webkit-box-flex: 0;\r\n        -ms-flex: 0 0 13.666667%;\r\n            flex: 0 0 13.666667%;\r\n    max-width: 13.666667%;\r\n  }\r\n  .main {\r\n    -webkit-box-flex: 0;\r\n        -ms-flex: 0 0 86.333334%;\r\n            flex: 0 0 86.333334%;\r\n    max-width: 86.333334%;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
@@ -341,7 +341,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <app-sidebar class=\"col-sm-3 col-md-2 d-none d-sm-block sidebar\">\n    </app-sidebar>\n    <main class=\"col-sm-9 col-md-10 ml-auto pt-3\">\n      <breadcrumb></breadcrumb>\n      <router-outlet></router-outlet>\n    </main>\n  </div>\n</div>\n<ng2-toasty></ng2-toasty>\n"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <app-sidebar class=\"col-sm-3 col-md-2 d-none d-sm-block sidebar\">\n    </app-sidebar>\n    <main class=\"col-sm-9 col-md-10 ml-auto pt-3 main\">\n      <breadcrumb></breadcrumb>\n      <router-outlet></router-outlet>\n    </main>\n  </div>\n</div>\n<ng2-toasty></ng2-toasty>\n"
 
 /***/ }),
 
@@ -1091,7 +1091,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/components/task-card/task-card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" [ngClass]=\"{'to-do border-primary': task.StatusID == 1, 'doing border-success': task.StatusID == 2, 'done': task.StatusID == 3}\">\r\n  <div class=\"card-header\">\r\n    <span class=\"float-left\">\r\n      {{ task.Title }}\r\n    <div class=\"float-right \">\r\n      <ng-container [ngSwitch]=\"task.StatusID\">\r\n        <i *ngSwitchCase=1 class=\"task-icon fa fa-check-square-o text-muted\" placement=\"top\" ngbTooltip=\"Begin\" (click)=\"progressTask()\"></i>\r\n        <i *ngSwitchCase=2 class=\"task-icon fa fa-check-square-o text-muted\" placement=\"top\" ngbTooltip=\"Complete\" (click)=\"progressTask()\"></i>\r\n      </ng-container>\r\n    </div>\r\n  </span>\r\n  </div>\r\n  <div class=\"card-body\" (click)=\"click()\">\r\n    <p class=\"task-description\">{{ task.Description}}</p>\r\n    <p><i class=\"typcn typcn-calendar-outline\"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"card\" [ngClass]=\"{'to-do border-primary': task.StatusID == 1, 'doing border-success': task.StatusID == 2, 'done': task.StatusID == 3}\">\r\n  <div class=\"card-header\">\r\n    <span>\r\n      {{ task.Title }}\r\n    <div class=\"pull-right \">\r\n      <ng-container [ngSwitch]=\"task.StatusID\">\r\n        <i *ngSwitchCase=1 class=\"task-icon fa fa-check-square-o text-muted\" placement=\"top\" ngbTooltip=\"Begin\" (click)=\"progressTask()\"></i>\r\n        <i *ngSwitchCase=2 class=\"task-icon fa fa-check-square-o text-muted\" placement=\"top\" ngbTooltip=\"Complete\" (click)=\"progressTask()\"></i>\r\n      </ng-container>\r\n    </div>\r\n  </span>\r\n  </div>\r\n  <div class=\"card-body\" (click)=\"click()\">\r\n    <p class=\"task-description\">{{ task.Description}}</p>\r\n    <p><i class=\"typcn typcn-calendar-outline\"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1757,6 +1757,12 @@ var DocumentsService = /** @class */ (function () {
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };
+    DocumentsService.prototype.getTypesByParticipant = function (id) {
+        return this._http
+            .get(this._docTypeURL + "/type/" + id)
+            .map(function (response) { return response.json(); })
+            .catch(function (err) { return err.message; });
+    };
     DocumentsService.prototype.addType = function (type) {
         return this._http
             .post(this._docTypeURL, type, { headers: this._headers })
@@ -1780,7 +1786,7 @@ var DocumentsService = /** @class */ (function () {
     };
     DocumentsService.prototype.saveDoc = function (doc) {
         return this._http
-            .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
+            .post(this._documentURL, JSON.stringify(doc.File), { headers: this._headers })
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };

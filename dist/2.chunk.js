@@ -1110,7 +1110,7 @@ var ParticipantDocumentComponent = /** @class */ (function () {
     ParticipantDocumentComponent.prototype.saveDocument = function () {
         this._partDocument.ExpeditionDate = new Date(this._dateFormatter.format(this._partDocument.formExpeditionDate));
         this._partDocument.ExpirationDate = new Date(this._dateFormatter.format(this._partDocument.formExpirationDate));
-        console.log(this._partDocument);
+        this.addDocument.emit(this._partDocument);
     };
     // equals(c1, c2): boolean {
     //   return c1 && c2 ? c1.ID === c2.ID : c1 === c2;
@@ -1208,36 +1208,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ParticipantDocumentsComponent = /** @class */ (function () {
     function ParticipantDocumentsComponent(_docServ, _util) {
-        var _this = this;
         this._docServ = _docServ;
         this._util = _util;
         this._showForm = false;
-        _docServ.getTypes()
-            .subscribe(function (data) {
-            _this._types = data;
-        });
     }
     ParticipantDocumentsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("hit");
-        this._docServ.getDocByParticipant(this.participant.ID)
-            .subscribe(function (data) {
+        this._docServ.getTypesByParticipant(this.participant.ParticipantTypeID).subscribe(function (data) {
+            _this._types = _this._util.sortBy(data, 'Name');
+        });
+        this._docServ.getDocByParticipant(this.participant.ID).subscribe(function (data) {
             _this._documents = data;
-            console.log(_this._documents);
         });
     };
     ParticipantDocumentsComponent.prototype.removeDoc = function (id) {
         var _this = this;
-        this._docServ.deleteDoc(id)
-            .subscribe(function (data) {
+        this._docServ.deleteDoc(id).subscribe(function (data) {
             _this._documents = _this._util.removeByID(_this._documents, id);
         });
     };
     ParticipantDocumentsComponent.prototype.addDoc = function (doc) {
         var _this = this;
         console.log(doc);
-        this._docServ.saveDoc(doc)
-            .subscribe(function (data) {
+        this._docServ.saveDoc(doc).subscribe(function (data) {
             _this._documents.push(doc);
             _this._toggleForm();
         });

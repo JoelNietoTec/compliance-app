@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   public pieChartLabels: Array<string> = []; // ['High', 'Medium', 'Low', 'Incomplete'];
   public pieChartData: Array<number> = []; // = [200, 600, 400, 300];
-  public pieChartType: string = 'pie';
+  public pieChartType: string = 'doughnut';
   public pieChartOptions: any;
   public chartColors: Array<any>;
   public chartReady: Boolean = false;

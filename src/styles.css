@@ -58,12 +58,12 @@ small.text-muted > .typcn {
   font-size: 13px;
 }
 
-.card, .form-control, .input-group, .input-group-addon, .breadcrumb,
+/* .card, .form-control, .input-group, .input-group-addon, .breadcrumb,
 .card-header, .card-footer, .modal-content, .btn, .pagination,
 .page-item:last-child .page-link, .page-item:first-child .page-link
 {
   border-radius: 0 !important;
-}
+} */
 
 .input-group > input {
   border-top-right-radius: 0 !important;
@@ -94,7 +94,7 @@ small.text-muted > .typcn {
   margin: 0;
 }
 
-.card, .breadcrumb, .navbar, .dropdown-menu {
+.card, .breadcrumb, .navbar, .dropdown-menu, .btn {
   box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
 }
 
