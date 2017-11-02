@@ -94,6 +94,10 @@ small.text-muted > .typcn {
   margin: 0;
 }
 
+.card-header {
+  font-weight: bold;
+}
+
 .card, .breadcrumb, .navbar, .dropdown-menu, .btn {
   box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
 }

@@ -66,7 +66,6 @@ export class DocumentsService {
     return this._http
       .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
       .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
   }
 
   deleteDoc(id: number) {

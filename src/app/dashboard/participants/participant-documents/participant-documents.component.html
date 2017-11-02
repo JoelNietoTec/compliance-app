@@ -1,9 +1,43 @@
 <div class="container">
+  <app-loading-modal *ngIf="!_documents"></app-loading-modal>
   <ng-container *ngFor="let document of _documents; let i = index">
-    <participant-document *ngIf="document && _types" [types]="_types" [doc]="document" [index]="i" (removeDocument)="removeDoc($event)"></participant-document>
+    <div class="card">
+      <div class="card-header">Documento {{ i + 1 }}
+        <span class="pull-right fa fa-trash-o fa-lg text-danger" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)"></span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="text-primary">Nro. Documento</span>
+            <h6>{{ document.DocumentCode }}</h6>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">Tipo Documento</span>
+            <h6>{{ document.DocumentType.Name }}</h6>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">Nombre Documento</span>
+            <h6>Documento.jpg</h6>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">Fecha de Expedición</span>
+            <h6>{{ document.ExpeditionDate | date: 'mediumDate' }}</h6>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">Fecha de Expiración</span>
+            <h6>{{ document.ExpirationDate | date: 'mediumDate' }}</h6>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">País Expedición</span>
+            <h6>{{ document.Country.Name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
-  <participant-document *ngIf="_showForm"  [types]="_types" [participant]="participant" (addDocument)="addDoc($event)"></participant-document>
+  <participant-document *ngIf="_showForm" [types]="_types" [participant]="participant" (addDocument)="addDoc($event)"></participant-document>
   <div class="d-flex justify-content-end">
-    <button *ngIf="!_showForm" type="button" class="btn btn-primary add-link" (click)="_toggleForm()"><span class="typcn typcn-document-add"></span> Nuevo Documento</button>
+    <button *ngIf="!_showForm" type="button" class="btn btn-primary add-link" (click)="_toggleForm()">
+      <span class="typcn typcn-document-add"></span> Nuevo Documento</button>
   </div>
 </div>

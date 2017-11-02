@@ -7,7 +7,7 @@
           <app-quick-card [icon]="risk.Icon" [value]="risk.Count" [type]="risk.ColorType" [name]="risk.name">
           </app-quick-card>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <app-loading-modal *ngIf="!chartReady"></app-loading-modal>
           <app-card [footer]=false *ngIf=chartReady>
             <div card-section="body">

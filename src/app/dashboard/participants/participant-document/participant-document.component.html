@@ -1,4 +1,4 @@
-<app-card [header]="_title" *ngIf="_partDocument && types">
+<app-card [header]="'Nuevo Documento'" *ngIf="_partDocument && types">
   <div card-section="body">
     <div class="row">
       <div class="col-md-4">
@@ -49,7 +49,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="">País Expedición</label>
-          <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.Country" required>
+          <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.CountryID" required>
             <option [value]="undefined" disabled>--- Seleccionar ---</option>
             <option *ngFor="let country of _countries" [value]="country.ID">
               {{ country.Name }}
@@ -58,7 +58,6 @@
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-danger" (click)="removeDoc()" role="button"><i class="typcn typcn-trash" aria-hidden="true"></i> Borrar</button>
         <button type="button" class="btn btn-primary" (click)="saveDocument()" ><i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
       </div>
     </div>

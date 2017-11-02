@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Document, ParticipantDocument, DocumentType } from '../../../shared/models/documents.models';
 import { UtilService } from '../../../shared/services/util.service';
@@ -17,7 +18,7 @@ export class ParticipantDocumentsComponent implements OnInit {
   _showForm: Boolean = false;
   _documents: Array<ParticipantDocument>;
 
-  constructor(private _docServ: DocumentsService, private _util: UtilService) {}
+  constructor(private _docServ: DocumentsService, private _util: UtilService, private toastr: ToastsManager) {}
 
   ngOnInit() {
     this._docServ.getTypesByParticipant(this.participant.ParticipantTypeID).subscribe(data => {
@@ -37,10 +38,14 @@ export class ParticipantDocumentsComponent implements OnInit {
 
   addDoc(doc: ParticipantDocument) {
     console.log(doc);
-    this._docServ.saveDoc(doc).subscribe(data => {
-      this._documents.push(doc);
-      this._toggleForm();
-    });
+    this._docServ.saveDoc(doc).subscribe(
+      data => {
+        this.toastr.success(data.DocumentType.Name, 'Documento Creado');
+        this._documents.push(doc);
+        this._toggleForm();
+      },
+      (err: Error) => console.log(err.message)
+    );
   }
 
   _toggleForm() {
