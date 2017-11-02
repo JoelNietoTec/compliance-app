@@ -62,9 +62,9 @@ export class DocumentsService {
       .catch((err: Error) => err.message);
   }
 
-  saveDoc(doc: ParticipantDocument) {
+  saveDoc(doc: ParticipantDocument): Observable<ParticipantDocument> {
     return this._http
-      .post(this._documentURL, JSON.stringify(doc.File), { headers: this._headers })
+      .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
       .map((response: Response) => response.json())
       .catch((err: Error) => err.message);
   }

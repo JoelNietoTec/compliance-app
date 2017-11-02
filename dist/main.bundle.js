@@ -1786,7 +1786,7 @@ var DocumentsService = /** @class */ (function () {
     };
     DocumentsService.prototype.saveDoc = function (doc) {
         return this._http
-            .post(this._documentURL, JSON.stringify(doc.File), { headers: this._headers })
+            .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
             .map(function (response) { return response.json(); })
             .catch(function (err) { return err.message; });
     };
