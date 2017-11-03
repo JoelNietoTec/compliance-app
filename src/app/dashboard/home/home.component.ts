@@ -26,10 +26,10 @@ export class HomeComponent implements OnInit {
       .subscribe(data => {
         this.byRisk = data;
         for (const i of this.byRisk) {
-          if (i.Rate === 'Incomplete') {
-            i.name = 'Incomplete';
+          if (i.Rate === 'No disponible') {
+            i.name = 'No disponible';
           } else {
-            i.name = i.Rate + ' Risk Participants';
+            i.name = `Participantes de ${i.Rate} Riesgo`;
           }
         }
         this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
