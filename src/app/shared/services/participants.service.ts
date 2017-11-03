@@ -91,13 +91,13 @@ export class ParticipantsService {
 
   getRate(_part: Participant): string {
     if (!_part.Score) {
-      return 'Incomplete';
+      return 'Incompleto';
     } else if (_part.Score < 3) {
-      return 'Low';
+      return 'Bajo';
     } else if (_part.Score < 6) {
-      return 'Medium';
+      return 'Medio';
     } else {
-      return 'High';
+      return 'Alto';
     }
   }
 
