@@ -21,7 +21,8 @@ export class CountriesComponent implements OnInit {
     this._options.columns = [
       { name: 'Name', title: 'Nombre', type: 'text', filterable: true },
       { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', filterable: true },
-      { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true }
+      { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true },
+      { name: 'BlackList', title: 'Lista Negra', type: 'checkbox' }
     ];
 
     this._options.style = 'table table-sm table-squared';

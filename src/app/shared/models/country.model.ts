@@ -4,4 +4,5 @@ export interface Country {
   EnglishName?: string;
   Abbreviation?: string;
   Code?: string;
+  BlackList?: Boolean;
 }
