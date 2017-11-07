@@ -28,6 +28,9 @@
           <h6 class="participant-info">{{ individual.WebSite }}</h6>
           <small class="text-muted">Dirección <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.Address }}</h6>
+          <agm-map *ngIf="position" [latitude]="position.lat" [longitude]="position.lng" [zoom]=15>
+            <agm-marker [latitude]="position.lat" [longitude]="position.lng"></agm-marker>
+          </agm-map>
           <small class="text-muted">Creado por <i class="typcn typcn-user-add-outline" aria-hidden="true"></i></small>
           <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
         </ng-template>

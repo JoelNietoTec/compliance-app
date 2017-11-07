@@ -34,7 +34,15 @@
         aria-describedby="helpId">
     </div>
   </div>
-
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="country">País de Origen</label>
+      <select class="custom-select form-control" [(ngModel)]="_individual.CountryID" name="country-id" id="country" required>
+        <option [value]="_default" disabled="true">---Seleccionar---</option>
+        <option *ngFor="let country of _countries" [value]="country.ID">{{ country.Name }}</option>
+      </select>
+    </div>
+  </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="birthDate">Fecha de Nacimiento</label>
@@ -84,17 +92,16 @@
         placeholder="9999-9999">
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      <label for="nationalities">Nacionalidades</label>
-      <ss-multiselect-dropdown [options]="_nationalities" [settings]="mySettings" [(ngModel)]="_selCountries"></ss-multiselect-dropdown>
-    </div>
-  </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="form-group">
       <label for="">Dirección</label>
-      <textarea class="form-control" name="" id="" rows="3" [(ngModel)]="_individual.Address"></textarea>
+      <textarea class="form-control" name="" id="" rows="3" [(ngModel)]="_individual.Address" (blur)="setLocation()"></textarea>
     </div>
+  </div>
+  <div class="col-md-12">
+    <agm-map *ngIf="_location" [latitude]="_location.lat" [longitude]="_location.lng" [zoom]=15>
+      <agm-marker [latitude]="_location.lat" [longitude]="_location.lng"></agm-marker>
+    </agm-map>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
     <a [routerLink]="['/dashboard/participants']" class="btn btn-outline-secondary" role="button">

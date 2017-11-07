@@ -31,3 +31,7 @@
 .completed {
   text-decoration: line-through;
 }
+
+agm-map {
+  height: 300px;
+}

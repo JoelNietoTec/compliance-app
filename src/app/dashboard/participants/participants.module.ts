@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AgmCoreModule } from '@agm/core';
 
 import { SharedModule } from '../../shared/shared.module';
 import { ParticipantsRoutingModule } from './participants-routing.module';
@@ -31,6 +31,9 @@ import { ParticipantTasksComponent } from './participant-tasks/participant-tasks
     FormsModule,
     ReactiveFormsModule,
     ParticipantsRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB7K_EiA1MSRPKh7Yk4dgkbMAYan4elt5A'
+    }),
     SharedModule
   ],
   exports: [],

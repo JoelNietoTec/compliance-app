@@ -17,3 +17,7 @@ a:hover {
   text-decoration: none;
 }
 
+agm-map {
+  height: 300px;
+  margin-bottom: 20px;
+}

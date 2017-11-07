@@ -20,7 +20,11 @@ export class ParticipantDetailsComponent implements OnInit {
   _participant: ParticipantData;
   _participantCopy: Participant;
 
-  constructor(private _route: ActivatedRoute, private _partServ: ParticipantsService, private _util: UtilService) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _partServ: ParticipantsService,
+    private _util: UtilService
+  ) {}
 
   ngOnInit() {
     this.getParticipant();

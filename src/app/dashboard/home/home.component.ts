@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
           if (i.Rate === 'No disponible') {
             i.name = 'No disponible';
           } else {
-            i.name = `Participantes de ${i.Rate} Riesgo`;
+            i.name = `${i.Rate} Riesgo`;
           }
         }
         this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);

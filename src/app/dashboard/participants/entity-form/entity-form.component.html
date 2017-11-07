@@ -9,8 +9,16 @@
   <div class="col-md-6">
     <div class="form-group">
       <label for="second-name">Nombre Comercial</label>
-      <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial"
-        aria-describedby="helpId">
+      <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="country">País de Constitución</label>
+      <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_entity.CountryID">
+        <option [value]="undefined" disabled>---Seleccionar---</option>
+        <option *ngFor="let country of _countries" [value]="country.ID">{{ country.Name }}</option>
+      </select>
     </div>
   </div>
   <div class="col-md-3">
@@ -59,11 +67,16 @@
         placeholder="9999-9999">
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="form-group">
       <label for="address">Dirección</label>
-      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad"></textarea>
+      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad" (blur)="setLocation()"></textarea>
     </div>
+  </div>
+  <div class="col-md-12">
+    <agm-map *ngIf="_location" [latitude]="_location.lat" [longitude]="_location.lng" [zoom]=15>
+      <agm-marker [latitude]="_location.lat" [longitude]="_location.lng"></agm-marker>
+    </agm-map>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
     <a [routerLink]="['/dashboard/darticipants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancelar</a>

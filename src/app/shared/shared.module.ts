@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
+import { AgmCoreModule } from '@agm/core';
 
 // Model Services
 import { GendersService } from './services/genders.service';
@@ -28,6 +29,7 @@ import { SanctionsService } from './services/sanctions.service';
 import { ParamValuesService } from './services/param-values.service';
 import { ParamSubValuesService } from './services/param-sub-values.service';
 import { AuthGuard } from './services/auth.guard';
+import { MapsService } from './services/maps.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -98,6 +100,7 @@ import { TableFormComponent } from './components/table-form/table-form.component
     ParamSubValuesService,
     SanctionsService,
     NgbActiveModal,
+    MapsService,
     AuthGuard
   ],
   declarations: [

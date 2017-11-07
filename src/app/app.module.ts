@@ -15,6 +15,7 @@ import { ToastOptions } from 'ng2-toastr';
 import { ToastOption } from './shared/services/toast-options';
 import { CustomDatepickerI18n, I18n } from './shared/services/datepicker-i18n';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 // Main Dependencies
 import { AppComponent } from './app.component';
@@ -28,9 +29,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,11 +40,15 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ChartsModule,
     ToastModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCa6QaPQGQ-WhsE13BxIO40At9I1wWa3h4'
+    })
   ],
   providers: [
     {
-      provide: LOCALE_ID, useValue: 'es-PA'
+      provide: LOCALE_ID,
+      useValue: 'es-PA'
     },
     BreadcrumbService,
     {
@@ -65,4 +68,4 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

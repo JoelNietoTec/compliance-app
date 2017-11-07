@@ -32,7 +32,8 @@ export interface Participant {
   CreatedBy?: number;
   CreatedByUser?: User;
   PEP?: Boolean;
-  Nationalities?: Array<Country>;
+  CountryID?: number;
+  Country?: Country;
   FullName?: string;
   ShortName?: string;
   MatrixReady?: boolean;

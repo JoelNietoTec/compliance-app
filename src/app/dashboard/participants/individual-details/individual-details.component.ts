@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Participant } from '../../../shared/models/participants.model';
+import { MapsService } from '../../../shared/services/maps.service';
 
 @Component({
   selector: 'individual-details',
@@ -9,9 +10,16 @@ import { Participant } from '../../../shared/models/participants.model';
 })
 
 export class IndividualDetailsComponent implements OnInit {
-
+  position: any;
+  lng: number;
+  lat: number;
   @Input() individual: Participant;
-  constructor() { }
+  constructor(private _map: MapsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._map.getPosition(this.individual.Address).subscribe(position => {
+      this.position = position.results[0].geometry.location;
+      console.log(this.position);
+    });
+   }
 }
