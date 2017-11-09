@@ -15,7 +15,6 @@ import { ToastOptions } from 'ng2-toastr';
 import { ToastOption } from './shared/services/toast-options';
 import { CustomDatepickerI18n, I18n } from './shared/services/datepicker-i18n';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { AgmCoreModule } from '@agm/core';
 
 // Main Dependencies
 import { AppComponent } from './app.component';
@@ -40,10 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ChartsModule,
     ToastModule.forRoot(),
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCa6QaPQGQ-WhsE13BxIO40At9I1wWa3h4'
-    })
+    ReactiveFormsModule
   ],
   providers: [
     {

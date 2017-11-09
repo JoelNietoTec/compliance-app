@@ -37,7 +37,6 @@ export class ParticipantDocumentsComponent implements OnInit {
   }
 
   addDoc(doc: ParticipantDocument) {
-    console.log(doc);
     this._docServ.saveDoc(doc).subscribe(
       data => {
         this.toastr.success(data.DocumentType.Name, 'Documento Creado');

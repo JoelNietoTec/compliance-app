@@ -1,13 +1,13 @@
 <nav class="paginator">
   <ul *ngIf="_pager.pages && _pager.pages.length" class="pagination">
-    <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
+    <li class="page-item" ngbTooltip="Inicio" [ngClass]="{disabled:_pager.currentPage === 1}">
       <a class="page-link" (click)="setPage(1)">
-        Primero
+        <i class="fa fa-fast-backward" aria-hidden="true" ></i>
       </a>
     </li>
-    <li class="page-item" [ngClass]="{disabled:_pager.currentPage === 1}">
+    <li class="page-item" ngbTooltip="Anterior" [ngClass]="{disabled:_pager.currentPage === 1}">
       <a class="page-link" (click)="setPage(_pager.currentPage - 1)">
-        Anterior
+        <i class="fa fa-step-backward" aria-hidden="true"></i>
       </a>
     </li>
     <li class="page-item" *ngFor="let page of _pager.pages" [ngClass]="{active:_pager.currentPage === page}">
@@ -15,14 +15,14 @@
         {{ page }}
       </a>
     </li>
-    <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages - 1}">
+    <li class="page-item" ngbTooltip="Siguiente" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages - 1}">
       <a class="page-link" (click)="setPage(_pager.currentPage + 1)">
-        Siguiente
+        <i class="fa fa-step-forward" aria-hidden="true"></i>
       </a>
     </li>
-    <li class="page-item" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages - 1}">
+    <li class="page-item" ngbTooltip="Final" [ngClass]="{disabled:_pager.currentPage === _pager.totalPages - 1}">
       <a class="page-link" (click)="setPage(_pager.totalPages - 1)">
-        Último
+        <i class="fa fa-fast-forward" aria-hidden="true"></i>
       </a>
     </li>
   </ul>

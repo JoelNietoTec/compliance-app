@@ -118,7 +118,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     } else {
 
       this._pagedItems = this._filteredItems;
-      console.log(this._pagedItems);
     }
   }
 

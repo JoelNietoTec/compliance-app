@@ -1,13 +1,14 @@
 <ngb-tabset type="pills">
   <ngb-tab>
-    <ng-template ngbTabTitle><i class="typcn typcn-th-large"></i> Dashboard</ng-template>
+    <ng-template ngbTabTitle>
+      <i class="typcn typcn-th-large"></i> Dashboard</ng-template>
     <ng-template ngbTabContent>
       <div class="row">
         <div class="col-md-3" *ngFor="let risk of byRisk">
           <app-quick-card [icon]="risk.Icon" [value]="risk.Count" [type]="risk.ColorType" [name]="risk.name">
           </app-quick-card>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <app-loading-modal *ngIf="!chartReady"></app-loading-modal>
           <app-card [footer]=false *ngIf=chartReady>
             <div card-section="body">
@@ -17,17 +18,32 @@
             </div>
           </app-card>
         </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title"><i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
+              <agm-map [zoom]="2">
+                <ng-container *ngFor="let address of _addresses">
+                  <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [title]="address.formatted_address" [latitude]="address.geometry.location.lat"
+                    [longitude]="address.geometry.location.lng"></agm-marker>
+                </ng-container>
+              </agm-map>
+            </div>
+          </div>
+        </div>
       </div>
     </ng-template>
   </ngb-tab>
   <ngb-tab>
-    <ng-template ngbTabTitle><i class="typcn typcn-input-checked"></i> Tareas</ng-template>
+    <ng-template ngbTabTitle>
+      <i class="typcn typcn-input-checked"></i> Tareas</ng-template>
     <ng-template ngbTabContent>
       <home-tasks></home-tasks>
     </ng-template>
   </ngb-tab>
   <ngb-tab>
-    <ng-template ngbTabTitle><i class="typcn typcn-calendar"></i> Calendario</ng-template>
+    <ng-template ngbTabTitle>
+      <i class="typcn typcn-calendar"></i> Calendario</ng-template>
     <ng-template ngbTabContent>
       <home-schedule></home-schedule>
     </ng-template>

@@ -29,7 +29,6 @@ export class UserFormComponent implements OnInit {
   }
 
   saveUser(model: User) {
-    console.log(model);
     this._userServ.createUser(model)
       .subscribe(data => {
         console.log(data);

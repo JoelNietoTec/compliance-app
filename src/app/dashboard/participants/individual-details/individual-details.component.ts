@@ -19,7 +19,6 @@ export class IndividualDetailsComponent implements OnInit {
   ngOnInit() {
     this._map.getPosition(this.individual.Address).subscribe(position => {
       this.position = position.results[0].geometry.location;
-      console.log(this.position);
     });
    }
 }
