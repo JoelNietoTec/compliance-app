@@ -80,7 +80,6 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
     relationship.RelationshipTypeID = this._currentRelationship.Type.ID;
     relationship.ParticipantID = this._currentRelationship.Participant.ID;
     relationship.RelatedParticipantID = this._currentRelationship.RelatedParticipant.ID;
-    // console.log(relationship);
     this._relService.addRelationship(relationship).subscribe(data => {
       this.toastr.success(data.RelatedParticipant.ShortName, 'Relación agregada');
       this._relationships.push(data);

@@ -36,7 +36,6 @@ export class ScheduleComponent implements OnInit {
   ngOnInit() {
     this._taskService.getTasks().subscribe(tasks => {
       tasks.forEach(task => {
-        console.log(task);
         let event: CalendarEvent = {
           title: task.Title,
           start: task.BeginDate,

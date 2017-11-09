@@ -62,6 +62,9 @@ import { TableFormComponent } from './components/table-form/table-form.component
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn btn-outline-danger'
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB7K_EiA1MSRPKh7Yk4dgkbMAYan4elt5A'
+    }),
     MultiselectDropdownModule
   ],
   exports: [
@@ -78,7 +81,8 @@ import { TableFormComponent } from './components/table-form/table-form.component
     SweetAlert2Module,
     MultiselectDropdownModule,
     CustomTableComponent,
-    ColumnPipe
+    ColumnPipe,
+    AgmCoreModule
   ],
   providers: [
     GendersService,

@@ -47,7 +47,6 @@ export class ParamMatrixComponent implements OnInit {
         .subscribe(data => {
           this._matrix = data;
           this.getCategories();
-          console.log(this._matrix);
           if (this._matrix.ParamCategories) {
             this.calculatePercent();
           }
@@ -63,7 +62,6 @@ export class ParamMatrixComponent implements OnInit {
   }
 
   addCategory() {
-    console.log(this._newCategory);
     this._newCategory.ParamMatrixID = this._matrix.ID;
     this._newCategories.push(this._newCategory);
     this.calculatePercent();
@@ -88,7 +86,6 @@ export class ParamMatrixComponent implements OnInit {
     this._newCategories.forEach(element => {
       this._categoryService.createCategory(element)
         .subscribe(data => {
-          console.log(data);
           this.initMatrix();
           this._newCategories = [];
         });

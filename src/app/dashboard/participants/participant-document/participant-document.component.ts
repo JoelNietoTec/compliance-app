@@ -68,7 +68,6 @@ export class ParticipantDocumentComponent implements OnInit {
   }
 
   setFile(file: any) {
-    console.log(file);
     this._partDocument.File.File = file;
   }
 

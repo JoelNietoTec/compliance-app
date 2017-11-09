@@ -48,7 +48,6 @@ export class ParticipantsService {
   updateParticipant(_id: number, _part: Participant): Observable<Participant> {
     return this._http.put(`${this._partURL}/${_id}`, JSON.stringify(_part), { headers: this._headers }).map(response => {
       this._newParticipant = response.json();
-      console.log(this._newParticipant);
       return this._newParticipant;
     });
   }
@@ -61,7 +60,6 @@ export class ParticipantsService {
     for (let item of participants) {
       let term = this._util.isNullString(item.FirstName) + this._util.isNullString(item.SecondName);
       term = term + this._util.isNullString(item.ThirdName) + this._util.isNullString(item.FourthName);
-      // console.log(term);
       term = term.toLocaleLowerCase();
 
       if (term.indexOf(search) >= 0) {

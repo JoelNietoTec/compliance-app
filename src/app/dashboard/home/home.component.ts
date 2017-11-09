@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ParticipantsService } from '../../shared/services/participants.service';
 
+import { ParticipantsService } from '../../shared/services/participants.service';
+import { MapsService } from '../../shared/services/maps.service';
 import { UtilService } from '../../shared/services/util.service';
 
 @Component({
@@ -17,28 +18,36 @@ export class HomeComponent implements OnInit {
   public pieChartOptions: any;
   public chartColors: Array<any>;
   public chartReady: Boolean = false;
+  public _addresses: Array<any> = [];
 
-  constructor(
-    private _partServ: ParticipantsService,
-    private _util: UtilService
-  ) {
-    this._partServ.getParticipantsbyRisk()
-      .subscribe(data => {
-        this.byRisk = data;
-        for (const i of this.byRisk) {
-          if (i.Rate === 'No disponible') {
-            i.name = 'No disponible';
-          } else {
-            i.name = `${i.Rate} Riesgo`;
+  constructor(private _partServ: ParticipantsService, private _util: UtilService, private _map: MapsService) {
+    this._partServ.getParticipants().subscribe(participants => {
+      participants.forEach(part => {
+        let location = {};
+        this._map.getPosition(part.Address).subscribe(position => {
+          if (position.results[0]) {
+            location = position.results[0];
+            console.log(location);
+            this._addresses.push(location);
           }
-        }
-        this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
-        this.loadChart();
+        });
       });
+    });
+    this._partServ.getParticipantsbyRisk().subscribe(data => {
+      this.byRisk = data;
+      for (const i of this.byRisk) {
+        if (i.Rate === 'No disponible') {
+          i.name = 'No disponible';
+        } else {
+          i.name = `${i.Rate} Riesgo`;
+        }
+      }
+      this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
+      this.loadChart();
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   loadChart() {
     const labels: string[] = [];
@@ -76,5 +85,5 @@ export class HomeComponent implements OnInit {
       }
     ];
     this.chartReady = true;
-  };
+  }
 }

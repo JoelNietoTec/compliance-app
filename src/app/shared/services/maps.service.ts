@@ -20,7 +20,6 @@ export class MapsService {
     terms.forEach(element => {
       term = term + '+' + element;
     });
-    console.log(`${this._gMapsURL}address=${term}&key=${this._conn.MAP_KEY}`);
     return this._http.get(`${this._gMapsURL}address=${term}&key=${this._conn.MAP_KEY}`).map((response: Response) => response.json());
   }
 }

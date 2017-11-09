@@ -44,8 +44,6 @@ export class ParticipantComplianceParamComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this._partParam = this._util.filterByID(this.partParams, this.param.ID);
-    // console.log(this.param);
 
     this._valService.getValuesByTable(this.param.ParamTableID).subscribe(data => {
       this._values = data;

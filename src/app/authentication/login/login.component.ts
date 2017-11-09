@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     this._authServ.authLogin(this._login).subscribe(data => {
-      console.log(data);
       if (data) {
         const _user = this._authServ.getUserInfo();
         this.toastr.success(_user.UserName, 'Bienvenido');

@@ -59,7 +59,6 @@ export class DocumentTypesComponent implements OnInit {
   }
 
   updateType(type: DocumentType) {
-    console.log(type);
     this._docServ.updateType(type.ID, type).subscribe(data => {
       this.toastr.success(data.Name, 'Tipo Documento Editado');
     });
