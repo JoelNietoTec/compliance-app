@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
         this._map.getPosition(part.Address).subscribe(position => {
           if (position.results[0]) {
             location = position.results[0];
-            console.log(location);
             this._addresses.push(location);
           }
         });

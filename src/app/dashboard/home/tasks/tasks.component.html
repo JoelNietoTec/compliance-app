@@ -1,13 +1,17 @@
 <div class="row">
-  <div *ngFor="let status of taskStatus" class="col-md-3">
-    <h4 class="bucket-title">
-      <i class="typcn" [ngClass]="{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}"></i> {{ status.Name }}</h4>
-    <button *ngIf="status.ID == 1" type="button" (click)="open()" placement="top" ngbTooltip="Nueva Tarea" class="btn btn-primary btn-block add-button">
-      <!-- <i class="typcn typcn-document-add"></i> Nueva Tarea -->
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
-    <div *ngFor="let task of _tasks">
-      <task-card *ngIf="task.StatusID == status.ID" placement="top" ngbTooltip="{{task.Title}}" [task]="task" (select)="selectTask($event)"></task-card>
+  <div *ngFor="let status of taskStatus" class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="bucket-title">
+          <i class="typcn" [ngClass]="{'typcn-time': status.ID == 1, 'typcn-edit': status.ID == 2, 'typcn-input-checked': status.ID ==3}"></i> {{ status.Name }}</h4>
+        <button *ngIf="status.ID == 1" type="button" (click)="open()" placement="top" ngbTooltip="Nueva Tarea" class="btn btn-primary btn-block add-button">
+          <!-- <i class="typcn typcn-document-add"></i> Nueva Tarea -->
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+        <div *ngFor="let task of _tasks">
+          <task-card *ngIf="task.StatusID == status.ID" placement="top" ngbTooltip="{{task.Title}}" [task]="task" (select)="selectTask($event)"></task-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

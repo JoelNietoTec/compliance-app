@@ -88,17 +88,20 @@ small.text-muted > .typcn {
 
 .btn {
   margin: 0 0 0 10px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .btn-block {
   margin: 0;
 }
 
+
 .card-header {
   font-weight: bold;
 }
 
-.card, .breadcrumb, .navbar, .dropdown-menu, .btn {
+.card, .breadcrumb, .navbar, .dropdown-menu {
   box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
 }
 
@@ -315,7 +318,8 @@ ngb-tabset > ul.nav > li.nav-item {
 
 .btn-outline-primary {
   color: #287FB9 !important;
-  border-color: #287FB9 !important;
+  /* border-color: #287FB9 !important; */
+  border: 0;
 }
 
 .text-primary {
@@ -388,25 +392,29 @@ ngb-tabset > ul.nav > li.nav-item {
 /*  Button Secondary */
 
 .btn-secondary {
-  background-color: #bdc3c7;
-  border-color: #bdc3c7;
+  /* background-color: #bdc3c7;
+  border-color: #bdc3c7; */
+  background-color: #415161;
+  border-color: #415161;
 }
 
 .btn-secondary:hover, .btn-secondary:active, .btn-secondary:focus  {
-  background-color: #bdc3c7;
-  border-color: #bdc3c7;
+  /* background-color: #bdc3c7;
+  border-color: #bdc3c7; */
+  background-color: #415161;
+  border-color: #415161;
 }
 
 .btn-outline-secondary {
-  color: #bdc3c7;
-  border-color: #bdc3c7;
+  color: #2c3e50;
+  border: 0;
 }
 
 .btn-outline-secondary:hover, .btn-outline-secondary:active,
 .btn-outline-secondary:focus {
   color: #fff;
-  background-color: #bdc3c7;
-  border-color: #bdc3c7;
+  background-color: #415161;
+  border-color: #415161;
 }
 
 

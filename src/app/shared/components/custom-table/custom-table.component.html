@@ -12,7 +12,8 @@
       </div>
     </div>
     <div *ngIf="options.newURL" class="col-md-4">
-      <a [routerLink]="options.newURL" class="btn btn-outline-primary pull-right">Nuevo elemento</a>
+      <a [routerLink]="options.newURL" class="btn btn-outline-primary pull-right">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo elemento</a>
     </div>
   </div>
   <table class="table" [ngClass]="options.style" *ngIf="_pagedItems">

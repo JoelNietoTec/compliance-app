@@ -15,7 +15,6 @@ import { SettingsModule } from './settings/settings.module';
 import { SettingsComponent } from './settings/settings.component';
 import { DiscardsModule } from './discards/discards.module';
 
-
 export function getParamsModule() {
   return ParamsModule;
 }
@@ -34,7 +33,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
+        path: 'home',
         canActivateChild: [AuthGuard],
         component: HomeComponent
       },
@@ -62,6 +61,11 @@ export const routes: Routes = [
         path: 'settings',
         canActivateChild: [AuthGuard],
         component: SettingsComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'home',
+        pathMatch: 'full'
       }
     ]
   }
@@ -69,8 +73,8 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}
 
 export const routedComponents = [DashboardComponent];
