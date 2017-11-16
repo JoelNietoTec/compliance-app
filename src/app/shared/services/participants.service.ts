@@ -106,6 +106,13 @@ export class ParticipantsService {
       .catch((err: Error) => err.message);
   }
 
+  getParticipantsbyCountry(): any {
+    return this._http
+      .get(`${this._partURL}/bycountry`)
+      .map((response: Response) => response.json())
+      .catch((err: Error) => err.message);
+  }
+
   getPendingDocuments(id: number): Observable<Array<PendingDocument>> {
     return this._http
       .get(`${this._partURL}/${id}/pending`)

@@ -17,11 +17,21 @@
               </canvas>
             </div>
           </app-card>
+          <div class="card">
+            <app-card [footer]=false *ngIf=chartReady>
+              <div card-section="body">
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions"
+                  [colors]="chartColors">
+                </canvas>
+              </div>
+            </app-card>
+          </div>
         </div>
         <div class="col-md-8">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title"><i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
+              <h4 class="card-title">
+                <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
               <agm-map [zoom]="2">
                 <ng-container *ngFor="let address of _addresses">
                   <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [title]="address.formatted_address" [latitude]="address.geometry.location.lat"

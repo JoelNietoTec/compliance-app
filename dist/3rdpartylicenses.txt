@@ -190,7 +190,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 MIT
 MIT
 
-angular-2-dropdown-multiselect@1.6.0
+angular-2-dropdown-multiselect@1.6.1
 MIT
 The MIT License (MIT)
 

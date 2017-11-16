@@ -23,3 +23,7 @@
 .dropdown-toggle::after {
   display: none;
 }
+
+.logo {
+  height: 28px;
+}

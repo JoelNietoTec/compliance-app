@@ -49,6 +49,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { TableFormComponent } from './components/table-form/table-form.component';
+import { ChartCardComponent } from './components/chart-card/chart-card.component';
 
 @NgModule({
   imports: [
@@ -120,7 +121,8 @@ import { TableFormComponent } from './components/table-form/table-form.component
     PaginatorComponent,
     ColumnPipe,
     BooleanPipe,
-    TableFormComponent
+    TableFormComponent,
+    ChartCardComponent
   ]
 })
 export class SharedModule {}

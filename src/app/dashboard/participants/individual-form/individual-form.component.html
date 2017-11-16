@@ -99,9 +99,13 @@
     </div>
   </div>
   <div class="col-md-12">
-    <agm-map *ngIf="_location" [latitude]="_location.lat" [longitude]="_location.lng" [zoom]=15>
-      <agm-marker [latitude]="_location.lat" [longitude]="_location.lng"></agm-marker>
-    </agm-map>
+    <div class="card" *ngIf="_location">
+      <div class="card-body">
+        <agm-map [latitude]="_location.lat" [longitude]="_location.lng" [zoom]=15>
+          <agm-marker [latitude]="_location.lat" [longitude]="_location.lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
     <a [routerLink]="['/dashboard/participants']" class="btn btn-outline-secondary" role="button">
