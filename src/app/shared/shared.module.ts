@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
@@ -38,6 +39,8 @@ import { SortIconComponent } from './components/sort-icon/sort-icon.component';
 import { QuickCardComponent } from './components/quick-card/quick-card.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { TableFormComponent } from './components/table-form/table-form.component';
+import { ChartCardComponent } from './components/chart-card/chart-card.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -48,14 +51,13 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
-import { TableFormComponent } from './components/table-form/table-form.component';
-import { ChartCardComponent } from './components/chart-card/chart-card.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
+    ChartsModule,
     NgbModule.forRoot(),
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
@@ -78,12 +80,14 @@ import { ChartCardComponent } from './components/chart-card/chart-card.component
     QuickCardComponent,
     TaskCardComponent,
     NgbModule,
+    ChartsModule,
     TaskFormComponent,
     SweetAlert2Module,
     MultiselectDropdownModule,
     CustomTableComponent,
     ColumnPipe,
-    AgmCoreModule
+    AgmCoreModule,
+    ChartCardComponent
   ],
   providers: [
     GendersService,

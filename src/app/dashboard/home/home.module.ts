@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
 import { CalendarModule } from 'angular-calendar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,7 +17,6 @@ import { TaskFormComponent } from '../../shared/components/task-form/task-form.c
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    ChartsModule,
     NgbModule,
     HomeRoutingModule,
     CalendarModule.forRoot()

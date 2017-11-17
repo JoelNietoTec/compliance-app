@@ -7,6 +7,7 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
     font-size: 14px;
 }
 
+
 button.form-control {
   text-align: left !important;
 }

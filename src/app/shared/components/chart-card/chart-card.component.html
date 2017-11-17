@@ -1,3 +1,11 @@
-<p>
-  chart-card works!
-</p>
+<app-card [footer]="false">
+  <div card-section="body">
+    <canvas baseChart
+      [data]="_values"
+      [labels]="_labels"
+      [chartType]="type"
+      [options]="options"
+      [colors]="colors"
+    ></canvas>
+  </div>
+</app-card>
