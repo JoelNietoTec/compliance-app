@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
         fontSize: 16
       },
       legend: {
-        position: 'bottom',
+        position: 'left',
         labels: {
           fontFamily: 'Nunito',
           boxWidth: 20
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
         fontSize: 16
       },
       legend: {
-        position: 'bottom',
+        position: 'left',
         labels: {
           fontFamily: 'Nunito',
           boxWidth: 20

@@ -1,11 +1,5 @@
-<app-card [footer]="false">
-  <div card-section="body">
-    <canvas baseChart
-      [data]="_values"
-      [labels]="_labels"
-      [chartType]="type"
-      [options]="options"
-      [colors]="colors"
-    ></canvas>
+<div class="card">
+  <div class="card-body">
+    <canvas baseChart [data]="_values" [labels]="_labels" [chartType]="type" [options]="options" [colors]="colors"></canvas>
   </div>
-</app-card>
+</div>
