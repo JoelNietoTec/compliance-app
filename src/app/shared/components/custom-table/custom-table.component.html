@@ -56,7 +56,7 @@
                 <span [innerHTML]="item | column: col.name | boolean"></span>
               </ng-container>
               <ng-container *ngSwitchCase="'object'">
-                {{ item | column: col.objectColumn }}
+                {{ item | column: col.objectText }}
               </ng-container>
               <ng-container *ngSwitchDefault>
                 {{ item | column: col.name }}

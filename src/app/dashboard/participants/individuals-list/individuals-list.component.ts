@@ -23,7 +23,8 @@ export class IndividualsListComponent implements OnInit {
       { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
       { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
+      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true },
+      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true }
     ];
 
     this._table.style = 'table table-sm table-striped table-squared';
@@ -41,7 +42,5 @@ export class IndividualsListComponent implements OnInit {
     for (let i of this.individuals) {
       i.Rate = this._partServ.getRate(i);
     }
-
   }
-
 }

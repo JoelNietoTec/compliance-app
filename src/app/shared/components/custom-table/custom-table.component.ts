@@ -46,6 +46,12 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
 
   ngOnInit() {
     this.options.columns.forEach(column => {
+      if (column.type === 'object') {
+        column.objectText = `text${column.name}`;
+        this.options.items.forEach(element => {
+          element[`text${column.name}`] = this._util.getProperty(element, column.objectColumn);
+        });
+      }
       if (column.filterable) {
         this._searchColumns.push(column.name);
       }
@@ -83,7 +89,12 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
       this._sortDesc = !this._sortDesc;
     }
 
-    this._filteredItems = this._util.sortBy(this._filteredItems, column.name, this._sortDesc);
+    if (column.type === 'object') {
+      this._filteredItems = this._util.sortBy(this._filteredItems, column.objectText, this._sortDesc);
+    } else {
+      this._filteredItems = this._util.sortBy(this._filteredItems, column.name, this._sortDesc);
+    }
+
     this._sortColumn = column.name;
 
     this.pageItems();
@@ -116,7 +127,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
 
       this.pageItems();
     } else {
-
       this._pagedItems = this._filteredItems;
     }
   }

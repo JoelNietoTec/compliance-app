@@ -28,4 +28,5 @@ export interface Column {
   listDisplay?: any;
   objectColumn?: string;
   objectID?: string;
+  objectText?: string;
 }
