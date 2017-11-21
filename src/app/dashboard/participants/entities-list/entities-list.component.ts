@@ -27,7 +27,7 @@ export class EntitiesListComponent implements OnInit {
       { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
     ];
 
-    this._table.style = 'table table-responsive table-sm table-striped table-squared';
+    this._table.style = 'table table-sm table-striped table-squared';
 
     this._table.pageable = true;
 
