@@ -11,11 +11,14 @@ export interface TableOptions {
   addMethod?: string;
   detailsURL?: Array<string>;
   newURL?: Array<string>;
+  showID?: boolean;
+  lookup?: boolean;
+  exportToCSV?: boolean;
 }
 
 export interface Column {
   name: string;
-  title: string;
+  title?: string;
   type?: string;
   sortable?: boolean;
   filterable?: boolean;

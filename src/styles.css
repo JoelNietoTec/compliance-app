@@ -376,7 +376,8 @@ ngb-tabset > ul.nav > li.nav-item {
 
 .btn-outline-success {
   color: #2ecc71!important;
-  border-color: #2ecc71 !important;
+  /* border-color: #2ecc71 !important; */
+  border: 0;
 }
 
 .text-success {

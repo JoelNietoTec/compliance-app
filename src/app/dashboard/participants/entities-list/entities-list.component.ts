@@ -22,11 +22,12 @@ export class EntitiesListComponent implements OnInit {
       { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
       { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true },
       { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
       { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
     ];
 
-    this._table.style = 'table table-sm table-striped table-squared';
+    this._table.style = 'table table-responsive table-sm table-striped table-squared';
 
     this._table.pageable = true;
 

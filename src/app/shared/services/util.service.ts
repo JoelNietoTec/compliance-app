@@ -118,10 +118,37 @@ export class UtilService {
   }
 
   getProperty(item: any, property: string): any {
-
     property.split('.').forEach(e => {
       item = item[e];
     });
     return item;
+  }
+
+  convertToCSV(objArray) {
+    const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    let row = '';
+
+    objArray.forEach(index => {
+      row += index + ',';
+    });
+
+    row = row.slice(0, -1);
+    str += row + '\r\n';
+    console.log(array);
+    for (let i = 0; i < array.length; i++) {
+      let line = '';
+
+      for (const index in array[i]) {
+        if (line !== '') {
+          line += ',';
+        }
+        line += array[i][index];
+      }
+
+
+      str += line + '\r\n';
+    }
+    return str;
   }
 }

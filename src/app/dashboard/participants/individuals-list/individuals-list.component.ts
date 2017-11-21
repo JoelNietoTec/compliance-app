@@ -22,9 +22,9 @@ export class IndividualsListComponent implements OnInit {
       { name: 'FullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
       { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true },
       { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true },
-      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true }
+      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true }
     ];
 
     this._table.style = 'table table-sm table-striped table-squared';

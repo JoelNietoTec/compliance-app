@@ -41,6 +41,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
   _searchColumns: Array<string> = [];
   _pageSizes: Array<number> = [5, 10, 15, 20, 25];
   _deleteMessage = ['Eliminar elemento?', 'No podrá ser cancelado', 'question'];
+  _idColumn: Column = {
+    name: 'ID'
+  };
 
   constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
 
@@ -54,6 +57,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
       }
       if (column.filterable) {
         this._searchColumns.push(column.name);
+      }
+      if (this.options.showID) {
+        this.options.columns.push(this._idColumn);
       }
     });
   }
@@ -145,5 +151,18 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     this.removeItem.emit(id);
     this.options.items = this._util.removeByID(this.options.items, id);
     this.filterItems();
+  }
+
+  exportCSV() {
+    const csvData = this._util.convertToCSV(this._filteredItems);
+    let a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    let blob = new Blob([csvData], { type: 'text/csv' });
+    let url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = 'User_Results.csv'; /* your file name*/
+    a.click();
+    return 'success';
   }
 }
