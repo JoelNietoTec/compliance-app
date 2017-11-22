@@ -66,8 +66,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
       if (this.options.showID) {
         this.options.columns.push(this._idColumn);
       }
-
-      column.lookupValues = this.getLookup(column);
+      if (this.options.lookup) {
+        column.lookupValues = this.getLookup(column);
+      }
     });
   }
 
