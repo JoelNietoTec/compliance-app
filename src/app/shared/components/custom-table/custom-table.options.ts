@@ -17,7 +17,7 @@ export interface TableOptions {
 }
 
 export interface Column {
-  name: string;
+  name?: string;
   title?: string;
   type?: string;
   sortable?: boolean;
@@ -32,4 +32,6 @@ export interface Column {
   objectColumn?: string;
   objectID?: string;
   objectText?: string;
+  lookup?: boolean;
+  lookupValues?: Array<any>;
 }

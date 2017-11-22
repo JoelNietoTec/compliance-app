@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-4 d-flex justify-content-end pull-right">
       <div *ngIf="options.exportToCSV" class="btn btn-success" (click)="exportCSV()" ngbTooltip="Exportar to Excel">
-        <i class="fa fa-table" aria-hidden="true"  ></i> CSV
+        <i class="fa fa-table" aria-hidden="true"></i> CSV
       </div>
       <a *ngIf="options.newURL" [routerLink]="options.newURL" class="btn btn-outline-primary">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo elemento</a>
@@ -27,14 +27,27 @@
             {{ header.title }}
             <i class="fa" [ngClass]="{
               'fa-sort': _sortColumn != header.name,
-              'fa-sort-desc': _sortColumn === header.name && _sortDesc,
-              'fa-sort-asc': _sortColumn === header.name && !_sortDesc
+              'fa-sort-amount-desc': _sortColumn === header.name && _sortDesc,
+              'fa-sort-amount-asc': _sortColumn === header.name && !_sortDesc
             }" aria-hidden="true"></i>
           </th>
           <th *ngIf="options.editable || options.detailsURL" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="options.lookup">
+          <ng-container *ngFor="let col of options.columns">
+            <td>
+              <select [disabled]="!col.lookup" class="custom-select form-control form-control-sm" [(ngModel)]="_filterValues[col.name]" (change)="changeFilter()">
+                <option [ngValue]="undefined" selected>---Todos---</option>
+                <ng-container *ngIf="col.lookup">
+                  <option *ngFor="let value of col.lookupValues" class="font-weight-bold" [ngValue]="value">{{ value }}</option>
+                </ng-container>
+              </select>
+            </td>
+          </ng-container>
+          <td></td>
+        </tr>
         <tr *ngIf="!_pagedItems.length">
           <td class="text-center" [colSpan]="options.columns.length + 1">
             Sin elementos disponibles
