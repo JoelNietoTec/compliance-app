@@ -15,7 +15,7 @@ const routes: Routes = [
         component: UsersListComponent
       },
       {
-        path: 'New',
+        path: 'nuevo',
         component: UserFormComponent
       }
     ]

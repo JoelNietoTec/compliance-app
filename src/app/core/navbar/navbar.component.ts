@@ -9,15 +9,11 @@ import { User } from '../../shared/models/users.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
   _loggedUSer: User;
 
-  constructor(
-    private _auth: AuthService
-  ) { }
+  constructor(private _auth: AuthService) {}
 
   ngOnInit() {
     this._loggedUSer = this._auth.getUserInfo();
   }
-
 }

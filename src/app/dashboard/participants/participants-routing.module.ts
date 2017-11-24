@@ -16,7 +16,7 @@ export const routes: Routes = [
         component: ParticipantsListComponent
       },
       {
-        path: 'new',
+        path: 'nuevo',
         component: ParticipantFormComponent
       },
       {

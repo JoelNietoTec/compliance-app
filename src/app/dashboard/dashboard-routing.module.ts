@@ -38,27 +38,27 @@ export const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'participants',
+        path: 'participantes',
         canActivateChild: [AuthGuard],
         loadChildren: './participants/participants.module#ParticipantsModule'
       },
       {
-        path: 'params',
+        path: 'parametros',
         canActivateChild: [AuthGuard],
         loadChildren: './params/params.module#ParamsModule'
       },
       {
-        path: 'users',
+        path: 'usuarios',
         canActivateChild: [AuthGuard],
         component: UsersComponent
       },
       {
-        path: 'discards',
+        path: 'descartes',
         canActivateChild: [AuthGuard],
         loadChildren: './discards/discards.module#DiscardsModule'
       },
       {
-        path: 'settings',
+        path: 'ajustes',
         canActivateChild: [AuthGuard],
         component: SettingsComponent
       },

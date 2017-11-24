@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb" role="navigation">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a [routerLink]="['/']">Inicio</a>
+    </li>
+    <li *ngFor="let route of routes; let first = first; let last = last " class="breadcrumb-item" [ngClass]="{ active: last }">
+      <ng-container *ngIf="!last">
+        <a [routerLink]="[route]">{{route}}</a>
+      </ng-container>
+      <ng-container *ngIf="last">
+        {{ route }}
+      </ng-container>
+    </li>
+  </ol>
+</nav>

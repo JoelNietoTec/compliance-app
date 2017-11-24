@@ -82,7 +82,7 @@ export class EntityFormComponent implements OnInit {
     if (!this.entity) {
       this._partServ.createParticipant(this._entity).subscribe(data => {
         this.toastr.success(data.ShortName, 'Entidad creada');
-        this._router.navigate(['/dashboard/participants', data.ID]);
+        this._router.navigate(['/dashboard/participantes', data.ID]);
       });
     } else {
       this._entity.Country = this._util.filterByID(this._countries, this._entity.CountryID);

@@ -18,16 +18,16 @@ export const routes: Routes = [
         path: 'matrices', component: ParamMatricesComponent
       },
       {
-        path: 'tables', component: ParamTablesComponent
+        path: 'tablas', component: ParamTablesComponent
       },
       {
-        path: 'tables/:id', component: ParamTableComponent
+        path: 'tablas/:id', component: ParamTableComponent
       },
       {
         path: 'matrices/:id', component: ParamMatrixDetailsComponent
       },
       {
-        path: 'matrices/:id/edit', component: ParamMatrixComponent
+        path: 'matrices/:id/editar', component: ParamMatrixComponent
       },
       {
         path: '**', pathMatch: 'full', redirectTo: 'matrices'

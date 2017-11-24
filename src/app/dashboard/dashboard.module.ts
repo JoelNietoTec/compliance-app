@@ -13,6 +13,7 @@ import { CoreModule } from '../core/core.module';
 
 // Routers
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   ],
   exports: [],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    BreadcrumbComponent
   ],
   providers: []
 })

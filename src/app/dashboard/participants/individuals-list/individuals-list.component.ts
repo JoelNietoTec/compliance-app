@@ -45,7 +45,7 @@ export class IndividualsListComponent implements OnInit {
 
     this._table.detailsURL = [];
 
-    this._table.newURL = ['new'];
+    this._table.newURL = ['nuevo'];
 
     for (let i of this.individuals) {
       i.Rate = this._partServ.getRate(i);
