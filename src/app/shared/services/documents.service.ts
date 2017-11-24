@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,10 +13,10 @@ export class DocumentsService {
   private _docTypeURL: string;
   private _partDocURL: string;
   private _partURL: string;
-  private _headers = new Headers({ 'Content-Type': 'application/json' });
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private _types: Array<DocumentType>;
 
-  constructor(private _http: Http, private _conn: ConnectionService) {
+  constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._docTypeURL = _conn.APIUrl + 'documenttypes';
     this._documentURL = _conn.APIUrl + 'documents';
     this._partDocURL = _conn.APIUrl + 'participantdocuments';
@@ -24,54 +24,34 @@ export class DocumentsService {
   }
 
   getTypes(): Observable<Array<DocumentType>> {
-    return this._http
-      .get(this._docTypeURL)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.get<DocumentType[]>(this._docTypeURL);
   }
 
   getTypesByParticipant(id: number): Observable<Array<DocumentType>> {
-    return this._http
-      .get(`${this._docTypeURL}/type/${id}`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.get<DocumentType[]>(`${this._docTypeURL}/type/${id}`);
   }
 
   addType(type: DocumentType): Observable<DocumentType> {
-    return this._http
-      .post(this._docTypeURL, type, { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.post<DocumentType>(this._docTypeURL, type, { headers: this._headers });
   }
 
   updateType(id: number, type: DocumentType): Observable<DocumentType> {
-    return this._http
-      .put(`${this._docTypeURL}/${id}`, type, { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.put<DocumentType>(`${this._docTypeURL}/${id}`, type, { headers: this._headers });
   }
 
   deleteType(id: number) {
-    return this._http.delete(`${this._docTypeURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
+    return this._http.delete(`${this._docTypeURL}/${id}`, { headers: this._headers });
   }
 
   getDocByParticipant(participantID: number): Observable<Array<ParticipantDocument>> {
-    return this._http
-      .get(`${this._partURL}/${participantID}/documents`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.get<ParticipantDocument[]>(`${this._partURL}/${participantID}/documents`);
   }
 
   saveDoc(doc: ParticipantDocument): Observable<ParticipantDocument> {
-    return this._http
-      .post(this._partDocURL, JSON.stringify(doc), { headers: this._headers })
-      .map((response: Response) => response.json())
+    return this._http.post<ParticipantDocument>(this._partDocURL, JSON.stringify(doc), { headers: this._headers });
   }
 
   deleteDoc(id: number) {
-    return this._http
-      .delete(`${this._partDocURL}/${id}`, { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.delete(`${this._partDocURL}/${id}`, { headers: this._headers });
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +8,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 import { AgmCoreModule } from '@agm/core';
+import { BreadcrumbsModule } from 'ng2-breadcrumbs';
 
 // Model Services
 import { GendersService } from './services/genders.service';

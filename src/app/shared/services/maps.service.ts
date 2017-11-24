@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,7 +10,7 @@ import { ConnectionService } from './connection.service';
 export class MapsService {
   private _gMapsURL: string;
 
-  constructor(private _http: Http, private _conn: ConnectionService) {
+  constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._gMapsURL = 'https://maps.googleapis.com/maps/api/geocode/json?';
   }
 
@@ -20,6 +20,6 @@ export class MapsService {
     terms.forEach(element => {
       term = term + '+' + element;
     });
-    return this._http.get(`${this._gMapsURL}address=${term}&key=${this._conn.MAP_KEY}`).map((response: Response) => response.json());
+    return this._http.get(`${this._gMapsURL}address=${term}&key=${this._conn.MAP_KEY}`);
   }
 }

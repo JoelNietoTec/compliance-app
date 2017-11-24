@@ -24,7 +24,12 @@ export class IndividualsListComponent implements OnInit {
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
       { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
       { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true }
+      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true },
+      { name: 'Address', title: 'Dirección', hidden: true },
+      { name: 'Gender', title: 'Género', type: 'object', objectColumn: 'Gender.Name', hidden: true },
+      { name: 'Phone', title: 'Teléfono', hidden: true },
+      { name: 'MobilePhone', title: 'Tel. Celular', hidden: true },
+      { name: 'CreateDate', title: 'Fec. Creación', hidden: true }
     ];
 
     this._table.style = 'table table-sm table-striped table-squared';
@@ -34,6 +39,7 @@ export class IndividualsListComponent implements OnInit {
     this._table.lookup = true;
 
     this._table.searcheable = true;
+    this._table.exportToCSV = true;
 
     this._table.items = this.individuals;
 

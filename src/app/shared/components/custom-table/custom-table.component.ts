@@ -18,6 +18,9 @@ import { PaginatorComponent } from '../paginator/paginator.component';
 import { TableOptions, Column } from './custom-table.options';
 import { UtilService } from '../../services/util.service';
 
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-custom-table',
   templateUrl: './custom-table.component.html',
@@ -45,6 +48,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     name: 'ID'
   };
   _filterValues: Array<string> = [];
+  _visibleColumns: number;
 
   constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
 
@@ -53,6 +57,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   initTable() {
+    this._visibleColumns = 0;
     this.options.columns.forEach(column => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
@@ -68,6 +73,10 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
       }
       if (this.options.lookup) {
         column.lookupValues = this.getLookup(column);
+      }
+
+      if (!column.hidden) {
+        this._visibleColumns++;
       }
     });
   }
@@ -204,15 +213,37 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   exportCSV() {
-    const csvData = this._util.convertToCSV(this._filteredItems);
-    let a = document.createElement('a');
-    a.setAttribute('style', 'display:none;');
-    document.body.appendChild(a);
-    let blob = new Blob([csvData], { type: 'text/csv' });
-    let url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = 'User_Results.csv'; /* your file name*/
-    a.click();
-    return 'success';
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.itemsToReports());
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+    saveAs(new Blob([this.s2ab(wbout)]), 'Book.xlsx');
+    // console.log(this.itemsToReports());
+  }
+
+  s2ab(s: string): ArrayBuffer {
+    const buf: ArrayBuffer = new ArrayBuffer(s.length);
+    const view: Uint8Array = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xff;
+    }
+    return buf;
+  }
+
+  itemsToReports(): Array<any> {
+    const items = [];
+    this._filteredItems.forEach(item => {
+      const object = {};
+      this.options.columns.forEach(column => {
+        if (column.type === 'object') {
+          object[column.title] = this._util.getProperty(item, column.objectColumn);
+        } else {
+          object[column.title] = this._util.getProperty(item, column.name);
+        }
+      });
+      items.push(object);
+    });
+    return items;
   }
 }

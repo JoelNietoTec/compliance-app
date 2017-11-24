@@ -28,6 +28,7 @@ export class RelationshipTypesComponent implements OnInit {
 
     this._table.style = 'table-sm table-squared';
     this._table.addMethod = 'inline';
+    this._table.exportToCSV = true;
 
     this._relService.getTypes().subscribe(data => {
       this._types = data;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -12,14 +12,14 @@ import { UtilService } from './util.service';
 
 @Injectable()
 export class SanctionsService {
-  private _headers = new Headers({ 'Content-Type': 'application/json' });
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private _listsURL: string;
   private _sanctionsURL: string;
   private _discardURL: string;
   private _matchesURL: string;
 
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     private _conn: ConnectionService,
     private _partService: ParticipantsService,
     private _util: UtilService
@@ -31,38 +31,29 @@ export class SanctionsService {
   }
 
   getLists(): Observable<Array<List>> {
-    return this._http.get(this._listsURL).map((response: Response) => response.json());
+    return this._http.get<List[]>(this._listsURL);
   }
 
   getSanctionsByList(listID: number): Observable<Array<Sanction>> {
-    return this._http
-      .get(`${this._listsURL}/${listID}/sanctions`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => Observable.throw(err.message));
+    return this._http.get<Sanction[]>(`${this._listsURL}/${listID}/sanctions`);
   }
 
   getDiscards(): Observable<Array<Discard>> {
-    return this._http
-      .get(this._discardURL)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => Observable.throw(err.message));
+    return this._http.get<Discard[]>(this._discardURL);
   }
 
   addDiscard(listID: number): Observable<Discard> {
     const _discard: Discard = {};
     _discard.ListID = listID;
-    return this._http
-      .post(this._discardURL, JSON.stringify(_discard), { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => Observable.throw(err.message));
+    return this._http.post(this._discardURL, JSON.stringify(_discard), { headers: this._headers });
   }
 
   runDiscard(discardID: number, sanctions: Array<Sanction>): Promise<Array<any>> {
-    let concurrences: Array<any> = [];
+    const concurrences: Array<any> = [];
 
     return new Promise(resolve => {
       this._partService.getParticipants().subscribe(data => {
-        let participants = data;
+        const participants = data;
         sanctions.forEach(sanction => {
           const terms = sanction.Term1.toLocaleLowerCase().split(' ');
           participants.forEach(participant => {
@@ -86,7 +77,7 @@ export class SanctionsService {
   }
 
   getMatches(discardID: number): Observable<Array<DiscardMatch>> {
-    return this._http.get(`${this._discardURL}/${discardID}/matches`).map((response: Response) => response.json());
+    return this._http.get<DiscardMatch[]>(`${this._discardURL}/${discardID}/matches`);
   }
 
   saveMatches(discardID: number, sanctionID: number, participantID: number): Observable<DiscardMatch> {
@@ -95,9 +86,6 @@ export class SanctionsService {
     _match.SanctionID = sanctionID;
     _match.ParticipantID = participantID;
     console.log(_match);
-    return this._http
-      .post(this._matchesURL, JSON.stringify(_match), { headers: this._headers })
-      .map((response: Response) => response.json())
-      .catch((err: Error) => Observable.throw(console.log(err.message)));
+    return this._http.post(this._matchesURL, JSON.stringify(_match), { headers: this._headers });
   }
 }

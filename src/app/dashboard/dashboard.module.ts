@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
-
 import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { HomeModule } from './home/home.module';
@@ -20,7 +18,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    Ng2BreadcrumbModule.forRoot(),
     SharedModule,
     CoreModule,
     HomeModule,
@@ -31,6 +28,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   declarations: [
     DashboardComponent
   ],
-  providers: [BreadcrumbService]
+  providers: []
 })
 export class DashboardModule { }

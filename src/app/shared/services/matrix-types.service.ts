@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -11,16 +11,11 @@ export class MatrixTypesService {
   private _matrixTypeURL: string;
   private _matrixTypes: MatrixType[];
 
-  constructor(
-    private _http: Http,
-    private _conn: ConnectionService
-  ) {
+  constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._matrixTypeURL = _conn.APIUrl + 'MatrixTypes';
-  };
+  }
 
   getMatrixTypes(): Observable<Array<MatrixType>> {
-    return this._http
-      .get(this._matrixTypeURL)
-      .map((response: Response) => response.json());
+    return this._http.get<MatrixType[]>(this._matrixTypeURL);
   }
 }

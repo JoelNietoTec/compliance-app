@@ -31,6 +31,8 @@ export class CountriesComponent implements OnInit {
 
     this._options.searcheable = true;
 
+    this._options.exportToCSV = true;
+
     this._options.editable = true;
 
     this._options.addMethod = 'inline';

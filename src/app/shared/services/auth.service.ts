@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -23,10 +24,10 @@ export class AuthService {
   public _countries: Array<Country>;
   public _taskStatus: Array<TaskStatus>;
   public _loggedUser: User;
-  private _headers = new Headers({ 'Content-Type': 'application/json' });
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     private _conn: ConnectionService,
     private _countryServ: CountriesService,
     private _taskService: TasksService
@@ -34,27 +35,33 @@ export class AuthService {
     this._loginURL = _conn.APIUrl + 'users/login';
   }
 
-  authLogin(login: any): Observable<Boolean> {
-    return this._http
-      .post(this._loginURL, JSON.stringify(login), { headers: this._headers })
-      .map((response: Response) => {
-        let token = response.json();
-        if (token) {
-          this.token = token;
-          localStorage.setItem('currentUser', JSON.stringify({ username: login.UserName, token: response.json() }));
-          this.initLocalInfo();
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .catch((err: Response) => {
-        return Observable.of(false);
-      });
+  authLogin(login: any): Observable<User> {
+    return this._http.post<User>(this._loginURL, JSON.stringify(login), { headers: this._headers });
+    // subscribe(
+    //   data => {
+    //     const token = data['results'];
+    //     if (token) {
+    //       this.token = token;
+    //       localStorage.setItem('currentUser', JSON.stringify({ username: login.UserName, token: token }));
+    //       this.initLocalInfo();
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   },
+    //   err => {
+    //     Observable.of(false);
+    //   }
+    // );
+  }
+
+  setCurrentUser(token: User) {
+    localStorage.setItem('currentUser', JSON.stringify({ username: token.UserName, token: token }));
+    this.initLocalInfo();
   }
 
   getUserInfo(): User {
-    let login = JSON.parse(localStorage.getItem('currentUser'));
+    const login = JSON.parse(localStorage.getItem('currentUser'));
     return login.token;
   }
 

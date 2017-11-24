@@ -1,20 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 
 // Packages Dependencies
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr';
 import { ToastOption } from './shared/services/toast-options';
 import { CustomDatepickerI18n, I18n } from './shared/services/datepicker-i18n';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { BreadcrumbsModule } from 'ng2-breadcrumbs';
 
 // Main Dependencies
 import { AppComponent } from './app.component';
@@ -30,23 +30,23 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     SharedModule,
     AppRoutingModule,
     ChartsModule,
     ToastModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BreadcrumbsModule
   ],
   providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'es-PA'
-    },
-    BreadcrumbService,
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'es-PA'
+    // },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

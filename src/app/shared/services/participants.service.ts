@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -18,38 +18,29 @@ export class ParticipantsService {
   private _newParam: ParticipantParam;
   private _participants: Array<Participant>;
   private _newParticipant: Participant;
-  private _headers = new Headers({ 'Content-Type': 'application/json' });
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private _http: Http, private _conn: ConnectionService, private _util: UtilService, private _auth: AuthService) {
+  constructor(private _http: HttpClient, private _conn: ConnectionService, private _util: UtilService, private _auth: AuthService) {
     this._partURL = _conn.APIUrl + 'participants';
     this._paramURL = _conn.APIUrl + 'participantparams';
   }
 
-  getParticipants() {
-    return this._http.get(this._partURL).map(response => {
-      this._participants = response.json();
-      return this._participants;
-    });
+  getParticipants(): Observable<Participant[]> {
+    return this._http.get<Participant[]>(this._partURL);
   }
 
-  getParticipant(_id: number) {
-    return this._http.get(this._partURL + '/' + _id).map(response => {
-      this._participant = response.json();
-      return this._participant;
-    });
+  getParticipant(_id: number): Observable<Participant> {
+    return this._http.get<Participant>(this._partURL + '/' + _id);
   }
 
   createParticipant(part: Participant): Observable<Participant> {
     const _user = this._auth.getUserInfo(); // get Current User
     part.CreatedBy = _user.ID; // set User ID
-    return this._http.post(this._partURL, JSON.stringify(part), { headers: this._headers }).map((response: Response) => response.json());
+    return this._http.post<Participant>(this._partURL, JSON.stringify(part), { headers: this._headers });
   }
 
   updateParticipant(_id: number, _part: Participant): Observable<Participant> {
-    return this._http.put(`${this._partURL}/${_id}`, JSON.stringify(_part), { headers: this._headers }).map(response => {
-      this._newParticipant = response.json();
-      return this._newParticipant;
-    });
+    return this._http.put(`${this._partURL}/${_id}`, JSON.stringify(_part), { headers: this._headers });
   }
 
   searchParticipant(participants: Participant[], search: string): Participant[] {
@@ -71,20 +62,15 @@ export class ParticipantsService {
   }
 
   getParams(_partID: number): Observable<Array<ParticipantParam>> {
-    return this._http.get(`${this._partURL}/${_partID}/params`).map(response => {
-      return response.json();
-    });
+    return this._http.get<ParticipantParam[]>(`${this._partURL}/${_partID}/params`);
   }
 
   getParticipantParam(participantID: number, paramID: number): Observable<ParticipantParam> {
-    return this._http.get(`${this._partURL}/${participantID}/params/${paramID}`).map((response: Response) => response.json());
+    return this._http.get<ParticipantParam>(`${this._partURL}/${participantID}/params/${paramID}`);
   }
 
   updateParam(_id: number, _param: ParticipantParam): Observable<ParticipantParam> {
-    return this._http.put(this._paramURL + '/' + _id, JSON.stringify(_param), { headers: this._headers }).map(response => {
-      this._newParam = response.json();
-      return this._newParam;
-    });
+    return this._http.put(this._paramURL + '/' + _id, JSON.stringify(_param), { headers: this._headers });
   }
 
   getRate(_part: Participant): string {
@@ -99,24 +85,15 @@ export class ParticipantsService {
     }
   }
 
-  getParticipantsbyRisk(): any {
-    return this._http
-      .get(`${this._partURL}/byrisk`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+  getParticipantsbyRisk(): Observable<Array<any>> {
+    return this._http.get<Array<any>>(`${this._partURL}/byrisk`);
   }
 
-  getParticipantsbyCountry(): any {
-    return this._http
-      .get(`${this._partURL}/bycountry`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+  getParticipantsbyCountry(): Observable<Array<any>> {
+    return this._http.get<Array<any>>(`${this._partURL}/bycountry`);
   }
 
   getPendingDocuments(id: number): Observable<Array<PendingDocument>> {
-    return this._http
-      .get(`${this._partURL}/${id}/pending`)
-      .map((response: Response) => response.json())
-      .catch((err: Error) => err.message);
+    return this._http.get<PendingDocument[]>(`${this._partURL}/${id}/pending`);
   }
 }

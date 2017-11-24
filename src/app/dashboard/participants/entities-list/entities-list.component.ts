@@ -24,12 +24,20 @@ export class EntitiesListComponent implements OnInit {
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
       { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
       { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true }
+      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true },
+      { name: 'Address', title: 'Dirección', hidden: true },
+      { name: 'WebSite', title: 'Sitio Web', hidden: true },
+      { name: 'LegalRepresentative', title: 'Representante Legal', hidden: true },
+      { name: 'Phone', title: 'Teléfono', hidden: true },
+      { name: 'MobilePhone', title: 'Tel. Celular', hidden: true },
+      { name: 'CreateDate', title: 'Fec. Creación', hidden: true },
     ];
 
     this._table.style = 'table table-sm table-striped table-squared';
 
     this._table.pageable = true;
+
+    this._table.exportToCSV = true;
 
     this._table.lookup = true;
 
