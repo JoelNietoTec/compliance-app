@@ -27,7 +27,7 @@ export class MapComponent implements OnInit, AfterViewInit {
             }]
         },
         onRegionTipShow: function(e, el, code) {
-          el.html(el.html() + ' (GDP - ' + regions[code] + ')');
+          el.html(el.html() + ' (Participantes - ' + regions[code] + ')');
         }
       });
     });
