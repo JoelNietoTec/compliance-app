@@ -218,7 +218,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-    saveAs(new Blob([this.s2ab(wbout)]), 'Book.xlsx');
+    saveAs(new Blob([this.s2ab(wbout)]), 'Export.xlsx');
     // console.log(this.itemsToReports());
   }
 

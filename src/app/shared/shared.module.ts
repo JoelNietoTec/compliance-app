@@ -31,6 +31,7 @@ import { ParamValuesService } from './services/param-values.service';
 import { ParamSubValuesService } from './services/param-sub-values.service';
 import { AuthGuard } from './services/auth.guard';
 import { MapsService } from './services/maps.service';
+import { ScheduleService } from './services/schedules.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -51,6 +52,7 @@ import { SaveButtonComponent } from './components/save-button/save-button.compon
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   imports: [
@@ -87,7 +89,8 @@ import { BooleanPipe } from './pipes/boolean.pipe';
     CustomTableComponent,
     ColumnPipe,
     AgmCoreModule,
-    ChartCardComponent
+    ChartCardComponent,
+    MapComponent
   ],
   providers: [
     GendersService,
@@ -108,6 +111,7 @@ import { BooleanPipe } from './pipes/boolean.pipe';
     ParamValuesService,
     ParamSubValuesService,
     SanctionsService,
+    ScheduleService,
     NgbActiveModal,
     MapsService,
     AuthGuard
@@ -126,7 +130,8 @@ import { BooleanPipe } from './pipes/boolean.pipe';
     ColumnPipe,
     BooleanPipe,
     TableFormComponent,
-    ChartCardComponent
+    ChartCardComponent,
+    MapComponent
   ]
 })
 export class SharedModule {}

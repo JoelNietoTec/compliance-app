@@ -1,0 +1,48 @@
+<ng-container *ngIf="_schedule">
+  <h4>{{ _schedule.Title }}</h4>
+  <ngb-accordion #acc="ngbAccordion">
+    <ng-container *ngFor="let milestone of _schedule.Milestones">
+      <ngb-panel title="{{milestone.Title}}">
+        <ng-template ngbPanelContent>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Tarea</th>
+                <th>Meta</th>
+                <th>Comentarios</th>
+                <th>Avance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let job of milestone.Jobs">
+                <td>{{ job.Title }}</td>
+                <td>{{ job.Goal }}</td>
+                <td>{{ job.Comments }}</td>
+                <td>{{ job.Completion }}%</td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea class="form-control" name="" id="" rows="3"></textarea>
+                </td>
+                <td>
+                  <textarea class="form-control" name="" id="" rows="3"></textarea>
+                </td>
+                <td>
+                  <textarea class="form-control" name="" id="" rows="3"></textarea>
+                </td>
+                <td>
+                  <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td [colSpan]="4">
+                  <a name="" id="" class="btn btn-primary pull-right" href="#" role="button">Guardar</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-panel>
+    </ng-container>
+  </ngb-accordion>
+</ng-container>

@@ -12,6 +12,7 @@ import { UtilService } from '../../shared/services/util.service';
 export class HomeComponent implements OnInit {
   public byRisk: Array<any>;
   public byCountry: Array<any>;
+  public _countries: any;
 
   public riskChartOptions: any;
   public countryChartOptions: any;
@@ -97,6 +98,11 @@ export class HomeComponent implements OnInit {
     };
     this._partServ.getParticipantsbyCountry().subscribe(data => {
       this.byCountry = data;
+      this._countries = {};
+      this.byCountry.forEach(country => {
+        this._countries[country.Abbreviation] = country.Value;
+      });
+      console.log(this._countries);
     });
   }
 }

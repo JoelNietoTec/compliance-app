@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,500,800');
 
 body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
     font-family: 'Nunito', sans-serif;
@@ -7,6 +7,13 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
     font-size: 14px;
 }
 
+.progress {
+  background-color: #fff;
+}
+
+.card-header a {
+  text-decoration: none;
+}
 
 button.form-control {
   text-align: left !important;
@@ -304,12 +311,19 @@ ngb-tabset > ul.nav > li.nav-item {
   border-color: #4ca2ff;
 }
 
+.btn {
+  border-bottom-width: 5px;
+}
 
+.btn:hover, .btn:active, .btn:focus {
+  border-bottom-width: 1px;
+  margin-bottom: 4px;
+}
 
 /* Button Primary*/
 .btn-primary, .page-item.active .page-link {
   background-color: #287FB9 !important;
-  border-color: #287FB9 !important;
+  border-color: #206594 !important;
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus  {
@@ -336,7 +350,7 @@ ngb-tabset > ul.nav > li.nav-item {
 /* Button danger */
 .btn-danger {
   background-color: #e74c3c !important;
-  border-color: #e74c3c !important;
+  border-color: #c0392b !important;
 }
 
 .btn-danger:hover, .btn-danger:active, .btn-danger:focus  {
@@ -366,7 +380,7 @@ ngb-tabset > ul.nav > li.nav-item {
 
 .btn-success {
   background-color: #2ecc71 !important;
-  border-color: #2ecc71 !important;
+  border-color: #27ae60 !important;
 }
 
 .btn-success:hover, .btn-success:active, .btn-success:focus  {
@@ -404,7 +418,7 @@ ngb-tabset > ul.nav > li.nav-item {
   /* background-color: #bdc3c7;
   border-color: #bdc3c7; */
   background-color: #415161;
-  border-color: #415161;
+  border-color: #2c3e50;
 }
 
 .btn-outline-secondary {
@@ -462,14 +476,6 @@ thead > tr > th {
 
 .bg-success {
   background-color: #27ae60 !important;
-}
-
-td > input {
-  border-width: 0 !important;
-}
-
-td > input, td > .form-control {
-  border-width: 0 !important;
 }
 
 .card {
