@@ -13,19 +13,14 @@
           <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
             [colors]="riskColors">
           </app-chart-card>
-          <app-chart-card *ngIf="byCountry" [items]="byCountry" [data]="'Value'" [label]="'Country'" [options]="countryChartOptions" [type]="'doughnut'"></app-chart-card>
+          <app-chart-card *ngIf="byCountry" [items]="byCountry" [data]="'Value'" [label]="'Country'" [options]="countryChartOptions"
+            [type]="'doughnut'"></app-chart-card>
         </div>
         <div class="col-md-7">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">
                 <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
-              <!-- <agm-map [zoom]="2">
-                <ng-container *ngFor="let address of _addresses">
-                  <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [title]="address.formatted_address" [latitude]="address.geometry.location.lat"
-                    [longitude]="address.geometry.location.lng"></agm-marker>
-                </ng-container>
-              </agm-map> -->
               <app-map *ngIf="_countries" [regions]="_countries"></app-map>
             </div>
           </div>

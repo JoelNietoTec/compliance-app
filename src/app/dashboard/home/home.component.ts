@@ -18,22 +18,10 @@ export class HomeComponent implements OnInit {
   public countryChartOptions: any;
   public riskColors: Array<any>;
   public chartReady: Boolean = false;
-  public _addresses: Array<any> = [];
 
   constructor(private _partServ: ParticipantsService, private _util: UtilService, private _map: MapsService) {}
 
   ngOnInit() {
-    this._partServ.getParticipants().subscribe(participants => {
-      participants.forEach(part => {
-        let location = {};
-        this._map.getPosition(part.Address).subscribe(position => {
-          if (position.results[0]) {
-            location = position.results[0];
-            this._addresses.push(location);
-          }
-        });
-      });
-    });
     this._partServ.getParticipantsbyRisk().subscribe(data => {
       this.byRisk = data;
       for (const i of this.byRisk) {

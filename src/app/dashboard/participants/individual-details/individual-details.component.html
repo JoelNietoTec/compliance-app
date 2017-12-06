@@ -11,37 +11,59 @@
   <div class="card-body section-block">
     <ngb-tabset type="pills" [justify]="'center'">
       <ngb-tab>
-        <ng-template ngbTabTitle><i class="typcn typcn-business-card"></i> Info</ng-template>
+        <ng-template ngbTabTitle>
+          <i class="typcn typcn-business-card"></i> Info</ng-template>
         <ng-template ngbTabContent>
-          <small class="text-muted">Email <i class="fa fa-envelope-o" aria-hidden="true"></i></small>
+          <small class="text-muted">Email
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.Email }}</h6>
-          <small class="text-muted">Número Telefónico <i class="typcn typcn-phone-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Número Telefónico
+            <i class="typcn typcn-phone-outline" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.Phone }}</h6>
-          <small class="text-muted">Teléfono Celular <i class="typcn typcn-device-phone" aria-hidden="true"></i></small>
+          <small class="text-muted">Teléfono Celular
+            <i class="typcn typcn-device-phone" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Fecha de nacimiento (edad)  <i class="fa fa-birthday-cake" aria-hidden="true"></i> </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }} <em>({{ individual.Age }})</em></h6>
-          <small *ngIf="individual.ParticipantTypeID == 2" class="text-muted">Fecha de constitución  <i class="fa fa-building" aria-hidden="true"></i> </small>
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Fecha de nacimiento (edad)
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+          </small>
+          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}
+            <em>({{ individual.Age }})</em>
+          </h6>
+          <small *ngIf="individual.ParticipantTypeID == 2" class="text-muted">Fecha de constitución
+            <i class="fa fa-building" aria-hidden="true"></i>
+          </small>
           <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Género <i class="fa fa-venus-mars" aria-hidden="true"></i></small>
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">Género
+            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+          </small>
           <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.Gender.EnglishName }}</h6>
-          <small class="text-muted">Sitio Web <i class="typcn typcn-globe-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Sitio Web
+            <i class="typcn typcn-globe-outline" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.WebSite }}</h6>
-          <small class="text-muted">Dirección <i class="typcn typcn-location-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Dirección
+            <i class="typcn typcn-location-outline" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.Address }}</h6>
           <agm-map *ngIf="position" [latitude]="position.lat" [longitude]="position.lng" [zoom]=15>
             <agm-marker [latitude]="position.lat" [longitude]="position.lng"></agm-marker>
           </agm-map>
-          <small class="text-muted">Creado por <i class="typcn typcn-user-add-outline" aria-hidden="true"></i></small>
+          <small class="text-muted">Creado por
+            <i class="typcn typcn-user-add-outline" aria-hidden="true"></i>
+          </small>
           <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
         </ng-template>
       </ngb-tab>
       <ngb-tab>
-          <ng-template ngbTabTitle><i class="typcn typcn-edit"></i> Tareas</ng-template>
-          <ng-template ngbTabContent>
-            <participant-tasks [participant]="individual"></participant-tasks>
-          </ng-template>
-        </ngb-tab>
+        <ng-template ngbTabTitle>
+          <i class="typcn typcn-edit"></i> Tareas</ng-template>
+        <ng-template ngbTabContent>
+          <participant-tasks [participant]="individual"></participant-tasks>
+        </ng-template>
+      </ngb-tab>
     </ngb-tabset>
   </div>
 </div>
