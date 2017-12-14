@@ -36,7 +36,15 @@ export class ScheduleService {
     return this._http.get<Array<Milestone>>(`${this._scheduleURL}/${scheduleID}/milestones`);
   }
 
+  createMilestone(milestone: Milestone): Observable<Milestone> {
+    return this._http.post<Milestone>(this._milestonesURL, JSON.stringify(milestone), { headers: this._headers });
+  }
+
   getJobs(milestoneID: number): Observable<Array<Job>> {
     return this._http.get<Array<Job>>(`${this._milestonesURL}/${milestoneID}/jobs`);
+  }
+
+  createJob(job: Job): Observable<Job> {
+    return this._http.post<Job>(this._jobsURL, JSON.stringify(job), { headers: this._headers });
   }
 }

@@ -6,18 +6,18 @@ export interface Schedule {
   BeginDate?: Date;
   CompleteDate?: Date;
   Status?: Boolean;
-  Milestones: Array<Milestone>;
+  Milestones?: Array<Milestone>;
 }
 
 export interface Milestone {
   ID?: number;
   Title?: string;
-  ScheduleID?: string;
+  ScheduleID?: number;
   Goal?: string;
   BeginDate?: Date;
   CompleteDate?: Date;
   Completion?: number;
-  Jobs: Array<Job>;
+  Jobs?: Array<Job>;
 }
 
 export interface Job {

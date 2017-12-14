@@ -20,29 +20,72 @@
                 <td>{{ job.Comments }}</td>
                 <td>{{ job.Completion }}%</td>
               </tr>
-              <tr>
-                <td>
-                  <textarea class="form-control" name="" id="" rows="3"></textarea>
-                </td>
-                <td>
-                  <textarea class="form-control" name="" id="" rows="3"></textarea>
-                </td>
-                <td>
-                  <textarea class="form-control" name="" id="" rows="3"></textarea>
-                </td>
-                <td>
-                  <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                </td>
-              </tr>
-              <tr>
-                <td [colSpan]="4">
-                  <a name="" id="" class="btn btn-primary pull-right" href="#" role="button">Guardar</a>
-                </td>
-              </tr>
             </tbody>
           </table>
+          <button type="button" (click)="openJob(job, milestone.ID)" class="btn btn-primary pull-right">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> Actividad
+          </button>
+          <ng-template #job let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Actividad</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" name="" id="title" [(ngModel)]="_job.Title" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">Título tarea macro</small>
+                <br>
+                <div class="form-group">
+                  <label for="goal">Meta</label>
+                  <textarea class="form-control" [(ngModel)]="_job.Goal" name="" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="goal">Commentarios</label>
+                  <textarea class="form-control" [(ngModel)]="_job.Comments" name="" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="progress">Avance</label>
+                  <input type="number" class="form-control" [(ngModel)]="_job.Completion" name="progress" aria-describedby="helpId" placeholder="">
+                  <small id="helpId" class="form-text text-muted">Avance tarea</small>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="c('Close click')">
+                <i class="fa fa-save" aria-hidden="true"></i> Guardar</button>
+            </div>
+          </ng-template>
         </ng-template>
       </ngb-panel>
     </ng-container>
   </ngb-accordion>
 </ng-container>
+<button type="button" (click)="openMilestone(milestone)" class="btn btn-outline-primary">
+  <i class="fa fa-plus-circle" aria-hidden="true"></i> Actividad Macro</button>
+<ng-template #milestone let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Actividad Macro</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="title">Título</label>
+      <input type="text" name="" id="title" [(ngModel)]="_milestone.Title" class="form-control" placeholder="" aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Título tarea macro</small>
+      <br>
+      <div class="form-group">
+        <label for="goal">Meta</label>
+        <textarea class="form-control" [(ngModel)]="_milestone.Goal" name="" id="" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">
+      <i class="fa fa-save" aria-hidden="true"></i> Guardar</button>
+  </div>
+</ng-template>

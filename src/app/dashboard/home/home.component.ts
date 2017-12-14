@@ -90,7 +90,6 @@ export class HomeComponent implements OnInit {
       this.byCountry.forEach(country => {
         this._countries[country.Abbreviation] = country.Value;
       });
-      console.log(this._countries);
     });
   }
 }
