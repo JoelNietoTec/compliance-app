@@ -2,16 +2,21 @@
   <div class="card-header">
     <span>
       {{ task.Title }}
-    <div class="pull-right ">
-      <ng-container [ngSwitch]="task.StatusID">
-        <i *ngSwitchCase=1 class="task-icon fa fa-check-square-o text-muted" placement="top" ngbTooltip="Begin" (click)="progressTask()"></i>
-        <i *ngSwitchCase=2 class="task-icon fa fa-check-square-o text-muted" placement="top" ngbTooltip="Complete" (click)="progressTask()"></i>
-      </ng-container>
-    </div>
-  </span>
+      <div class="pull-right ">
+        <ng-container [ngSwitch]="task.StatusID">
+          <span *ngSwitchCase=1 placement="top" ngbTooltip="Iniciar" (click)="progressTask()">
+            <i class="task-icon far fa-check-square text-muted"></i>
+          </span>
+          <span *ngSwitchCase=2 placement="top" ngbTooltip="Completar" (click)="progressTask()">
+            <i class="task-icon far fa-check-square text-muted"></i>
+          </span>
+        </ng-container>
+      </div>
+    </span>
   </div>
   <div class="card-body" (click)="click()">
     <p class="task-description">{{ task.Description}}</p>
-    <p><i class="typcn typcn-calendar-outline"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>
+    <p>
+      <i class="far fa-calendar-alt"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>
   </div>
 </div>

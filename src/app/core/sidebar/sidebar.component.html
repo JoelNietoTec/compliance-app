@@ -1,5 +1,5 @@
 <ul class="nav nav-pills flex-column ">
-  <h6 class="user-name"><i class="typcn typcn-user-outline" aria-hidden="true"></i> {{ _loggedUser.UserName }}</h6>
+  <h6 class="user-name"><i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.UserName }}</h6>
   <li class="nav-item dropdown user-email"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
     <div class="dropdown-menu">
       <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a>
@@ -8,16 +8,16 @@
   </li>
   <li class="nav-item">
     <a [routerLink]="['home']" class="nav-link" routerLinkActive="active">
-      <i class="typcn typcn-home-outline" aria-hidden="true"></i> Inicio
+      <i class="fas fa-home" aria-hidden="true"></i> Inicio
     </a>
   </li>
   <li class="nav-item">
-    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active"><span class="typcn typcn-group"></span> Participantes
+    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active"><i class="fas fa-users"></i> Participantes
     </a>
   </li>
   <li class="nav-item">
     <a data-toggle="collapse" href="#paramLinks" class="nav-link">
-      <i class="typcn typcn-chart-bar-outline" aria-hidden="true"></i> Parámetros
+      <i class="far fa-chart-bar" aria-hidden="true"></i> Parámetros
       </a>
     <ul class="nav-pills flex-column sub-items collapse" id="paramLinks">
       <li class="nav-item sub-item">
@@ -30,11 +30,11 @@
   </li>
   <li class="nav-item">
     <a [routerLink]="['descartes']" class="nav-link" routerLinkActive="active">
-      <i class="typcn typcn-zoom-outline" aria-hidden="true"></i> Descartes
+      <i class="fas fa-search" aria-hidden="true"></i> Descartes
     </a>
   </li>
   <li class="nav-item">
     <a [routerLink]="['ajustes']" class="nav-link" routerLinkActive="active">
-    <i class="typcn typcn-spanner-outline" aria-hidden="true"></i> Ajustes</a>
+    <i class="fas fa-wrench" aria-hidden="true"></i> Ajustes</a>
   </li>
 </ul>

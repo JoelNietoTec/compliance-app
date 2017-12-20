@@ -50,7 +50,7 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         canActivateChild: [AuthGuard],
-        component: UsersComponent
+        loadChildren: './users/users.module#UsersModule'
       },
       {
         path: 'descartes',

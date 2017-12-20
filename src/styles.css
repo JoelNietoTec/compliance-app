@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,500,800');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500');
 
 body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 14px;
 }

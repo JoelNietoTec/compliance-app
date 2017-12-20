@@ -1,13 +1,13 @@
 <app-card [footer]=true>
   <div card-section="body">
-    <h4 class="card-title">All Users</h4>
+    <h4 class="card-title">Usuarios</h4>
     <table class="table table-sm">
       <thead>
         <tr>
           <th>ID</th>
-          <th>User Name</th>
+          <th>Nombre Usuario</th>
           <th>Email</th>
-          <th>Create Date</th>
+          <th>Fecha Creación</th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +21,6 @@
     </table>
   </div>
   <div card-section="footer">
-    <a name="new-user" id="" class="btn btn-primary" [routerLink]="['New']" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
+    <a name="new-user" id="" class="btn btn-primary" [routerLink]="['nuevo']" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo Usuario</a>
   </div>
 </app-card>

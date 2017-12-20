@@ -19,7 +19,7 @@
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formBeginDate" name="bd" ngbDatepicker #bd="ngbDatepicker">
             <div class="input-group-addon" (click)="bd.toggle()">
-              <i class="typcn typcn-calendar" aria-hidden="true"></i>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formExpirationDate" name="ed" ngbDatepicker #ed="ngbDatepicker">
             <div class="input-group-addon" (click)="ed.toggle()">
-              <i class="typcn typcn-calendar" aria-hidden="true"></i>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary"><i class="typcn typcn-download-outline"></i> Guardar</button>
+        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary"><i class="far fa-save"></i> Guardar</button>
       </div>
     </div>
   </div>

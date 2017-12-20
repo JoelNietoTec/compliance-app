@@ -1,7 +1,7 @@
 <ngb-tabset type="pills">
   <ngb-tab>
     <ng-template ngbTabTitle>
-      <i class="typcn typcn-th-large"></i> Dashboard</ng-template>
+      <i class="fas fa-chart-pie"></i> Dashboard</ng-template>
     <ng-template ngbTabContent>
       <div class="row">
         <div class="col-md-3" *ngFor="let risk of byRisk">
@@ -30,21 +30,21 @@
   </ngb-tab>
   <ngb-tab>
     <ng-template ngbTabTitle>
-      <i class="typcn typcn-input-checked"></i> Tareas</ng-template>
+      <i class="fas fa-tasks"></i> Tareas</ng-template>
     <ng-template ngbTabContent>
       <home-tasks></home-tasks>
     </ng-template>
   </ngb-tab>
   <ngb-tab>
     <ng-template ngbTabTitle>
-      <i class="typcn typcn-calendar"></i> Calendario</ng-template>
+      <i class="far fa-calendar-alt"></i> Calendario</ng-template>
     <ng-template ngbTabContent>
       <home-schedule></home-schedule>
     </ng-template>
   </ngb-tab>
   <ngb-tab>
     <ng-template ngbTabTitle>
-      <i class="typcn typcn-stopwatch"></i> Cronograma
+      <i class="far fa-clock"></i> Cronograma
     </ng-template>
     <ng-template ngbTabContent>
       <app-schedules></app-schedules>
