@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
 
 body, button, input, input.form-control, button.form-control, optgroup, select, select.form-control, textarea, textarea.form-control, .tooltip {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-weight: 400;
     font-size: 14px;
 }
@@ -95,7 +95,7 @@ small.text-muted > .typcn {
 }
 
 .btn {
-  margin: 0 0 0 10px;
+  /* margin: 0 0 0 10px; */
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -311,14 +311,14 @@ ngb-tabset > ul.nav > li.nav-item {
   border-color: #4ca2ff;
 }
 
-.btn {
+/* .btn {
   border-bottom-width: 5px;
 }
 
 .btn:hover, .btn:active, .btn:focus {
   border-bottom-width: 1px;
   margin-bottom: 4px;
-}
+} */
 
 /* Button Primary*/
 .btn-primary, .page-item.active .page-link {

@@ -14,3 +14,7 @@
 .top-bar {
   margin-bottom: .75rem;
 }
+
+.btn-outline-primary {
+  margin-left: 10px;
+}

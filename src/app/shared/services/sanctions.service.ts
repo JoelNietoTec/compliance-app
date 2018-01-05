@@ -88,4 +88,15 @@ export class SanctionsService {
     console.log(_match);
     return this._http.post(this._matchesURL, JSON.stringify(_match), { headers: this._headers });
   }
+
+  validMatch(matchID: number, valid: boolean): Observable<DiscardMatch> {
+    let _valid: string;
+    if (valid === true) {
+      _valid = 'valid';
+    } else {
+      _valid = 'invalid';
+    }
+
+    return this._http.get(`${this._discardURL}/matches/${matchID}/${_valid}`);
+  }
 }

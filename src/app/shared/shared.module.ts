@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { SweetAlert2Module } from '@toverux/ngsweetalert2';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AgmCoreModule } from '@agm/core';
 import { BreadcrumbsModule } from 'ng2-breadcrumbs';
 

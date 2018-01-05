@@ -12,5 +12,32 @@
       </div>
     </div>
   </div>
-  <app-custom-table *ngIf="_currentDiscardID" [options]="_table"></app-custom-table>
+  <!-- <app-custom-table *ngIf="_currentDiscardID" [options]="_table"></app-custom-table> -->
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>Participante</th>
+        <th>Sancionado</th>
+        <th>Válida</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of _matches">
+        <td>{{ match.Participant.FullName }}</td>
+        <td>{{ match.Sanction.FullTerm }}</td>
+        <td>{{ match.Valid }}</td>
+        <td class="text-center">
+          <div class="btn-group btn-group-sm" role="group" aria-label="">
+            <button type="button" ngbTooltip="Validar" class="btn btn-success" (click)="validMatches(match, true)">
+              <i class="far fa-check-circle" aria-hidden="true"></i>
+            </button>
+            <button type="button" ngbTooltip="Descartar" class="btn btn-danger" (click)="validMatches(match, false)">
+              <i class="far fa-times-circle" aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

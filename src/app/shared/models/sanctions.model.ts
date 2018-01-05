@@ -14,6 +14,7 @@ export interface Sanction {
   Term3: String;
   Term4: String;
   Term5: String;
+  FullTerm?: String;
 }
 
 export interface Discard {
