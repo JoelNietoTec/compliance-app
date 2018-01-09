@@ -11,7 +11,7 @@
         <ngb-tabset #t type="pills" *ngIf="_participant">
           <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
-              <!-- <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance> -->
+              <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Documentos">
