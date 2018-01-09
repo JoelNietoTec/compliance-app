@@ -24,7 +24,7 @@ export const routes: Routes = [
         path: 'tablas/:id', component: ParamTableComponent
       },
       {
-        path: 'matrices/:id', component: ParamMatrixDetailsComponent
+        path: 'matrices/:id', component: ParamMatrixComponent
       },
       {
         path: 'matrices/:id/editar', component: ParamMatrixComponent

@@ -32,7 +32,7 @@ export class IndividualsListComponent implements OnInit {
       { name: 'CreateDate', title: 'Fec. Creación', hidden: true }
     ];
 
-    this._table.style = 'table table-sm table-striped table-squared';
+    this._table.style = 'table table-sm table-squared';
 
     this._table.pageable = true;
 

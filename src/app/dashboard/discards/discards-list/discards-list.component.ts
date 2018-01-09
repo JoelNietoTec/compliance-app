@@ -24,8 +24,6 @@ export class DiscardsListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      {name: 'ID', title: '#', type: 'number'},
-      {name: 'Date', title: 'Fecha', type: 'date', sortable: true },
       {name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true},
       {name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true},
       {name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true},
