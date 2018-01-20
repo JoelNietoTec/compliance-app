@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <select class="form-control custom-select" [(ngModel)]="_currentComparisonID" (ngModelChange)="getMatches()" name="discard" id="discard">
+          <option selected disabled [value]="undefined">--- Seleccionar descarte ---</option>
+          <option *ngFor="let discard of _comparisons" [value]="discard.ID">
+            {{ discard.File }} | {{ discard.Date | date: 'short' }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Participante</th>
+        <th>Término</th>
+        <th>Puntaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of _matches" >
+        <td>{{ match.ParticipantID }}</td>
+        <td>{{ match.Participant.FullName }}</td>
+        <td>{{ match.Term1 }}</td>
+        <td>{{ match.Score }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -7,16 +7,17 @@
         </h4>
         <div class="form-group">
           <label for="email">
-            <span class="typcn typcn-mail" aria-hidden="true"></span> Email /
-            <span class="typcn typcn-user-outline"></span>Nombre Usuario </label>
-          <input type="email" [(ngModel)]="_login.UserName" class="form-control form-control-lg" name="email" id="email" aria-describedby="emailHelpId"
+            <i class="far fa-envelope"></i> Email /
+            <i class="far fa-user"></i> Nombre Usuario </label>
+          <input type="email" [(ngModel)]="_login.UserName" class="form-control form-control-lg" name="email" id="email" [disabled]="_loading"
             placeholder="username@domain.com">
           <small id="emailHelpId" class="form-text text-muted">Email / Nombre de Usuario </small>
         </div>
         <div class="form-group">
           <label for="password">
-            <i class="typcn typcn-key-outline" aria-hidden="true"></i> Contraseña</label>
-          <input type="password" [(ngModel)]="_login.Password" class="form-control form-control-lg" name="password" id="password" placeholder="Contraseña">
+            <i class="fas fa-key" aria-hidden="true"></i> Contraseña</label>
+          <input type="password" [(ngModel)]="_login.Password" class="form-control form-control-lg" name="password" id="password" placeholder="Contraseña"
+            [disabled]="_loading">
           <small class="form-text text-muted">Contraseña de Usuario</small>
         </div>
         <div class="form-group" *ngIf="_invalid">
@@ -28,8 +29,17 @@
           </div>
         </div>
         <div class="form-group">
-          <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" (click)="signIn()">INICIAR SESIÓN
-            <span class="typcn typcn-power-outline"></span>
+          <button [disabled]="_loading" type="button" name="" id="" class="btn btn-primary btn-lg btn-block" (click)="signIn()">INICIAR SESIÓN
+            <ng-container *ngIf="_loading===false">
+              <span>
+                <i class="fas fa-sign-in-alt"></i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="_loading">
+              <span>
+                <i class="fas fa-sync fa-spin"></i>
+              </span>
+            </ng-container>
           </button>
         </div>
       </div>

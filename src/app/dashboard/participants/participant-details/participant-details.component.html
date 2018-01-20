@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-8">
       <div class="card">
-        <ngb-tabset #t type="pills" *ngIf="_participant">
+        <ngb-tabset #t type="tabs" *ngIf="_participant">
           <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
               <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>

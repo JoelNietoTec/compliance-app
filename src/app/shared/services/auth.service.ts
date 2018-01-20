@@ -65,6 +65,15 @@ export class AuthService {
     return login.token;
   }
 
+  isLogged(): boolean {
+    const login = JSON.parse(localStorage.getItem('currentUser'));
+    if (login) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   authLogout(): void {
     this.token = null;
     localStorage.removeItem('currentUser');

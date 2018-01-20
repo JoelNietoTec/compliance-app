@@ -1,34 +1,75 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <input name="" id="" class="btn btn-primary" (change)="onFileChange($event)" type="file" accept=".xlsx, .xls" />
+<ngb-tabset type="pills">
+  <ngb-tab>
+    <ng-template ngbTabTitle><i class="fas fa-upload" aria-hidden="true"></i> Carga</ng-template>
+    <ng-template ngbTabContent>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <input name="" id="" class="btn btn-primary" (change)="onFileChange($event)" type="file" accept=".xlsx, .xls" />
+            </div>
+          </div>
+        </div>
+        <div *ngIf="data" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" (click)="open(content)">Ejecutar Descarte</button>
+            </div>
+          </div>
+        </div>
+        <table *ngIf="data" class="table table-sm">
+          <thead>
+            <tr>
+              <th *ngFor="let val of columns">
+                {{val.column}}
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let row of data; let i = index">
+            <tbody *ngIf="i!=0">
+              <tr>
+                <td *ngFor="let val of row">
+                  {{val}}
+                </td>
+              </tr>
+            </tbody>
+          </ng-container>
+        </table>
       </div>
-    </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><i class="fas fa-search"></i>  Descartes</ng-template>
+    <ng-template ngbTabContent>
+      <files-matches></files-matches>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Columnas</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div *ngIf="data" class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <button type="button" class="btn btn-primary">Ejecutar Descarte</button>
-      </div>
-    </div>
+  <div class="modal-body">
+    <h5>¿Qué columnas desea validar?</h5>
+    <ul class="list-group">
+      <li *ngFor="let column of columns" class="list-group-item">
+        <span class="pull-right" (click)="toggleColumn(column.column)">
+          <span *ngIf="column.valid">
+            <i class="fas text-primary fa-check-square fa-lg" aria-hidden="true"></i>
+          </span>
+          <span *ngIf="!column.valid">
+            <i class="far text-primary fa-square fa-lg" aria-hidden="true"></i>
+          </span>
+        </span>
+        {{column.column}}
+      </li>
+    </ul>
   </div>
-  <table *ngIf="data" class="table table-sm">
-    <ng-container *ngFor="let row of data; let i = index">
-      <thead *ngIf="i === 0">
-        <tr>
-          <th *ngFor="let val of row">
-            {{val}}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngIf="i!=0">
-        <tr>
-          <td *ngFor="let val of row">
-            {{val}}
-          </td>
-        </tr>
-      </tbody>
-    </ng-container>
-  </table>
-</div>
+  <div class="modal-footer">
+    <button [disabled]="selectedCols.length < 1" type="button" class="btn btn-outline-primary" (click)="c('Close click')">Ejecutar</button>
+  </div>
+</ng-template>

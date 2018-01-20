@@ -31,6 +31,7 @@ import { ParamValuesService } from './services/param-values.service';
 import { ParamSubValuesService } from './services/param-sub-values.service';
 import { AuthGuard } from './services/auth.guard';
 import { MapsService } from './services/maps.service';
+import { ComparisonsService } from './services/comparisons.service';
 import { ScheduleService } from './services/schedules.service';
 
 // Components
@@ -112,6 +113,7 @@ import { MapComponent } from './components/map/map.component';
     ParamSubValuesService,
     SanctionsService,
     ScheduleService,
+    ComparisonsService,
     NgbActiveModal,
     MapsService,
     AuthGuard

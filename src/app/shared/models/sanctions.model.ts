@@ -34,3 +34,21 @@ export interface DiscardMatch {
   Pending?: Boolean;
   Valid?: Boolean;
 }
+
+export interface Comparison {
+  ID?: number;
+  Date?: Date;
+  File?: string;
+}
+
+export interface Match {
+  ID?: number;
+  ComparisonID?: number;
+  ParticipantID?: number;
+  Participant?: Participant;
+  Term1?: String;
+  Term2?: string;
+  Pending?: Boolean;
+  Confirmed?: Boolean;
+  Score?: number;
+}

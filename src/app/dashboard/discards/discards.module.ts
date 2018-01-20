@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { DiscardsListComponent } from './discards-list/discards-list.component';
 import { MatchesComponent } from './matches/matches.component';
 import { FilesComponent } from './files/files.component';
+import { FilesMatchesComponent } from './files-matches/files-matches.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { FilesComponent } from './files/files.component';
     DiscardsRoutingModule,
     SharedModule
   ],
-  declarations: [DiscardsComponent, DiscardsListComponent, MatchesComponent, FilesComponent]
+  declarations: [DiscardsComponent, DiscardsListComponent, MatchesComponent, FilesComponent, FilesMatchesComponent]
 })
 export class DiscardsModule { }

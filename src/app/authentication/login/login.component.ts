@@ -17,24 +17,36 @@ export class LoginComponent implements OnInit {
   };
 
   _invalid: Boolean = false;
+  _loading: Boolean = false;
 
   constructor(private _authServ: AuthService, private _router: Router, private toastr: ToastsManager) {}
 
   ngOnInit() {
-    this.toastr.info('Sesión finalizada', 'Adiós');
-    this._authServ.authLogout();
+    if (this._authServ.isLogged()) {
+      this.toastr.info('Sesión finalizada', 'Adiós');
+      this._authServ.authLogout();
+    }
   }
 
   signIn() {
-    this._authServ.authLogin(this._login).subscribe(data => {
-      if (data) {
-        this._authServ.setCurrentUser(data);
-        const _user = this._authServ.getUserInfo();
-        this.toastr.success(_user.UserName, 'Bienvenido');
-        this._router.navigate(['/']);
-      } else {
+    this._loading = true;
+    this._authServ.authLogin(this._login).subscribe(
+      data => {
+        if (data) {
+          this._loading = false;
+          this._authServ.setCurrentUser(data);
+          const _user = this._authServ.getUserInfo();
+          this.toastr.success(_user.UserName, 'Bienvenido');
+          this._router.navigate(['/']);
+        } else {
+          this._loading = false;
+          this._invalid = true;
+        }
+      },
+      err => {
+        this._loading = false;
         this._invalid = true;
       }
-    }, err => (this._invalid = true));
+    );
   }
 }

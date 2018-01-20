@@ -241,7 +241,6 @@ body {
   animation-name: fadeIn;
 }
 
-
 .card {
   margin-bottom: 20px;
 }
@@ -250,27 +249,43 @@ ngb-tabset > .tab-content {
   margin-top: 20px;
 }
 
-ngb-tabset > ul.nav {
+ngb-tabset ul.nav-pills {
+  padding-left: 15px;
+}
+
+ngb-tabset ul.nav-pills .nav-link {
+  text-transform: uppercase;
+}
+
+ul.nav-pills .nav-link.active {
+  background-color: #287FB9;
+}
+
+ngb-tabset ul.nav-tabs a.nav-link {
+  border-width: 0 0 1px 0;
+}
+
+ngb-tabset > ul.nav-tabs {
   border-bottom: 1px solid #ccc;
 }
 
-ngb-tabset > ul.nav > li.nav-item > a.nav-link.active {
+ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active {
   border-bottom: 1px solid #0275d8;
   border-radius: 0;
   font-weight: bold;
 }
 
-ngb-tabset > ul.nav > li.nav-item > a.nav-link {
+ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link {
   background-color: inherit !important;
   color: #292b2c !important;
   text-transform: uppercase;
 }
 
-.card > ngb-tabset > ul.nav > li.nav-item > a.nav-link {
+.card > ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link {
   padding: 15px 20px;
 }
 
-ngb-tabset > ul.nav > li.nav-item {
+ngb-tabset > ul.nav-tabs > li.nav-item {
   margin-bottom: -1px;
 }
 
