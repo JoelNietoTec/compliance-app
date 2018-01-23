@@ -1,16 +1,37 @@
-<div class="row">
-  <div *ngFor="let status of taskStatus" class="col-md-3">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="bucket-title">
-          <i class="far" [ngClass]="{'fa-clock': status.ID == 1, 'fa-edit': status.ID == 2, 'fa-check-square': status.ID ==3}"></i> {{ status.Name }}</h4>
-        <button *ngIf="status.ID == 1" type="button" (click)="open()" placement="top" ngbTooltip="Nueva Tarea" class="btn btn-primary btn-block add-button">
-          <i class="fas fa-plus" aria-hidden="true"></i>
-        </button>
-        <div *ngFor="let task of _tasks">
-          <task-card *ngIf="task.StatusID == status.ID" [task]="task" (select)="selectTask($event)"></task-card>
+<ngb-tabset type="pills">
+  <ngb-tab>
+    <ng-template ngbTabTitle>
+      <i class="far fa-list-alt"></i>
+      Diarias
+    </ng-template>
+    <ng-template ngbTabContent>
+      <div class="container-fluid">
+        <div class="row">
+          <div *ngFor="let status of taskStatus" class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="bucket-title">
+                  <i class="far" [ngClass]="{'fa-clock': status.ID == 1, 'fa-edit': status.ID == 2, 'fa-check-square': status.ID ==3}"></i> {{ status.Name }}</h4>
+                <button *ngIf="status.ID == 1" type="button" (click)="open()" placement="top" ngbTooltip="Nueva Tarea" class="btn btn-primary btn-block add-button">
+                  <i class="fas fa-plus" aria-hidden="true"></i>
+                </button>
+                <div *ngFor="let task of _tasks">
+                  <task-card *ngIf="task.StatusID == status.ID" [task]="task" (select)="selectTask($event)"></task-card>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle>
+      <i class="fas fa-users"></i>
+      Participantes
+    </ng-template>
+    <ng-template ngbTabContent>
+      <p>Content 2</p>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

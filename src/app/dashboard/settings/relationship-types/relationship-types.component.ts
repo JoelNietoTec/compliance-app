@@ -32,7 +32,6 @@ export class RelationshipTypesComponent implements OnInit {
 
     this._relService.getTypes().subscribe(data => {
       this._types = data;
-      this._table.items = this._types;
     });
   }
 

@@ -1,5 +1,5 @@
-<app-loading-modal *ngIf="!options.items"></app-loading-modal>
-<ng-container *ngIf="options.items">
+<app-loading-modal *ngIf="!items"></app-loading-modal>
+<ng-container *ngIf="items">
   <h4>{{ options.title }}</h4>
   <div class="row justify-content-between top-bar">
     <div class="col-md-4">
@@ -101,6 +101,11 @@
             <ng-container *ngFor="let col of options.columns">
               <td *ngIf="!col.hidden" [ngClass]="{'text-center': col.type == 'checkbox'}">
                 <ng-container *ngIf="!col.readonly" [ngSwitch]="col.type">
+                  <select *ngSwitchCase="'boolean'" class="form-control custom-select" [(ngModel)]="_selectedItem[col.name]" [name]="col.name">
+                    <option value="null" disabled>---</option>
+                    <option [value]="true">Sí</option>
+                    <option [value]="false">No</option>
+                  </select>
                   <input *ngSwitchCase="'checkbox'" [checked]="_selectedItem[col.name]" class="form-control" type="{{ col.type }}" (change)="_selectedItem[col.name] = !_selectedItem[col.name]">
                   <input *ngSwitchDefault class="form-control" type="{{ col.type }}" [(ngModel)]="_selectedItem[col.name]" placeholder="{{ col.title }}">
                   <select *ngSwitchCase="'object'" class="form-control custom-select" [(ngModel)]="_selectedItem[col.objectID]" [name]="col.name"
@@ -153,12 +158,19 @@
                     {{ val[col.listDisplay] }}
                   </option>
                 </select>
+                <select *ngSwitchCase="'boolean'" class="form-control custom-select" [(ngModel)]="_newItem[col.name]" [name]="col.name">
+                  <option [value]="undefined" disabled>---</option>
+                  <option [value]="true">Sí</option>
+                  <option [value]="false">No</option>
+                </select>
                 <input *ngSwitchDefault class="form-control" type="{{ col.type }}" [(ngModel)]="_newItem[col.name]" placeholder="{{ col.title }}">
               </ng-container>
             </td>
           </ng-container>
           <td class="text-center">
-            <i class="far fa-plus-square fa-lg text-primary" (click)="createItem()" placement="top" ngbTooltip="Agregar elemento"></i>
+            <span (click)="createItem()" placement="top" ngbTooltip="Agregar elemento">
+              <i class="far fa-plus-square fa-lg text-primary"></i>
+            </span>
           </td>
         </tr>
       </tbody>

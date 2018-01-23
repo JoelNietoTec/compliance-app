@@ -3,6 +3,6 @@
     <h4 class="card-title">
       Grupo: {{ _value.DisplayValue }}
     </h4>
-    <app-custom-table [options]="_table" (addItem)="addValue($event)" (editItem)="updateValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
+    <app-custom-table [options]="_table" [items]="_value.ParamSubValues" (addItem)="addValue($event)" (editItem)="updateValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
   </div>
 </div>

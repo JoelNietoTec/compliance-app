@@ -42,7 +42,6 @@ export class ParamTableSimpleComponent implements OnInit {
 
     this._valueServ.getValuesByTable(this.table.ID).subscribe(data => {
       this._values = data;
-      this._customTable.items = this._values;
     });
   }
 

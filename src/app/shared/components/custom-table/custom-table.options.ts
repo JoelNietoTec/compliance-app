@@ -1,6 +1,5 @@
 export interface TableOptions {
-  items?: Array<any>;
-  columns?: Array<Column>;
+  columns?: Column[];
   style?: string;
   title?: string;
   pageable?: boolean;
@@ -9,8 +8,8 @@ export interface TableOptions {
   deletable?: boolean;
   creatable?: boolean;
   addMethod?: string;
-  detailsURL?: Array<string>;
-  newURL?: Array<string>;
+  detailsURL?: String[];
+  newURL?: String[];
   showID?: boolean;
   lookup?: boolean;
   exportToCSV?: boolean;
@@ -26,12 +25,12 @@ export interface Column {
   hidden?: boolean;
   style?: string;
   readonly?: boolean;
-  list?: Array<any>;
+  list?: any[];
   listID?: any;
   listDisplay?: any;
   objectColumn?: string;
   objectID?: string;
   objectText?: string;
   lookup?: boolean;
-  lookupValues?: Array<any>;
+  lookupValues?: any[];
 }

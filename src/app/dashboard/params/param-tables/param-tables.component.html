@@ -3,7 +3,7 @@
   <div class="col-md-12">
     <div class="card" *ngIf="tables">
       <div class="card-body">
-        <app-custom-table [options]="_table" (addItem)="addTable($event)" (editItem)="editTable($event)" (removeItem)="deleteTable($event)"></app-custom-table>
+        <app-custom-table [options]="_table" [items]="tables" (addItem)="addTable($event)" (editItem)="editTable($event)" (removeItem)="deleteTable($event)"></app-custom-table>
       </div>
     </div>
   </div>

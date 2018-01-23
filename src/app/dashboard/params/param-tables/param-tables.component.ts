@@ -58,7 +58,6 @@ export class ParamTablesComponent implements OnInit {
 
     this._tablesService.getTables().subscribe(data => {
       this.tables = data;
-      this._table.items = this.tables;
     });
   }
 

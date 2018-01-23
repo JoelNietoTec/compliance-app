@@ -3,7 +3,7 @@
   <div class="col-md-12">
     <div class="card" *ngIf="_matrices">
       <div class="card-body">
-        <app-custom-table [options]="_table" (addItem)="createMatrix($event)" (editItem)="updateMatrix($event)"></app-custom-table>
+        <app-custom-table [options]="_table" [items]="_matrices" (addItem)="createMatrix($event)" (editItem)="updateMatrix($event)"></app-custom-table>
       </div>
     </div>
   </div>

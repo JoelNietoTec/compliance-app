@@ -34,15 +34,13 @@ export class ParamValueComponent implements OnInit {
       { name: 'EnglishDisplayValue', title: 'Nombre Inglés', type: 'text', sortable: true, filterable: true },
       { name: 'Score', title: 'Valor', type: 'number', sortable: true }
     ];
-    this._table.items = this._value.ParamSubValues;
-
   }
 
   addValue(value: ParamSubValue) {
     value.ParamValueID = this._value.ID;
     this._subValService.addSubValue(value).subscribe(data => {
       this.toastr.success(data.DisplayValue, 'Valor creado');
-      this._table.items.push(data);
+      this._value.ParamSubValues.push(data);
     });
   }
 

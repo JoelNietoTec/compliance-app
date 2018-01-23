@@ -1,4 +1,4 @@
 <div class="container-fluid">
-  <app-custom-table [options]="_table" (editItem)="updateType($event)" (removeItem)="deleteType($event)" (addItem)="addType($event)">
+  <app-custom-table [options]="_table" [items]="_types" (editItem)="updateType($event)" (removeItem)="deleteType($event)" (addItem)="addType($event)">
   </app-custom-table>
 </div>

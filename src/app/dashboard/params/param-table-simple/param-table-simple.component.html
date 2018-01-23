@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">Valores</h4>
-    <app-custom-table [options]="_customTable" (addItem)="addValue($event)" (editItem)="editValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
+    <app-custom-table [options]="_customTable" [items]="_values" (addItem)="addValue($event)" (editItem)="editValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
   </div>
 </div>

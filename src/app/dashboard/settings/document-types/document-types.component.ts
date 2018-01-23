@@ -22,8 +22,8 @@ export class DocumentTypesComponent implements OnInit {
     this._table.columns = [
       { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
       { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', sortable: true },
-      { name: 'RequiredIndividual', title: 'Req. Individuo', type: 'checkbox' },
-      { name: 'RequiredEntity', title: 'Req. Entidad', type: 'checkbox' }
+      { name: 'RequiredIndividual', title: 'Req. Individuo', type: 'boolean' },
+      { name: 'RequiredEntity', title: 'Req. Entidad', type: 'boolean' }
     ];
 
     this._table.editable = true;
@@ -33,7 +33,6 @@ export class DocumentTypesComponent implements OnInit {
 
     this._docServ.getTypes().subscribe(data => {
       this._types = data;
-      this._table.items = this._types;
     });
   }
 

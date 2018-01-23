@@ -33,8 +33,13 @@ export class ComparisonsService {
     return this._http.post(this._comparisonURL, JSON.stringify(_comparison), { headers: this._headers });
   }
 
+  updateMatch(id: number, match: Match) {
+    match.Confirmed = true;
+    return this._http.put(`${this._matchesURL}/${id}`, JSON.stringify(match), { headers: this._headers });
+  }
+
   addMatch(match: Match): Observable<Match> {
-    return this._http.post<Match>(this._matchesURL, JSON.stringify(match), {headers: this._headers});
+    return this._http.post<Match>(this._matchesURL, JSON.stringify(match), { headers: this._headers });
   }
 
   runComparison(comparisonID: number, sheet: any[], columns: any[]): Promise<any[]> {
@@ -55,7 +60,7 @@ export class ComparisonsService {
                 }
               });
             });
-            if (count > 0) {
+            if (count > 1) {
               const val: any = {};
               val.participant = participant;
               val.score = count;

@@ -43,7 +43,7 @@ export class DiscardsListComponent implements OnInit {
   getSanctions() {
     this._sanctionServ.getSanctionsByList(this._currentListID).subscribe(data => {
       this._sanctions = data;
-      this._table.items = this._sanctions;
+      // this._table.items = this._sanctions;
       this.setPage(1);
     });
   }

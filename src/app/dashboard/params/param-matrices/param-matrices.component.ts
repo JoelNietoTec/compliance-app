@@ -65,7 +65,6 @@ export class ParamMatricesComponent implements OnInit {
 
     this._matrixService.getMatrices().subscribe(data => {
       this._matrices = data;
-      this._table.items = this._matrices;
     });
   }
 

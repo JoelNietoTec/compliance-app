@@ -20,14 +20,16 @@ import { UtilService } from '../../services/util.service';
 
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-custom-table',
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.css']
 })
-export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
+export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, OnChanges {
   @Input() options: TableOptions;
+  @Input() items: any[];
   @Output() editItem = new EventEmitter();
   @Output() removeItem = new EventEmitter();
   @Output() addItem = new EventEmitter();
@@ -56,12 +58,21 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     this.initTable();
   }
 
+  ngOnChanges(model: SimpleChanges) {
+    if (model.items) {
+      if (this.items) {
+        this._filteredItems = this.items;
+        this.filterItems();
+      }
+    }
+  }
+
   initTable() {
     this._visibleColumns = 0;
     this.options.columns.forEach(column => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
-        this.options.items.forEach(element => {
+        this.items.forEach(element => {
           element[`text${column.name}`] = this._util.getProperty(element, column.objectColumn);
         });
       }
@@ -85,30 +96,29 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     let _values: Array<any> = [];
 
     if (col.type === 'object') {
-      this.options.items.forEach(element => {
+      this.items.forEach(element => {
         if (!_values.includes(this._util.getProperty(element, col.objectColumn))) {
           _values.push(this._util.getProperty(element, col.objectColumn));
         }
       });
     } else {
-      this.options.items.forEach(element => {
+      this.items.forEach(element => {
         if (!_values.includes(element[col.name])) {
           _values.push(element[col.name]);
         }
       });
     }
-
     _values = _values.sort();
     return _values;
   }
 
   ngDoCheck() {
-    if (this.options.items) {
+    if (this.items) {
       if (!this.options.pageable) {
-        this._filteredItems = this.options.items;
+        this._filteredItems = this.items;
         this._pagedItems = this._filteredItems;
       } else if (!this._filteredItems) {
-        this._filteredItems = this.options.items;
+        this._filteredItems = this.items;
         this.filterItems();
       }
     }
@@ -165,7 +175,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
     this.pageItems();
   }
 
-  getDetailsURL(ID: number): Array<string> {
+  getDetailsURL(ID: number): String[] {
     const URL = this.options.detailsURL.slice();
     URL.push(ID.toString());
     return URL;
@@ -186,7 +196,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   filterItems() {
-    this._filteredItems = this._util.searchFilter(this.options.items, this._searchColumns, this._searchText);
+    this._filteredItems = this._util.searchFilter(this.items, this._searchColumns, this._searchText);
     if (this.options.pageable) {
       this._itemsCount = this._filteredItems.length;
 
@@ -208,7 +218,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck {
 
   deleteItem(id: number) {
     this.removeItem.emit(id);
-    this.options.items = this._util.removeByID(this.options.items, id);
+    this.items = this._util.removeByID(this.items, id);
     this.filterItems();
   }
 

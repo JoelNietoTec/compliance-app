@@ -22,7 +22,7 @@ export class CountriesComponent implements OnInit {
       { name: 'Name', title: 'Nombre', type: 'text', filterable: true },
       { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', filterable: true },
       { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true },
-      { name: 'BlackList', title: 'Lista Negra', type: 'checkbox' }
+      { name: 'BlackList', title: 'Lista Negra', type: 'boolean' }
     ];
 
     this._options.style = 'table table-sm table-squared';
@@ -39,7 +39,6 @@ export class CountriesComponent implements OnInit {
 
     this._countryServ.getCountries().subscribe(data => {
       this._countries = data;
-      this._options.items = this._countries;
     });
   }
 

@@ -23,27 +23,32 @@ export class MatchesComponent implements OnInit {
     this._sanctionServ.getDiscards().subscribe(data => {
       this._discards = this._util.sortBy(data, 'Date', true);
     });
+    this.initTable();
+  }
 
-    // this._table.columns = [
-    //   { name: 'Participant.FullName', title: 'Participante', filterable: true },
-    //   { name: 'Sanction.FullTerm', title: 'Sancionado', filterable: true },
-    //   { name: 'Pending', title: 'Pendiente', type: 'boolean' },
-    //   { name: 'Valid', title: 'Válida', type: 'boolean' }
-    // ];
+  initTable() {
+    this._table.columns = [
+      { name: 'Participant.FullName', title: 'Participante', filterable: true, readonly: true },
+      { name: 'Sanction.FullTerm', title: 'Sancionado', filterable: true, readonly: true },
+      { name: 'Pending', title: 'Pendiente', type: 'boolean', readonly: true },
+      { name: 'Valid', title: 'Válida', type: 'boolean' }
+    ];
 
-    // this._table.title = 'Coincidencias';
+    this._table.title = 'Coincidencias';
 
-    // this._table.style = 'table table-sm table-squared';
+    this._table.editable = true;
 
-    // this._table.pageable = true;
+    this._table.style = 'table table-sm table-squared';
 
-    // this._table.searcheable = true;
+    this._table.pageable = true;
+
+    this._table.searcheable = true;
   }
 
   getMatches() {
+
     this._sanctionServ.getMatches(this._currentDiscardID).subscribe(data => {
       this._matches = data;
-      this._table.items = this._matches;
     });
   }
 
