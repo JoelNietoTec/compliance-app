@@ -51,7 +51,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   };
   _filterValues: Array<string> = [];
   _visibleColumns: number;
-
+  _booleanValues: any = [{ value: true, display: 'Sí' }, { value: false, display: 'No' }];
   constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
 
   ngOnInit() {
@@ -69,6 +69,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
 
   initTable() {
     this._visibleColumns = 0;
+
     this.options.columns.forEach(column => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
@@ -227,8 +228,17 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
+    let filename: string;
+    const date = new Date();
+
+    if (this.options.title) {
+      filename = `${this.options.title} - ${date.toLocaleString()}.xlsx`;
+    } else {
+      filename = `Export - ${date.toLocaleString()}.xlsx`;
+    }
+
     const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-    saveAs(new Blob([this.s2ab(wbout)]), 'Export.xlsx');
+    saveAs(new Blob([this.s2ab(wbout)]), filename);
     // console.log(this.itemsToReports());
   }
 

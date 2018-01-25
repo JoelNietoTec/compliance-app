@@ -4,7 +4,8 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-control-label" for="">Nro. Documento</label>
-          <input type="text" [(ngModel)]="_partDocument.DocumentCode"  class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+          <input type="text" [(ngModel)]="_partDocument.DocumentCode" class="form-control" name="" id="" aria-describedby="helpId"
+            placeholder="">
         </div>
       </div>
       <div class="col-md-4">
@@ -17,20 +18,23 @@
         </div>
       </div>
       <div class="col-md-4">
-       <div class="form-group">
-        <label for="">Documento</label>
-        <div class="input-group">
-          <input type="file" class="form-control" (change)="setFile($event.target.files[0])">
+        <div class="form-group">
+          <label for="">Documento</label>
+          <div class="input-group">
+            <input type="file" class="form-control" (change)="setFile($event.target.files[0])">
+          </div>
         </div>
-       </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="">Fecha Expedición</label>
           <div class="input-group">
-            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpeditionDate" ngbDatepicker #d="ngbDatepicker" placeholder="YYYY-MM-DD">
-            <div class="input-group-addon" (click)="d.toggle()">
-            <i class="far fa-calendar-alt"></i>
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpeditionDate" ngbDatepicker #d="ngbDatepicker"
+              placeholder="YYYY-MM-DD">
+            <div class="input-group-append" (click)="d.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -39,9 +43,12 @@
         <div class="form-group">
           <label for="">Fecha Expiración</label>
           <div class="input-group">
-            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpirationDate" ngbDatepicker #e="ngbDatepicker" placeholder="YYYY-MM-DD">
-            <div class="input-group-addon" (click)="e.toggle()">
-            <i class="far fa-calendar-alt"></i>
+            <input type="text" class="form-control" name="" id="" [(ngModel)]="_partDocument.formExpirationDate" ngbDatepicker #e="ngbDatepicker"
+              placeholder="YYYY-MM-DD">
+            <div class="input-group-append" (click)="e.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -58,7 +65,8 @@
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" (click)="saveDocument()" ><i class="typcn typcn-download-outline"></i> Guardar</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()">
+          <i class="typcn typcn-download-outline"></i> Guardar</button>
       </div>
     </div>
   </div>

@@ -12,5 +12,5 @@
       </div>
     </div>
   </div>
-  <app-custom-table *ngIf="_currentComparisonID" [options]="_table" [items]="_matches"></app-custom-table>
+  <app-custom-table *ngIf="_currentComparisonID" [options]="_table" [items]="_matches" (editItem)="confirmMatch($event)"></app-custom-table>
 </div>

@@ -27,8 +27,10 @@
       <div class="input-group">
         <input class="form-control" [(ngModel)]="_entity.formBirthDate" [maxDate]="_maxDate" [minDate]="_minDate" placeholder="YYYY-MM-DD"
           name="dp" ngbDatepicker #d="ngbDatepicker">
-        <div class="input-group-addon" (click)="d.toggle()">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <div class="input-group-append" (click)="d.toggle()">
+          <span class="input-group-text">
+            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          </span>
         </div>
       </div>
     </div>
@@ -70,7 +72,8 @@
   <div class="col-md-12">
     <div class="form-group">
       <label for="address">Dirección</label>
-      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad" (blur)="setLocation()"></textarea>
+      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad"
+        (blur)="setLocation()"></textarea>
     </div>
   </div>
   <div class="col-md-12">
@@ -79,7 +82,9 @@
     </agm-map>
   </div>
   <div class="col-md-12 d-flex justify-content-end">
-    <a [routerLink]="['/dashboard/darticipants']" class="btn btn-outline-secondary" role="button"><i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancelar</a>
-    <button type="button" class="btn btn-primary" (click)="saveEntity()"><i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
+    <a [routerLink]="['/dashboard/darticipants']" class="btn btn-outline-secondary" role="button">
+      <i class="typcn typcn-cancel-outline" aria-hidden="true"></i> Cancelar</a>
+    <button type="button" class="btn btn-primary" (click)="saveEntity()">
+      <i class="typcn typcn-download-outline" aria-hidden="true"></i> Guardar</button>
   </div>
 </div>

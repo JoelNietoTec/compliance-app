@@ -103,8 +103,7 @@
                 <ng-container *ngIf="!col.readonly" [ngSwitch]="col.type">
                   <select *ngSwitchCase="'boolean'" class="form-control custom-select" [(ngModel)]="_selectedItem[col.name]" [name]="col.name">
                     <option value="null" disabled>---</option>
-                    <option [value]="true">Sí</option>
-                    <option [value]="false">No</option>
+                    <option *ngFor="let val of _booleanValues" class="font-weight-bold" [ngValue]="val.value">{{val.display}}</option>
                   </select>
                   <input *ngSwitchCase="'checkbox'" [checked]="_selectedItem[col.name]" class="form-control" type="{{ col.type }}" (change)="_selectedItem[col.name] = !_selectedItem[col.name]">
                   <input *ngSwitchDefault class="form-control" type="{{ col.type }}" [(ngModel)]="_selectedItem[col.name]" placeholder="{{ col.title }}">
@@ -159,9 +158,8 @@
                   </option>
                 </select>
                 <select *ngSwitchCase="'boolean'" class="form-control custom-select" [(ngModel)]="_newItem[col.name]" [name]="col.name">
-                  <option [value]="undefined" disabled>---</option>
-                  <option [value]="true">Sí</option>
-                  <option [value]="false">No</option>
+                  <option value="null" disabled>---</option>
+                  <option *ngFor="let val of _booleanValues" class="font-weight-bold" [ngValue]="val.value">{{val.display}}</option>
                 </select>
                 <input *ngSwitchDefault class="form-control" type="{{ col.type }}" [(ngModel)]="_newItem[col.name]" placeholder="{{ col.title }}">
               </ng-container>

@@ -14,22 +14,26 @@ export class TasksService {
   private _taskStatusURL: string;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private _newTask: Task;
-  private _tasks: Array<Task>;
+  private _tasks: Task[];
 
   constructor(private _http: HttpClient, private _conn: ConnectionService, private _util: UtilService) {
     this._taskURL = _conn.APIUrl + 'tasks';
     this._taskStatusURL = _conn.APIUrl + 'taskstatus';
   }
 
-  getTasks(): Observable<Array<Task>> {
-    return this._http.get<Array<Task>>(this._taskURL);
+  getTasks(): Observable<Task[]> {
+    return this._http.get<Task[]>(this._taskURL);
+  }
+
+  getTasksByCategory(id: number): Observable<Task[]> {
+    return this._http.get<Task[]>(`${this._taskURL}/category/${id}`);
   }
 
   createTasks(task: Task): Observable<Task> {
     return this._http.post<Task>(this._taskURL, JSON.stringify(task), { headers: this._headers });
   }
 
-  getStatus(): Observable<Array<TaskStatus>> {
+  getStatus(): Observable<TaskStatus[]> {
     return this._http.get<Array<TaskStatus>>(this._taskStatusURL);
   }
 

@@ -38,7 +38,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     this.taskStatus = JSON.parse(localStorage.getItem('taskStatus'));
-    this._taskService.getTasks().subscribe(data => {
+    this._taskService.getTasksByCategory(1).subscribe(data => {
       this._tasks = data;
       this.sortTask();
     });

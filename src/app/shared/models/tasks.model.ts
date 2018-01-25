@@ -1,5 +1,6 @@
 export interface Task {
   ID?: number;
+  CategoryID?: number;
   Title?: string;
   Description?: string;
   CreatedDate?: Date;

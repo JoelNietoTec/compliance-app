@@ -13,10 +13,12 @@ export class ComparisonsService {
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private _matchesURL: string;
   private _comparisonURL: string;
+  private _participantURL: string;
 
   constructor(private _http: HttpClient, private _conn: ConnectionService, private _partService: ParticipantsService) {
     this._comparisonURL = _conn.APIUrl + 'comparisons';
     this._matchesURL = _conn.APIUrl + 'matches';
+    this._participantURL = _conn.APIUrl + 'participants';
   }
 
   getComparisons(): Observable<Comparison[]> {
@@ -27,6 +29,10 @@ export class ComparisonsService {
     return this._http.get<Match[]>(`${this._comparisonURL}/${id}/matches`);
   }
 
+  getMatchesByParticipant(id: number): Observable<Match[]> {
+    return this._http.get<Match[]>(`${this._participantURL}/${id}/matches`);
+  }
+
   addComparison(fileName: string): Observable<Comparison> {
     const _comparison: Comparison = {};
     _comparison.File = fileName;
@@ -34,7 +40,6 @@ export class ComparisonsService {
   }
 
   updateMatch(id: number, match: Match) {
-    match.Confirmed = true;
     return this._http.put(`${this._matchesURL}/${id}`, JSON.stringify(match), { headers: this._headers });
   }
 

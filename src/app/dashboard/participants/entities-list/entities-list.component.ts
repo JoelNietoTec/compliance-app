@@ -47,6 +47,8 @@ export class EntitiesListComponent implements OnInit {
 
     this._table.newURL = ['nuevo'];
 
+    this._table.title = 'Entidades';
+
     for (let i of this.entities) {
       i.Rate = this._partServ.getRate(i);
     }

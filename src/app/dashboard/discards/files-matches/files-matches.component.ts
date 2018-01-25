@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { UtilService } from '../../../shared/services/util.service';
 import { ComparisonsService } from '../../../shared/services/comparisons.service';
@@ -16,7 +17,7 @@ export class FilesMatchesComponent implements OnInit {
   _matches: Match[];
   _table: TableOptions = {};
 
-  constructor(private _util: UtilService, private _compService: ComparisonsService) {}
+  constructor(private _util: UtilService, private _compService: ComparisonsService, private toastr: ToastsManager) {}
 
   ngOnInit() {
     this._compService.getComparisons().subscribe(data => {
@@ -41,6 +42,7 @@ export class FilesMatchesComponent implements OnInit {
     this._table.editable = true;
     this._table.exportToCSV = true;
     this._table.style = 'table-sm table-squared';
+    this._table.title = 'Descartes Pendientes';
   }
 
   getMatches() {
@@ -51,6 +53,17 @@ export class FilesMatchesComponent implements OnInit {
       });
       this.InitTable();
       this._matches = data;
+    });
+  }
+
+  confirmMatch(match: Match) {
+    this._compService.updateMatch(match.ID, match).subscribe(data => {
+      if (match.Confirmed) {
+        this.toastr.success(match.Participant.FullName, 'Coincidencia confirmada');
+      } else {
+        this.toastr.success(match.Participant.FullName, 'Coincidencia descartada');
+      }
+      this._matches = this._util.removeByID(this._matches, match.ID);
     });
   }
 }

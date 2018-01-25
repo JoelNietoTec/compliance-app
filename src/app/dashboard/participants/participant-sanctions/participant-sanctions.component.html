@@ -1,0 +1,5 @@
+<ng-container *ngIf="_matches">
+  <h6 *ngFor="let match of _matches">{{ match.Comparison.File }}
+    <small class="pull-right text-muted">{{ match.Comparison.Date | date: 'mediumDate'}}</small>
+  </h6>
+</ng-container>

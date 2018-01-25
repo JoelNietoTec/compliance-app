@@ -44,11 +44,12 @@ export interface Comparison {
 export interface Match {
   ID?: number;
   ComparisonID?: number;
+  Comparison?: Comparison;
   ParticipantID?: number;
   Participant?: Participant;
   Term1?: String;
   Term2?: string;
-  Pending?: Boolean;
-  Confirmed?: Boolean;
+  Pending?: boolean;
+  Confirmed?: boolean;
   Score?: number;
 }

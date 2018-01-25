@@ -1,5 +1,10 @@
 <div class="modal-header">
-  <h4 class="modal-title text-secondary"><i class="fa fa-edit" aria-hidden="true"></i> Nueva Tarea</h4>
+  <h4 *ngIf="!currentTask.ID" class="modal-title text-secondary">
+    <i class="fa fa-edit" aria-hidden="true"></i> Nueva Tarea
+  </h4>
+  <h4 *ngIf="currentTask.ID" class="modal-title text-secondary">
+    <i class="fa fa-edit" aria-hidden="true"></i> {{ currentTask.Title }}
+  </h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -18,8 +23,10 @@
           <label for="birthDate">Fecha Inicio</label>
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formBeginDate" name="bd" ngbDatepicker #bd="ngbDatepicker">
-            <div class="input-group-addon" (click)="bd.toggle()">
-              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+            <div class="input-group-append" (click)="bd.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -28,9 +35,12 @@
         <div class="form-group">
           <label for="birthDate">Fecha Expiración</label>
           <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formExpirationDate" name="ed" ngbDatepicker #ed="ngbDatepicker">
-            <div class="input-group-addon" (click)="ed.toggle()">
-              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="currentTask.formExpirationDate" name="ed" ngbDatepicker
+              #ed="ngbDatepicker">
+            <div class="input-group-append" (click)="ed.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -51,7 +61,8 @@
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-end">
-        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary"><i class="far fa-save"></i> Guardar</button>
+        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary">
+          <i class="far fa-save"></i> Guardar</button>
       </div>
     </div>
   </div>
