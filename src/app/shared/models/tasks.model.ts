@@ -1,3 +1,5 @@
+import { Participant } from './participants.model';
+
 export interface Task {
   ID?: number;
   CategoryID?: number;
@@ -9,6 +11,7 @@ export interface Task {
   CompletedDate?: Date;
   StatusID?: number;
   ParticipantID?: number;
+  Participant?: Participant;
   TaskStatus?: TaskStatus;
 }
 

@@ -1,13 +1,14 @@
 <div class="container-fluid">
-  <div class="row">
-    <div *ngFor="let task of _tasks" class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ task.Title }}</h5>
-          <p class="card-text">
-            {{ task.Description }}
-          </p>
-        </div>
+  <div class="card-columns">
+    <div *ngFor="let task of _tasks" class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.Title }}</h5>
+        <p>
+          <a class="card-link" [routerLink]="['/dashboard', 'participantes', task.ParticipantID]">{{ task.Participant.ShortName}}</a>
+        </p>
+        <small class="card-text">
+          {{ task.CreatedDate | date: 'mediumDate' }}
+        </small>
       </div>
     </div>
   </div>
