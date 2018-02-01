@@ -6,7 +6,8 @@ import 'rxjs/add/operator/catch';
 
 import { UtilService } from './util.service';
 import { ConnectionService } from './connection.service';
-import { Task, TaskStatus } from '../models/tasks.model';
+import { Task, TaskStatus, TaskCount } from '../models/tasks.model';
+import { Participant } from '../models/participants.model';
 
 @Injectable()
 export class TasksService {
@@ -27,6 +28,14 @@ export class TasksService {
 
   getTasksByCategory(id: number): Observable<Task[]> {
     return this._http.get<Task[]>(`${this._taskURL}/category/${id}`);
+  }
+
+  getTaskCount(id: number): Observable<TaskCount[]> {
+    return this._http.get<TaskCount[]>(`${this._taskURL}/category/${id}/count`);
+  }
+
+  getTaksByParticipant(): Observable<Participant[]> {
+    return this._http.get<Participant[]>(`${this._taskURL}/byparticipant`);
   }
 
   createTasks(task: Task): Observable<Task> {

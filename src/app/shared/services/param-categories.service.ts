@@ -30,4 +30,8 @@ export class ParamCategoriesService {
   createCategory(cat: ParamCategory): Observable<ParamCategory> {
     return this._http.post<ParamCategory>(this._categoryURL, JSON.stringify(cat), { headers: this._headers });
   }
+
+  editCategory(id: number, cat: ParamCategory) {
+    return this._http.put(`${this._categoryURL}/${id}`, JSON.stringify(cat), { headers: this._headers });
+  }
 }

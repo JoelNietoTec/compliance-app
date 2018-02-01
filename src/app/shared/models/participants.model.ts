@@ -4,6 +4,7 @@ import { User } from './users.model';
 import { ParticipantDocument } from './documents.models';
 import { ParticipantRelationship } from './relationships.model';
 import { Country } from './country.model';
+import {Task} from './tasks.model';
 
 export interface Participant {
   ID?: number;
@@ -23,9 +24,9 @@ export interface Participant {
   LegalRepresentative?: string;
   Phone?: string;
   MobilePhone?: string;
-  ParticipantContacts?: Array<ParticipantContact>;
+  ParticipantContacts?: ParticipantContact[];
   ParamMatrixID?: number;
-  ParticipantParams?: Array<ParticipantParam>;
+  ParticipantParams?: ParticipantParam[];
   Score?: number;
   Rate?: string;
   CreateDate?: Date;
@@ -37,6 +38,7 @@ export interface Participant {
   FullName?: string;
   ShortName?: string;
   MatrixReady?: boolean;
+  Tasks?: Task[];
 }
 
 export interface ParticipantParam {

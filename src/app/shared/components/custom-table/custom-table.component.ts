@@ -58,6 +58,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     this.initTable();
   }
 
+  // Dispara el evento cuando los items están aún cargados
   ngOnChanges(model: SimpleChanges) {
     if (model.items) {
       if (this.items) {
@@ -65,16 +66,20 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
         this.filterItems();
       }
     }
+    if (model.items) {
+      console.log(this.items);
+      this.initTable();
+    }
   }
 
+  // Inicializar la tabla
   initTable() {
-    this._visibleColumns = 0;
-
+    this._visibleColumns = 0; // inicializa el número de columnas visibles
     this.options.columns.forEach(column => {
       if (column.type === 'object') {
         column.objectText = `text${column.name}`;
         this.items.forEach(element => {
-          element[`text${column.name}`] = this._util.getProperty(element, column.objectColumn);
+          this.getObjectText(element, column);
         });
       }
       if (column.filterable) {
@@ -93,9 +98,13 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     });
   }
 
+  getObjectText(item: any, column: Column) {
+    item[`text${column.name}`] = this._util.getProperty(item, column.objectColumn);
+  }
+
+  //
   getLookup(col: Column): Array<any> {
     let _values: Array<any> = [];
-
     if (col.type === 'object') {
       this.items.forEach(element => {
         if (!_values.includes(this._util.getProperty(element, col.objectColumn))) {
@@ -121,6 +130,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
       } else if (!this._filteredItems) {
         this._filteredItems = this.items;
         this.filterItems();
+      } else {
+        this._filteredItems = this.items;
+        this._itemsCount = this._filteredItems.length;
       }
     }
   }
@@ -208,8 +220,28 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   createItem() {
+    this.options.columns.forEach(column => {
+      if (column.type === 'object') {
+        let id: number;
+        id = this._newItem[column.objectID];
+        this._newItem[column.name] = this._util.filterByID(column.list, this._newItem[column.objectID]);
+        this.getObjectText(this._newItem, column);
+      }
+    });
     this.addItem.emit(this._newItem);
     this._newItem = {};
+  }
+
+  attachNewItem(item: any) {
+    this.options.columns.forEach(column => {
+      if (column.type === 'object') {
+        let id: number;
+        id = item[column.objectID];
+        item[column.name] = this._util.filterByID(column.list, item[column.objectID]);
+        this.getObjectText(item, column);
+      }
+    });
+    this.items.push(item);
   }
 
   updateItem() {

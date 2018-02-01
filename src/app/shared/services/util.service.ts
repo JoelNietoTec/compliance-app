@@ -40,7 +40,7 @@ export class UtilService {
   }
 
   filterByID(array: Array<any>, id: number): any {
-    return array.find(item => item.ID === id);
+    return array.find(item => item.ID === Number(id));
   }
 
   removeByID(array: Array<any>, id: number): Array<any> {

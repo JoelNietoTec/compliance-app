@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ParticipantsService } from '../../shared/services/participants.service';
+import { TasksService } from '../../shared/services/tasks.service';
 import { MapsService } from '../../shared/services/maps.service';
 import { UtilService } from '../../shared/services/util.service';
 
@@ -10,16 +11,24 @@ import { UtilService } from '../../shared/services/util.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public byRisk: Array<any>;
-  public byCountry: Array<any>;
+  public byRisk: any[];
+  public byCountry: any[];
   public _countries: any;
 
   public riskChartOptions: any;
   public countryChartOptions: any;
-  public riskColors: Array<any>;
+  public tasksChartOptions: any;
+  public _tasks: any[];
+  public _partTasks: any[];
+  public riskColors: any[];
   public chartReady: Boolean = false;
 
-  constructor(private _partServ: ParticipantsService, private _util: UtilService, private _map: MapsService) {}
+  constructor(
+    private _partServ: ParticipantsService,
+    private _util: UtilService,
+    private _map: MapsService,
+    private _taskService: TasksService
+  ) {}
 
   ngOnInit() {
     this._partServ.getParticipantsbyRisk().subscribe(data => {
@@ -32,9 +41,11 @@ export class HomeComponent implements OnInit {
         }
       }
       this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
+      console.log(this.byRisk);
       this.loadRiskChart();
     });
     this.loadCountry();
+    this.loadTasks();
   }
 
   loadRiskChart() {
@@ -62,6 +73,36 @@ export class HomeComponent implements OnInit {
         backgroundColor: ['#db7b7b', '#f8cd79', '#639a6f', '#b2b2b2']
       }
     ];
+  }
+
+  loadTasks() {
+    this.tasksChartOptions = {
+      title: {
+        display: true,
+        text: 'Tareas Diarias',
+        fontFamily: 'Roboto Condensed',
+        fontSize: 16
+      },
+      legend: {
+        position: 'left',
+        labels: {
+          fontFamily: 'Roboto Condensed',
+          boxWidth: 20
+        }
+      },
+      tooltips: {
+        bodyFontFamily: 'Roboto Condensed',
+        bodyFontSize: 14
+      }
+    };
+
+    this._taskService.getTaskCount(1).subscribe(data => {
+      this._tasks = data;
+    });
+
+    this._taskService.getTaskCount(2).subscribe(data => {
+      this._partTasks = data;
+    });
   }
 
   loadCountry() {

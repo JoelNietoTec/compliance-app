@@ -55,6 +55,7 @@ export class ParamTablesComponent implements OnInit {
       },
       { name: 'CreateDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
     ];
+    this._table.pageable = true;
 
     this._tablesService.getTables().subscribe(data => {
       this.tables = data;
@@ -64,6 +65,7 @@ export class ParamTablesComponent implements OnInit {
   addTable(table: ParamTable) {
     this._tablesService.createTable(table).subscribe(data => {
       this.toastr.success(data.Name, 'Tabla Creada');
+      data.TableType = this._util.filterByID(this._tableTypes, data.TableTypeID);
       this.tables.push(data);
     });
   }

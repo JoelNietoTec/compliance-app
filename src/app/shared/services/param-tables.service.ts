@@ -41,7 +41,7 @@ export class ParamTablesService {
   }
 
   deleteTable(id: number) {
-    return this._http.delete(`${this._tablesURL}/${id}`, { headers: this._headers }).map((response: Response) => response.json());
+    return this._http.delete(`${this._tablesURL}/${id}`, { headers: this._headers });
   }
 
   addSubValue(val: ParamSubValue): Observable<ParamSubValue> {

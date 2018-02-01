@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="card-columns">
-    <div *ngFor="let task of _tasks" class="card">
+    <!-- <div *ngFor="let task of _tasks" class="card">
       <div class="card-body">
         <h5 class="card-title">{{ task.Title }}</h5>
         <p>
@@ -9,6 +9,15 @@
         <small class="card-text">
           {{ task.CreatedDate | date: 'mediumDate' }}
         </small>
+      </div>
+    </div> -->
+    <div *ngFor="let participant of _participants" class="card">
+      <div class="card-body">
+        <a class="card-title" [routerLink]="['/dashboard', 'participantes', participant.ID]" >{{ participant.FullName }}</a>
+        <h6 class="card-subtitle text-muted">Pendientes</h6>
+        <p *ngFor="let task of participant.Tasks" class="card-text">
+          {{ task.Title }}
+        </p>
       </div>
     </div>
   </div>

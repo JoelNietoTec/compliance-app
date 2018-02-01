@@ -20,3 +20,11 @@ export interface TaskStatus {
   Name?: string;
   EnglishName?: string;
 }
+
+export interface TaskCount {
+  Count?: number;
+  CategoryID?: number;
+  Category?: string;
+  StatusID?: number;
+  Status?: string;
+}

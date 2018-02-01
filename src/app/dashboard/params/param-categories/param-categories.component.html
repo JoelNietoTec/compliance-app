@@ -1,62 +1,8 @@
 <div class="row" *ngIf="_categories">
-  <div class="col-md-12" [hidden]="false">
-    <h3>Categorías</h3>
-    <form (ngSubmit)="addCategory()" class="card">
-      <div class="card-body">
-        <div class="row" id="new-category-form">
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="name">Nombre</label>
-              <input [(ngModel)]="_newCategory.Name" type="text" name="name" id="new-category-name" class="form-control" placeholder="Nombre Categoría">
-            </div>
-          </div>
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="english-name">Nombre Inglés</label>
-              <input [(ngModel)]="_newCategory.EnglishName" type="text" name="english-name" id="new-category-name" class="form-control"
-                placeholder="Nombre Inglés Categoría">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="weighting">Ponderación</label>
-              <input [(ngModel)]="_newCategory.Weighting" type="number" name="weighting" id="new-category-weighting" class="form-control">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-12" *ngIf="_categories.length > 0">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Categorías</h4>
-        <table class="table table-sm table-squared">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Nombre Inglés</th>
-              <th>Ponderación</th>
-              <th class="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let category of _categories">
-              <td>{{ category.Name }}</td>
-              <td>{{ category.EnglishName }}</td>
-              <td>{{ category.Weighting }}%</td>
-              <td class="text-center">
-                <div class="btn-group" role="group" aria-label="">
-                  <button type="button" class="btn btn-success btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <app-custom-table [options]="_table" [items]="_categories" (addItem)="addCategory($event)" (editItem)="editCategory($event)"></app-custom-table>
       </div>
     </div>
   </div>
