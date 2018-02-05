@@ -14,3 +14,9 @@ p.card-text {
 .card-subtitle {
   margin-bottom: 5px;
 }
+
+
+.btn.pull-right {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}

@@ -53,18 +53,18 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Distribución de Riesgo',
-        fontFamily: 'Roboto Condensed',
+        fontFamily: 'Nunito',
         fontSize: 16
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Roboto Condensed',
+          fontFamily: 'Nunito',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Roboto Condensed',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14
       }
     };
@@ -80,18 +80,18 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Tareas Diarias',
-        fontFamily: 'Roboto Condensed',
+        fontFamily: 'Nunito',
         fontSize: 16
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Roboto Condensed',
+          fontFamily: 'Nunito',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Roboto Condensed',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14
       }
     };
@@ -110,18 +110,18 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Participantes por País',
-        fontFamily: 'Roboto Condensed',
+        fontFamily: 'Nunito',
         fontSize: 16
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Roboto Condensed',
+          fontFamily: 'Nunito',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Roboto Condensed',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14
       }
     };

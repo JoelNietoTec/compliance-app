@@ -31,7 +31,7 @@
           <p *ngFor="let task of participant.Tasks" class="card-text">
             {{ task.Title }}
           </p>
-          <a [routerLink]="['/dashboard', 'participantes', participant.ID]" class="btn btn-primary">
+          <a [routerLink]="['/dashboard', 'participantes', participant.ID]" class="btn btn-primary pull-right">
             <i class="fas fa-user"></i> Ir al Perfil
           </a>
           <br>
