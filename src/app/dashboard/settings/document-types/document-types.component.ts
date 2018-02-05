@@ -30,6 +30,8 @@ export class DocumentTypesComponent implements OnInit {
     this._table.deletable = true;
     this._table.style = 'table-sm table-squared';
     this._table.addMethod = 'inline';
+    this._table.pageable = true;
+    this._table.exportToCSV = true;
 
     this._docServ.getTypes().subscribe(data => {
       this._types = data;

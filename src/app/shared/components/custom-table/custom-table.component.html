@@ -158,7 +158,7 @@
                   </option>
                 </select>
                 <select *ngSwitchCase="'boolean'" class="form-control custom-select" [(ngModel)]="_newItem[col.name]" [name]="col.name">
-                  <option value="null" disabled>---</option>
+                  <option value="undefined" disabled>---</option>
                   <option *ngFor="let val of _booleanValues" class="font-weight-bold" [ngValue]="val.value">{{val.display}}</option>
                 </select>
                 <input *ngSwitchDefault class="form-control" type="{{ col.type }}" [(ngModel)]="_newItem[col.name]" placeholder="{{ col.title }}">
