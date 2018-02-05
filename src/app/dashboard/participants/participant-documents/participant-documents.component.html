@@ -3,7 +3,9 @@
   <ng-container *ngFor="let document of _documents; let i = index">
     <div class="card">
       <div class="card-header">Documento {{ i + 1 }}
-        <span class="pull-right fa fa-trash-o fa-lg text-danger" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)"></span>
+        <span class="pull-right fa-lg text-danger" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)">
+          <i class="far fa-trash-alt"></i>
+        </span>
       </div>
       <div class="card-body">
         <div class="row">

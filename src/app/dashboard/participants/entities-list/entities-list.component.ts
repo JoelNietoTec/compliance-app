@@ -20,6 +20,7 @@ export class EntitiesListComponent implements OnInit {
   ngOnInit() {
     this._table.columns = [
       { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
+      { name: 'Code', title: 'RUC/NIT', sortable: true },
       { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
       { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
@@ -30,7 +31,7 @@ export class EntitiesListComponent implements OnInit {
       { name: 'LegalRepresentative', title: 'Representante Legal', hidden: true },
       { name: 'Phone', title: 'Teléfono', hidden: true },
       { name: 'MobilePhone', title: 'Tel. Celular', hidden: true },
-      { name: 'CreateDate', title: 'Fec. Creación', hidden: true },
+      { name: 'CreateDate', title: 'Fec. Creación', hidden: true }
     ];
 
     this._table.style = 'table table-sm table-squared';

@@ -12,6 +12,12 @@
       <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial">
     </div>
   </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="code">RUC/NIT</label>
+      <input type="text" name="code" id="code" [(ngModel)]="_entity.Code" class="form-control" placeholder="RUC/NIT de la Entidad">
+    </div>
+  </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="country">País de Constitución</label>
@@ -64,7 +70,7 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label for="mobile-phoner">Número Telefónico</label>
+      <label for="mobile-phoner">Número Celular</label>
       <input type="tel" class="form-control" [(ngModel)]="_entity.MobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>

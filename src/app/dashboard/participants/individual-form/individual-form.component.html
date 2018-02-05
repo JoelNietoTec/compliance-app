@@ -1,10 +1,9 @@
 <div class="row">
   <div class="col-12">
-    <label class="custom-control custom-checkbox">
+    <div class="custom-control custom-checkbox">
       <input type="checkbox" name="pep" id="pep" [(ngModel)]="_individual.PEP" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Es PEP?</span>
-    </label>
+      <label class="custom-control-label" for="pep">Es PEP?</label>
+    </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
@@ -36,6 +35,12 @@
   </div>
   <div class="col-md-3">
     <div class="form-group">
+      <label for="code"># Documento Personal</label>
+      <input type="text" name="code" id="code" [(ngModel)]="_individual.Code"  class="form-control" placeholder="C.I.P./Pasaporte">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
       <label for="country">País de Origen</label>
       <select class="custom-select form-control" [(ngModel)]="_individual.CountryID" name="country-id" id="country" required>
         <option [value]="_default" disabled="true">---Seleccionar---</option>
@@ -49,7 +54,7 @@
       <div class="input-group">
         <input class="form-control" [(ngModel)]="_individual.formBirthDate" [startDate]="_startDate" [maxDate]="_maxDate" [minDate]="_minDate"
           placeholder="YYYY-MM-DD" name="dp" ngbDatepicker #d="ngbDatepicker">
-        <div class="input-group-appedn" (click)="d.toggle()">
+        <div class="input-group-append" (click)="d.toggle()">
           <span class="input-group-text">
             <i class="far fa-calendar-alt" aria-hidden="true"></i>
           </span>

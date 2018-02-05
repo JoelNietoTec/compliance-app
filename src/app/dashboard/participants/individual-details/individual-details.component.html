@@ -14,6 +14,14 @@
         <ng-template ngbTabTitle>
           <i class="far fa-address-card"></i> Info</ng-template>
         <ng-template ngbTabContent>
+          <small class="text-muted">
+            <ng-container>
+              <span *ngIf="individual.ParticipantTypeID==1">Documento de Identidad</span>
+              <span *ngIf="individual.ParticipantTypeID==2">RUC/NIT</span>
+            </ng-container>
+            <i class="far fa-address-card"></i>
+          </small>
+          <h6 class="participant-info">{{ individual.Code }}</h6>
           <small class="text-muted">Email
             <i class="far fa-envelope-open"></i>
           </small>

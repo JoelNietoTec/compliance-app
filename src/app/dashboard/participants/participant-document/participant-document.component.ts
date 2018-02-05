@@ -68,6 +68,13 @@ export class ParticipantDocumentComponent implements OnInit {
   }
 
   setFile(file: any) {
+    let reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log(reader.result.split(',')[1]);
+      };
+    }
     this._partDocument.File.File = file;
   }
 
