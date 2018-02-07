@@ -32,7 +32,9 @@ export class ParticipantDocumentComponent implements OnInit {
   @Output() addDocument = new EventEmitter();
   @Output() removeDocument = new EventEmitter();
 
-  _countries: Array<Country>;
+  _countries: Country[];
+  _filestoUpload: File[];
+  _isLoading: Boolean = false;
   _partDocument: FormDocument = { File: {} };
   _title: string;
 

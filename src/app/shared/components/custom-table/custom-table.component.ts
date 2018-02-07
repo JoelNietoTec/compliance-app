@@ -34,6 +34,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   @Output() removeItem = new EventEmitter();
   @Output() addItem = new EventEmitter();
 
+  _sorting: Boolean = false;
   _newItem: any = {};
   _selectedItem: any = {};
   _sortColumn: string;
@@ -61,14 +62,11 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   // Dispara el evento cuando los items están aún cargados
   ngOnChanges(model: SimpleChanges) {
     if (model.items) {
+      this.initTable();
       if (this.items) {
         this._filteredItems = this.items;
         this.filterItems();
       }
-    }
-    if (model.items) {
-      console.log(this.items);
-      this.initTable();
     }
   }
 
@@ -133,6 +131,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
       } else {
         this._filteredItems = this.items;
         this._itemsCount = this._filteredItems.length;
+        if (!this._sorting) {
+          this.filterItems();
+        }
       }
     }
   }
@@ -173,6 +174,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   sortByColumn(column: Column) {
+    this._sorting = true;
     if (column.name === this._sortColumn) {
       this._sortDesc = !this._sortDesc;
     }
@@ -209,10 +211,10 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   filterItems() {
+    this._sorting = false;
     this._filteredItems = this._util.searchFilter(this.items, this._searchColumns, this._searchText);
     if (this.options.pageable) {
       this._itemsCount = this._filteredItems.length;
-
       this.pageItems();
     } else {
       this._pagedItems = this._filteredItems;

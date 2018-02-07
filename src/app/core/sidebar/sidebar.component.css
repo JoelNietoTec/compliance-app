@@ -48,3 +48,7 @@ ul.sub-items {
 .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
   background-color: #2980b9;
 }
+
+a.nav-link {
+  border-radius: 0 !important;
+}

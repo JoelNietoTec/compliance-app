@@ -1,36 +1,39 @@
 <div class="row d-flex align-content-center justify-content-center">
-  <div class="col-md-5">
+  <div class="col-md-6">
     <app-card>
       <div card-section="body">
-        <h4 class="card-title">New User</h4>
+        <h4 class="card-title">Nuevo Usuario</h4>
         <form [formGroup]="_userForm" novalidate (ngSubmit)="saveUser(_user)">
           <div class="form-group">
-            <label class="form-control-label" for="">User Name</label>
+            <label class="form-control-label" for="">Nombre</label>
             <input type="text" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine}"
-              [(ngModel)]="_user.UserName" id="name" required #name name="name" formControlName="UserName" placeholder="User's Name">
-            <small *ngIf="!_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine" class="invalid-feedback animated fadeIn">Name require at least 5 characters</small>
+              [(ngModel)]="_user.UserName" id="name" required #name name="name" formControlName="UserName" placeholder="Nombre de usuario">
+            <small *ngIf="!_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine" class="invalid-feedback animated fadeIn">Nombre requiere al menos 5 caracteres</small>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="">Email</label>
             <input type="email" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.Email.valid && !_userForm.controls.Email.pristine}"
-              [(ngModel)]="_user.Email" formControlName="Email" email placeholder="User's Email Address">
-            <small *ngIf="!_userForm.controls.Email.valid && !_userForm.controls.Email.pristine" class="invalid-feedback animated fadeIn">Invalid email address</small>
+              [(ngModel)]="_user.Email" formControlName="Email" email placeholder="Correo de electrónico de usuario">
+            <small *ngIf="!_userForm.controls.Email.valid && !_userForm.controls.Email.pristine" class="invalid-feedback animated fadeIn">Dirección de correo inválida</small>
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="">Password</label>
+            <label class="form-control-label" for="">Contraseña</label>
             <input type="password" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.Password.valid && !_userForm.controls.Password.pristine}"
-              [(ngModel)]="_user.Password" formControlName="Password" name="password" id="" placeholder="User's Password">
-            <small *ngIf="!_userForm.controls.Password.valid && !_userForm.controls.Password.pristine" class="invalid-feedback animated fadeIn">Password require at least 6 characters</small>
+              [(ngModel)]="_user.Password" formControlName="Password" name="password" id="" placeholder="Contraseña de usuario">
+            <small *ngIf="!_userForm.controls.Password.valid && !_userForm.controls.Password.pristine" class="invalid-feedback animated fadeIn">Contraseña requiere al menos 6 caracteres</small>
           </div>
           <div class="form-group" >
-            <label class="form-control-label" for="">Confirm Password</label>
+            <label class="form-control-label" for="">Confirmar contraseña</label>
             <input type="password" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.PasswordConfirm.pristine && _userForm.controls.PasswordConfirm.value != _userForm.controls.Password.value }" formControlName="PasswordConfirm" name="confirm-password" id="confirm-password"
-              placeholder="Password Confirmation">
+              placeholder="Confirmación de contraseña">
             <small *ngIf="!_userForm.controls.PasswordConfirm.pristine && _userForm.controls.PasswordConfirm.value != _userForm.controls.Password.value"
-              class="invalid-feedback animated fadeIn">Password confirmation doesn't match</small>
+              class="invalid-feedback animated fadeIn">La confirmación de contraseña no coincide</small>
           </div>
           <div class="form-group d-flex justify-content-end ">
-            <button type="submit" [disabled]="!_userForm.valid" class="btn btn-primary"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+            <a [routerLink]="['../']" class="btn btn-outline-secondary" role="button">
+              <i class="fas fa-ban" aria-hidden="true"></i> Cancelar
+            </a>
+            <button type="submit" [disabled]="!_userForm.valid" class="btn btn-primary"><i class="far fa-hdd" aria-hidden="true"></i> Guardar</button>
           </div>
         </form>
       </div>
