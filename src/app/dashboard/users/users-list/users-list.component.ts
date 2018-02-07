@@ -17,13 +17,15 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'ID', title: '#', sortable: true },
-      { name: 'UserName', title: 'Nombre Usuario', sortable: true },
-      { name: 'Email', title: 'Email', sortable: true },
+      { name: 'ID', title: '#', sortable: true, filterable: true },
+      { name: 'UserName', title: 'Nombre Usuario', sortable: true, filterable: true },
+      { name: 'Email', title: 'Email', sortable: true, filterable: true },
       { name: 'CreateDate', title: 'Fecha Creación', type: 'datetime', sortable: true }
     ];
 
     this._table.style = 'table-sm table-squared';
+
+    this._table.pageable = true;
 
     this._table.searcheable = true;
 
