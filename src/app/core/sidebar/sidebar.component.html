@@ -2,7 +2,7 @@
   <h6 class="user-name"><i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.UserName }}</h6>
   <li class="nav-item dropdown user-email"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a>
+      <!-- <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a -->
       <a [routerLink]="['usuarios']" class="dropdown-item"><i class="fas fa-users" aria-hidden="true"></i> Usuarios</a>
       <a [routerLink]="['/login']" class="dropdown-item"><i class="typcn typcn-power-outline" aria-hidden="true"></i> Cerrar Sesión</a>
     </div>

@@ -7,7 +7,7 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
     font-size: 14px;
 }
 
-.btn {
+.btn.btn-primary, .btn.btn-secondary, .btn.btn-success {
   margin-left: 15px;
 }
 
