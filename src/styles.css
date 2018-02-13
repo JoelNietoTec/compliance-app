@@ -7,7 +7,7 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
     font-size: 14px;
 }
 
-.btn.btn-primary, .btn.btn-secondary, .btn.btn-success {
+.justify-content-end > .btn.btn-primary, .justify-content-end > .btn.btn-secondary, .justify-content-end > .btn.btn-success {
   margin-left: 15px;
 }
 

@@ -213,7 +213,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   filterItems() {
     this._sorting = false;
     this._filteredItems = this._util.searchFilter(this.items, this._searchColumns, this._searchText);
-    console.log(this._filteredItems);
     if (this.options.pageable) {
       this._itemsCount = this._filteredItems.length;
       this.pageItems();
