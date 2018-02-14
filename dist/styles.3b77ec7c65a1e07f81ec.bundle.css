@@ -1,36 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700");
 /* You can add global styles to this file, and also import other style files */.tooltip,body,button,button.form-control,input,input.form-control,optgroup,select,select.form-control,textarea,textarea.form-control{font-family:Nunito,sans-serif;font-weight:400;font-size:14px}.justify-content-end>.btn.btn-primary,.justify-content-end>.btn.btn-secondary,.justify-content-end>.btn.btn-success{margin-left:15px}.progress{background-color:#fff}.card-header a{text-decoration:none}button.form-control{text-align:left!important}main{background-color:#f7f7f8;min-height:100vh!important}label>.typcn{font-size:1.5em}.btn-sm>.typcn{font-size:1em}small.text-muted>.typcn{font-size:1.5em}.btn{cursor:pointer}.typcn{font-size:1.25em}.breadcrumb,.card-header{background-color:#eceeef;border-width:0}.table-squared{border:1px solid #e9ecef!important}.select-item{text-decoration:none;text-transform:capitalize}.spinner{height:80px}.tooltip{font-size:13px}.breadcrumb,.btn,.card,.card-footer,.card-header,.form-control,.input-group,.input-group-addon,.input-group-text,.modal-content,.nav-pills .nav-link,.page-item:first-child .page-link,.page-item:last-child .page-link,.pagination{border-radius:.15rem!important}.input-group>input{border-top-right-radius:0!important;border-bottom-right-radius:0!important}.input-group-addon{padding-bottom:2px;padding-top:2px;border-top-left-radius:0!important;border-bottom-left-radius:0!important}.btn-sm{font-size:.75em}.text-muted{color:#99abb4!important}.btn{text-transform:uppercase;font-weight:700}.btn-block{margin:0}.card-header{font-weight:700}.breadcrumb,.card,.dropdown-menu,.navbar{-webkit-box-shadow:0 5px 20px rgba(0,0,0,.05);box-shadow:0 5px 20px rgba(0,0,0,.05)}a:not([href]):not([tabindex]){color:#0275d8}.breadcrumb-item{text-transform:uppercase;font-weight:400}
-/* .breadcrumb {
-  background-color: #fff;
-} */
-/*
- * Base structure
- */
-/*
- * Typography
- */label{font-weight:700}h1,h3{margin-bottom:20px;padding-bottom:9px;border-bottom:1px solid #eee}
-/*
- * Sidebar
- */.sidebar{position:fixed;top:51px;bottom:0;left:0;z-index:1000;padding:20px;overflow-x:hidden;overflow-y:auto; /* Scrollable contents if viewport is shorter than content. */border-right:1px solid #eee}
+/* Typography */label{font-weight:700}h1,h3{margin-bottom:20px;padding-bottom:9px;border-bottom:1px solid #eee}
+/* Sidebar */.sidebar{position:fixed;top:51px;bottom:0;left:0;z-index:1000;padding:20px;overflow-x:hidden;overflow-y:auto; /* Scrollable contents if viewport is shorter than content. */border-right:1px solid #eee}
 /* Move down content because we have a fixed navbar that is 50px tall */body{padding-top:50px}
 /* Sidebar navigation */.sidebar{padding-left:0;padding-right:0}.sidebar .nav{margin-bottom:20px}.sidebar .nav-item{width:100%}.sidebar .nav-item+.nav-item{margin-left:0}.sidebar .nav-link{border-radius:0}
-/*
- * Dashboard
- */
+/* Dashboard */
 /* Placeholders */.placeholders{padding-bottom:3rem}.placeholder img{padding-top:1.5rem;padding-bottom:1.5rem}
 /* Transitions */.animated,.card,.card-footer,h3,td{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.fast{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both}@-webkit-keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes fadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes fadeOut{0%{opacity:1}to{opacity:0}}@keyframes fadeOut{0%{opacity:1}to{opacity:0}}.card,.card-footer,.fadeIn,h3,td{-webkit-animation-name:fadeIn;animation-name:fadeIn}.card{margin-bottom:20px}ngb-tabset>.tab-content{margin-top:20px}ngb-tabset ul.nav-pills{padding-left:15px}ngb-tabset ul.nav-pills .nav-link{text-transform:uppercase}ul.nav-pills .nav-link.active{background-color:#287fb9}ngb-tabset ul.nav-tabs a.nav-link{border-width:0 0 1px 0}ngb-tabset>ul.nav-tabs{border-bottom:1px solid #ccc}ngb-tabset>ul.nav-tabs>li.nav-item>a.nav-link.active{border-bottom:1px solid #0275d8;border-radius:0;font-weight:700}ngb-tabset>ul.nav-tabs>li.nav-item>a.nav-link{background-color:inherit!important;color:#292b2c!important;text-transform:uppercase}.card>ngb-tabset>ul.nav-tabs>li.nav-item>a.nav-link{padding:15px 20px}ngb-tabset>ul.nav-tabs>li.nav-item{margin-bottom:-1px}
 /* enable absolute positioning */.inner-addon{position:relative}.fa-lg{font-size:1.65em;cursor:pointer}
 /* style icon */.inner-addon .fa{position:absolute;padding:10px;pointer-events:none}
 /* align icon */.left-addon .fa{left:0}.right-addon .fa{right:0}
 /* add padding  */.left-addon input{padding-left:30px}.right-addon input{padding-right:30px}.ngb-dp-day>.btn-secondary{color:inherit;background-color:inherit;border-color:inherit}.ngb-dp-day>.btn-secondary:hover{color:#fff;background-color:#4ca2ff;border-color:#4ca2ff}
-/* .btn {
-  border-bottom-width: 5px;
-}
-
-.btn:hover, .btn:active, .btn:focus {
-  border-bottom-width: 1px;
-  margin-bottom: 4px;
-} */
 /* Button Primary*/.btn-primary,.page-item.active .page-link{background-color:#287fb9!important;border-color:#206594!important}.btn-primary:active,.btn-primary:focus,.btn-primary:hover{background-color:#206594!important;border-color:#206594!important}.btn-outline-primary{
   /* border-color: #287FB9 !important; */border:0}.btn-outline-primary,.text-primary{color:#287fb9!important}.btn-outline-primary:active,.btn-outline-primary:focus,.btn-outline-primary:hover,.page-item.active .page-link:hover{color:#fff!important;background-color:#287fb9!important;border-color:#287fb9!important}
 /* Button danger */.btn-danger{background-color:#e74c3c!important;border-color:#c0392b!important}.btn-danger:active,.btn-danger:focus,.btn-danger:hover{background-color:#c0392b!important;border-color:#c0392b!important}.btn-outline-danger,.text-danger{color:#e74c3c!important}.btn-outline-danger{border-color:#e74c3c!important}.btn-outline-danger:active,.btn-outline-danger:focus,.btn-outline-danger:hover{color:#fff!important;background-color:#e74c3c!important;border-color:#e74c3c!important}
@@ -41,7 +21,7 @@
   border-color: #bdc3c7; */background-color:#415161;border-color:#415161}.btn-secondary:active,.btn-secondary:focus,.btn-secondary:hover{
   /* background-color: #bdc3c7;
   border-color: #bdc3c7; */background-color:#415161;border-color:#2c3e50}.btn-outline-secondary{color:#2c3e50;border:0}.btn-outline-secondary:active,.btn-outline-secondary:focus,.btn-outline-secondary:hover{color:#fff;background-color:#415161;border-color:#415161}a,a:not([href]):not([tabindex]){color:#206594}.dropdown-item.active,.dropdown-item:active,.dropdown-item:focus{background-color:#206594}thead>tr>th{background-color:#287fb9;color:#fff}
-/*********Backgrounds************/.bg-primary{background-color:#287fb9!important}.border-primary{border-color:#287fb9!important}.bg-warning{background-color:#f1c40f!important}.bg-danger{background-color:#c0392b!important}.bg-secondary{background-color:#95a5a6!important}.bg-success{background-color:#27ae60!important}.card{border-width:0}select.custom-select{
+/* Backgrounds */.bg-primary{background-color:#287fb9!important}.border-primary{border-color:#287fb9!important}.bg-warning{background-color:#f1c40f!important}.bg-danger{background-color:#c0392b!important}.bg-secondary{background-color:#95a5a6!important}.bg-success{background-color:#27ae60!important}.card{border-width:0}select.custom-select{
   /* padding: 8px 28px 8px 12px !important; */height:34px!important}td{vertical-align:middle!important}.table-sm td,.table-sm th{padding:.3rem .75rem}tr.form-table>td{padding:0}/*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors

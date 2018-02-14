@@ -83,7 +83,6 @@ small.text-muted > .typcn {
   border-bottom-right-radius: 0 !important;
 }
 
-
 .input-group-addon {
   padding-bottom: 2px;
   padding-top: 2px;
@@ -108,7 +107,6 @@ small.text-muted > .typcn {
   margin: 0;
 }
 
-
 .card-header {
   font-weight: bold;
 }
@@ -125,17 +123,7 @@ a:not([href]):not([tabindex]) {
   font-weight: 400;
 }
 
-/* .breadcrumb {
-  background-color: #fff;
-} */
-
-/*
- * Base structure
- */
-
-/*
- * Typography
- */
+/* Typography */
 
 label {
   font-weight: bold;
@@ -147,9 +135,7 @@ h1, h3 {
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Sidebar
- */
+/* Sidebar */
 
 .sidebar {
   position: fixed;
@@ -190,9 +176,7 @@ body {
   border-radius: 0;
 }
 
-/*
- * Dashboard
- */
+/* Dashboard */
 
  /* Placeholders */
 .placeholders {
@@ -330,15 +314,6 @@ ngb-tabset > ul.nav-tabs > li.nav-item {
   border-color: #4ca2ff;
 }
 
-/* .btn {
-  border-bottom-width: 5px;
-}
-
-.btn:hover, .btn:active, .btn:focus {
-  border-bottom-width: 1px;
-  margin-bottom: 4px;
-} */
-
 /* Button Primary*/
 .btn-primary, .page-item.active .page-link {
   background-color: #287FB9 !important;
@@ -385,8 +360,6 @@ ngb-tabset > ul.nav-tabs > li.nav-item {
   color: #e74c3c !important;
   border-color: #e74c3c !important;
 }
-
-
 
 .btn-outline-danger:hover, .btn-outline-danger:active,
 .btn-outline-danger:focus {
@@ -452,11 +425,9 @@ ngb-tabset > ul.nav-tabs > li.nav-item {
   border-color: #415161;
 }
 
-
 a {
   color: #206594
 }
-
 
 a:not([href]):not([tabindex]) {
   color: #206594;
@@ -471,8 +442,7 @@ thead > tr > th {
   color: #fff;
 }
 
-
-/*********Backgrounds************/
+/* Backgrounds */
 .bg-primary {
   background-color: #287FB9 !important;
 }
@@ -517,4 +487,3 @@ td {
 tr.form-table > td {
   padding: 0
 }
-
