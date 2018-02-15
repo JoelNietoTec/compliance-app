@@ -129,10 +129,8 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
         this._filteredItems = this.items;
         this.filterItems();
       } else {
+        this._filteredItems = this.items;
         this._itemsCount = this._filteredItems.length;
-        if (!this._sorting) {
-          this.filterItems();
-        }
       }
     }
   }
@@ -173,7 +171,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   sortByColumn(column: Column) {
-
     this._sorting = true;
     if (column.name === this._sortColumn) {
       this._sortDesc = !this._sortDesc;
