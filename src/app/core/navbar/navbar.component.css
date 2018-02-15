@@ -27,3 +27,7 @@
 .logo {
   height: 28px;
 }
+
+nav.navbar {
+  min-height: 51px;
+}

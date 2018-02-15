@@ -40,6 +40,6 @@
   <participant-document *ngIf="_showForm" [types]="_types" [participant]="participant" (addDocument)="addDoc($event)"></participant-document>
   <div class="d-flex justify-content-end">
     <button *ngIf="!_showForm" type="button" class="btn btn-primary add-link" (click)="_toggleForm()">
-      <span class="typcn typcn-document-add"></span> Nuevo Documento</button>
+      <span class="far fa-plus-square"></span> Nuevo Documento</button>
   </div>
 </div>
