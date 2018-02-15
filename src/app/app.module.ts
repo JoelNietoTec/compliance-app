@@ -1,10 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
+import { CalendarModule } from 'angular-calendar';
+import localeEs from '@angular/common/locales/es-PA';
+
+registerLocaleData(localeEs);
 
 // Packages Dependencies
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     AppRoutingModule,
     ChartsModule,
+    CalendarModule.forRoot(),
     ToastModule.forRoot(),
     ReactiveFormsModule,
     BreadcrumbsModule
