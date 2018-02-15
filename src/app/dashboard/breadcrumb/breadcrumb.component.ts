@@ -17,7 +17,7 @@ export class BreadcrumbComponent implements OnInit {
         this.routes = [];
         this.path = location.path();
         this.path.split('/').forEach(e => {
-          if (e !== '' && e !== 'home' && e !== 'dashboard') {
+          if (e !== '' && e !== 'home' && e !== 'app') {
             this.routes.push(e);
           }
         });

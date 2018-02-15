@@ -9,8 +9,8 @@ import { AuthGuard } from './shared/services/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', loadChildren: './authentication/authentication.module#AuthenticationModule' },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+  { path: 'app', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  { path: '**', redirectTo: 'app', pathMatch: 'full' }
 ];
 
 @NgModule({
