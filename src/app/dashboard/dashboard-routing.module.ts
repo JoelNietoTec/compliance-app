@@ -14,6 +14,7 @@ import { AuthGuard } from '../shared/services/auth.guard';
 import { SettingsModule } from './settings/settings.module';
 import { SettingsComponent } from './settings/settings.component';
 import { DiscardsModule } from './discards/discards.module';
+import {TasksModule} from './tasks/tasks.module';
 
 export function getParamsModule() {
   return ParamsModule;
@@ -41,6 +42,11 @@ export const routes: Routes = [
         path: 'participantes',
         canActivateChild: [AuthGuard],
         loadChildren: './participants/participants.module#ParticipantsModule'
+      },
+      {
+        path: 'tareas',
+        canActivateChild: [AuthGuard],
+        loadChildren: './tasks/tasks.module#TasksModule'
       },
       {
         path: 'parametros',

@@ -14,19 +14,19 @@ interface FormTask extends Task {
 }
 
 @Component({
-  selector: 'home-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  selector: 'users-tasks',
+  templateUrl: './users-tasks.component.html',
+  styleUrls: ['./users-tasks.component.css']
 })
-export class TasksComponent implements OnInit {
-  @Input() taskStatus: Array<TaskStatus>;
+export class UsersTasksComponent implements OnInit {
+  @Input() taskStatus: TaskStatus[];
   @ViewChild(TaskFormComponent) private taskForm: TaskFormComponent;
 
   closeResult: string;
 
   _currentTask: FormTask = {};
   _newTask: Task = {};
-  _tasks: Array<Task>;
+  _tasks: Task[];
 
   constructor(
     private modalService: NgbModal,

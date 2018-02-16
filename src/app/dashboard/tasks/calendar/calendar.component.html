@@ -49,10 +49,11 @@
 </div>
 <br>
 <div [ngSwitch]="view">
-  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-month-view>
-  <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)">
+  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale" [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-month-view>
+  <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale" [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-week-view>
 </div>
 <br>
@@ -89,8 +90,7 @@
       </td>
       <td>
         <div class="input-group">
-          <input class="form-control" [(ngModel)]="event.start"  placeholder="YYYY-MM-DD"
-            name="dp" ngbDatepicker #d="ngbDatepicker">
+          <input class="form-control" [(ngModel)]="event.start" placeholder="YYYY-MM-DD" name="dp" ngbDatepicker #d="ngbDatepicker">
           <div class="input-group-append" (click)="d.toggle()">
             <span class="input-group-text">
               <i class="far fa-calendar-alt" aria-hidden="true"></i>
@@ -100,8 +100,7 @@
       </td>
       <td>
         <div class="input-group">
-          <input class="form-control" [(ngModel)]="event.end"  placeholder="YYYY-MM-DD"
-            name="dp" ngbDatepicker #e="ngbDatepicker">
+          <input class="form-control" [(ngModel)]="event.end" placeholder="YYYY-MM-DD" name="dp" ngbDatepicker #e="ngbDatepicker">
           <div class="input-group-append" (click)="e.toggle()">
             <span class="input-group-text">
               <i class="far fa-calendar-alt" aria-hidden="true"></i>
@@ -116,5 +115,4 @@
       </td>
     </tr>
   </tbody>
-
 </table>

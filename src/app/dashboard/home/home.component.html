@@ -1,55 +1,28 @@
-<ngb-tabset type="tabs">
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <i class="fas fa-chart-pie"></i> Dashboard</ng-template>
-    <ng-template ngbTabContent>
-      <!-- <h4 class="section-title"><i class="far fa-user"></i> Participantes por Riesgo</h4> -->
-      <!-- <div class="row">
-        <div class="col-md-3" *ngFor="let risk of byRisk">
-          <app-quick-card [icon]="risk.Icon" [value]="risk.Count" [type]="risk.ColorType" [name]="risk.name">
-          </app-quick-card>
-        </div>
-      </div> -->
-      <div class="row">
-        <div class="col-md-4">
-          <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'" [colors]="riskColors"></app-chart-card>
-        </div>
-        <div class="col-md-4">
-          <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'" [colors]="riskColors"></app-chart-card>
-        </div>
-        <div class="col-md-4">
-          <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"></app-chart-card>
-        </div>
-        <div class="col-md-5">
-          <app-loading-modal *ngIf="!byRisk"></app-loading-modal>
-          <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
-            [colors]="riskColors">
-          </app-chart-card>
-        </div>
-        <div class="col-md-7">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">
-                <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
-              <app-map *ngIf="_countries" [regions]="_countries"></app-map>
-            </div>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-md-4">
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+      [colors]="riskColors"></app-chart-card>
+  </div>
+  <div class="col-md-4">
+    <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions"
+      [type]="'doughnut'" [colors]="riskColors"></app-chart-card>
+  </div>
+  <div class="col-md-4">
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"></app-chart-card>
+  </div>
+  <div class="col-md-5">
+    <app-loading-modal *ngIf="!byRisk"></app-loading-modal>
+    <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
+      [colors]="riskColors">
+    </app-chart-card>
+  </div>
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
+        <app-map *ngIf="_countries" [regions]="_countries"></app-map>
       </div>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <i class="fas fa-tasks"></i> Tareas</ng-template>
-    <ng-template ngbTabContent>
-      <home-tasks></home-tasks>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <i class="far fa-calendar-alt"></i> Calendario</ng-template>
-    <ng-template ngbTabContent>
-      <app-calendar></app-calendar>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+    </div>
+  </div>
+</div>

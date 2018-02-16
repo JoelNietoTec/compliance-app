@@ -7,10 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { HomeComponent } from './home.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { TaskFormComponent } from '../../shared/components/task-form/task-form.component';
-import { TasksParticipantsComponent } from './tasks-participants/tasks-participants.component';
-import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   imports: [
@@ -22,7 +19,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     HomeRoutingModule,
     CalendarModule.forRoot()
   ],
-  declarations: [HomeComponent, TasksComponent, TasksParticipantsComponent, CalendarComponent],
+  declarations: [HomeComponent],
   entryComponents: [TaskFormComponent]
 })
 export class HomeModule { }

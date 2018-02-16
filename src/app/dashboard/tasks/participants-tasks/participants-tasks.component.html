@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="card-columns">
+    <ngb-accordion *ngFor="let participant of _participants" #acc="ngbAccordion">
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          {{ participant.FullName }}
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <h6 class="card-title text-muted">Pendientes</h6>
+          <p *ngFor="let task of participant.Tasks" class="card-text">
+            {{ task.Title }}
+          </p>
+          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+            <i class="fas fa-user"></i> Ir al Perfil
+          </a>
+          <br>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+</div>

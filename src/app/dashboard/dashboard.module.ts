@@ -8,7 +8,7 @@ import { ParticipantsModule } from './participants/participants.module';
 import { ParamsModule } from './params/params.module';
 import { UsersModule } from './users/users.module';
 import { SettingsModule } from './settings/settings.module';
-import { TasksComponent } from './home/tasks/tasks.component';
+import { TasksModule } from './tasks/tasks.module';
 import { CoreModule } from '../core/core.module';
 
 // Routers
@@ -16,20 +16,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    SharedModule,
-    CoreModule,
-    HomeModule,
-    UsersModule,
-    SettingsModule
-  ],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, CoreModule, HomeModule, UsersModule, SettingsModule],
   exports: [],
-  declarations: [
-    DashboardComponent,
-    BreadcrumbComponent
-  ],
+  declarations: [DashboardComponent, BreadcrumbComponent],
   providers: []
 })
-export class DashboardModule { }
+export class DashboardModule {}

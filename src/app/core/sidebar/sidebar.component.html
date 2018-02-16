@@ -9,16 +9,21 @@
   </li>
   <li class="nav-item">
     <a [routerLink]="['home']" class="nav-link" routerLinkActive="active">
-      <i class="fas fa-home" aria-hidden="true"></i> Inicio
+      <i class="fas fa-home fa-fw" aria-hidden="true"></i> Inicio
     </a>
   </li>
   <li class="nav-item">
-    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active"><i class="fas fa-users"></i> Participantes
+    <a [routerLink]="['tareas']" class="nav-link" routerLinkActive="active">
+      <i class="fas fa-tasks fa-fw"></i> Tareas
+    </a>
+  </li>
+  <li class="nav-item">
+    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active"><i class="fas fa-users fa-fw"></i> Participantes
     </a>
   </li>
   <li class="nav-item">
     <a data-toggle="collapse" href="#paramLinks" class="nav-link">
-      <i class="fas fa-list-ol" aria-hidden="true"></i> Parámetros
+      <i class="fas fa-list-ol fa-fw" aria-hidden="true"></i> Parámetros
       </a>
     <ul class="nav-pills flex-column sub-items collapse" id="paramLinks">
       <li class="nav-item sub-item">
@@ -36,6 +41,6 @@
   </li>
   <li class="nav-item">
     <a [routerLink]="['ajustes']" class="nav-link" routerLinkActive="active">
-    <i class="fas fa-wrench" aria-hidden="true"></i> Ajustes</a>
+    <i class="fas fa-wrench fa-fw" aria-hidden="true"></i> Ajustes</a>
   </li>
 </ul>
