@@ -1,3 +1,69 @@
-<p>
-  roadmap works!
-</p>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Nuevo Cronograma</h5>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input type="text" class="form-control" [(ngModel)]="_newRoadmap.Name" name="title" id="title" placeholder="Título cronograma">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="startdate">Fecha Inicio</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="YYYY-MM-DD" name="startdate" [(ngModel)]="_startDate" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-default" (click)="dp.toggle()" type="button">
+                <i class="far fa-calendar-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="enddate">Fecha Final</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="YYYY-MM-DD" name="enddate" [(ngModel)]="_endDate" ngbDatepicker #e="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-default" (click)="e.toggle()" type="button">
+                <i class="far fa-calendar-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="year">Año</label>
+          <input type="text" class="form-control" [(ngModel)]="_newRoadmap.Year" name="year" id="year" placeholder="YYYY">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Save')">
+      <i class="far fa-save fa-fw"></i> Guardar</button>
+  </div>
+</ng-template>
+<h5>Cronogramas</h5>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <select class="form-control custom-select" [(ngModel)]="_currentRoadMap" name="roadmap" id="roadmap">
+        <option [value]="_default" [disabled]="true">--- Seleccionar ---</option>
+        <option *ngFor="let roadmap of _roadMaps"  [ngValue]="roadmap">{{ roadmap.Name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-outline-primary" (click)="open(content)">Nuevo cronograma</button>
+  </div>
+</div>
+<app-phases *ngIf="_currentRoadMap" [roadmap]="_currentRoadMap"></app-phases>

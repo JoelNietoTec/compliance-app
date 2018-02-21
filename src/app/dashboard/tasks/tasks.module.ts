@@ -11,6 +11,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { UsersTasksComponent } from './users-tasks/users-tasks.component';
 import { ParticipantsTasksComponent } from './participants-tasks/participants-tasks.component';
 import { RoadmapComponent } from './roadmap/roadmap.component';
+import { MilestonesComponent } from './milestones/milestones.component';
+import { PhasesComponent } from './phases/phases.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import { RoadmapComponent } from './roadmap/roadmap.component';
     NgbModule,
     SharedModule
   ],
-  declarations: [TasksComponent, CalendarComponent, UsersTasksComponent, ParticipantsTasksComponent, RoadmapComponent]
+  declarations: [TasksComponent, CalendarComponent, UsersTasksComponent, ParticipantsTasksComponent, RoadmapComponent, MilestonesComponent, PhasesComponent]
 })
 export class TasksModule {}

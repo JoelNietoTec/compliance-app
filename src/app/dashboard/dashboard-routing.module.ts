@@ -14,7 +14,9 @@ import { AuthGuard } from '../shared/services/auth.guard';
 import { SettingsModule } from './settings/settings.module';
 import { SettingsComponent } from './settings/settings.component';
 import { DiscardsModule } from './discards/discards.module';
-import {TasksModule} from './tasks/tasks.module';
+import { TasksModule } from './tasks/tasks.module';
+import { TrainingModule } from './training/training.module';
+import {ReportsModule} from './reports/reports.module';
 
 export function getParamsModule() {
   return ParamsModule;
@@ -57,6 +59,16 @@ export const routes: Routes = [
         path: 'usuarios',
         canActivateChild: [AuthGuard],
         loadChildren: './users/users.module#UsersModule'
+      },
+      {
+        path: 'training',
+        canActivateChild: [AuthGuard],
+        loadChildren: './training/training.module#TrainingModule'
+      },
+      {
+        path: 'reportes',
+        canActivateChild: [AuthGuard],
+        loadChildren: './reports/reports.module#ReportsModule'
       },
       {
         path: 'descartes',

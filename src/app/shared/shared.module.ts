@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AgmCoreModule } from '@agm/core';
 import { BreadcrumbsModule } from 'ng2-breadcrumbs';
@@ -32,7 +31,7 @@ import { ParamSubValuesService } from './services/param-sub-values.service';
 import { AuthGuard } from './services/auth.guard';
 import { MapsService } from './services/maps.service';
 import { ComparisonsService } from './services/comparisons.service';
-import { ScheduleService } from './services/schedules.service';
+import { RoadmapService } from './services/roadmap.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -55,6 +54,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MapComponent } from './components/map/map.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -70,8 +70,7 @@ import { MapComponent } from './components/map/map.component';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB7K_EiA1MSRPKh7Yk4dgkbMAYan4elt5A'
-    }),
-    MultiselectDropdownModule
+    })
   ],
   exports: [
     LoadingModalComponent,
@@ -86,7 +85,6 @@ import { MapComponent } from './components/map/map.component';
     ChartsModule,
     TaskFormComponent,
     SweetAlert2Module,
-    MultiselectDropdownModule,
     CustomTableComponent,
     ColumnPipe,
     AgmCoreModule,
@@ -112,8 +110,8 @@ import { MapComponent } from './components/map/map.component';
     ParamValuesService,
     ParamSubValuesService,
     SanctionsService,
-    ScheduleService,
     ComparisonsService,
+    RoadmapService,
     NgbActiveModal,
     MapsService,
     AuthGuard

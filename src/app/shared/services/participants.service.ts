@@ -30,7 +30,7 @@ export class ParticipantsService {
   }
 
   getParticipant(_id: number): Observable<Participant> {
-    return this._http.get<Participant>(this._partURL + '/' + _id);
+    return this._http.get<Participant>(`${this._partURL}/${_id}`);
   }
 
   createParticipant(part: Participant): Observable<Participant> {

@@ -1,0 +1,81 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Nueva tarea</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="_newMilestone.Title" name="title" id="title" aria-describedby="helpId"
+            placeholder="Título de la tarea">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea class="form-control" [(ngModel)]="_newMilestone.Description" name="description" id="description" placeholder="Descripción de la tarea"
+            rows="2"></textarea>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="startdate">Fecha Inicio</label>
+          <div class="input-group">
+            <input class="form-control" [(ngModel)]="_startDate" placeholder="YYYY-MM-DD" name="startdate" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-default" (click)="dp.toggle()" type="button">
+                <i class="far fa-calendar-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="enddate">Fecha Final</label>
+          <div class="input-group">
+            <input class="form-control" [(ngModel)]="_endDate" placeholder="YYYY-MM-DD" name="enddate" ngbDatepicker #e="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-default" (click)="e.toggle()" type="button">
+                <i class="far fa-calendar-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="recurrence">Periodicidad</label>
+          <select class="custom-select" [(ngModel)]="_newMilestone.RecurrenceID" name="recurrence" id="recurrence">
+            <option disabled [value]="undefined">--- Seleccionar ---</option>
+            <option *ngFor="let rec of _recurrence" [value]="rec.ID">{{ rec.Name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+<button class="btn btn-outline-primary" (click)="open(content)">Nueva Tarea</button>
+<ng-container *ngFor="let milestone of phase.Milestones">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ milestone.Title }}</h4>
+        <p class="card-text">{{ milestone.Description }}</p>
+        <p class="text-muted">
+          <i class="far fa-calendar-alt fa-fw"></i> {{ milestone.StartDate | date: 'shortDate' }} - {{ milestone.EndDate | date: 'shortDate' }}
+        </p>
+        <p>
+          <i class="far fa-clock   fa-fw"></i> {{ milestone.Recurrence.Name }}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>
