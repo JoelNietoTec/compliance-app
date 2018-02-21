@@ -1,21 +1,150 @@
-<div class="container-fluid">
-  <div class="card-columns">
-    <ngb-accordion *ngFor="let participant of _participants" #acc="ngbAccordion">
-      <ngb-panel>
-        <ng-template ngbPanelTitle>
-          {{ participant.FullName }}
-        </ng-template>
-        <ng-template ngbPanelContent>
-          <h6 class="card-title text-muted">Pendientes</h6>
-          <p *ngFor="let task of participant.Tasks" class="card-text">
-            {{ task.Title }}
-          </p>
-          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
-            <i class="fas fa-user"></i> Ir al Perfil
-          </a>
-          <br>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+<div class="card">
+  <div class="card-body">
+    <div class="container-fluid">
+      <h5>Pendientes de Participantes</h5>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="view">Vista</label>
+            <select class="custom-select" [(ngModel)]="_view" name="view" id="view">
+              <option [value]="'alpha'" selected>Alfabéticamente</option>
+              <option [value]="'risk'">Riesgo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <ng-container [ngSwitch]="_view">
+        <ng-container *ngSwitchCase="'alpha'">
+          <div class="card-columns">
+            <ngb-accordion *ngFor="let participant of _participants" #acc="ngbAccordion">
+              <ngb-panel>
+                <ng-template ngbPanelTitle>
+                  {{ participant.FullName }}
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <h6 class="card-title text-muted">Pendientes</h6>
+                  <p *ngFor="let task of participant.Tasks" class="card-text">
+                    {{ task.Title }}
+                  </p>
+                  <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+                    <i class="fas fa-user"></i> Ir al Perfil
+                  </a>
+                  <br>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'risk'">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card border-danger risk-container">
+                <div class="card-body">
+                  <h5 class="text-danger">Alto</h5>
+                  <ng-container *ngFor="let participant of _participants">
+                    <ngb-accordion *ngIf="participant.Rate === 'Alto'">
+                      <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                          {{ participant.FullName }}
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <h6 class="card-title text-muted">Pendientes</h6>
+                          <p *ngFor="let task of participant.Tasks" class="card-text">
+                            {{ task.Title }}
+                          </p>
+                          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+                            <i class="fas fa-user"></i> Ir al Perfil
+                          </a>
+                          <br>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-warning risk-container">
+                <div class="card-body">
+                  <h5 class="text-warning">Medio</h5>
+                  <ng-container *ngFor="let participant of _participants">
+                    <ngb-accordion *ngIf="participant.Rate === 'Medio'">
+                      <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                          {{ participant.FullName }}
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <h6 class="card-title text-muted">Pendientes</h6>
+                          <p *ngFor="let task of participant.Tasks" class="card-text">
+                            {{ task.Title }}
+                          </p>
+                          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+                            <i class="fas fa-user"></i> Ir al Perfil
+                          </a>
+                          <br>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-success risk-container">
+                <div class="card-body">
+                  <h5 class="text-success">Bajo</h5>
+                  <ng-container *ngFor="let participant of _participants">
+                    <ngb-accordion *ngIf="participant.Rate === 'Bajo'">
+                      <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                          {{ participant.FullName }}
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <h6 class="card-title text-muted">Pendientes</h6>
+                          <p *ngFor="let task of participant.Tasks" class="card-text">
+                            {{ task.Title }}
+                          </p>
+                          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+                            <i class="fas fa-user"></i> Ir al Perfil
+                          </a>
+                          <br>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-muted risk-container">
+                <div class="card-body">
+                  <h5 class="text-muted">No disponible</h5>
+                  <ng-container *ngFor="let participant of _participants">
+                    <ngb-accordion *ngIf="participant.Rate === 'Incompleto'">
+                      <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                          {{ participant.FullName }}
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <h6 class="card-title text-muted">Pendientes</h6>
+                          <p *ngFor="let task of participant.Tasks" class="card-text">
+                            {{ task.Title }}
+                          </p>
+                          <a [routerLink]="['/app', 'participantes', participant.ID]" class="btn btn-primary pull-right">
+                            <i class="fas fa-user"></i> Ir al Perfil
+                          </a>
+                          <br>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
 </div>
