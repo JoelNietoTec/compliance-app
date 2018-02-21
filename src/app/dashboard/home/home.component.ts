@@ -22,13 +22,26 @@ export class HomeComponent implements OnInit {
   public _partTasks: any[];
   public riskColors: any[];
   public chartReady: Boolean = false;
+  public _addresses: any[] = [];
 
   constructor(
     private _partServ: ParticipantsService,
     private _util: UtilService,
     private _map: MapsService,
     private _taskService: TasksService
-  ) {}
+  ) {
+    _partServ.getParticipants().subscribe(participants => {
+      participants.forEach(part => {
+        let location = {};
+        _map.getPosition(part.Address).subscribe(position => {
+          if (position.results[0]) {
+            location = position.results[0];
+            this._addresses.push(location);
+          }
+        });
+      });
+    });
+  }
 
   ngOnInit() {
     this._partServ.getParticipantsbyRisk().subscribe(data => {

@@ -19,7 +19,7 @@
             <ngb-accordion *ngFor="let participant of _participants" #acc="ngbAccordion">
               <ngb-panel>
                 <ng-template ngbPanelTitle>
-                  {{ participant.FullName }}
+                  {{ participant.ShortName }}
                 </ng-template>
                 <ng-template ngbPanelContent>
                   <h6 class="card-title text-muted">Pendientes</h6>
@@ -45,7 +45,7 @@
                     <ngb-accordion *ngIf="participant.Rate === 'Alto'">
                       <ngb-panel>
                         <ng-template ngbPanelTitle>
-                          {{ participant.FullName }}
+                          {{ participant.ShortName }}
                         </ng-template>
                         <ng-template ngbPanelContent>
                           <h6 class="card-title text-muted">Pendientes</h6>
@@ -71,7 +71,7 @@
                     <ngb-accordion *ngIf="participant.Rate === 'Medio'">
                       <ngb-panel>
                         <ng-template ngbPanelTitle>
-                          {{ participant.FullName }}
+                          {{ participant.ShortName }}
                         </ng-template>
                         <ng-template ngbPanelContent>
                           <h6 class="card-title text-muted">Pendientes</h6>
@@ -97,7 +97,7 @@
                     <ngb-accordion *ngIf="participant.Rate === 'Bajo'">
                       <ngb-panel>
                         <ng-template ngbPanelTitle>
-                          {{ participant.FullName }}
+                          {{ participant.ShortName }}
                         </ng-template>
                         <ng-template ngbPanelContent>
                           <h6 class="card-title text-muted">Pendientes</h6>
@@ -123,7 +123,7 @@
                     <ngb-accordion *ngIf="participant.Rate === 'Incompleto'">
                       <ngb-panel>
                         <ng-template ngbPanelTitle>
-                          {{ participant.FullName }}
+                          {{ participant.ShortName }}
                         </ng-template>
                         <ng-template ngbPanelContent>
                           <h6 class="card-title text-muted">Pendientes</h6>
