@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-4">
             <span class="text-primary">Nombre Documento</span>
-            <h6>Documento.jpg</h6>
+            <h6><a [href]="_conn.fileURL + document.FilePath" [download]="true">Descargar</a></h6>
           </div>
           <div class="col-md-4">
             <span class="text-primary">Fecha de Expedición</span>

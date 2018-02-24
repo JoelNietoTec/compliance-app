@@ -53,6 +53,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MapComponent } from './components/map/map.component';
+import { FilesService } from './services/files.service';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { MapComponent } from './components/map/map.component';
     RoadmapService,
     NgbActiveModal,
     MapsService,
+    FilesService,
     AuthGuard
   ],
   declarations: [

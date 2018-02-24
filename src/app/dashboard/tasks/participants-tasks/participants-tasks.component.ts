@@ -24,7 +24,6 @@ export class ParticipantsTasksComponent implements OnInit {
       data.forEach(e => {
         e.Rate = this._partServ.getRate(e);
       });
-      console.log(data);
       this._participants = this._util.sortBy(data, 'ShortName');
     });
   }

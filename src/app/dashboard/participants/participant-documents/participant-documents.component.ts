@@ -5,6 +5,7 @@ import { Document, ParticipantDocument, DocumentType } from '../../../shared/mod
 import { UtilService } from '../../../shared/services/util.service';
 import { Participant } from '../../../shared/models/participants.model';
 import { DocumentsService } from '../../../shared/services/documents.service';
+import { ConnectionService } from '../../../shared/services/connection.service';
 
 @Component({
   selector: 'participant-documents',
@@ -18,7 +19,12 @@ export class ParticipantDocumentsComponent implements OnInit {
   _showForm: Boolean = false;
   _documents: Array<ParticipantDocument>;
 
-  constructor(private _docServ: DocumentsService, private _util: UtilService, private toastr: ToastsManager) {}
+  constructor(
+    private _docServ: DocumentsService,
+    private _util: UtilService,
+    private toastr: ToastsManager,
+    public _conn: ConnectionService
+  ) {}
 
   ngOnInit() {
     this._docServ.getTypesByParticipant(this.participant.ParticipantTypeID).subscribe(data => {

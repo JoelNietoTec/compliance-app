@@ -37,9 +37,10 @@ export interface Participant {
   Country?: Country;
   FullName?: string;
   ShortName?: string;
-  MatrixReady?: boolean;
+  MatrixReady?: Boolean;
   Tasks?: Task[];
   Age?: number;
+  Status?: Boolean;
 }
 
 export interface ParticipantParam {

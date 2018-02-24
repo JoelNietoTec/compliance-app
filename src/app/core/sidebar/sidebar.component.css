@@ -27,6 +27,10 @@ ul.sub-items {
   margin: 0;
 }
 
+.nav-item > .nav-link > .fa-fw {
+  margin: 0 10px;
+}
+
 .user-name.nav-item > a.nav-link:hover, .user-name > a.nav-item:focus  {
    color: #abb2b9 !important;
 }
@@ -34,6 +38,10 @@ ul.sub-items {
 .dropdown-menu {
   border-radius: 0;
   right: auto;
+}
+
+.dropdown-menu > .dropdown-item {
+  font-size: .85rem;
 }
 
 .user-email {

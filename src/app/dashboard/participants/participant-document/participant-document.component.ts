@@ -1,18 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-  NgbDateParserFormatter,
-  NgbDateStruct
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
-import {
-  DocumentType,
-  ParticipantDocument
-} from '../../../shared/models/documents.models';
+import { DocumentType, ParticipantDocument } from '../../../shared/models/documents.models';
 import { Participant } from '../../../shared/models/participants.model';
 import { Country } from '../../../shared/models/country.model';
 import { CountriesService } from '../../../shared/services/countries.service';
 import { DocumentsService } from '../../../shared/services/documents.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { FilesService } from '../../../shared/services/files.service';
 
 interface FormDocument extends ParticipantDocument {
   formExpeditionDate?: NgbDateStruct;
@@ -42,6 +37,7 @@ export class ParticipantDocumentComponent implements OnInit {
     private _docServ: DocumentsService,
     private _dateFormatter: NgbDateParserFormatter,
     private _countryServ: CountriesService,
+    private _fileServ: FilesService,
     private _util: UtilService
   ) {}
 
@@ -49,12 +45,8 @@ export class ParticipantDocumentComponent implements OnInit {
     this._title = `Documento ${this.index + 1}`;
     if (this.doc) {
       this._partDocument = this.doc;
-      this._partDocument.formExpeditionDate = this._dateFormatter.parse(
-        this._partDocument.ExpeditionDate.toString()
-      );
-      this._partDocument.formExpirationDate = this._dateFormatter.parse(
-        this._partDocument.ExpirationDate.toString()
-      );
+      this._partDocument.formExpeditionDate = this._dateFormatter.parse(this._partDocument.ExpeditionDate.toString());
+      this._partDocument.formExpirationDate = this._dateFormatter.parse(this._partDocument.ExpirationDate.toString());
     } else {
       this._partDocument.ParticipantID = this.participant.ID;
     }
@@ -70,23 +62,15 @@ export class ParticipantDocumentComponent implements OnInit {
   }
 
   setFile(file: any) {
-    let reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        console.log(reader.result.split(',')[1]);
-      };
-    }
-    this._partDocument.File.File = file;
+    this._filestoUpload = <Array<File>>file.target.files;
+    this._fileServ.uploadFiles(this._filestoUpload).subscribe(data => {
+      this._partDocument.FilePath = data;
+    });
   }
 
   saveDocument() {
-    this._partDocument.ExpeditionDate = new Date(
-      this._dateFormatter.format(this._partDocument.formExpeditionDate)
-    );
-    this._partDocument.ExpirationDate = new Date(
-      this._dateFormatter.format(this._partDocument.formExpirationDate)
-    );
+    this._partDocument.ExpeditionDate = new Date(this._dateFormatter.format(this._partDocument.formExpeditionDate));
+    this._partDocument.ExpirationDate = new Date(this._dateFormatter.format(this._partDocument.formExpirationDate));
     this.addDocument.emit(this._partDocument);
   }
 

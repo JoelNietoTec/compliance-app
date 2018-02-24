@@ -8,18 +8,22 @@ import { UtilService } from './util.service';
 import { ConnectionService } from './connection.service';
 import { Task, TaskStatus, TaskCount } from '../models/tasks.model';
 import { Participant } from '../models/participants.model';
+import { CalendarEvent } from 'calendar-utils';
 
 @Injectable()
 export class TasksService {
   private _taskURL: string;
   private _taskStatusURL: string;
+  private _eventsURL: string;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private _newTask: Task;
   private _tasks: Task[];
+  private _events: CalendarEvent[];
 
   constructor(private _http: HttpClient, private _conn: ConnectionService, private _util: UtilService) {
     this._taskURL = _conn.APIUrl + 'tasks';
     this._taskStatusURL = _conn.APIUrl + 'taskstatus';
+    this._eventsURL = _conn.APIUrl + 'tasksevents';
   }
 
   getTasks(): Observable<Task[]> {
@@ -28,6 +32,10 @@ export class TasksService {
 
   getTasksByCategory(id: number): Observable<Task[]> {
     return this._http.get<Task[]>(`${this._taskURL}/category/${id}`);
+  }
+
+  getEvents(): Observable<CalendarEvent[]> {
+    return this._http.get<CalendarEvent[]>(this._eventsURL);
   }
 
   getTaskCount(id: number): Observable<TaskCount[]> {

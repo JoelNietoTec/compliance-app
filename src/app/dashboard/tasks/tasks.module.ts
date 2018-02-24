@@ -13,16 +13,19 @@ import { ParticipantsTasksComponent } from './participants-tasks/participants-ta
 import { RoadmapComponent } from './roadmap/roadmap.component';
 import { MilestonesComponent } from './milestones/milestones.component';
 import { PhasesComponent } from './phases/phases.component';
+import { CalendarHeaderComponent } from './calendar/calender-header.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TasksRoutingModule,
-    CalendarModule,
-    FormsModule,
-    NgbModule,
-    SharedModule
-  ],
-  declarations: [TasksComponent, CalendarComponent, UsersTasksComponent, ParticipantsTasksComponent, RoadmapComponent, MilestonesComponent, PhasesComponent]
+  imports: [CommonModule, TasksRoutingModule, CalendarModule, FormsModule, NgbModule, SharedModule],
+  declarations: [
+    TasksComponent,
+    CalendarComponent,
+    UsersTasksComponent,
+    ParticipantsTasksComponent,
+    RoadmapComponent,
+    MilestonesComponent,
+    PhasesComponent,
+    CalendarHeaderComponent
+  ]
 })
 export class TasksModule {}

@@ -12,6 +12,7 @@ export interface ParticipantDocument {
   Country?: Country;
   File?: Document;
   FileID?: number;
+  FilePath?: string;
 }
 
 export interface DocumentType {

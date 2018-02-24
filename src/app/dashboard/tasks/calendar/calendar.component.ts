@@ -1,9 +1,27 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, startOfToday } from 'date-fns';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+  startOfToday,
+  startOfMonth,
+  startOfWeek,
+  endOfWeek,
+  format
+} from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK, CalendarDateFormatter } from 'angular-calendar';
 import { CustomDateFormatter } from '../../../shared/pipes/custom-date-formatter.provider';
+import { TasksService } from '../../../shared/services/tasks.service';
+import { Observable } from 'rxjs/Observable';
+import { HttpParams, HttpClient } from '@angular/common/http';
+import { Task } from '../../../shared/models/tasks.model';
 
 const colors: any = {
   red: {
@@ -39,7 +57,7 @@ export class CalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  locale: string = 'es';
+  public locale: string = 'es-PA';
 
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
@@ -68,43 +86,13 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events$: Observable<Array<CalendarEvent>>;
+
+  events: CalendarEvent[];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private _taskServ: TasksService, private _http: HttpClient) {}
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
@@ -142,5 +130,23 @@ export class CalendarComponent implements OnInit {
     this.refresh.next();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getEvents();
+  }
+
+  getEvents(): void {
+    const getStart: any = {
+      month: startOfMonth,
+      week: startOfWeek,
+      day: startOfDay
+    }[this.view];
+
+    const getEnd: any = {
+      month: endOfMonth,
+      week: endOfWeek,
+      day: endOfDay
+    }[this.view];
+
+    this.events$ = this._taskServ.getEvents();
+  }
 }
