@@ -19,8 +19,10 @@ import { TableOptions, Column } from './custom-table.options';
 import { UtilService } from '../../services/util.service';
 
 import * as XLSX from 'xlsx';
+import * as pdf from './pdf';
 import { saveAs } from 'file-saver';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-custom-table',
@@ -53,7 +55,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   _filterValues: Array<string> = [];
   _visibleColumns: number;
   _booleanValues: any = [{ value: true, display: 'Sí' }, { value: false, display: 'No' }];
-  constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal) {}
+  constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal, private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.initTable();
@@ -139,6 +141,10 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     if (this.options.editable) {
       this._selectedItem = item;
     }
+  }
+
+  generatePDF() {
+    pdf.generatePDF(this.options.columns, this.itemsToReports(true), this.options.title);
   }
 
   changeFilter() {
@@ -282,15 +288,19 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     return buf;
   }
 
-  itemsToReports(): Array<any> {
+  itemsToReports(visible?: Boolean): any[] {
     const items = [];
     this._filteredItems.forEach(item => {
       const object = {};
       this.options.columns.forEach(column => {
-        if (column.type === 'object') {
-          object[column.title] = this._util.getProperty(item, column.objectColumn);
-        } else {
-          object[column.title] = this._util.getProperty(item, column.name);
+        if (!column.hidden || !visible) {
+          if (column.type === 'object') {
+            object[column.title] = this._util.getProperty(item, column.objectColumn);
+          } else if (column.type === 'date') {
+            object[column.title] = this.datePipe.transform(this._util.getProperty(item, column.name), 'mediumDate');
+          } else {
+            object[column.title] = this._util.getProperty(item, column.name);
+          }
         }
       });
       items.push(object);

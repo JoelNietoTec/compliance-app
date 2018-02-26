@@ -9,11 +9,11 @@
     <div class="col-md-8">
       <div class="card">
         <ngb-tabset #t type="tabs" *ngIf="_participant">
-          <ngb-tab title="Matrix de Riesgo">
+          <!-- <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
               <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <ngb-tab title="Documentos">
             <ng-template ngbTabContent>
               <participant-documents [participant]="_participant"></participant-documents>

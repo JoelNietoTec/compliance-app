@@ -9,6 +9,12 @@
       </div>
       <div class="card-body">
         <div class="row">
+          <div class="col-md-4 align-bottom">
+            <a name="download" id="download" class="btn btn-primary btn-block" [href]="_conn.fileURL + document.FilePath" [download]="true"
+              role="button">Descargar
+              <i class="fas fa-download"></i>
+            </a>
+          </div>
           <div class="col-md-4">
             <span class="text-primary">Nro. Documento</span>
             <h6>{{ document.DocumentCode }}</h6>
@@ -17,10 +23,7 @@
             <span class="text-primary">Tipo Documento</span>
             <h6>{{ document.DocumentType.Name }}</h6>
           </div>
-          <div class="col-md-4">
-            <span class="text-primary">Nombre Documento</span>
-            <h6><a [href]="_conn.fileURL + document.FilePath" [download]="true">Descargar</a></h6>
-          </div>
+
           <div class="col-md-4">
             <span class="text-primary">Fecha de Expedición</span>
             <h6>{{ document.ExpeditionDate | date: 'mediumDate' }}</h6>

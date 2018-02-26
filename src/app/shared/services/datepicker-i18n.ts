@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
-  'es-PA': {
+  'es-MX': {
     weekdays: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'],
     months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
   }
@@ -10,7 +10,7 @@ const I18N_VALUES = {
 
 @Injectable()
 export class I18n {
-  language = 'es-PA';
+  language = 'es-MX';
 }
 
 @Injectable()

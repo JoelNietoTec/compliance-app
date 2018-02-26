@@ -57,7 +57,7 @@ export class CalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  public locale: string = 'es-PA';
+  public locale: string = 'es-MX';
 
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -116,7 +116,8 @@ import { FilesService } from './services/files.service';
     NgbActiveModal,
     MapsService,
     FilesService,
-    AuthGuard
+    AuthGuard,
+    DatePipe
   ],
   declarations: [
     LoadingModalComponent,

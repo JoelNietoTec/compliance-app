@@ -1,6 +1,5 @@
 <app-loading-modal *ngIf="!items"></app-loading-modal>
 <ng-container *ngIf="items">
-  <h4>{{ options.title }}</h4>
   <div class="row justify-content-between top-bar">
     <div class="col-md-4">
       <div *ngIf="options.searcheable" class="form-group search-form">
@@ -8,7 +7,18 @@
           placeholder="&#xf002; Búsqueda" style="font-family:Nunito, FontAwesome">
       </div>
     </div>
-    <div class="col-md-4 d-flex justify-content-end pull-right">
+    <div class="col-md-8 d-flex justify-content-end pull-right">
+      <div class="btn-group pull-right" role="group" aria-label="">
+        <button type="button" class="btn btn-danger" (click)="generatePDF()" ngbTooltip="Exportar a PDF">
+          <i class="far fa-file-pdf fa-fw"></i>
+        </button>
+        <button *ngIf="options.exportToCSV" type="button" class="btn btn-success" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
+          <i class="fas fa-table fa-fw"></i>
+        </button>
+      </div>
+      <!-- <button *ngIf="options.exportToCSV" class="btn btn-success pull-right" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
+        <i class="fas fa-download"></i>
+      </button> -->
       <a *ngIf="options.newURL" [routerLink]="options.newURL" class="btn btn-primary">
         <i class="fa fa-plus-circle"></i> Nuevo elemento</a>
     </div>
@@ -185,11 +195,6 @@
       <ng-container *ngIf="options.pageable">
         <app-paginator [itemsCount]="_itemsCount" (paginate)="setPage($event)"></app-paginator>
       </ng-container>
-    </div>
-    <div class="col-md-4">
-      <button *ngIf="options.exportToCSV" class="btn btn-success pull-right" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
-        <i class="fas fa-download"></i>
-      </button>
     </div>
   </div>
 </ng-container>

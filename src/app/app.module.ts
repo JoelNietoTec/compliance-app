@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
-import localeEs from '@angular/common/locales/es-PA';
+import localeEs from '@angular/common/locales/es-MX';
 
 registerLocaleData(localeEs);
 
@@ -48,10 +48,10 @@ import { AppRoutingModule } from './app-routing.module';
     BreadcrumbsModule
   ],
   providers: [
-    // {
-    //   provide: LOCALE_ID,
-    //   useValue: 'es-PA'
-    // },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-MX'
+    },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

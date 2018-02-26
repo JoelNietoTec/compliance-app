@@ -20,7 +20,7 @@ export class IndividualsListComponent implements OnInit {
   ngOnInit() {
     this._table.columns = [
       { name: 'FullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
-      { name: 'Code', title: 'C.I.P./Pasaporte', filterable: true },
+      { name: 'Code', title: '# Doc', filterable: true },
       { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
       { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
       { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
