@@ -1,8 +1,15 @@
 <h5>Reportes</h5>
 <ngb-tabset type="tabs">
-  <ngb-tab title="Title1">
+  <ngb-tab>
+    <ng-template ngbTabTitle>
+      <i class="fas fa-users   fa-fw"></i> Participantes
+    </ng-template>
     <ng-template ngbTabContent>
-      <p>Content 1</p>
+      <div class="card">
+        <div class="card-body">
+          <reports-participants></reports-participants>
+        </div>
+      </div>
     </ng-template>
   </ngb-tab>
   <ngb-tab title="Title2">

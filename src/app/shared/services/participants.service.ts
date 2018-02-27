@@ -25,8 +25,12 @@ export class ParticipantsService {
     this._paramURL = _conn.APIUrl + 'participantparams';
   }
 
-  getParticipants(): Observable<Participant[]> {
-    return this._http.get<Participant[]>(this._partURL);
+  getParticipants(type?: string): Observable<Participant[]> {
+    if (type) {
+      return this._http.get<Participant[]>(`${this._partURL}/${type}`);
+    } else {
+      return this._http.get<Participant[]>(this._partURL);
+    }
   }
 
   getParticipant(_id: number): Observable<Participant> {

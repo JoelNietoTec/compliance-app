@@ -13,6 +13,7 @@ export interface TableOptions {
   showID?: boolean;
   lookup?: boolean;
   exportToCSV?: boolean;
+  reportsOnly?: boolean;
 }
 
 export interface Column {

@@ -64,8 +64,8 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   // Dispara el evento cuando los items están aún cargados
   ngOnChanges(model: SimpleChanges) {
     if (model.items) {
-      this.initTable();
       if (this.items) {
+        this.initTable();
         this._filteredItems = this.items;
         this.filterItems();
       }

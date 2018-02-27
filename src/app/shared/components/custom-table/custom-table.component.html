@@ -59,7 +59,7 @@
               </select>
             </td>
           </ng-container>
-          <td></td>
+          <td *ngIf="!options.reportsOnly"></td>
         </tr>
         <tr *ngIf="!_pagedItems.length">
           <td class="text-center" [colSpan]="_visibleColumns + 1">
