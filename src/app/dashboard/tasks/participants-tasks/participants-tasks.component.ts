@@ -21,10 +21,8 @@ export class ParticipantsTasksComponent implements OnInit {
 
   ngOnInit() {
     this._taskServ.getTaksByParticipant().subscribe(data => {
-      data.forEach(e => {
-        e.Rate = this._partServ.getRate(e);
-      });
       this._participants = this._util.sortBy(data, 'ShortName');
+      console.log(this._participants);
     });
   }
 }
