@@ -128,7 +128,7 @@ export class IndividualFormComponent implements OnInit {
       // this.setNationalities();
       this._partServ.createParticipant(this._individual).subscribe(data => {
         this.toastr.success(data.ShortName, 'Individuo Creado');
-        this._router.navigate(['dashboard/participantes', data.ID]);
+        this._router.navigate(['app/participantes', data.ID]);
       });
     } else {
       this._individual.Country = this._util.filterByID(this._countries, this._individual.CountryID);

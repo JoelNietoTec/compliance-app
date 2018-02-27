@@ -15,8 +15,8 @@
     </div>
 
     <div class="col-md-8">
-      <app-loading-modal *ngIf="!byRisk"></app-loading-modal>
-      <div class="card">
+      <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
+      <div  *ngIf="_addresses" class="card">
         <div class="card-body">
           <h4 class="card-title">
             <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
@@ -28,11 +28,12 @@
           </agm-map>
         </div>
       </div>
-      <div class="card">
+      <app-loading-modal *ngIf="!_countries"></app-loading-modal>
+      <div *ngIf="_countries" class="card">
         <div class="card-body">
           <h4 class="card-title">
             <i class="far fa-flag" aria-hidden="true"></i> Distribución por País</h4>
-          <app-map *ngIf="_countries" [regions]="_countries"></app-map>
+          <app-map [regions]="_countries"></app-map>
         </div>
       </div>
     </div>

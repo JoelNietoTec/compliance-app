@@ -42,8 +42,6 @@ export class ReportsEntitiesComponent implements OnInit {
 
     this._table.exportToCSV = true;
 
-    this._table.lookup = true;
-
     this._table.searcheable = true;
 
     this._table.title = 'Entidades';
