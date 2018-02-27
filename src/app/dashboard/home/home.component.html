@@ -12,11 +12,39 @@
         [type]="'doughnut'" [colors]="riskColors"></app-chart-card>
       <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'">
       </app-chart-card>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Creado</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let part of _lastParticipants">
+                <td>
+                  <a [routerLink]="['/app','participantes', part.ID]">{{ part.ShortName }}</a>
+                </td>
+                <td>{{ part.CreateDate | date: 'shortDate' }}</td>
+                <td>
+                  <span class="badge" [ngClass]="{'badge-success': part.Rate === 'Bajo', 'badge-warning': part.Rate === 'Medio', 'badge-danger': part.Rate === 'Alto', 'badge-secondary': part.Rate === 'Incompleto' }">{{ part.Rate }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-8">
       <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
-      <div  *ngIf="_addresses" class="card">
+      <div *ngIf="_addresses" class="card">
         <div class="card-body">
           <h4 class="card-title">
             <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>

@@ -4,6 +4,7 @@ import { ParticipantsService } from '../../shared/services/participants.service'
 import { TasksService } from '../../shared/services/tasks.service';
 import { MapsService } from '../../shared/services/maps.service';
 import { UtilService } from '../../shared/services/util.service';
+import { Participant } from '../../shared/models/participants.model';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   public byRisk: any[];
   public byCountry: any[];
   public _countries: any;
+  public _lastParticipants: Participant[];
 
   public riskChartOptions: any;
   public countryChartOptions: any;
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit {
     });
     this.loadCountry();
     this.loadTasks();
+    this.loadLastParticipants();
   }
 
   loadRiskChart() {
@@ -143,6 +146,12 @@ export class HomeComponent implements OnInit {
       this.byCountry.forEach(country => {
         this._countries[country.Abbreviation] = country.Value;
       });
+    });
+  }
+
+  loadLastParticipants() {
+    this._partServ.getLastParticipants().subscribe(data => {
+      this._lastParticipants = data;
     });
   }
 }

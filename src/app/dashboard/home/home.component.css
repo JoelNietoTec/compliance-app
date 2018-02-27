@@ -9,3 +9,7 @@ h4.section-title {
   font-size: 1.15rem;
   color: #6c757d !important;
 }
+
+.card-header > .card-title {
+  margin-bottom: 0;
+}

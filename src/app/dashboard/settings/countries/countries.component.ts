@@ -29,6 +29,8 @@ export class CountriesComponent implements OnInit {
 
     this._options.pageable = true;
 
+    this._options.title = 'Países';
+
     this._options.searcheable = true;
 
     this._options.exportToCSV = true;

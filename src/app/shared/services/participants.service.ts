@@ -37,6 +37,10 @@ export class ParticipantsService {
     return this._http.get<Participant>(`${this._partURL}/${_id}`);
   }
 
+  getLastParticipants(): Observable<Participant[]> {
+    return this._http.get<Participant[]>(`${this._partURL}/last`);
+  }
+
   createParticipant(part: Participant): Observable<Participant> {
     const _user = this._auth.getUserInfo(); // get Current User
     part.CreatedBy = _user.ID; // set User ID
