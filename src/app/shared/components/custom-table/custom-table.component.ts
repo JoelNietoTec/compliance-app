@@ -288,6 +288,22 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     return buf;
   }
 
+  getClassRate(value: string, col: Column) {
+    console.log('Hi');
+    if (col.rateField) {
+      switch (value) {
+        case 'Incompleto':
+          return `${col.customClasses} text-secondary`;
+        case 'Bajo':
+          return `${col.customClasses} text-success`;
+        case 'Medio':
+          return `${col.customClasses} text-warning`;
+        case 'Alto':
+          return `${col.customClasses} text-danger`;
+      }
+    }
+  }
+
   itemsToReports(visible?: Boolean): any[] {
     const items = [];
     this._filteredItems.forEach(item => {

@@ -69,7 +69,7 @@
         <ng-container *ngFor="let item of _pagedItems">
           <tr *ngIf="item.ID != _selectedItem.ID" (dblclick)="selectItem(item)">
             <ng-container *ngFor="let col of options.columns">
-              <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="{'text-center': col.type == 'checkbox'}">
+              <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="getClassRate(item.Rate, col)">
                 <ng-container [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
                     {{ item | column: col.name | date: 'mediumDate' }}

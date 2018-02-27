@@ -34,4 +34,6 @@ export interface Column {
   objectText?: string;
   lookup?: boolean;
   lookupValues?: any[];
+  customClasses?: string;
+  rateField?: boolean;
 }

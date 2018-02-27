@@ -69,18 +69,18 @@ export class HomeComponent implements OnInit {
         display: true,
         text: 'Distribución de Riesgo',
         fontFamily: 'Nunito',
-        fontSize: 16
+        fontSize: 14
       },
       legend: {
         position: 'left',
         labels: {
           fontFamily: 'Nunito',
-          boxWidth: 20
+          boxWidth: 15
         }
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 14
+        bodyFontSize: 12
       }
     };
     this.riskColors = [
@@ -96,18 +96,19 @@ export class HomeComponent implements OnInit {
         display: true,
         text: 'Tareas Diarias',
         fontFamily: 'Nunito',
-        fontSize: 16
+        fontSize: 14
       },
       legend: {
         position: 'left',
         labels: {
           fontFamily: 'Nunito',
-          boxWidth: 20
+          boxWidth: 15,
+          fontSize: 12
         }
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 14
+        bodyFontSize: 12
       }
     };
 
