@@ -1,0 +1,50 @@
+<div class="container">
+  <div *ngIf="_profile" class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="h4 card-title">Resumen</div>
+        <div class="row">
+          <div class="col-md-4">
+            <span class="text-primary">
+              Saldo
+            </span>
+            <h5>$ {{ _profile.Total | number: '3.2'}}</h5>
+          </div>
+          <div class="col-md-4">
+            <span class="text-primary">
+              Última modificación
+            </span>
+            <h5>{{ _profile.ModifiedDate | date: 'medium' }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Cuentas</h4>
+        <table class="table table-sm table-squared">
+          <thead>
+            <tr>
+              <th># Cuenta</th>
+              <th>Nombre</th>
+              <th>Tipo Cuenta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="!_profile.Accounts.length">
+              <td [colSpan]="3" class="text-center">
+                Sin cuentas disponibles
+              </td>
+            </tr>
+            <tr *ngFor="let account of _profile.Accounts">
+              <td>{{ account.Code }}</td>
+              <td>{{ account.Name }}</td>
+              <td>{{ account.AccountType.Name }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary pull-right">Agregar Cuenta</button>
+      </div>
+    </div>
+  </div>
+</div>

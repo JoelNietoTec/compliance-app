@@ -28,7 +28,7 @@ ul.sub-items {
 }
 
 .nav-item > .nav-link > .fa-fw {
-  margin: 0 10px;
+  margin: 0 5px 0 0;
 }
 
 .user-name.nav-item > a.nav-link:hover, .user-name > a.nav-item:focus  {

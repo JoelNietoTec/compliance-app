@@ -32,6 +32,8 @@ import { AuthGuard } from './services/auth.guard';
 import { MapsService } from './services/maps.service';
 import { ComparisonsService } from './services/comparisons.service';
 import { RoadmapService } from './services/roadmap.service';
+import { ParticipantProfilesService } from './services/participant-profiles.service';
+import { FilesService } from './services/files.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -53,7 +55,6 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MapComponent } from './components/map/map.component';
-import { FilesService } from './services/files.service';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { FilesService } from './services/files.service';
     RoadmapService,
     NgbActiveModal,
     MapsService,
+    ParticipantProfilesService,
     FilesService,
     AuthGuard,
     DatePipe

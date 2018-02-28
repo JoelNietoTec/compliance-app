@@ -24,6 +24,8 @@ import { ParticipantRelationshipComponent } from './participant-relationship/par
 import { ParticipantRelationshipFormComponent } from './participant-relationship-form/participant-relationship-form.component';
 import { ParticipantTasksComponent } from './participant-tasks/participant-tasks.component';
 import { ParticipantSanctionsComponent } from './participant-sanctions/participant-sanctions.component';
+import { ParticipantProfileComponent } from './participant-profile/participant-profile.component';
+import { ParticipantAccountsComponent } from './participant-accounts/participant-accounts.component';
 
 @NgModule({
   imports: [
@@ -54,7 +56,9 @@ import { ParticipantSanctionsComponent } from './participant-sanctions/participa
     ParticipantDocumentsComponent,
     ParticipantRelationshipFormComponent,
     ParticipantTasksComponent,
-    ParticipantSanctionsComponent
+    ParticipantSanctionsComponent,
+    ParticipantProfileComponent,
+    ParticipantAccountsComponent
   ],
   entryComponents: [
     ParticipantRelationshipComponent

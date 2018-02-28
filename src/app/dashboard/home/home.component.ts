@@ -72,15 +72,11 @@ export class HomeComponent implements OnInit {
         fontSize: 14
       },
       legend: {
-        position: 'left',
-        labels: {
-          fontFamily: 'Nunito',
-          boxWidth: 15
-        }
+        display: false
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 12
+        bodyFontSize: 9
       }
     };
     this.riskColors = [
@@ -103,12 +99,12 @@ export class HomeComponent implements OnInit {
         labels: {
           fontFamily: 'Nunito',
           boxWidth: 15,
-          fontSize: 12
+          fontSize: 9
         }
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 12
+        bodyFontSize: 9
       }
     };
 

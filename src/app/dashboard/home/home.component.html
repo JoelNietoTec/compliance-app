@@ -34,7 +34,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let part of _lastParticipants">
-                <td>
+                <td class="font-weight-bold">
                   <a [routerLink]="['/app','participantes', part.ID]">{{ part.ShortName }}</a>
                 </td>
                 <td>{{ part.CreateDate | date: 'shortDate' }}</td>

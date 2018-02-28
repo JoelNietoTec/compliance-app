@@ -289,7 +289,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   getClassRate(value: string, col: Column) {
-    console.log('Hi');
     if (col.rateField) {
       switch (value) {
         case 'Incompleto':
