@@ -17,11 +17,36 @@
       <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'">
       </app-chart-card>
     </div>
+    <div class="col-md-12">
+      <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
+      <div *ngIf="_addresses" class="card">
+        <div class="card-header">
+          <p class="card-title">
+            <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global
+          </p>
+        </div>
+        <div class="card-body">
+          <agm-map [zoom]="3">
+            <ng-container *ngFor="let address of _addresses">
+              <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
+                <agm-info-window>
+                  <b>{{ address.participant.ShortName }}</b>,
+                  <br> {{ address.formatted_address }}
+                  <br>
+                  <br>
+                  <a [routerLink]="['/app', 'participantes', address.participant.ID]" class="btn btn-outline-primary btn-sm" role="button">Ver Perfil</a>
+                </agm-info-window>
+              </agm-marker>
+            </ng-container>
+          </agm-map>
+        </div>
+      </div>
+    </div>
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">
-            <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</h5>
+          <p class="card-title">
+            <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</p>
         </div>
         <div class="card-body">
           <table class="table table-sm table-striped">
@@ -48,24 +73,15 @@
       </div>
     </div>
     <div class="col-md-8">
-      <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
-      <div *ngIf="_addresses" class="card">
-        <div class="card-body">
-          <h4 class="card-title">
-            <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global</h4>
-          <agm-map [zoom]="2">
-            <ng-container *ngFor="let address of _addresses">
-              <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [title]="address.formatted_address" [latitude]="address.geometry.location.lat"
-                [longitude]="address.geometry.location.lng"></agm-marker>
-            </ng-container>
-          </agm-map>
-        </div>
-      </div>
+
       <app-loading-modal *ngIf="!_countries"></app-loading-modal>
       <div *ngIf="_countries" class="card">
+        <div class="card-header">
+          <p class="card-title">
+            <i class="far fa-flag" aria-hidden="true"></i> Distribución por País
+          </p>
+        </div>
         <div class="card-body">
-          <h4 class="card-title">
-            <i class="far fa-flag" aria-hidden="true"></i> Distribución por País</h4>
           <app-map [regions]="_countries"></app-map>
         </div>
       </div>

@@ -6,6 +6,10 @@ import { MapsService } from '../../shared/services/maps.service';
 import { UtilService } from '../../shared/services/util.service';
 import { Participant } from '../../shared/models/participants.model';
 
+interface Part extends Participant {
+  location?: any;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +20,8 @@ export class HomeComponent implements OnInit {
   public byCountry: any[];
   public _countries: any;
   public _lastParticipants: Participant[];
+  public _participants: Part[];
+  public _mapReady: boolean;
 
   public riskChartOptions: any;
   public countryChartOptions: any;
@@ -24,7 +30,7 @@ export class HomeComponent implements OnInit {
   public _partTasks: any[];
   public riskColors: any[];
   public chartReady: Boolean = false;
-  public _addresses: any[] = [];
+  public _addresses: any[];
 
   constructor(
     private _partServ: ParticipantsService,
@@ -33,15 +39,20 @@ export class HomeComponent implements OnInit {
     private _taskService: TasksService
   ) {
     _partServ.getParticipants().subscribe(participants => {
-      participants.forEach(part => {
-        let location = {};
+      this._addresses = [];
+      this._participants = participants;
+      this._participants.forEach(part => {
+        let location: any = {};
         _map.getPosition(part.Address).subscribe(position => {
           if (position.results[0]) {
             location = position.results[0];
+            location.participant = part;
             this._addresses.push(location);
+            part.location = location;
           }
         });
       });
+      console.log(this._participants);
     });
   }
 
