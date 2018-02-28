@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
           }
         });
       });
-      console.log(this._participants);
     });
   }
 
@@ -77,17 +76,22 @@ export class HomeComponent implements OnInit {
   loadRiskChart() {
     this.riskChartOptions = {
       title: {
-        display: true,
+        display: false,
         text: 'Distribución de Riesgo',
         fontFamily: 'Nunito',
-        fontSize: 14
+        fontSize: 12
       },
       legend: {
-        display: false
+        position: 'left',
+        labels: {
+          fontFamily: 'Nunito',
+          boxWidth: 15,
+          fontSize: 12
+        }
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 9
+        bodyFontSize: 14
       }
     };
     this.riskColors = [
@@ -100,7 +104,7 @@ export class HomeComponent implements OnInit {
   loadTasks() {
     this.tasksChartOptions = {
       title: {
-        display: true,
+        display: false,
         text: 'Tareas Diarias',
         fontFamily: 'Nunito',
         fontSize: 14
@@ -110,12 +114,12 @@ export class HomeComponent implements OnInit {
         labels: {
           fontFamily: 'Nunito',
           boxWidth: 15,
-          fontSize: 9
+          fontSize: 12
         }
       },
       tooltips: {
         bodyFontFamily: 'Nunito',
-        bodyFontSize: 9
+        bodyFontSize: 12
       }
     };
 

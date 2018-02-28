@@ -26,7 +26,7 @@
           </p>
         </div>
         <div class="card-body">
-          <agm-map [zoom]="3">
+          <agm-map [zoom]="2">
             <ng-container *ngFor="let address of _addresses">
               <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
                 <agm-info-window>
