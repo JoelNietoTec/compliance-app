@@ -10,8 +10,16 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
   margin-left: 15px;
 }
 
+.card-header > .card-title {
+  margin-bottom: 0 !important;
+}
+
 .progress {
   background-color: #fff;
+}
+
+.btn:disabled {
+  cursor: not-allowed !important;
 }
 
 .card-header a {

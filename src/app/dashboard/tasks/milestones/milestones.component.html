@@ -63,19 +63,33 @@
     <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
-<button class="btn btn-outline-primary" (click)="open(content)">Nueva Tarea</button>
-<ng-container *ngFor="let milestone of phase.Milestones">
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">{{ milestone.Title }}</h4>
-        <p class="card-text">{{ milestone.Description }}</p>
-        <p class="text-muted">
-          <i class="far fa-calendar-alt fa-fw"></i> {{ milestone.StartDate | date: 'shortDate' }} - {{ milestone.EndDate | date: 'shortDate' }}
-        </p>
-        <p>
-          <i class="far fa-clock   fa-fw"></i> {{ milestone.Recurrence.Name }}</p>
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-outline-primary" (click)="open(content)">
+      <span class="fa-layers fa-fw">
+        <i class="fas fa-thumbtack"></i>
+        <span class="fas fa-certificate" data-fa-transform="shrink-9 up-4.2 right-4"></span>
+      </span>
+      Nueva Tarea
+    </button>
+    <br>
+    <br>
+  </div>
+  <ng-container *ngFor="let milestone of phase.Milestones">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title">{{ milestone.Title }}</p>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ milestone.Description }}</p>
+          <p class="text-muted">
+            <i class="far fa-calendar-alt fa-fw"></i> {{ milestone.StartDate | date: 'shortDate' }} - {{ milestone.EndDate | date: 'shortDate' }}
+          </p>
+          <p>
+            <i class="far fa-clock   fa-fw"></i> {{ milestone.Recurrence.Name }}</p>
+        </div>
       </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
+</div>

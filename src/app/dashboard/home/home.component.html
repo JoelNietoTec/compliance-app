@@ -11,10 +11,11 @@
     </div>
     <div class="col-md-3">
       <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions"
-        [type]="'doughnut'" [colors]="riskColors"></app-chart-card>
+        [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card>
     </div>
     <div class="col-md-3">
-      <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'">
+      <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+        [title]="'Cronograma'">
       </app-chart-card>
     </div>
     <div class="col-md-12">
