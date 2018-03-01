@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbDateParserFormatter, NgbDateStruct, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from '../../../shared/services/util.service';
 import { RoadmapService } from '../../../shared/services/roadmap.service';
 import { Roadmap } from '../../../shared/models/roadmap.model';
 import { ToastsManager } from 'ng2-toastr';
+import { RoadmapsFormComponent } from '../roadmaps-form/roadmaps-form.component';
 
 @Component({
   selector: 'app-roadmap',
@@ -11,6 +12,8 @@ import { ToastsManager } from 'ng2-toastr';
   styleUrls: ['./roadmap.component.css']
 })
 export class RoadmapComponent implements OnInit {
+  @ViewChild(RoadmapsFormComponent) private form: RoadmapsFormComponent;
+
   _roadMaps: Roadmap[];
   _newRoadmap: Roadmap = {};
   _currentRoadMap: Roadmap;
@@ -34,14 +37,26 @@ export class RoadmapComponent implements OnInit {
     });
   }
 
-  open(content) {
-    this.modal.open(content).result.then(
+  // open(content) {
+  //   this.modal.open(content).result.then(
+  //     result => {
+  //       this.createRoadmap();
+  //       this.closeResult = `Close with: ${result}`;
+  //     },
+  //     reason => {
+  //       console.log(`Dismissed ${this.getDismissReason(reason)}`);
+  //     }
+  //   );
+  // }
+
+  open() {
+    const modalRef = this.modal.open(RoadmapsFormComponent);
+    modalRef.result.then(
       result => {
         this.createRoadmap();
-        this.closeResult = `Close with: ${result}`;
       },
-      reason => {
-        console.log(`Dismissed ${this.getDismissReason(reason)}`);
+      dismiss => {
+        this._currentRoadMap = {};
       }
     );
   }

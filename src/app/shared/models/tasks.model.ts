@@ -3,6 +3,7 @@ import { Participant } from './participants.model';
 export interface Task {
   ID?: number;
   CategoryID?: number;
+  ProjectID?: number;
   Title?: string;
   Description?: string;
   CreatedDate?: Date;

@@ -12,22 +12,26 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
   ngAfterViewInit() {
     var regions = this.regions;
 
     $(function() {
-      $('#world-map').vectorMap({
-        map: 'world_mill',
-        series: {
-          regions: [{
-              values: regions,
-              scale: ['#C8EEFF', '#0071A4'],
-              normalizeFunction: 'polynomial'
-            }]
-        },
-        onRegionTipShow: function(e, el, code) {
-          el.html(el.html() + ' (Participantes - ' + regions[code] + ')');
+      $('#vmap').vectorMap({
+        map: 'world_en',
+        hoverOpacity: 0.7,
+        selectedColor: '#666666',
+        enableZoom: true,
+        showTooltip: true,
+        showLabels: true,
+        values: regions,
+        scaleColors: ['#C8EEFF', '#0071A4'],
+        normalizeFunction: 'polynomial',
+        onLabelShow: function(event, label, code) {
+          if (regions[code]) {
+            label.append(': ' + regions[code] + ' participantes');
+          }
         }
       });
     });

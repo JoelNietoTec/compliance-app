@@ -8,7 +8,7 @@
         <option *ngFor="let value of _values" [ngValue]="value">{{ value.DisplayValue }}</option>
       </select>
       <select [ngClass]="{'is-invalid': !_currentValue && !_currentSubValue, 'is-valid': _currentValue || _currentSubValue}" *ngSwitchCase="2" name="" id="" class="form-control custom-select" [(ngModel)]="_currentSubValue" (ngModelChange)="updateParam($event)">
-        <option selected disabled [value]="_default">--- Select one ---</option>
+        <option selected disabled [value]="_default">--- Seleccionar ---</option>
         <optgroup *ngFor="let val of _values" label="{{ val.DisplayValue }}">
           <option *ngFor="let subval of val.ParamSubValues" [ngValue]="subval">{{ subval.DisplayValue }}</option>
         </optgroup>

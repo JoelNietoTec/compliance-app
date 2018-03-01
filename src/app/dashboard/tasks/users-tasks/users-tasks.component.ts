@@ -96,6 +96,8 @@ export class UsersTasksComponent implements OnInit {
   }
 
   addTask() {
+    this._currentTask.CategoryID = 1;
+    this._currentTask.ProjectID = 1;
     this._taskService.createTasks(this._currentTask).subscribe(data => {
       this.toastr.success(data.Title, 'Tarea agregada');
       this._tasks.push(data);
