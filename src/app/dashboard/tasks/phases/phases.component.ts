@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Roadmap, Phase } from '../../../shared/models/roadmap.model';
 import { UtilService } from '../../../shared/services/util.service';
 import { RoadmapService } from '../../../shared/services/roadmap.service';
 import { NgbModal, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr';
+import { PhasesFormComponent } from '../phases-form/phases-form.component';
 
 @Component({
   selector: 'app-phases',
@@ -12,10 +13,13 @@ import { ToastsManager } from 'ng2-toastr';
 })
 export class PhasesComponent implements OnInit {
   @Input() roadmap: Roadmap;
+  @ViewChild(PhasesFormComponent) private form: PhasesFormComponent;
+
   _startDate: NgbDateStruct;
   _endDate: NgbDateStruct;
 
   _newPhase: Phase = {};
+  _currentPhase: Phase = {};
 
   constructor(
     private _util: UtilService,
@@ -25,12 +29,11 @@ export class PhasesComponent implements OnInit {
     private toast: ToastsManager
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   createPhase() {
-    this._newPhase.StartDate = new Date(this.dateFormatter.format(this._startDate));
-    this._newPhase.EndDate = new Date(this.dateFormatter.format(this._endDate));
+    this._newPhase = this._currentPhase;
+    console.log(this._newPhase);
     this.roadmapServ.createPhase(this._newPhase).subscribe(data => {
       this.roadmap.Phases.push(data);
       this.toast.success('Fase creada exitosamente');
@@ -38,7 +41,7 @@ export class PhasesComponent implements OnInit {
     });
   }
 
-  open(content) {
+  dopen(content) {
     this._newPhase.RoadmapID = this.roadmap.ID;
     console.log(this._newPhase);
     this.modal.open(content).result.then(
@@ -47,5 +50,25 @@ export class PhasesComponent implements OnInit {
       },
       reason => {}
     );
+  }
+
+  open() {
+    const modalRef = this.modal.open(PhasesFormComponent);
+    modalRef.result.then(
+      result => {
+        this.save();
+      },
+      dismiss => {
+        this._currentPhase = {};
+      }
+    );
+    modalRef.componentInstance.currentPhase = this._currentPhase;
+  }
+
+  save() {
+    if (!this._currentPhase.ID) {
+      this.createPhase();
+      this._currentPhase = {};
+    }
   }
 }

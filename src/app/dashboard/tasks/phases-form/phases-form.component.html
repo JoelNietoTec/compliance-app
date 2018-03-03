@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title">Nuevo Cronograma</h5>
+  <h4 class="modal-title">Nueva Fase</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,15 +9,20 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="title">Título</label>
-        <input type="text" class="form-control" [(ngModel)]="currentRoadmap.Name" name="title" id="title" placeholder="Título cronograma">
+        <input type="text" class="form-control" name="title" id="title" [(ngModel)]="currentPhase.Title" placeholder="Título Fase">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea class="form-control" name="description" [(ngModel)]="currentPhase.Description" id="description" rows="3"></textarea>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="startdate">Fecha Inicio</label>
         <div class="input-group">
-          <input class="form-control" placeholder="YYYY-MM-DD" name="startdate" [(ngModel)]="_startDate" (ngModelChange)="updateDates()"
-            ngbDatepicker #dp="ngbDatepicker">
+          <input class="form-control" [(ngModel)]="_startDate" placeholder="YYYY-MM-DD" name="startdate" ngbDatepicker #dp="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn btn-default" (click)="dp.toggle()" type="button">
               <i class="far fa-calendar-alt fa-fw"></i>
@@ -30,8 +35,7 @@
       <div class="form-group">
         <label for="enddate">Fecha Final</label>
         <div class="input-group">
-          <input class="form-control" placeholder="YYYY-MM-DD" name="enddate" [(ngModel)]="_endDate" (ngModelChange)="updateDates()"
-            ngbDatepicker #e="ngbDatepicker">
+          <input class="form-control" [(ngModel)]="_endDate" placeholder="YYYY-MM-DD" (ngModelChange)="updateDates()" name="enddate" ngbDatepicker #e="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn btn-default" (click)="e.toggle()" type="button">
               <i class="far fa-calendar-alt fa-fw"></i>
@@ -40,15 +44,10 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="year">Año</label>
-        <input type="text" class="form-control" [(ngModel)]="currentRoadmap.Year" name="year" id="year" placeholder="YYYY">
-      </div>
-    </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button [disabled]="!currentRoadmap.Name || !_endDate || !_startDate" type="button" class="btn btn-primary" (click)="activeModal.close('Save')">
-    <i class="far fa-save fa-fw"></i> Guardar</button>
+  <button [disabled]="!currentPhase.Title || !_startDate || !_endDate" type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">
+    <i class="far fa-save fa-fw"></i> Guardar
+  </button>
 </div>

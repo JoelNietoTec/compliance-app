@@ -15,7 +15,8 @@ export class RoadmapComponent implements OnInit {
   @ViewChild(RoadmapsFormComponent) private form: RoadmapsFormComponent;
 
   _roadMaps: Roadmap[];
-  _newRoadmap: Roadmap = {};
+  _newRoadmap: Roadmap;
+  _selectedRoadmap: Roadmap = {};
   _currentRoadMap: Roadmap;
   _startDate: NgbDateStruct;
   _endDate: NgbDateStruct;
@@ -37,46 +38,41 @@ export class RoadmapComponent implements OnInit {
     });
   }
 
-  // open(content) {
-  //   this.modal.open(content).result.then(
-  //     result => {
-  //       this.createRoadmap();
-  //       this.closeResult = `Close with: ${result}`;
-  //     },
-  //     reason => {
-  //       console.log(`Dismissed ${this.getDismissReason(reason)}`);
-  //     }
-  //   );
-  // }
-
   open() {
     const modalRef = this.modal.open(RoadmapsFormComponent);
     modalRef.result.then(
       result => {
-        this.createRoadmap();
+        this.save();
       },
       dismiss => {
-        this._currentRoadMap = {};
+        this._selectedRoadmap = {};
       }
     );
+    modalRef.componentInstance.currentRoadmap = this._selectedRoadmap;
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking backdrop';
-    } else {
-      return `with: ${reason}`;
+  save() {
+    if (!this._selectedRoadmap.ID) {
+      this.createRoadmap();
     }
+  }
+  selectRoadmap() {
+    this._selectedRoadmap = Object.assign({}, this._selectedRoadmap, this._currentRoadMap);
+    console.log(this._selectedRoadmap);
+    this.open();
   }
 
   createRoadmap() {
-    this._newRoadmap.StartDate = new Date(this.dateFormatter.format(this._startDate));
-    this._newRoadmap.EndDate = new Date(this.dateFormatter.format(this._endDate));
-    this._roadmapServ.createRoadmap(this._newRoadmap).subscribe(data => {
+    this._roadmapServ.createRoadmap(this._selectedRoadmap).subscribe(data => {
       this._roadMaps.push(data);
-      this.toast.success('Cronograma creado exitosamente');
+      this.toast.success('Cronograma creado exitosamente!');
+    });
+  }
+
+  updateRoadmap() {
+    this._roadmapServ.updateRoadmap(this._selectedRoadmap.ID, this._selectedRoadmap).subscribe(data => {
+      this._currentRoadMap = this._selectedRoadmap;
+      this.toast.success('Cronograma editado exitosamente!');
     });
   }
 }

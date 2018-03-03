@@ -1,4 +1,4 @@
-<button class="btn btn-outline-primary" (click)="open(content)">
+<button class="btn btn-outline-primary" (click)="open()">
   <span class="fa-layers fa-fw">
     <i class="fas fa-code-branch"></i>
     <span class="fas fa-certificate" data-fa-transform="shrink-9 up-4.2 right-4"></span>
@@ -19,60 +19,3 @@
     </ngb-panel>
   </ng-container>
 </ngb-accordion>
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Nueva Fase</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="title">Título</label>
-          <input type="text" class="form-control" name="title" id="title" [(ngModel)]="_newPhase.Title" placeholder="Título Fase">
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <textarea class="form-control" name="description" [(ngModel)]="_newPhase.Description" id="description" rows="3"></textarea>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="startdate">Fecha Inicio</label>
-          <div class="input-group">
-            <input class="form-control" [(ngModel)]="_startDate" placeholder="YYYY-MM-DD" [minDate]="roadmap.StartDate" [maxDate]="roadmap.EndDate"
-              name="startdate" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-default" (click)="dp.toggle()" type="button">
-                <i class="far fa-calendar-alt fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="enddate">Fecha Final</label>
-          <div class="input-group">
-            <input class="form-control" [(ngModel)]="_endDate" placeholder="YYYY-MM-DD" [minDate]="roadmap.StartDate" [maxDate]="roadmap.EndDate"
-              name="enddate" ngbDatepicker #e="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-default" (click)="e.toggle()" type="button">
-                <i class="far fa-calendar-alt fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button [disabled]="!_newPhase.Title || !_startDate || !_endDate" type="button" class="btn btn-primary" (click)="c('Close click')">
-      <i class="far fa-save fa-fw"></i> Guardar
-    </button>
-  </div>
-</ng-template>

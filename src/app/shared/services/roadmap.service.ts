@@ -25,6 +25,10 @@ export class RoadmapService {
     return this._http.get<Roadmap[]>(this._roadmapURL);
   }
 
+  updateRoadmap(id: number, roadmap: Roadmap): Observable<Roadmap> {
+    return this._http.put(`${this._roadmapURL}/${id}`, JSON.stringify(roadmap), { headers: this._headers });
+  }
+
   getRoadmap(id: number): Observable<Roadmap> {
     return this._http.get<Roadmap>(`${this._roadmapURL}/${id}`);
   }

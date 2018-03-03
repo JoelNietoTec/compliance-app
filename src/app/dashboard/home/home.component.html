@@ -1,90 +1,88 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
-        [colors]="riskColors">
-      </app-chart-card>
-    </div>
-    <div class="col-md-3">
-      <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
-        [colors]="riskColors"></app-chart-card>
-    </div>
-    <div class="col-md-3">
-      <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions"
-        [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card>
-    </div>
-    <div class="col-md-3">
-      <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
-        [title]="'Cronograma'">
-      </app-chart-card>
-    </div>
-    <div class="col-md-12">
-      <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
-      <div *ngIf="_addresses" class="card">
-        <div class="card-header">
-          <p class="card-title">
-            <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global
-          </p>
-        </div>
-        <div class="card-body">
-          <agm-map [zoom]="2">
-            <ng-container *ngFor="let address of _addresses">
-              <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
-                <agm-info-window>
-                  <b>{{ address.participant.ShortName }}</b>,
-                  <br> {{ address.formatted_address }}
-                  <br>
-                  <br>
-                  <a [routerLink]="['/app', 'participantes', address.participant.ID]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
-                </agm-info-window>
-              </agm-marker>
-            </ng-container>
-          </agm-map>
-        </div>
+<div class="row">
+  <div class="col-md-3">
+    <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
+      [colors]="riskColors">
+    </app-chart-card>
+  </div>
+  <div class="col-md-3">
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+      [colors]="riskColors"></app-chart-card>
+  </div>
+  <div class="col-md-3">
+    <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions"
+      [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card>
+  </div>
+  <div class="col-md-3">
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+      [title]="'Cronograma'">
+    </app-chart-card>
+  </div>
+  <div class="col-md-12">
+    <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
+    <div *ngIf="_addresses" class="card">
+      <div class="card-header">
+        <p class="card-title">
+          <i class="fa fa-globe" aria-hidden="true"></i> Distribución Global
+        </p>
+      </div>
+      <div class="card-body">
+        <agm-map [zoom]="2">
+          <ng-container *ngFor="let address of _addresses">
+            <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
+              <agm-info-window>
+                <b>{{ address.participant.ShortName }}</b>,
+                <br> {{ address.formatted_address }}
+                <br>
+                <br>
+                <a [routerLink]="['/app', 'participantes', address.participant.ID]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
+              </agm-info-window>
+            </agm-marker>
+          </ng-container>
+        </agm-map>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          <p class="card-title">
-            <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</p>
-        </div>
-        <div class="card-body">
-          <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Creado</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let part of _lastParticipants">
-                <td class="font-weight-bold">
-                  <a [routerLink]="['/app','participantes', part.ID]">{{ part.ShortName }}</a>
-                </td>
-                <td>{{ part.CreateDate | date: 'shortDate' }}</td>
-                <td>
-                  <span class="badge" [ngClass]="{'badge-success': part.Rate === 'Bajo', 'badge-warning': part.Rate === 'Medio', 'badge-danger': part.Rate === 'Alto', 'badge-secondary': part.Rate === 'Incompleto' }">{{ part.Rate }}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <p class="card-title">
+          <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</p>
+      </div>
+      <div class="card-body">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Creado</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let part of _lastParticipants">
+              <td class="font-weight-bold">
+                <a [routerLink]="['/app','participantes', part.ID]">{{ part.ShortName }}</a>
+              </td>
+              <td>{{ part.CreateDate | date: 'shortDate' }}</td>
+              <td>
+                <span class="badge" [ngClass]="{'badge-success': part.Rate === 'Bajo', 'badge-warning': part.Rate === 'Medio', 'badge-danger': part.Rate === 'Alto', 'badge-secondary': part.Rate === 'Incompleto' }">{{ part.Rate }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="col-md-8">
+  </div>
+  <div class="col-md-8">
 
-      <app-loading-modal *ngIf="!_countries"></app-loading-modal>
-      <div *ngIf="_countries" class="card">
-        <div class="card-header">
-          <p class="card-title">
-            <i class="far fa-flag" aria-hidden="true"></i> Distribución por País
-          </p>
-        </div>
-        <div class="card-body">
-          <app-map [regions]="_countries"></app-map>
-        </div>
+    <app-loading-modal *ngIf="!_countries"></app-loading-modal>
+    <div *ngIf="_countries" class="card">
+      <div class="card-header">
+        <p class="card-title">
+          <i class="far fa-flag" aria-hidden="true"></i> Distribución por País
+        </p>
+      </div>
+      <div class="card-body">
+        <app-map [regions]="_countries"></app-map>
       </div>
     </div>
   </div>

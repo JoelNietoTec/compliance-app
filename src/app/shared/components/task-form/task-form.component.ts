@@ -41,6 +41,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   save() {
+    console.log('Hi');
     if (!this._task.ID) {
       this._taskService.createTasks(this._task)
         .subscribe(data => {
