@@ -6,49 +6,33 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="text-primary">
               Saldo
             </span>
-            <h5>$ {{ _profile.Total | number: '3.2'}}</h5>
+            <h6>$ {{ _profile.Total | number: '3.2'}}</h6>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="text-primary">
               Última modificación
             </span>
-            <h5>{{ _profile.ModifiedDate | date: 'medium' }}</h5>
+            <h6>{{ _profile.ModifiedDate | date: 'medium' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Tope Ingresos Mes
+            </span>
+            <h6>$ {{ _profile.MonthlyIncomeLimit | number: '3.2' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Tope Egresos Mes
+            </span>
+            <h6>$ {{ _profile.MonthlyExpenseLimit | number: '3.2' }}</h6>
           </div>
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <p class="card-title">Cuentas</p>
-      </div>
-      <div class="card-body">
-        <table class="table table-sm table-squared">
-          <thead>
-            <tr>
-              <th># Cuenta</th>
-              <th>Nombre</th>
-              <th>Tipo Cuenta</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="!_profile.Accounts.length">
-              <td [colSpan]="3" class="text-center">
-                Sin cuentas disponibles
-              </td>
-            </tr>
-            <tr *ngFor="let account of _profile.Accounts">
-              <td>{{ account.Code }}</td>
-              <td>{{ account.Name }}</td>
-              <td>{{ account.AccountType.Name }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button type="button" class="btn btn-primary pull-right">Agregar Cuenta</button>
-      </div>
-    </div>
+    <participant-accounts [profile]="_profile"></participant-accounts>
   </div>
 </div>

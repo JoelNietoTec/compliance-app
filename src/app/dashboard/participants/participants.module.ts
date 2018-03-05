@@ -26,6 +26,8 @@ import { ParticipantTasksComponent } from './participant-tasks/participant-tasks
 import { ParticipantSanctionsComponent } from './participant-sanctions/participant-sanctions.component';
 import { ParticipantProfileComponent } from './participant-profile/participant-profile.component';
 import { ParticipantAccountsComponent } from './participant-accounts/participant-accounts.component';
+import { ParticipantAccountsFormComponent } from './participant-accounts-form/participant-accounts-form.component';
+import { ParticipantTransactionsComponent } from './participant-transactions/participant-transactions.component';
 
 @NgModule({
   imports: [
@@ -58,10 +60,12 @@ import { ParticipantAccountsComponent } from './participant-accounts/participant
     ParticipantTasksComponent,
     ParticipantSanctionsComponent,
     ParticipantProfileComponent,
-    ParticipantAccountsComponent
+    ParticipantAccountsComponent,
+    ParticipantAccountsFormComponent,
+    ParticipantTransactionsComponent
   ],
   entryComponents: [
-    ParticipantRelationshipComponent
+    ParticipantRelationshipComponent, ParticipantAccountsFormComponent
   ]
 })
 export class ParticipantsModule { }

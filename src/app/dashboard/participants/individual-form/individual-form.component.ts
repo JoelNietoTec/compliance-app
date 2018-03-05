@@ -28,12 +28,12 @@ export class IndividualFormComponent implements OnInit {
 
   _individual: Individual;
   private birthdate: string;
-  _genders: Array<Gender>;
+  _genders: Gender[];
   _default: any = undefined;
   _startDate: any;
   _maxDate: any;
   _minDate: any;
-  _countries: Array<Country>;
+  _countries: Country[];
   _location: any;
 
   // mySettings: IMultiSelectSettings = {

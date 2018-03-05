@@ -1,0 +1,3 @@
+<div class="container-fluid" *ngIf="_banks">
+  <app-custom-table [options]="_table" [items]="_banks" (addItem)="addBank($event)"></app-custom-table>
+</div>

@@ -41,17 +41,6 @@ export class PhasesComponent implements OnInit {
     });
   }
 
-  dopen(content) {
-    this._newPhase.RoadmapID = this.roadmap.ID;
-    console.log(this._newPhase);
-    this.modal.open(content).result.then(
-      result => {
-        this.createPhase();
-      },
-      reason => {}
-    );
-  }
-
   open() {
     const modalRef = this.modal.open(PhasesFormComponent);
     modalRef.result.then(

@@ -4,6 +4,8 @@ export interface ParticipantProfile {
   Total?: number;
   ModifiedDate?: Date;
   Accounts?: ProfileAccount[];
+  MonthlyIncomeLimit?: number;
+  MonthlyExpenseLimit?: number;
 }
 
 export interface ProfileAccount {
@@ -13,11 +15,14 @@ export interface ProfileAccount {
   Name?: string;
   AccountTypeID?: number;
   AccountType?: AccountType;
+  Amount?: number;
+  BankID?: number;
+  Bank?: Bank;
 }
 
 export interface AccountType {
   ID?: number;
-  Name?: number;
+  Name?: string;
 }
 
 export interface Transaction {
@@ -31,6 +36,19 @@ export interface Transaction {
 }
 
 export interface TransactionType {
+  ID?: number;
+  Name?: string;
+}
+
+export interface Bank {
+  ID?: number;
+  BankTypeID?: number;
+  BankType?: BankType;
+  Name: string;
+  ShortName: string;
+}
+
+export interface BankType {
   ID?: number;
   Name?: string;
 }

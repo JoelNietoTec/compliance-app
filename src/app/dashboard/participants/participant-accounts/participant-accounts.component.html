@@ -1,3 +1,33 @@
-<p>
-  participant-accounts works!
-</p>
+<div class="card">
+  <div class="card-header">
+    <p class="card-title">Cuentas</p>
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th># Cuenta</th>
+          <th>Nombre</th>
+          <th>Tipo Cuenta</th>
+          <th>Banco</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!profile.Accounts.length">
+          <td [colSpan]="5" class="text-center">
+            Sin cuentas disponibles
+          </td>
+        </tr>
+        <tr *ngFor="let account of profile.Accounts">
+          <td>{{ account.Code }}</td>
+          <td>{{ account.Name }}</td>
+          <td>{{ account.AccountType.Name }}</td>
+          <td>{{ account.Bank.Name }}</td>
+          <td>$ {{ account.Amount | number: '3.2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" (click)="open()" class="btn btn-primary pull-right">Agregar Cuenta</button>
+  </div>
+</div>

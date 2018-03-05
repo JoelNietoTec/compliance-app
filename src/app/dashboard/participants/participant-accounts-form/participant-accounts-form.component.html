@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h5 class="modal-title" *ngIf="!currentAccount.ID">Nueva cuenta</h5>
+  <h5 class="modal-title" *ngIf="currentAccount.ID">Editar cuenta</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <app-loading-modal *ngIf="!_banks"></app-loading-modal>
+  <div class="row" *ngIf="_banks">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="name">Nombre de la cuenta</label>
+        <input type="text" class="form-control" [(ngModel)]="currentAccount.Name" name="name" id="name" placeholder="Nombre de la cuenta">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="code">Código de la cuenta</label>
+        <input type="text" name="code" id="code" class="form-control" [(ngModel)]="currentAccount.Code" placeholder="Código de la cuenta">
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <label for="type">Tipo cuenta</label>
+        <select class="custom-select form-control" [(ngModel)]="currentAccount.AccountTypeID" name="type" id="type">
+          <option selected disabled [value]="undefined">---Seleccionar---</option>
+          <option *ngFor="let type of _types" [value]="type.ID">{{ type.Name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="form-group">
+        <label for="bank">Banco</label>
+        <select class="custom-select form-control" [(ngModel)]="currentAccount.BankID" name="bank" id="bank">
+          <option selected [value]="undefined">---Seleccionar---</option>
+          <option *ngFor="let bank of _banks" [value]="bank.ID">{{ bank.Name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="amount">Saldo</label>
+        <input type="number" name="amount" id="amount" [(ngModel)]="currentAccount.Amount" class="form-control" placeholder="$0,000" >
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="!currentAccount.Name || !currentAccount.AccountTypeID" class="btn btn-primary" (click)="activeModal.close('Close click')">
+    <i class="far fa-save fa-fw"></i> Guardar
+  </button>
+</div>
