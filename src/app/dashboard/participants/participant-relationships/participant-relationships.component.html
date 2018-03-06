@@ -5,10 +5,10 @@
       <app-card>
         <div card-section="body" class="border-primary">
           <h4 class="card-title">
-            <a *ngIf="relation.ParticipantID == participant.ID" [routerLink]="['/dashboard/participantes', relation.RelatedParticipantID]">
+            <a *ngIf="relation.ParticipantID == participant.ID" [routerLink]="['/app', 'participantes', relation.RelatedParticipantID]">
               {{ relation.RelatedParticipant.ShortName }}
             </a>
-            <a *ngIf="relation.RelatedParticipantID == participant.ID" [routerLink]="['/dashboard/participantes', relation.ParticipantID]">
+            <a *ngIf="relation.RelatedParticipantID == participant.ID" [routerLink]="['/app', 'participantes', relation.ParticipantID]">
               {{ relation.Participant.ShortName }}
             </a>
             <small *ngIf="relation.ParticipantID == participant.ID" class="score pull-right" [ngClass]="{
