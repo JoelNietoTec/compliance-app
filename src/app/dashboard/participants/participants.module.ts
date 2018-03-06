@@ -28,15 +28,11 @@ import { ParticipantProfileComponent } from './participant-profile/participant-p
 import { ParticipantAccountsComponent } from './participant-accounts/participant-accounts.component';
 import { ParticipantAccountsFormComponent } from './participant-accounts-form/participant-accounts-form.component';
 import { ParticipantTransactionsComponent } from './participant-transactions/participant-transactions.component';
+import { ParticipantProfileFormComponent } from './participant-profile-form/participant-profile-form.component';
+import { ParticipantTransactionsFormComponent } from './participant-transactions-form/participant-transactions-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ParticipantsRoutingModule,
-    SharedModule
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ParticipantsRoutingModule, SharedModule],
   exports: [],
   declarations: [
     ParticipantsComponent,
@@ -62,10 +58,15 @@ import { ParticipantTransactionsComponent } from './participant-transactions/par
     ParticipantProfileComponent,
     ParticipantAccountsComponent,
     ParticipantAccountsFormComponent,
-    ParticipantTransactionsComponent
+    ParticipantTransactionsComponent,
+    ParticipantProfileFormComponent,
+    ParticipantTransactionsFormComponent
   ],
   entryComponents: [
-    ParticipantRelationshipComponent, ParticipantAccountsFormComponent
+    ParticipantRelationshipComponent,
+    ParticipantAccountsFormComponent,
+    ParticipantProfileFormComponent,
+    ParticipantTransactionsFormComponent
   ]
 })
-export class ParticipantsModule { }
+export class ParticipantsModule {}

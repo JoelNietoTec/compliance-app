@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ParticipantProfile, ProfileAccount } from '../../../shared/models/profiles.model';
 import { ParticipantAccountsFormComponent } from '../participant-accounts-form/participant-accounts-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +13,7 @@ import { ParticipantProfilesService } from '../../../shared/services/participant
 export class ParticipantAccountsComponent implements OnInit {
   @Input() profile: ParticipantProfile;
   @ViewChild(ParticipantAccountsFormComponent) form: ParticipantAccountsFormComponent;
+  @Output() updateProfile = new EventEmitter();
 
   _currentAccount: ProfileAccount = {};
 
@@ -45,6 +46,7 @@ export class ParticipantAccountsComponent implements OnInit {
     this._profilesService.createAccount(this._currentAccount).subscribe(data => {
       this.toast.success('Cuenta agregada exitosamente');
       this.profile.Accounts.push(data);
+      this.updateProfile.emit();
     });
   }
 }

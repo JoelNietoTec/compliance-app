@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h5 class="modal-title">Editar límites mensuales</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="income">Tope Ingresos Mes</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign fa-fw"></i>
+            </span>
+          </div>
+          <input type="text" id="income" name="income" [(ngModel)]="currentProfile.MonthlyIncomeLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+        <small id="helpId" class="form-text text-muted">0 para ilimitado</small>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="income">Tope Egresos Mes</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign fa-fw"></i>
+            </span>
+          </div>
+          <input type="text" id="expense" name="expense" [(ngModel)]="currentProfile.MonthlyExpenseLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+        <small id="helpId" class="form-text text-muted">0 para ilimitado</small>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">
+    <i class="far fa-save   fa-fw"></i> Guardar cambios
+  </button>
+</div>

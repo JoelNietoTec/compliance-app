@@ -28,9 +28,12 @@ export interface AccountType {
 export interface Transaction {
   ID?: number;
   TransactionTypeID?: number;
+  TransactionType?: TransactionType;
+  ParticipantProfileID?: number;
   Title?: string;
   Description?: string;
   AccountID?: number;
+  Account?: ProfileAccount;
   Date?: Date;
   Amount?: number;
 }

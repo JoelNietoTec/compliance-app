@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <p class="card-title">Cuentas</p>
+    <p class="card-title"><i class="fas fa-briefcase fa-fw"></i> Cuentas</p>
   </div>
   <div class="card-body">
     <table class="table table-sm table-striped">
@@ -28,6 +28,11 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" (click)="open()" class="btn btn-primary pull-right">Agregar Cuenta</button>
+    <button type="button" (click)="open()" class="btn btn-primary pull-right">
+      <span class="fa-layers fa-fw">
+        <i class="fas fa-suitcase"></i>
+        <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900">$</span>
+      </span> Agregar
+    </button>
   </div>
 </div>

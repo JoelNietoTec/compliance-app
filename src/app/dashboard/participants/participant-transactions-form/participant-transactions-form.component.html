@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <h5 class="modal-title">Nueva Transacción</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="title">Nombre</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="currentTransaction.Title" id="title" placeholder="Título">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="type">Tipo</label>
+        <select class="custom-select form-control" [(ngModel)]="currentTransaction.TransactionTypeID" name="type" id="type">
+          <option [disabled]="true" [value]="undefined">--Seleccionar--</option>
+          <option *ngFor="let type of _types" [value]="type.ID">{{ type.Name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea class="form-control" [(ngModel)]="currentTransaction.Description" name="description" id="description" rows="2"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="account">Cuenta</label>
+        <select class="custom-select form-control" [(ngModel)]="currentTransaction.AccountID" name="account" id="account">
+          <option selected [value]="undefined">--Seleccionar--</option>
+          <option *ngFor="let acc of _accounts" [value]="acc.ID">{{ acc.Name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="">Monto</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign fa-fw"></i>
+            </span>
+          </div>
+          <input type="number" class="form-control" [(ngModel)]="currentTransaction.Amount" name="amount" id="amount">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="date">Fecha Transacción</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="YYYY-MM-DD" name="date" [(ngModel)]="_date" (ngModelChange)="updateDate()" ngbDatepicker
+            #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-default" (click)="dp.toggle()" type="button">
+              <i class="far fa-calendar-alt fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">
+    <i class="far fa-save   fa-fw"></i> Guardar</button>
+</div>

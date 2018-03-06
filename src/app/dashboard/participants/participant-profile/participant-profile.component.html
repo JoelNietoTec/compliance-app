@@ -1,8 +1,9 @@
 <div class="container">
+  <app-loading-modal *ngIf="!_profile"></app-loading-modal>
   <div *ngIf="_profile" class="container-fluid">
     <div class="card">
       <div class="card-header">
-        <p class="card-title">Resumen</p>
+        <p class="card-title"><i class="far fa-file-alt fa-fw"></i> Resumen</p>
       </div>
       <div class="card-body">
         <div class="row">
@@ -16,7 +17,7 @@
             <span class="text-primary">
               Última modificación
             </span>
-            <h6>{{ _profile.ModifiedDate | date: 'medium' }}</h6>
+            <h6>{{ _profile.ModifiedDate | date: 'short' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
@@ -30,9 +31,14 @@
             </span>
             <h6>$ {{ _profile.MonthlyExpenseLimit | number: '3.2' }}</h6>
           </div>
+          <div class="col-md-12">
+            <button type="button" class="btn btn-primary pull-right" (click)="open()">
+              <i class="fas fa-pencil-alt fa-fw"></i> Editar</button>
+          </div>
         </div>
       </div>
     </div>
-    <participant-accounts [profile]="_profile"></participant-accounts>
+    <participant-accounts [profile]="_profile" (updateProfile)="getProfile()"></participant-accounts>
+    <participant-transactions [profile]="_profile" (updateProfile)="getProfile()"></participant-transactions>
   </div>
 </div>

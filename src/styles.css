@@ -14,6 +14,15 @@ body, button, input, input.form-control, button.form-control, optgroup, select, 
   margin-bottom: 0 !important;
 }
 
+.input-group-prepend {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .input-group-text {
+  border-radius: 0 !important;
+}
+
 .progress {
   background-color: #fff;
 }
@@ -82,7 +91,7 @@ small.text-muted > .typcn {
 .page-item:last-child .page-link, .page-item:first-child .page-link,.input-group-text,
 .nav-pills .nav-link
 {
-  border-radius: .15rem !important;
+  border-radius: .15rem;
 }
 
 .input-group > input {

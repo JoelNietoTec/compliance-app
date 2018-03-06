@@ -41,7 +41,14 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="amount">Saldo</label>
-        <input type="number" name="amount" id="amount" [(ngModel)]="currentAccount.Amount" class="form-control" placeholder="$0,000" >
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign fa-fw"></i>
+            </span>
+          </div>
+          <input type="number" name="amount" id="amount" [(ngModel)]="currentAccount.Amount" class="form-control" placeholder="0.00">
+        </div>
       </div>
     </div>
   </div>
