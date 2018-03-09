@@ -13,6 +13,7 @@
           </div>
         </div>
       </div>
+      <app-loading-modal *ngIf="!_participants"></app-loading-modal>
       <ng-container [ngSwitch]="_view">
         <ng-container *ngSwitchCase="'alpha'">
           <div class="card-columns">

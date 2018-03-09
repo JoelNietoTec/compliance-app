@@ -1,9 +1,10 @@
 <div class="container">
   <app-loading-modal *ngIf="!_profile"></app-loading-modal>
-  <div *ngIf="_profile" class="container-fluid">
+  <div *ngIf="_profile">
     <div class="card">
       <div class="card-header">
-        <p class="card-title"><i class="far fa-file-alt fa-fw"></i> Resumen</p>
+        <p class="card-title">
+          <i class="far fa-file-alt fa-fw"></i> Resumen</p>
       </div>
       <div class="card-body">
         <div class="row">
@@ -30,6 +31,47 @@
               Tope Egresos Mes
             </span>
             <h6>$ {{ _profile.MonthlyExpenseLimit | number: '3.2' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Ingresos Año
+            </span>
+            <h6>$ {{ _profile.IncomeYTD | number: '3.2' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Egresos Año
+            </span>
+            <h6>$ {{ _profile.ExpenseYTD | number: '3.2' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Ingresos Mes
+            </span>
+            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.IncomeMTD >= _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0, 'text-success':  _profile.IncomeMTD < _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0 }">
+              $ {{ _profile.IncomeMTD | number: '3.2' }}
+              <span *ngIf=" _profile.IncomeMTD > _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0" class="pull-right">
+                <i class="fas fa-exclamation-circle"></i>
+              </span>
+              <span *ngIf=" _profile.IncomeMTD < _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0" class="pull-right">
+                <i class="fas fa-check-circle"></i>
+              </span>
+            </h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Egresos Mes
+            </span>
+            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.ExpenseMTD >= _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0, 'text-success': _profile.ExpenseMTD
+            < _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit> 0 }">
+              $ {{ _profile.ExpenseMTD | number: '3.2' }}
+              <span *ngIf=" _profile.ExpenseMTD > _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0" class="pull-right">
+                <i class="fas fa-exclamation-circle"></i>
+              </span>
+              <span *ngIf=" _profile.ExpenseMTD < _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0" class="pull-right">
+                <i class="fas fa-check-circle"></i>
+              </span>
+            </h6>
           </div>
           <div class="col-md-12">
             <button type="button" class="btn btn-primary pull-right" (click)="open()">

@@ -6,6 +6,10 @@ export interface ParticipantProfile {
   Accounts?: ProfileAccount[];
   MonthlyIncomeLimit?: number;
   MonthlyExpenseLimit?: number;
+  IncomeYTD?: number;
+  IncomeMTD?: number;
+  ExpenseYTD?: number;
+  ExpenseMTD?: number;
 }
 
 export interface ProfileAccount {

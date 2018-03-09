@@ -16,6 +16,7 @@ export class ParticipantProfileComponent implements OnInit {
   @ViewChild(ParticipantProfileFormComponent) form: ParticipantProfileFormComponent;
 
   _profile: ParticipantProfile;
+  _updatedProfile: ParticipantProfile;
 
   constructor(private _profileServ: ParticipantProfilesService, public modal: NgbModal, private toast: ToastsManager) {}
 
@@ -25,10 +26,15 @@ export class ParticipantProfileComponent implements OnInit {
 
   open() {
     const modalRef = this.modal.open(ParticipantProfileFormComponent);
-    modalRef.result.then(result => {
-      this.updateProfile();
-    });
-    modalRef.componentInstance.currentProfile = this._profile;
+    modalRef.result.then(
+      result => {
+        this.updateProfile();
+      },
+      dismiss => {}
+    );
+    this._updatedProfile = Object.assign({}, this._updatedProfile, this._profile);
+
+    modalRef.componentInstance.currentProfile = this._updatedProfile;
   }
 
   getProfile() {
@@ -39,10 +45,13 @@ export class ParticipantProfileComponent implements OnInit {
 
   updateProfile() {
     let profile: ParticipantProfile;
-    profile = Object.assign({}, profile, this._profile);
+    profile = Object.assign({}, profile, this._updatedProfile);
+    console.log(profile);
     profile.Accounts = [];
     this._profileServ.updateProfile(profile.ID, profile).subscribe(data => {
       this.toast.success('Perfil actualizado');
+      profile.Accounts = this._profile.Accounts;
+      this._profile = profile;
     });
   }
 }

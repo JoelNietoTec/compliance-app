@@ -12,9 +12,9 @@
     <ngb-tabset type="tabs" [justify]="'center'">
       <ngb-tab>
         <ng-template ngbTabTitle>
-          <i class="far fa-address-card"></i> Info</ng-template>
+          <i class="far fa-address-card fa-fw"></i> Info</ng-template>
         <ng-template ngbTabContent>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="far fa-address-card"></i>
             <ng-container>
               <span *ngIf="individual.ParticipantTypeID==1"> Documento de Identidad</span>
@@ -22,44 +22,44 @@
             </ng-container>
           </small>
           <h6 class="participant-info">{{ individual.Code }}</h6>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="far fa-envelope-open"></i> Email
           </small>
           <h6 class="participant-info">{{ individual.Email }}</h6>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="fas fa-phone"></i> Número Telefónico
           </small>
           <h6 class="participant-info">{{ individual.Phone }}</h6>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="fas fa-mobile"></i> Teléfono Celular
           </small>
           <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
             <i class="fas fa-birthday-cake"></i> Fecha de nacimiento (edad)
           </small>
           <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}
             <em>({{ individual.Age }})</em>
           </h6>
-          <small *ngIf="individual.ParticipantTypeID == 2" class="text-muted">
+          <small *ngIf="individual.ParticipantTypeID == 2" class="text-primary font-weight-bold">
             <i class="far fa-building"></i> Fecha de constitución
           </small>
           <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-muted">
+          <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
             <i class="fas fa-venus-mars"></i> Género
           </small>
           <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.Gender.Name }}</h6>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="fas fa-globe"></i> Sitio Web
           </small>
           <h6 class="participant-info">{{ individual.WebSite }}</h6>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="fas fa-map-marker"></i> Dirección
           </small>
           <h6 class="participant-info">{{ individual.Address }}</h6>
           <agm-map *ngIf="position" [latitude]="position.lat" [longitude]="position.lng" [zoom]=15>
             <agm-marker [latitude]="position.lat" [longitude]="position.lng"></agm-marker>
           </agm-map>
-          <small class="text-muted">
+          <small class="text-primary font-weight-bold">
             <i class="fas fa-user-plus"></i> Creado por
           </small>
           <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
@@ -67,15 +67,15 @@
       </ngb-tab>
       <ngb-tab>
         <ng-template ngbTabTitle>
-          <i class="far fa-edit"></i> Tareas</ng-template>
+          <i class="far fa-edit fa-fw"></i> Tareas</ng-template>
         <ng-template ngbTabContent>
           <participant-tasks [participant]="individual"></participant-tasks>
         </ng-template>
       </ngb-tab>
       <ngb-tab>
         <ng-template ngbTabTitle>
-          <i class="fas fa-user-secret" aria-hidden="true"></i>
-          Sanciones
+          <i class="fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>
+          Alertas
         </ng-template>
         <ng-template ngbTabContent>
           <participant-sanctions [participantID]="individual.ID"></participant-sanctions>
