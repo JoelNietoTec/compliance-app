@@ -5,7 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { SanctionsService } from '../../../shared/services/sanctions.service';
 import { ComparisonsService } from '../../../shared/services/comparisons.service';
 import { Comparison, Match } from '../../../shared/models/sanctions.model';
-import {UtilService} from '../../../shared/services/util.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 import * as XLSX from 'xlsx';
 
@@ -37,8 +37,7 @@ export class FilesComponent implements OnInit {
     private _util: UtilService
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onFileChange(evt: any) {
     const target: DataTransfer = <DataTransfer>evt.target;
@@ -111,10 +110,7 @@ export class FilesComponent implements OnInit {
   }
 
   getMatches(comparisonID: number) {
-    this._compService.getMatchesbyComparison(comparisonID)
-    .subscribe(data => {
-
-    });
+    this._compService.getMatchesbyComparison(comparisonID).subscribe(data => {});
   }
 
   runDiscard() {
@@ -130,8 +126,12 @@ export class FilesComponent implements OnInit {
     });
     this._compService.runComparison(this._comparison.ID, this._selectedItems, this.selectedCols).then(matches => {
       this._matches = matches;
-      this.saveMatches(this._matches.shift());
-      this.toastr.success(`${matches.length} concurrencias`, 'Comparación ejecutada');
+      if (this._matches.length > 0) {
+        this.saveMatches(this._matches.shift());
+        this.toastr.success(`${matches.length} coincidencias`, 'Comparación ejecutada');
+      } else {
+        this.toastr.success('0 coincidencias', 'Comparación ejecutada');
+      }
     });
   }
 
