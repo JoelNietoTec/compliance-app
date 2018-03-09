@@ -28,6 +28,7 @@ export class FilesComponent implements OnInit {
   _filename: string;
   _comparison: Comparison;
   _matches: any[];
+  _searching: Boolean = false;
 
   constructor(
     private toastr: ToastsManager,
@@ -61,7 +62,7 @@ export class FilesComponent implements OnInit {
         item.index = index;
         this.columns.push(item);
       });
-      this.toastr.success(`Archivo ${this._filename} cargado exitosamente!`);
+      this.toastr.info(`Archivo ${this._filename} cargado exitosamente!`);
     };
     reader.readAsBinaryString(target.files[0]);
   }
@@ -103,6 +104,7 @@ export class FilesComponent implements OnInit {
   }
 
   prepareDiscard() {
+    this._searching = true;
     this._compService.addComparison(this._filename).subscribe(data => {
       this._comparison = data;
       this.runDiscard();
@@ -129,8 +131,10 @@ export class FilesComponent implements OnInit {
       if (this._matches.length > 0) {
         this.saveMatches(this._matches.shift());
         this.toastr.success(`${matches.length} coincidencias`, 'Comparación ejecutada');
+        this._searching = false;
       } else {
         this.toastr.success('0 coincidencias', 'Comparación ejecutada');
+        this._searching = false;
       }
     });
   }

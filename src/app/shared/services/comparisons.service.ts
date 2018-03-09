@@ -7,6 +7,7 @@ import { ConnectionService } from './connection.service';
 import { Match, Comparison } from '../models/sanctions.model';
 import { Participant } from '../models/participants.model';
 import { ParticipantsService } from './participants.service';
+import { UtilService } from './util.service';
 
 @Injectable()
 export class ComparisonsService {
@@ -15,7 +16,12 @@ export class ComparisonsService {
   private _comparisonURL: string;
   private _participantURL: string;
 
-  constructor(private _http: HttpClient, private _conn: ConnectionService, private _partService: ParticipantsService) {
+  constructor(
+    private _http: HttpClient,
+    private _conn: ConnectionService,
+    private _partService: ParticipantsService,
+    private _util: UtilService
+  ) {
     this._comparisonURL = _conn.APIUrl + 'comparisons';
     this._matchesURL = _conn.APIUrl + 'matches';
     this._participantURL = _conn.APIUrl + 'participants';
@@ -58,12 +64,14 @@ export class ComparisonsService {
             let count = 0;
             const match = row;
             columns.forEach(field => {
-              const terms = row[field.name].toLocaleLowerCase().split(' ');
-              terms.forEach(term => {
-                if (partTerm.indexOf(term) >= 0 && term.length > 4) {
-                  count = count + 1;
-                }
-              });
+              if (row[field.name]) {
+                const terms = row[field.name].toLocaleLowerCase().split(' ');
+                terms.forEach(term => {
+                  if (partTerm.indexOf(term) >= 0 && term.length > 4) {
+                    count = count + 1;
+                  }
+                });
+              }
             });
             if (count > 1) {
               const val: any = {};
