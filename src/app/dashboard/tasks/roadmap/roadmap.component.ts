@@ -58,7 +58,6 @@ export class RoadmapComponent implements OnInit {
   }
   selectRoadmap() {
     this._selectedRoadmap = Object.assign({}, this._selectedRoadmap, this._currentRoadMap);
-    console.log(this._selectedRoadmap);
     this.open();
   }
 

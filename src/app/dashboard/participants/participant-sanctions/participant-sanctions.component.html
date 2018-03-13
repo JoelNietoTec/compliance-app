@@ -3,3 +3,30 @@
     <small class="pull-right text-muted">{{ match.Comparison.Date | date: 'mediumDate'}}</small>
   </h6>
 </ng-container>
+<ng-container *ngIf="_alerts">
+  <ng-container *ngFor="let alert of _alerts">
+    <div *ngIf="!alert.Discard" class="card">
+      <div class="card-body">
+        <h6 class="card-title">
+          <i class="fas fa-exclamation-circle text-danger fa-fw"></i>
+          {{ alert.Description }}
+        </h6>
+        <small class="card-text text-muted pull-right">{{ alert.Date | date: 'd/M/yy, h:mm a'}}</small>
+        <button type="button" class="btn btn-primary btn-sm" (click)="selectAlert(alert)">Descartar</button>
+      </div>
+    </div>
+  </ng-container>
+  <p class="text-muted" (click)="toogleShow()">
+    MOSTRAR DESCARTADAS <i class="fas fa-chevron-down"></i>
+  </p>
+  <ng-container *ngFor="let alert of _alerts">
+
+    <ngb-alert *ngIf="alert.Discard && _showDiscarded" type="dark" [dismissible]="false">
+      <strong>{{ alert.Name }}</strong>
+      <span class="pull-right">{{ alert.Date | date: 'd/M/yy, h:mm a'}}</span>
+      <span  ngbTooltip="{{ alert.Clarification }}">
+        <i class="fas fa-exclamation-circle "></i>
+      </span>
+    </ngb-alert>
+  </ng-container>
+</ng-container>

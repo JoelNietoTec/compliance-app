@@ -20,7 +20,7 @@
           <td>{{ tran.Title }}</td>
           <td>{{ tran.Description }}</td>
           <td>{{ tran.Account.Name }}</td>
-          <td>{{ tran.Date | date: 'shortDate' }}</td>
+          <td>{{ tran.Date | date: 'medium' }}</td>
           <td>${{ tran.Amount | number: '3.2' }}</td>
         </tr>
       </tbody>

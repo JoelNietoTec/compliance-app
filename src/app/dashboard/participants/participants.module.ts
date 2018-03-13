@@ -30,6 +30,7 @@ import { ParticipantAccountsFormComponent } from './participant-accounts-form/pa
 import { ParticipantTransactionsComponent } from './participant-transactions/participant-transactions.component';
 import { ParticipantProfileFormComponent } from './participant-profile-form/participant-profile-form.component';
 import { ParticipantTransactionsFormComponent } from './participant-transactions-form/participant-transactions-form.component';
+import { ParticipantAlertsComponent } from './participant-alerts/participant-alerts.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ParticipantsRoutingModule, SharedModule],
@@ -60,13 +61,15 @@ import { ParticipantTransactionsFormComponent } from './participant-transactions
     ParticipantAccountsFormComponent,
     ParticipantTransactionsComponent,
     ParticipantProfileFormComponent,
-    ParticipantTransactionsFormComponent
+    ParticipantTransactionsFormComponent,
+    ParticipantAlertsComponent
   ],
   entryComponents: [
     ParticipantRelationshipComponent,
     ParticipantAccountsFormComponent,
     ParticipantProfileFormComponent,
-    ParticipantTransactionsFormComponent
+    ParticipantTransactionsFormComponent,
+    ParticipantAlertsComponent
   ]
 })
 export class ParticipantsModule {}

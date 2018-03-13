@@ -23,6 +23,14 @@
           </small>
           <h6 class="participant-info">{{ individual.Code }}</h6>
           <small class="text-primary font-weight-bold">
+            <i class="far fa-flag"></i>
+            <ng-container>
+              <span *ngIf="individual.ParticipantTypeID==1"> País de Origen</span>
+              <span *ngIf="individual.ParticipantTypeID==2"> País de Constitución</span>
+            </ng-container>
+          </small>
+          <h6 class="participant-info">{{ individual.Country.Name }}</h6>
+          <small class="text-primary font-weight-bold">
             <i class="far fa-envelope-open"></i> Email
           </small>
           <h6 class="participant-info">{{ individual.Email }}</h6>

@@ -35,6 +35,7 @@ import { RoadmapService } from './services/roadmap.service';
 import { ParticipantProfilesService } from './services/participant-profiles.service';
 import { FilesService } from './services/files.service';
 import { BanksService } from './services/banks.service';
+import { ParticipantAlertsService } from './services/participant-alerts.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -56,8 +57,6 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MapComponent } from './components/map/map.component';
-
-
 
 @NgModule({
   imports: [
@@ -121,6 +120,7 @@ import { MapComponent } from './components/map/map.component';
     ParticipantProfilesService,
     FilesService,
     BanksService,
+    ParticipantAlertsService,
     AuthGuard,
     DatePipe
   ],

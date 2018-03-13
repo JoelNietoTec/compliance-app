@@ -1,6 +1,7 @@
 <h3>Matrices de Riesgo</h3>
 <div class="row">
   <div class="col-md-12">
+    <app-loading-modal *ngIf="!_matrices"></app-loading-modal>
     <div class="card" *ngIf="_matrices">
       <div class="card-body">
         <app-custom-table [options]="_table" [items]="_matrices" (addItem)="createMatrix($event)" (editItem)="updateMatrix($event)"></app-custom-table>
