@@ -64,7 +64,9 @@ export class ParticipantProfileComponent implements OnInit {
           alert.AlertTypeID = 2;
           alert.Name = 'Sobrepaso egresos';
           alert.Description = 'Sobrepasó límite de egresos mensuales';
-          this._alertServ.createAlert(alert).subscribe(datad => {});
+          this._alertServ.createAlert(alert).subscribe(datad => {
+            this.toast.error(alert.Description);
+          });
         }
         if (
           this._profile.IncomeMTD > this._profile.MonthlyIncomeLimit &&
@@ -77,7 +79,9 @@ export class ParticipantProfileComponent implements OnInit {
           alert.AlertTypeID = 2;
           alert.Name = 'Sobrepaso ingresos';
           alert.Description = 'Sobrepasó límite de ingresos mensuales';
-          this._alertServ.createAlert(alert).subscribe(datad => {});
+          this._alertServ.createAlert(alert).subscribe(datad => {
+            this.toast.error(alert.Description);
+          });
         }
       }
     });

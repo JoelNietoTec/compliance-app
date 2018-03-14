@@ -32,7 +32,7 @@ export class ParticipantSanctionsComponent implements OnInit {
 
   ngOnInit() {
     this._alertService.getAlertsByParticipant(this.participantID).subscribe(data => {
-      this._alerts = data;
+      this._alerts = this._util.sortBy(data, 'Date', true);
     });
     this._compServ.getMatchesByParticipant(this.participantID).subscribe(data => {
       this._matches = data;

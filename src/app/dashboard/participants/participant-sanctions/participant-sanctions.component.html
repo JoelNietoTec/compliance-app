@@ -3,6 +3,7 @@
     <small class="pull-right text-muted">{{ match.Comparison.Date | date: 'mediumDate'}}</small>
   </h6>
 </ng-container>
+<app-loading-modal *ngIf="!_alerts"></app-loading-modal>
 <ng-container *ngIf="_alerts">
   <ng-container *ngFor="let alert of _alerts">
     <div *ngIf="!alert.Discard" class="card">
@@ -20,7 +21,6 @@
     MOSTRAR DESCARTADAS <i class="fas fa-chevron-down"></i>
   </p>
   <ng-container *ngFor="let alert of _alerts">
-
     <ngb-alert *ngIf="alert.Discard && _showDiscarded" type="dark" [dismissible]="false">
       <strong>{{ alert.Name }}</strong>
       <span class="pull-right">{{ alert.Date | date: 'd/M/yy, h:mm a'}}</span>
