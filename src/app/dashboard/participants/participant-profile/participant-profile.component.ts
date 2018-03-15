@@ -28,7 +28,6 @@ export class ParticipantProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(new Date().toLocaleString());
     this.getProfile();
   }
 
@@ -58,13 +57,14 @@ export class ParticipantProfileComponent implements OnInit {
           this._profile.MonthlyExpenseLimit > 0 &&
           profile.ExpenseMTD < this._profile.ExpenseMTD
         ) {
-          let alert: ParticipantAlert = {};
+          const alert: ParticipantAlert = {};
           alert.Date = new Date();
           alert.ParticipantID = this._profile.ParticipantID;
           alert.AlertTypeID = 2;
           alert.Name = 'Sobrepaso egresos';
           alert.Description = 'Sobrepasó límite de egresos mensuales';
           this._alertServ.createAlert(alert).subscribe(datad => {
+            this._alertServ.updateLastAlerts();
             this.toast.error(alert.Description);
           });
         }
@@ -73,7 +73,7 @@ export class ParticipantProfileComponent implements OnInit {
           this._profile.MonthlyIncomeLimit > 0 &&
           profile.IncomeMTD < this._profile.IncomeMTD
         ) {
-          let alert: ParticipantAlert = {};
+          const alert: ParticipantAlert = {};
           alert.Date = new Date();
           alert.ParticipantID = this._profile.ParticipantID;
           alert.AlertTypeID = 2;
@@ -96,12 +96,6 @@ export class ParticipantProfileComponent implements OnInit {
       this.toast.success('Perfil actualizado');
       profile.Accounts = this._profile.Accounts;
       this._profile = profile;
-      if (
-        (this._profile.ExpenseMTD > this._profile.MonthlyExpenseLimit && this._profile.MonthlyExpenseLimit > 0) ||
-        (this._profile.IncomeMTD > this._profile.MonthlyIncomeLimit && this._profile.MonthlyIncomeLimit > 0)
-      ) {
-        this.toast.error('Limite mensual excedido, favor revisar!');
-      }
     });
   }
 }

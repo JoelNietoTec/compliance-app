@@ -12,7 +12,7 @@
           <i class="fas fa-exclamation-circle text-danger fa-fw"></i>
           {{ alert.Description }}
         </h6>
-        <small class="card-text text-muted pull-right">{{ alert.Date | date: 'd/M/yy, h:mm a'}}</small>
+        <span class="card-text text-muted pull-right">{{ alert.Date | date: 'd/M/yy, h:mm a'}}</span>
         <button type="button" class="btn btn-primary btn-sm" (click)="selectAlert(alert)">Descartar</button>
       </div>
     </div>

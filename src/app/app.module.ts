@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 import localeEs from '@angular/common/locales/es-MX';
 
 registerLocaleData(localeEs);
@@ -45,7 +46,8 @@ import { AppRoutingModule } from './app-routing.module';
     CalendarModule.forRoot(),
     ToastModule.forRoot(),
     ReactiveFormsModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    AsyncLocalStorageModule
   ],
   providers: [
     {

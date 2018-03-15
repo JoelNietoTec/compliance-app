@@ -5,6 +5,8 @@ import { UtilService } from '../../../shared/services/util.service';
 import { ComparisonsService } from '../../../shared/services/comparisons.service';
 import { Comparison, Match } from '../../../shared/models/sanctions.model';
 import { Column, TableOptions } from '../../../shared/components/custom-table/custom-table.options';
+import { ParticipantAlertsService } from '../../../shared/services/participant-alerts.service';
+import { ParticipantAlert } from '../../../shared/models/alerts.model';
 
 @Component({
   selector: 'files-matches',
@@ -13,11 +15,16 @@ import { Column, TableOptions } from '../../../shared/components/custom-table/cu
 })
 export class FilesMatchesComponent implements OnInit {
   _comparisons: Comparison[];
-  _currentComparisonID: number;
+  _currentComparison: Comparison;
   _matches: Match[];
   _table: TableOptions = {};
 
-  constructor(private _util: UtilService, private _compService: ComparisonsService, private toastr: ToastsManager) {}
+  constructor(
+    private _util: UtilService,
+    private _compService: ComparisonsService,
+    private _alertService: ParticipantAlertsService,
+    private toastr: ToastsManager
+  ) {}
 
   ngOnInit() {
     this._compService.getComparisons().subscribe(data => {
@@ -47,7 +54,7 @@ export class FilesMatchesComponent implements OnInit {
 
   getMatches() {
     this._matches = [];
-    this._compService.getMatchesbyComparison(this._currentComparisonID).subscribe(data => {
+    this._compService.getMatchesbyComparison(this._currentComparison.ID).subscribe(data => {
       data.forEach(element => {
         element.Confirmed = null;
       });
@@ -59,7 +66,15 @@ export class FilesMatchesComponent implements OnInit {
   confirmMatch(match: Match) {
     this._compService.updateMatch(match.ID, match).subscribe(data => {
       if (match.Confirmed) {
-        this.toastr.success(match.Participant.FullName, 'Coincidencia confirmada');
+        let alert: ParticipantAlert = {};
+        alert.AlertTypeID = 1;
+        alert.Date = new Date();
+        alert.Name = 'Coincidencia confirmada';
+        alert.ParticipantID = match.Participant.ID;
+        alert.Description = `Coincidencia confirmada contra archivo ${this._currentComparison.File}`;
+        this._alertService.createAlert(alert).subscribe(datad => {
+          this.toastr.success(match.Participant.FullName, 'Coincidencia confirmada');
+        });
       } else {
         this.toastr.success(match.Participant.FullName, 'Coincidencia descartada');
       }

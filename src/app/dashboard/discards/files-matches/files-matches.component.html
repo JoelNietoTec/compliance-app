@@ -2,15 +2,15 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <select class="form-control custom-select" [(ngModel)]="_currentComparisonID" (ngModelChange)="getMatches()" name="discard"
+        <select class="form-control custom-select" [(ngModel)]="_currentComparison" (ngModelChange)="getMatches()" name="discard"
           id="discard">
-          <option selected disabled [value]="undefined">--- Seleccionar descarte ---</option>
-          <option *ngFor="let discard of _comparisons" [value]="discard.ID">
+          <option selected disabled [ngValue]="undefined">--- Seleccionar descarte ---</option>
+          <option *ngFor="let discard of _comparisons" [ngValue]="discard">
             {{ discard.File }} | {{ discard.Date | date: 'short' }}
           </option>
         </select>
       </div>
     </div>
   </div>
-  <app-custom-table *ngIf="_currentComparisonID" [options]="_table" [items]="_matches" (editItem)="confirmMatch($event)"></app-custom-table>
+  <app-custom-table *ngIf="_currentComparison" [options]="_table" [items]="_matches" (editItem)="confirmMatch($event)"></app-custom-table>
 </div>
