@@ -39,6 +39,7 @@ export class ParticipantAlertsService {
 
   initAlerts() {
     this.getAlerts().subscribe(data => {
+      console.log(data);
       this.localStorage.setItem('alerts', data).subscribe(() => {});
     });
   }
