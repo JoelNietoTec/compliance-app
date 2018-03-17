@@ -58,7 +58,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal, private datePipe: DatePipe) {}
 
   ngOnInit() {
-    this.initTable();
+    // this.initTable();
   }
 
   // Dispara el evento cuando los items están aún cargados
@@ -66,8 +66,8 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     if (model.items) {
       if (this.items) {
         this.initTable();
-        this._filteredItems = this.items;
-        this.filterItems();
+        // this._filteredItems = this.items;
+        // this.filterItems();
       }
     }
   }
@@ -131,7 +131,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
         this._filteredItems = this.items;
         this.filterItems();
       } else {
-        this._filteredItems = this.items;
+        // this._filteredItems = this.items;
         this._itemsCount = this._filteredItems.length;
       }
     }

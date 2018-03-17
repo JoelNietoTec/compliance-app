@@ -14,6 +14,7 @@ export interface TableOptions {
   lookup?: boolean;
   exportToCSV?: boolean;
   reportsOnly?: boolean;
+  showTitle?: boolean;
 }
 
 export interface Column {

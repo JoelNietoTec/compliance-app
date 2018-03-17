@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ReportsParticipantsComponent } from './reports-participants/reports-participants.component';
 import { ReportsIndividualsComponent } from './reports-individuals/reports-individuals.component';
 import { ReportsEntitiesComponent } from './reports-entities/reports-entities.component';
+import { ReportsAlertsComponent } from './reports-alerts/reports-alerts.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { ReportsEntitiesComponent } from './reports-entities/reports-entities.co
     ReportsRoutingModule,
     SharedModule
   ],
-  declarations: [ReportsComponent, ReportsHomeComponent, ReportsParticipantsComponent, ReportsIndividualsComponent, ReportsEntitiesComponent]
+  declarations: [ReportsComponent, ReportsHomeComponent, ReportsParticipantsComponent, ReportsIndividualsComponent, ReportsEntitiesComponent, ReportsAlertsComponent]
 })
 export class ReportsModule { }

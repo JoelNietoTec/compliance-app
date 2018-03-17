@@ -1,12 +1,18 @@
-<ngb-tabset type="pills" justify="center">
-  <ngb-tab title="Individuos">
-    <ng-template ngbTabContent>
-     <reports-individuals></reports-individuals>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="Entidades">
-    <ng-template ngbTabContent>
-      <reports-entities></reports-entities>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+<div class="card">
+  <ngb-tabset type="tabs">
+    <ngb-tab title="Individuos">
+      <ng-template ngbTabContent>
+        <div class="container-fluid">
+          <reports-individuals></reports-individuals>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Entidades">
+      <ng-template ngbTabContent>
+        <div class="container-fluid">
+          <reports-entities></reports-entities>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

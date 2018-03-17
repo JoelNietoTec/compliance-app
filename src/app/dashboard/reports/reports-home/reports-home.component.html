@@ -1,20 +1,11 @@
-<h5>Reportes</h5>
-<ngb-tabset type="tabs">
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <i class="fas fa-users   fa-fw"></i> Participantes
-    </ng-template>
-    <ng-template ngbTabContent>
-      <div class="card">
-        <div class="card-body">
-          <reports-participants></reports-participants>
-        </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="list-group">
+        <a [routerLink]="['participantes']" class="list-group-item list-group-item-action"><i class="fas fa-users fa-fw"></i> Participantes</a>
+        <a [routerLink]="['alertas']" class="list-group-item list-group-item-action"><i class="fas fa-exclamation-circle fa-fw"></i> Alertas</a>
+        <a href="#" class="list-group-item list-group-item-action disabled">Disabled item</a>
       </div>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="Title2">
-    <ng-template ngbTabContent>
-      <p>Content 2</p>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+    </div>
+  </div>
+</div>

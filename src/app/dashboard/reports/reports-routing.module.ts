@@ -3,12 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ReportsComponent } from './reports.component';
 import { ReportsHomeComponent } from './reports-home/reports-home.component';
+import { ReportsParticipantsComponent } from './reports-participants/reports-participants.component';
+import { ReportsAlertsComponent } from './reports-alerts/reports-alerts.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ReportsComponent,
-    children: [{ path: '', component: ReportsHomeComponent }]
+    children: [
+      { path: '', component: ReportsHomeComponent },
+      { path: 'participantes', component: ReportsParticipantsComponent },
+      { path: 'alertas', component: ReportsAlertsComponent }
+    ]
   }
 ];
 
