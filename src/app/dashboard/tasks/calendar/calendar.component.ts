@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarDateFormatter, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { CustomDateFormatter } from '../../../shared/pipes/custom-date-formatter.provider';
 import { TasksService } from '../../../shared/services/tasks.service';
+import { TaskFormComponent } from '../../../shared/components/task-form/task-form.component';
+import { Task } from '../../../shared/models/tasks.model';
 
 const colors: any = {
   red: {
@@ -21,6 +23,12 @@ const colors: any = {
   }
 };
 
+interface TaskEvent extends CalendarEvent {
+  id?: number;
+  taskid?: number;
+  categoryid?: number;
+}
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -34,6 +42,7 @@ const colors: any = {
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  @ViewChild(TaskFormComponent) taskForm: TaskFormComponent;
 
   view: string = 'month';
 
@@ -64,7 +73,7 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[];
+  events: TaskEvent[];
 
   _events: CalendarEvent[];
 
@@ -88,9 +97,21 @@ export class CalendarComponent implements OnInit {
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+  handleEvent(action: string, event: TaskEvent): void {
+    if ((event.categoryid = 1)) {
+      let _currentTask: Task;
+      this._taskServ.getTask(event.taskid).subscribe(data => {
+        _currentTask = data;
+        this.open(_currentTask);
+      });
+    }
+  }
+
+  open(task: Task) {
+    const modalRef = this.modal.open(TaskFormComponent, { size: 'lg' });
+    modalRef.result.then(result => {}, reason => {});
+
+    modalRef.componentInstance.currentTask = task;
   }
 
   addEvent(): void {
@@ -117,16 +138,13 @@ export class CalendarComponent implements OnInit {
       data.forEach(event => {
         event.start = new Date(event.start);
         event.end = new Date(event.end);
-        event.color = colors.blue;
+        if (event.categoryid === 1) {
+          event.color = colors.blue;
+        } else {
+          event.color = colors.yellow;
+        }
       });
       this._events = data;
-      this._events.push({
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        color: colors.red,
-        actions: this.actions
-      });
     });
   }
 }

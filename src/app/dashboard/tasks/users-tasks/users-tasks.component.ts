@@ -72,12 +72,6 @@ export class UsersTasksComponent implements OnInit {
 
   selectTask(selectedTask: Task) {
     this._currentTask = Object.assign({}, this._currentTask, selectedTask);
-    if (this._currentTask.BeginDate) {
-      this._currentTask.formBeginDate = this._dateFormatter.parse(this._currentTask.BeginDate.toString());
-    }
-    if (selectedTask.ExpirationDate) {
-      this._currentTask.formExpirationDate = this._dateFormatter.parse(this._currentTask.ExpirationDate.toString());
-    }
     this.open();
   }
 
@@ -86,8 +80,6 @@ export class UsersTasksComponent implements OnInit {
   }
 
   saveTask() {
-    this._currentTask.BeginDate = new Date(this._dateFormatter.format(this._currentTask.formBeginDate));
-    this._currentTask.ExpirationDate = new Date(this._dateFormatter.format(this._currentTask.formExpirationDate));
     if (!this._currentTask.ID) {
       this.addTask();
     } else {
@@ -111,7 +103,6 @@ export class UsersTasksComponent implements OnInit {
       this.toastr.success(data.Title, 'Tarea editada');
       const oldItem = this._util.filterByID(this._tasks, this._currentTask.ID);
       const index = this._tasks.indexOf(oldItem);
-
       this._tasks[index] = this._currentTask;
       this._currentTask = {};
     });

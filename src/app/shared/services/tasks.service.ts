@@ -38,8 +38,8 @@ export class TasksService {
     return this._http.get<Task[]>(`${this._taskURL}/category/${id}`);
   }
 
-  getEvents(): Observable<CalendarEvent[]> {
-    return this._http.get<CalendarEvent[]>(this._eventsURL);
+  getEvents(): Observable<any[]> {
+    return this._http.get<any[]>(this._eventsURL);
   }
 
   getTaskCount(id: number): Observable<TaskCount[]> {

@@ -379,6 +379,10 @@ ngb-tabset > ul.nav-tabs > li.nav-item {
   border-color: #4ca2ff;
 }
 
+.cal-day-badge {
+  background-color: #c0392b !important;
+}
+
 /* Button Primary*/
 .btn-primary,
 .page-item.active .page-link {
