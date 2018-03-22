@@ -1,27 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-  startOfToday,
-  startOfMonth,
-  startOfWeek,
-  endOfWeek,
-  format
-} from 'date-fns';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK, CalendarDateFormatter } from 'angular-calendar';
+import { CalendarEvent, CalendarDateFormatter, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { CustomDateFormatter } from '../../../shared/pipes/custom-date-formatter.provider';
 import { TasksService } from '../../../shared/services/tasks.service';
-import { Observable } from 'rxjs/Observable';
-import { HttpParams, HttpClient } from '@angular/common/http';
-import { Task } from '../../../shared/models/tasks.model';
 
 const colors: any = {
   red: {
@@ -40,7 +23,6 @@ const colors: any = {
 
 @Component({
   selector: 'app-calendar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
   providers: [
@@ -58,10 +40,6 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
 
   public locale: string = 'es-MX';
-
-  weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-
-  weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
   modalData: {
     action: string;
@@ -86,13 +64,13 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events$: Observable<Array<CalendarEvent>>;
-
   events: CalendarEvent[];
+
+  _events: CalendarEvent[];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private _taskServ: TasksService, private _http: HttpClient) {}
+  constructor(private modal: NgbModal, private _taskServ: TasksService) {}
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
@@ -135,18 +113,20 @@ export class CalendarComponent implements OnInit {
   }
 
   getEvents(): void {
-    const getStart: any = {
-      month: startOfMonth,
-      week: startOfWeek,
-      day: startOfDay
-    }[this.view];
-
-    const getEnd: any = {
-      month: endOfMonth,
-      week: endOfWeek,
-      day: endOfDay
-    }[this.view];
-
-    this.events$ = this._taskServ.getEvents();
+    this._taskServ.getEvents().subscribe(data => {
+      data.forEach(event => {
+        event.start = new Date(event.start);
+        event.end = new Date(event.end);
+        event.color = colors.blue;
+      });
+      this._events = data;
+      this._events.push({
+        start: subDays(startOfDay(new Date()), 1),
+        end: addDays(new Date(), 1),
+        title: 'A 3 day event',
+        color: colors.red,
+        actions: this.actions
+      });
+    });
   }
 }

@@ -13,10 +13,10 @@
     <div class="col-md-8 d-flex justify-content-end pull-right">
       <div class="btn-group pull-right" role="group" aria-label="">
         <button type="button" class="btn btn-danger" (click)="generatePDF()" ngbTooltip="Exportar a PDF">
-          <i class="far fa-file-pdf fa-fw"></i>
+          <i class="ms-Icon ms-Icon--PDF" aria-hidden="true"></i>
         </button>
         <button *ngIf="options.exportToCSV" type="button" class="btn btn-success" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
-          <i class="fas fa-table fa-fw"></i>
+          <i class="ms-Icon ms-Icon--ExcelLogo" aria-hidden="true"></i>
         </button>
       </div>
       <!-- <button *ngIf="options.exportToCSV" class="btn btn-success pull-right" (click)="exportCSV()" ngbTooltip="Exportar a Excel">

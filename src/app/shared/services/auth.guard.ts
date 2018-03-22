@@ -32,9 +32,7 @@ export class AuthGuard implements CanActivate {
 
   getAlerts() {
     this.localStorage.getItem<ParticipantAlert[]>('alerts').subscribe(alerts => {
-      console.log(alerts);
       if (alerts) {
-        console.log(alerts);
         this._alertServ.updateLastAlerts();
       } else {
         this._alertServ.initAlerts();

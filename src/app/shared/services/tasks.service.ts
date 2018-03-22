@@ -30,6 +30,10 @@ export class TasksService {
     return this._http.get<Task[]>(this._taskURL);
   }
 
+  getTask(id: number): Observable<Task> {
+    return this._http.get<Task>(`${this._taskURL}/${id}`);
+  }
+
   getTasksByCategory(id: number): Observable<Task[]> {
     return this._http.get<Task[]>(`${this._taskURL}/category/${id}`);
   }

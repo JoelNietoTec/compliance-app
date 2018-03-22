@@ -13,7 +13,6 @@ import { ParticipantsTasksComponent } from './participants-tasks/participants-ta
 import { RoadmapComponent } from './roadmap/roadmap.component';
 import { MilestonesComponent } from './milestones/milestones.component';
 import { PhasesComponent } from './phases/phases.component';
-import { CalendarHeaderComponent } from './calendar/calender-header.component';
 import { RoadmapsFormComponent } from './roadmaps-form/roadmaps-form.component';
 import { PhasesFormComponent } from './phases-form/phases-form.component';
 
@@ -27,7 +26,6 @@ import { PhasesFormComponent } from './phases-form/phases-form.component';
     RoadmapComponent,
     MilestonesComponent,
     PhasesComponent,
-    CalendarHeaderComponent,
     RoadmapsFormComponent,
     PhasesFormComponent
   ],
