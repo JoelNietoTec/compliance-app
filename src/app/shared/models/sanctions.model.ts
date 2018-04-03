@@ -53,3 +53,14 @@ export interface Match {
   Confirmed?: boolean;
   Score?: number;
 }
+
+export interface SanctionList {
+  ID?: number;
+  Name?: string;
+  URL?: string;
+  ElementIDs?: string;
+  TermField?: string;
+  CommentsField?: string;
+  CountryField?: string;
+  ActiveSearch?: Boolean;
+}

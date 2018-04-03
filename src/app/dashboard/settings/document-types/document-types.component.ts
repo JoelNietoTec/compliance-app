@@ -20,8 +20,8 @@ export class DocumentTypesComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', sortable: true },
+      { name: 'Name', title: 'Nombre', sortable: true },
+      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true },
       { name: 'RequiredIndividual', title: 'Req. Individuo', type: 'boolean' },
       { name: 'RequiredEntity', title: 'Req. Entidad', type: 'boolean' }
     ];

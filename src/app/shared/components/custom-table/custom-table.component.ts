@@ -23,6 +23,7 @@ import * as pdf from './pdf';
 import { saveAs } from 'file-saver';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 import { DatePipe } from '@angular/common';
+import { TableFormComponent } from '../table-form/table-form.component';
 
 @Component({
   selector: 'app-custom-table',
@@ -35,6 +36,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   @Output() editItem = new EventEmitter();
   @Output() removeItem = new EventEmitter();
   @Output() addItem = new EventEmitter();
+  @ViewChild(TableFormComponent) form: TableFormComponent;
 
   _sorting: Boolean = false;
   _newItem: any = {};
@@ -42,6 +44,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   _sortColumn: string;
   _sortDesc = true;
   _itemsCount: number;
+  _originalCount: number;
   _pagedItems: Array<any> = [];
   _currentPage: any = {};
   _searchText: string = '';
@@ -66,6 +69,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     if (model.items) {
       if (this.items) {
         this.initTable();
+        this._originalCount = this.items.length;
         // this._filteredItems = this.items;
         // this.filterItems();
       }
@@ -98,11 +102,33 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     });
   }
 
+  openModal() {
+    console.log(this._selectedItem);
+    const modalRef = this.modalService.open(TableFormComponent);
+    modalRef.result.then(
+      result => {
+        if (this._selectedItem.ID) {
+          this.updateItem();
+        } else {
+          this.createItem();
+        }
+      },
+      dismiss => {
+        this.cancelSelect();
+      }
+    );
+    modalRef.componentInstance.fields = this.options.columns;
+    if (this._selectedItem.ID) {
+      modalRef.componentInstance.item = this._selectedItem;
+    } else {
+      modalRef.componentInstance.item = this._newItem;
+    }
+  }
+
   getObjectText(item: any, column: Column) {
     item[`text${column.name}`] = this._util.getProperty(item, column.objectColumn);
   }
 
-  //
   getLookup(col: Column): Array<any> {
     let _values: Array<any> = [];
     if (col.type === 'object') {
@@ -127,19 +153,25 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
       if (!this.options.pageable) {
         this._filteredItems = this.items;
         this._pagedItems = this._filteredItems;
+        this.initTable();
       } else if (!this._filteredItems) {
         this._filteredItems = this.items;
         this.filterItems();
       } else {
-        // this._filteredItems = this.items;
-        this._itemsCount = this._filteredItems.length;
+        if (this._originalCount !== this.items.length) {
+          this.initTable();
+          this._filteredItems = this.items;
+          this._itemsCount = this._filteredItems.length;
+          this._originalCount = this.items.length;
+        }
       }
     }
   }
 
   selectItem(item: any) {
-    if (this.options.editable) {
-      this._selectedItem = item;
+    this._selectedItem = Object.assign({}, this._selectedItem, item);
+    if (this.options.addMethod === 'modal') {
+      this.openModal();
     }
   }
 
@@ -225,14 +257,14 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   createItem() {
-    this.options.columns.forEach(column => {
-      if (column.type === 'object') {
-        let id: number;
-        id = this._newItem[column.objectID];
-        this._newItem[column.name] = this._util.filterByID(column.list, this._newItem[column.objectID]);
-        this.getObjectText(this._newItem, column);
-      }
-    });
+    // this.options.columns.forEach(column => {
+    //   if (column.type === 'object') {
+    //     let id: number;
+    //     id = this._newItem[column.objectID];
+    //     this._newItem[column.name] = this._util.filterByID(column.list, this._newItem[column.objectID]);
+    //     this.getObjectText(this._newItem, column);
+    //   }
+    // });
     this.addItem.emit(this._newItem);
     this._newItem = {};
   }
@@ -250,6 +282,10 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   updateItem() {
+    this._pagedItems = this._util.updateItem(this._selectedItem, this._pagedItems);
+    this.items = this._util.updateItem(this._selectedItem, this.items);
+    this._filteredItems = this._util.updateItem(this._selectedItem, this._filteredItems);
+    // item = this._selectedItem;
     this.editItem.emit(this._selectedItem);
     this._selectedItem = {};
   }

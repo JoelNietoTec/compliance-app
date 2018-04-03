@@ -36,6 +36,9 @@ import { ParticipantProfilesService } from './services/participant-profiles.serv
 import { FilesService } from './services/files.service';
 import { BanksService } from './services/banks.service';
 import { ParticipantAlertsService } from './services/participant-alerts.service';
+import { SanctionListsService } from './services/sanction-lists.service';
+import { TransactionsService } from './services/transactions.service';
+import { ProfileAccountsService } from './services/profile-accounts.service';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -57,6 +60,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MapComponent } from './components/map/map.component';
+import { DateInputComponent } from './components/date-input/date-input.component';
 
 @NgModule({
   imports: [
@@ -92,6 +96,7 @@ import { MapComponent } from './components/map/map.component';
     ColumnPipe,
     AgmCoreModule,
     ChartCardComponent,
+    DateInputComponent,
     MapComponent
   ],
   providers: [
@@ -121,6 +126,9 @@ import { MapComponent } from './components/map/map.component';
     FilesService,
     BanksService,
     ParticipantAlertsService,
+    SanctionListsService,
+    TransactionsService,
+    ProfileAccountsService,
     AuthGuard,
     DatePipe
   ],
@@ -139,7 +147,9 @@ import { MapComponent } from './components/map/map.component';
     BooleanPipe,
     TableFormComponent,
     ChartCardComponent,
-    MapComponent
-  ]
+    MapComponent,
+    DateInputComponent
+  ],
+  entryComponents: [TableFormComponent]
 })
 export class SharedModule {}

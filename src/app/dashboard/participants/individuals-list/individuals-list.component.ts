@@ -41,6 +41,7 @@ export class IndividualsListComponent implements OnInit {
 
     this._table.searcheable = true;
     this._table.exportToCSV = true;
+    this._table.exportToPDF = true;
 
     this._table.detailsURL = [];
 

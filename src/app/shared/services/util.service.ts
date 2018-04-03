@@ -117,6 +117,12 @@ export class UtilService {
     };
   }
 
+  updateItem(item: any, array: any[]): any[] {
+    const objIndex = array.findIndex((obj => obj.ID === item.ID));
+    array[objIndex] = item;
+    return array;
+  }
+
   getProperty(item: any, property: string): any {
     property.split('.').forEach(e => {
       item = item[e];
@@ -145,7 +151,6 @@ export class UtilService {
         }
         line += array[i][index];
       }
-
 
       str += line + '\r\n';
     }

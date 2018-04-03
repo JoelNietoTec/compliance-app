@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
     this._loggedUSer = this._auth.getUserInfo();
     this.localStorage.getItem<UserAlert[]>('alerts').subscribe(alerts => {
       this._alerts = this._util.sortBy(alerts, 'Date', true);
-      console.log(this._alerts);
     });
   }
 

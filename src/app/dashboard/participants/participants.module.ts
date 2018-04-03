@@ -31,6 +31,7 @@ import { ParticipantTransactionsComponent } from './participant-transactions/par
 import { ParticipantProfileFormComponent } from './participant-profile-form/participant-profile-form.component';
 import { ParticipantTransactionsFormComponent } from './participant-transactions-form/participant-transactions-form.component';
 import { ParticipantAlertsComponent } from './participant-alerts/participant-alerts.component';
+import { FinancialProfileComponent } from './financial-profile/financial-profile.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ParticipantsRoutingModule, SharedModule],
@@ -62,7 +63,8 @@ import { ParticipantAlertsComponent } from './participant-alerts/participant-ale
     ParticipantTransactionsComponent,
     ParticipantProfileFormComponent,
     ParticipantTransactionsFormComponent,
-    ParticipantAlertsComponent
+    ParticipantAlertsComponent,
+    FinancialProfileComponent
   ],
   entryComponents: [
     ParticipantRelationshipComponent,

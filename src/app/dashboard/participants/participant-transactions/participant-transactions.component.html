@@ -1,31 +1,11 @@
 <div class="card">
   <div class="card-header">
-    <p class="card-title"><i class="fas fa-exchange-alt fa-fw"></i> Transacciones</p>
+    <p class="card-title">
+      <i class="fas fa-exchange-alt fa-fw"></i> Historial Transacciones</p>
   </div>
-  <div class="card-body">
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th>Tipo</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Cuenta</th>
-          <th>Fecha</th>
-          <th>Monto</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tran of _transactions">
-          <td>{{ tran.TransactionType.Name }}</td>
-          <td>{{ tran.Title }}</td>
-          <td>{{ tran.Description }}</td>
-          <td>{{ tran.Account.Name }}</td>
-          <td>{{ tran.Date | date: 'medium' }}</td>
-          <td>${{ tran.Amount | number: '3.2' }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" class="btn btn-primary pull-right" (click)="open()">
-      <i class="fas fa-exchange-alt fa-fw"></i> Agregar</button>
+  <div *ngIf="_sources" class="card-body">
+    <app-custom-table [options]="_table" [items]="_transactions" (addItem)="addTransaction($event)" (editItem)="editTransaction($event)"></app-custom-table>
+    <!-- <button type="button" class="btn btn-primary pull-right" (click)="open()">
+      <i class="fas fa-exchange-alt fa-fw"></i> Agregar</button> -->
   </div>
 </div>

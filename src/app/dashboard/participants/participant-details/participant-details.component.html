@@ -11,12 +11,17 @@
         <ngb-tabset #t type="tabs" *ngIf="_participant">
           <ngb-tab title="Matrix de Riesgo">
             <ng-template ngbTabContent>
-              <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
+              <!-- <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance> -->
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Perfil Transaccional">
+            <ng-template ngbTabContent>
+              <app-participant-profile [participant]="_participant"></app-participant-profile>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Perfil Financiero">
             <ng-template ngbTabContent>
-              <app-participant-profile [participant]="_participant"></app-participant-profile>
+              <app-financial-profile></app-financial-profile>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Documentos">

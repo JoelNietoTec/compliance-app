@@ -6,8 +6,8 @@
   </button>
 </div>
 <div class="modal-body">
-  <app-loading-modal *ngIf="!_banks"></app-loading-modal>
-  <div class="row" *ngIf="_banks">
+  <app-loading-modal *ngIf="!_banks || !_types"></app-loading-modal>
+  <div class="row" *ngIf="_banks && _types">
     <div class="col-md-12">
       <div class="form-group">
         <label for="name">Nombre de la cuenta</label>

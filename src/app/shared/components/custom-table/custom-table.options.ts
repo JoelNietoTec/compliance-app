@@ -7,12 +7,13 @@ export interface TableOptions {
   editable?: boolean;
   deletable?: boolean;
   creatable?: boolean;
-  addMethod?: string;
+  addMethod?: 'inline' | 'modal';
   detailsURL?: String[];
   newURL?: String[];
   showID?: boolean;
   lookup?: boolean;
   exportToCSV?: boolean;
+  exportToPDF?: boolean;
   reportsOnly?: boolean;
   showTitle?: boolean;
 }
@@ -20,7 +21,7 @@ export interface TableOptions {
 export interface Column {
   name?: string;
   title?: string;
-  type?: string;
+  type?: 'date' | 'datetime' | 'decimal' | 'number' | 'money' | 'boolean' | 'checkbox' | 'object' | 'text';
   sortable?: boolean;
   filterable?: boolean;
   pipe?: string;

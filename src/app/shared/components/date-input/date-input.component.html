@@ -1,0 +1,8 @@
+<div class="input-group">
+  <input class="form-control" [(ngModel)]="_currentDate" (keyup)="change()" (ngModelChange)="change()" placeholder="YYYY-MM-DD" ngbDatepicker #d="ngbDatepicker">
+  <div class="input-group-append" (click)="d.toggle()">
+    <span class="input-group-text">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+    </span>
+  </div>
+</div>

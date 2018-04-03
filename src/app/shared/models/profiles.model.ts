@@ -27,11 +27,14 @@ export interface ProfileAccount {
 export interface AccountType {
   ID?: number;
   Name?: string;
+  EnglishName?: string;
 }
 
 export interface Transaction {
   ID?: number;
   TransactionTypeID?: number;
+  TransactionSourceID?: number;
+  TransactionSource?: TransactionSource;
   TransactionType?: TransactionType;
   ParticipantProfileID?: number;
   Title?: string;
@@ -45,6 +48,12 @@ export interface Transaction {
 export interface TransactionType {
   ID?: number;
   Name?: string;
+}
+
+export interface TransactionSource {
+  ID?: number;
+  Name?: string;
+  EnglishName?: string;
 }
 
 export interface Bank {

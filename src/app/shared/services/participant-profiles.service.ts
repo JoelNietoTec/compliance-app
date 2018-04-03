@@ -38,16 +38,5 @@ export class ParticipantProfilesService {
     return this._http.put(`${this._accountsURL}/${id}`, JSON.stringify(account), { headers: this._headers });
   }
 
-  getTransactions(): Observable<Transaction[]> {
-    return this._http.get<Transaction[]>(this._transactionsURL);
-  }
-
-  getTransactionsByProfile(id: number): Observable<Transaction[]> {
-    return this._http.get<Transaction[]>(`${this._profilesURL}/${id}/transactions`);
-  }
-
-  createTransaction(tran: Transaction): Observable<Transaction> {
-    return this._http.post<Transaction>(this._transactionsURL, JSON.stringify(tran), { headers: this._headers });
-  }
 }
 

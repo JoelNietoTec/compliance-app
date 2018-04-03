@@ -1,3 +1,30 @@
-<p>
-  table-form works!
-</p>
+<div class="modal-header">
+  <h5 class="modal-title" *ngIf="!item.ID">Nuevo elemento</h5>
+  <h5 class="modal-title" *ngIf="item.ID">Editar elemento</h5>
+  <button type="button" class="close" aria-label="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group row" *ngFor="let field of fields">
+    <label for="{{ field.name }}" class="col-sm-3 col-form-label">{{ field.title }}</label>
+    <div class="col-sm-9">
+      <ng-container [ngSwitch]="true">
+        <select *ngSwitchCase="field.type === 'object'" [(ngModel)]="item[field.objectID]" class="custom-select form-control" [name]="field.objectID" [id]="field.name">
+          <option [value]="undefined" [disabled]="true">---Seleccionar---</option>
+          <option *ngFor="let val of field.list" [value]="val[field.listID]">
+            {{ val[field.listDisplay] }}
+          </option>
+        </select>
+        <app-date-input [(ngModel)]="item[field.name]" [name]="field.name" [id]="field.name" *ngSwitchCase="field.type === 'datetime' || field.type === 'date'"></app-date-input>
+        <input *ngSwitchDefault [(ngModel)]="item[field.name]" type="text" class="form-control" [readOnly]="field.readonly" [ngClass]="{'form-control-plaintext': field.readonly}"
+          [id]="field.name" [name]="field.name">
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close()">
+    <i class="far fa-save fa-fw"></i> Guardar
+  </button>
+</div>

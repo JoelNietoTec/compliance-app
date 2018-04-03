@@ -40,6 +40,8 @@ export class EntitiesListComponent implements OnInit {
 
     this._table.exportToCSV = true;
 
+    this._table.exportToPDF = true;
+
     this._table.lookup = true;
 
     this._table.searcheable = true;

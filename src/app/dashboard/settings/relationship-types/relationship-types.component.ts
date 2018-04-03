@@ -30,6 +30,7 @@ export class RelationshipTypesComponent implements OnInit {
     this._table.addMethod = 'inline';
     this._table.exportToCSV = true;
     this._table.pageable = true;
+    this._table.exportToPDF = true;
 
     this._relService.getTypes().subscribe(data => {
       this._types = data;

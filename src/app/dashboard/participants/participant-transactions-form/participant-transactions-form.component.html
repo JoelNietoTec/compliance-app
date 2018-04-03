@@ -5,7 +5,8 @@
   </button>
 </div>
 <div class="modal-body">
-  <div class="row">
+  <app-loading-modal *ngIf="!_sources"></app-loading-modal>
+  <div class="row" *ngIf="_sources">
     <div class="col-md-6">
       <div class="form-group">
         <label for="title">Nombre</label>
@@ -19,6 +20,29 @@
           <option [disabled]="true" [value]="undefined">--Seleccionar--</option>
           <option *ngFor="let type of _types" [value]="type.ID">{{ type.Name }}</option>
         </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="sources">Origen fondos</label>
+        <select class="custom-select" name="sources" [(ngModel)]="currentTransaction.TransactionSourceID" id="sources">
+          <option [disabled]="true" value="undefined">--Seleccionar--</option>
+          <option *ngFor="let source of _sources" [value]="source.ID">{{ source.Name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="date">Fecha Transacción</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="YYYY-MM-DD" name="date" [(ngModel)]="_date" (ngModelChange)="updateDate()" ngbDatepicker
+            #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-default" (click)="dp.toggle()" type="button">
+              <i class="far fa-calendar-alt fa-fw"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-12">
@@ -49,20 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="date">Fecha Transacción</label>
-        <div class="input-group">
-          <input class="form-control" placeholder="YYYY-MM-DD" name="date" [(ngModel)]="_date" (ngModelChange)="updateDate()" ngbDatepicker
-            #dp="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-default" (click)="dp.toggle()" type="button">
-              <i class="far fa-calendar-alt fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 <div class="modal-footer">

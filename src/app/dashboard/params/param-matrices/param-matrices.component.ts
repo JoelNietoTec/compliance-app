@@ -28,6 +28,7 @@ export class ParamMatricesComponent implements OnInit {
     this._table.addMethod = 'inline';
     this._table.creatable = true;
     this._table.editable = true;
+    this._table.pageable = true
     this._table.detailsURL = [];
     this._table.style = 'table-sm table-squared';
     this._table.title = 'Matrices';
@@ -60,7 +61,7 @@ export class ParamMatricesComponent implements OnInit {
         objectID: 'MatrixTypeID'
       },
       { name: 'Description', title: 'Descripción', type: 'text', sortable: true },
-      { name: 'CreateDate', title: 'Fec. Creación', type: 'date', readonly: true }
+      { name: 'CreateDate', title: 'Fec. Creación', type: 'datetime', readonly: true }
     ];
 
     this._matrixService.getMatrices().subscribe(data => {
@@ -71,13 +72,13 @@ export class ParamMatricesComponent implements OnInit {
   createMatrix(matrix: ParamMatrix) {
     matrix.CreateDate = new Date();
     this._matrixService.createMatrix(matrix).subscribe(data => {
-      data.MatrixType = this._util.filterByID(this._matrixTypes, data.MatrixTypeID);
       this.toastr.success(data.Name, 'Matriz creada');
       this._matrices.push(data);
     });
   }
 
   updateMatrix(matrix: ParamMatrix) {
+    console.log(matrix);
     this._matrixService.updateMatrix(matrix.ID, matrix).subscribe(
       data => {
         this.toastr.success(matrix.Name, 'Matrix Updated');

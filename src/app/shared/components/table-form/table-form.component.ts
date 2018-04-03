@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UtilService } from '../../services/util.service';
+import { Column } from '../custom-table/custom-table.options';
 
 @Component({
   selector: 'app-table-form',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-form.component.css']
 })
 export class TableFormComponent implements OnInit {
+  @Input() fields: Column[];
+  @Input() item?: any = {};
 
-  constructor() { }
+  constructor(public activeModal: NgbActiveModal, private _util: UtilService) {}
 
   ngOnInit() {
+    console.log(this.fields);
+    console.log(this.item);
   }
 
+  change() {
+    console.log(this.item);
+  }
 }
