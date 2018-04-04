@@ -17,6 +17,6 @@
   <div class="card-body" (click)="click()">
     <p class="task-description">{{ task.Description}}</p>
     <p>
-      <i class="far fa-calendar-alt"></i> {{ task.ExpirationDate | date: 'dd/MM'}}</p>
+      <i class="far fa-calendar-alt"></i> {{ task.ExpirationDate | date: 'dd/MM' : '+0600'}}</p>
   </div>
 </div>

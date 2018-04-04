@@ -27,6 +27,7 @@ export class ParticipantDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this._util.months);
     this.getParticipant();
   }
 

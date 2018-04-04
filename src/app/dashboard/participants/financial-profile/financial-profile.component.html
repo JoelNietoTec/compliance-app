@@ -1,3 +1,21 @@
-<p>
-  financial-profile works!
-</p>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <app-chart-card *ngIf="_monthlyData.length" [options]="_summaryChart" [title]="'Resumen Mensual'" [items]="_monthlyData"
+        [data]="'amount'" [label]="'month'" [type]="'bar'"></app-chart-card> -->
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title">
+            <i class="fas fa-chart-line"></i> Resumen Mensual
+          </p>
+        </div>
+        <div class="card-body">
+          <ng-container *ngIf="_chart">
+            <canvas id="canvas">{{ _chart }}</canvas>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

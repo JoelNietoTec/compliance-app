@@ -45,13 +45,13 @@
           <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
             <i class="fas fa-birthday-cake"></i> Fecha de nacimiento (edad)
           </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}
+          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' : '+0600' }}
             <em>({{ individual.Age }})</em>
           </h6>
           <small *ngIf="individual.ParticipantTypeID == 2" class="text-primary font-weight-bold">
             <i class="far fa-building"></i> Fecha de constitución
           </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' }}</h6>
+          <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' : '+0600' }}</h6>
           <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
             <i class="fas fa-venus-mars"></i> Género
           </small>

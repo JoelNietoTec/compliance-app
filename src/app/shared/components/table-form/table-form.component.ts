@@ -14,12 +14,5 @@ export class TableFormComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private _util: UtilService) {}
 
-  ngOnInit() {
-    console.log(this.fields);
-    console.log(this.item);
-  }
-
-  change() {
-    console.log(this.item);
-  }
+  ngOnInit() {}
 }

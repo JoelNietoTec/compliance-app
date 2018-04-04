@@ -68,3 +68,13 @@ export interface BankType {
   ID?: number;
   Name?: string;
 }
+
+export interface FinancialDashboard {
+  ParticipantID?: number;
+  Month?: number;
+  Type?: string;
+  Account?: string;
+  Source?: string;
+  Bank?: string;
+  Amount?: number;
+}

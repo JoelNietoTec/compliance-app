@@ -5,21 +5,23 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { ConnectionService } from './connection.service';
-import { ParticipantProfile, ProfileAccount, Transaction } from '../models/profiles.model';
+import { ParticipantProfile, ProfileAccount, Transaction, FinancialDashboard } from '../models/profiles.model';
 
 @Injectable()
 export class ParticipantProfilesService {
-  _participantsURL: String;
-  _profilesURL: string;
-  _accountsURL: string;
-  _transactionsURL: string;
-  _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private _participantsURL: String;
+  private _profilesURL: string;
+  private _accountsURL: string;
+  private _transactionsURL: string;
+  private _dashboardURL: string;
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._participantsURL = _conn.APIUrl + 'participants';
     this._accountsURL = _conn.APIUrl + 'profileaccounts';
     this._profilesURL = _conn.APIUrl + 'participantprofiles';
     this._transactionsURL = _conn.APIUrl + 'transactions';
+    this._dashboardURL = _conn.APIUrl + 'financialdashboard';
   }
 
   getProfile(id: number): Observable<ParticipantProfile> {
@@ -38,5 +40,11 @@ export class ParticipantProfilesService {
     return this._http.put(`${this._accountsURL}/${id}`, JSON.stringify(account), { headers: this._headers });
   }
 
-}
+  getDashboards(): Observable<FinancialDashboard[]> {
+    return this._http.get<FinancialDashboard[]>(this._dashboardURL);
+  }
 
+  getDashboard(id: number): Observable<FinancialDashboard[]> {
+    return this._http.get<FinancialDashboard[]>(`${this._dashboardURL}/${id}`);
+  }
+}

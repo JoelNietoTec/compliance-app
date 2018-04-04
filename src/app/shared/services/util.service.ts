@@ -5,6 +5,23 @@ import { Injectable } from '@angular/core';
 export class UtilService {
   constructor() {}
 
+  get months() {
+    return [
+      { id: 1, name: 'Enero', shortName: 'Ene' },
+      { id: 2, name: 'Febrero', shortName: 'Feb' },
+      { id: 3, name: 'Marzo', shortName: 'Mar' },
+      { id: 4, name: 'Abril', shortName: 'Abr' },
+      { id: 5, name: 'Mayo', shortName: 'May' },
+      { id: 6, name: 'Junio', shortName: 'Jun' },
+      { id: 7, name: 'Julio', shortName: 'Jul' },
+      { id: 8, name: 'Agosto', shortName: 'Ago' },
+      { id: 9, name: 'Septiembre', shortName: 'Sep' },
+      { id: 10, name: 'Octubre', shortName: 'Oct' },
+      { id: 11, name: 'Noviembre', shortName: 'Nov' },
+      { id: 12, name: 'Diciembre', shortName: 'Dic' }
+    ];
+  }
+
   sortBy(array: Array<any>, args: string, desc?: boolean): Array<any> {
     if (desc) {
       array.sort((a: any, b: any) => {
@@ -118,7 +135,7 @@ export class UtilService {
   }
 
   updateItem(item: any, array: any[]): any[] {
-    const objIndex = array.findIndex((obj => obj.ID === item.ID));
+    const objIndex = array.findIndex(obj => obj.ID === item.ID);
     array[objIndex] = item;
     return array;
   }
