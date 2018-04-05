@@ -138,7 +138,6 @@ export class FinancialProfileComponent implements OnInit {
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
-            console.log(data);
             const value = data.datasets[0].data[tooltipItem.index];
             return '$ ' + this._pipe.transform(value, '1.2');
           }
