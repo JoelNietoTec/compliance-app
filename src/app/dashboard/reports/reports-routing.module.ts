@@ -5,6 +5,7 @@ import { ReportsComponent } from './reports.component';
 import { ReportsHomeComponent } from './reports-home/reports-home.component';
 import { ReportsParticipantsComponent } from './reports-participants/reports-participants.component';
 import { ReportsAlertsComponent } from './reports-alerts/reports-alerts.component';
+import { ReportsTransactionsComponent } from './reports-transactions/reports-transactions.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
     children: [
       { path: '', component: ReportsHomeComponent },
       { path: 'participantes', component: ReportsParticipantsComponent },
-      { path: 'alertas', component: ReportsAlertsComponent }
+      { path: 'alertas', component: ReportsAlertsComponent },
+      { path: 'transacciones', component: ReportsTransactionsComponent }
     ]
   }
 ];
@@ -24,4 +26,10 @@ const routes: Routes = [
 })
 export class ReportsRoutingModule {}
 
-export const routedComponents = [ReportsComponent, ReportsHomeComponent];
+export const routedComponents = [
+  ReportsComponent,
+  ReportsHomeComponent,
+  ReportsParticipantsComponent,
+  ReportsAlertsComponent,
+  ReportsTransactionsComponent
+];

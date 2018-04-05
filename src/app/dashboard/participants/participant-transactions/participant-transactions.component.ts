@@ -106,7 +106,7 @@ export class ParticipantTransactionsComponent implements OnInit {
 
   addTransaction(tran: Transaction) {
     tran.ParticipantProfileID = this.profile.ID;
-    console.log(tran);
+    tran.ParticipantID = this.profile.ParticipantID;
     this._tranServ.createTransaction(tran).subscribe(
       data => {
         console.log(data);

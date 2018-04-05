@@ -22,6 +22,7 @@ export class ReportsAlertsComponent implements OnInit {
     this._table.title = 'Alertas';
     this._table.style = 'squared table-sm table-striped';
     this._table.exportToCSV = true;
+    this._table.exportToPDF = true;
     this._table.searcheable = true;
     this._table.showTitle = true;
     this._table.lookup = true;

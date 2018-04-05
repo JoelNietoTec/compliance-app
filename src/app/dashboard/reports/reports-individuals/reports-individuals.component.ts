@@ -40,6 +40,7 @@ export class ReportsIndividualsComponent implements OnInit {
 
     this._table.searcheable = true;
     this._table.exportToCSV = true;
+    this._table.exportToPDF = true;
     this._table.reportsOnly = true;
     this._table.title = 'Individuos';
   }

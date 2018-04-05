@@ -7,10 +7,10 @@ import { TransactionSource, Transaction } from '../models/profiles.model';
 
 @Injectable()
 export class TransactionsService {
-  _transactionsURL: string;
-  _sourcesURL: string;
-  _profilesURL: string;
-  _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private _transactionsURL: string;
+  private _sourcesURL: string;
+  private _profilesURL: string;
+  private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._transactionsURL = _conn.APIUrl + 'transactions';

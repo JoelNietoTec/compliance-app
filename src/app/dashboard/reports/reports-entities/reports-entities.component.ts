@@ -41,6 +41,7 @@ export class ReportsEntitiesComponent implements OnInit {
     this._table.pageable = true;
 
     this._table.exportToCSV = true;
+    this._table.exportToPDF = true;
 
     this._table.searcheable = true;
 

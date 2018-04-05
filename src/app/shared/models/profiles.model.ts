@@ -1,3 +1,5 @@
+import { Participant } from "./participants.model";
+
 export interface ParticipantProfile {
   ID?: number;
   ParticipantID?: number;
@@ -33,6 +35,8 @@ export interface AccountType {
 export interface Transaction {
   ID?: number;
   TransactionTypeID?: number;
+  ParticipantID?: number;
+  Participant?: Participant;
   TransactionSourceID?: number;
   TransactionSource?: TransactionSource;
   TransactionType?: TransactionType;
