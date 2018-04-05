@@ -80,19 +80,16 @@ export class FinancialProfileComponent implements OnInit {
       type: 'bar',
       data: {
         labels: labels,
-        axisY: {
-          valueFormatString: '$#,###,#0'
-        },
         datasets: [
           {
             label: 'Ingresos',
             data: incomes,
-            backgroundColor: '#90B4D2'
+            backgroundColor: 'rgba(54,162,235,0.6)'
           },
           {
             label: 'Egresos',
             data: expenses,
-            backgroundColor: '#E5A2A2'
+            backgroundColor: 'rgba(255,99,132,0.6)'
           }
         ]
       },
@@ -141,6 +138,7 @@ export class FinancialProfileComponent implements OnInit {
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
+            console.log(data);
             const value = data.datasets[0].data[tooltipItem.index];
             return '$ ' + this._pipe.transform(value, '1.2');
           }

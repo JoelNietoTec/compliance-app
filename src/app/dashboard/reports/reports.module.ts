@@ -8,6 +8,7 @@ import { ReportsParticipantsComponent } from './reports-participants/reports-par
 import { ReportsIndividualsComponent } from './reports-individuals/reports-individuals.component';
 import { ReportsEntitiesComponent } from './reports-entities/reports-entities.component';
 import { ReportsAlertsComponent } from './reports-alerts/reports-alerts.component';
+import { ReportsTransactionsComponent } from './reports-transactions/reports-transactions.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ReportsAlertsComponent } from './reports-alerts/reports-alerts.componen
     ReportsRoutingModule,
     SharedModule
   ],
-  declarations: [ReportsComponent, ReportsHomeComponent, ReportsParticipantsComponent, ReportsIndividualsComponent, ReportsEntitiesComponent, ReportsAlertsComponent]
+  declarations: [ReportsComponent, ReportsHomeComponent, ReportsParticipantsComponent, ReportsIndividualsComponent, ReportsEntitiesComponent, ReportsAlertsComponent, ReportsTransactionsComponent]
 })
 export class ReportsModule { }
