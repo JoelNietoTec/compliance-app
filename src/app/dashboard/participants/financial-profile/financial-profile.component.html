@@ -2,8 +2,6 @@
 
   <div class="row">
     <div class="col-md-12">
-      <!-- <app-chart-card *ngIf="_monthlyData.length" [options]="_summaryChart" [title]="'Resumen Mensual'" [items]="_monthlyData"
-        [data]="'amount'" [label]="'month'" [type]="'bar'"></app-chart-card> -->
       <div class="card">
         <div class="card-header">
           <p class="card-title">
@@ -16,6 +14,12 @@
           </ng-container>
         </div>
       </div>
+    </div>
+    <div class="col-md-4">
+      <app-chart-card *ngIf="_sourceChart" [title]="'Transacciones por Fuente'" [items]="_sourceData" [data]="'amount'" [label]="'source'" [type]="'pie'" [options]="_sourceChart"></app-chart-card>
+    </div>
+    <div class="col-md-4">
+      <app-chart-card *ngIf="_accountChart" [title]="'Transacciones por Cuenta'" [items]="_accountData" [data]="'amount'" [label]="'account'" [type]="'pie'" [options]="_accountChart"></app-chart-card>
     </div>
   </div>
 </div>

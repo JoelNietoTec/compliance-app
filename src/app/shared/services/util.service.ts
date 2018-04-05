@@ -64,6 +64,17 @@ export class UtilService {
     return array.filter(item => item.ID !== id);
   }
 
+  mapDistinct(array: any[], field: string): any[] {
+    const items = array.map(x => x[field]);
+    let result = [];
+    items.forEach(element => {
+      if (!result.includes(element)) {
+        result.push(element);
+      }
+    });
+    return result;
+  }
+
   searchFilter(array: Array<any>, args: Array<string>, searchText: string): Array<any> {
     let filterArray: Array<any> = [];
 

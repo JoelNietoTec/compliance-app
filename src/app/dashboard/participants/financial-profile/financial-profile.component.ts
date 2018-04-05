@@ -5,6 +5,7 @@ import { FinancialDashboard } from '../../../shared/models/profiles.model';
 import { Participant } from '../../../shared/models/participants.model';
 import { DecimalPipe } from '@angular/common';
 import { Chart } from 'chart.js';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-financial-profile',
@@ -14,7 +15,10 @@ import { Chart } from 'chart.js';
 export class FinancialProfileComponent implements OnInit {
   @Input() participant: Participant;
   _dashboard: FinancialDashboard[];
-  _summaryChart: any;
+  _sourceChart: any;
+  _sourceData: any[] = [];
+  _accountData: any[] = [];
+  _accountChart: any;
   _monthlyData: any[] = [];
   _chart: any = [];
 
@@ -24,13 +28,15 @@ export class FinancialProfileComponent implements OnInit {
     this._financialServ.getDashboard(this.participant.ID).subscribe(data => {
       this._dashboard = data;
       this.initCharts();
+      this.initSourceChart();
+      this.initAccountChart();
     });
   }
 
   initCharts() {
     this._util.months.forEach(month => {
       let items = this._dashboard.filter(x => x.Month === month.id);
-      let item = { month: month.shortName, income: 0, expense: 0, amount: 0 };
+      let item = { month: month.shortName, income: 0, expense: 0 };
       let amount: number = 0;
       items.forEach(element => {
         if (element.Type === 'Ingresos') {
@@ -38,21 +44,35 @@ export class FinancialProfileComponent implements OnInit {
         } else {
           item.expense = item.expense + element.Amount;
         }
-        amount = amount + element.Amount;
       });
-      item.amount = amount;
       this._monthlyData.push(item);
     });
-
     let labels = this._util.months.map(x => x.shortName);
     let incomes = this._monthlyData.map(x => x.income);
     let expenses = this._monthlyData.map(x => x.expense);
 
-    this._summaryChart = {
-      title: { display: false, text: 'Tareas Diarias', fontFamily: 'Roboto', fontSize: 14 },
+    const _options = {
+      legend: { labels: { fontFamily: 'Roboto', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
       tooltips: {
         bodyFontFamily: 'Roboto',
-        bodyFontSize: 12
+        bodyFontSize: 12,
+        callbacks: {
+          label: (tooltipItem, data) => {
+            return '$ ' + this._pipe.transform(tooltipItem.yLabel, '1.2');
+          }
+        }
+      },
+      scales: {
+        fontStyle: 'bold',
+        yAxes: [
+          {
+            ticks: {
+              callback: (value, index, values) => {
+                return '$' + this._pipe.transform(value, '1.0');
+              }
+            }
+          }
+        ]
       }
     };
 
@@ -60,6 +80,9 @@ export class FinancialProfileComponent implements OnInit {
       type: 'bar',
       data: {
         labels: labels,
+        axisY: {
+          valueFormatString: '$#,###,#0'
+        },
         datasets: [
           {
             label: 'Ingresos',
@@ -69,10 +92,60 @@ export class FinancialProfileComponent implements OnInit {
           {
             label: 'Egresos',
             data: expenses,
-            backgroundColor: '#db7b7b'
+            backgroundColor: '#E5A2A2'
           }
         ]
-      }
+      },
+      options: _options
     });
+  }
+
+  initSourceChart() {
+    const sources = this._util.mapDistinct(this._dashboard, 'Source');
+    sources.forEach(source => {
+      let item = { source: source, amount: 0 };
+      let items = this._dashboard.filter(x => x.Source === source);
+      items.forEach(element => {
+        item.amount = item.amount + element.Amount;
+      });
+      this._sourceData.push(item);
+    });
+    this._sourceChart = {
+      legend: { position: 'left', labels: { fontFamily: 'Roboto', boxWidth: 15, fontSize: 12 } },
+      tooltips: {
+        bodyFontFamily: 'Roboto',
+        bodyFontSize: 14,
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const value = data.datasets[0].data[tooltipItem.index];
+            return '$ ' + this._pipe.transform(value, '1.2');
+          }
+        }
+      }
+    };
+  }
+  initAccountChart() {
+    const accounts = this._util.mapDistinct(this._dashboard, 'Account');
+    accounts.forEach(account => {
+      let item = { account: account, amount: 0 };
+      let items = this._dashboard.filter(x => x.Account === account);
+      items.forEach(element => {
+        item.amount = item.amount + element.Amount;
+      });
+      this._accountData.push(item);
+    });
+    this._accountChart = {
+      legend: { position: 'left', labels: { fontFamily: 'Roboto', boxWidth: 15, fontSize: 12 } },
+      tooltips: {
+        bodyFontFamily: 'Roboto',
+        bodyFontSize: 14,
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const value = data.datasets[0].data[tooltipItem.index];
+            return '$ ' + this._pipe.transform(value, '1.2');
+          }
+        }
+      }
+    };
   }
 }
