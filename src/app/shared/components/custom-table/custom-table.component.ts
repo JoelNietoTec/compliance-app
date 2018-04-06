@@ -69,8 +69,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     if (model.items) {
       if (this.items) {
         this.initTable();
-        this._originalCount = this.items.length;
-        // this._filteredItems = this.items;
+        this._filteredItems = this.items;
         // this.filterItems();
       }
     }

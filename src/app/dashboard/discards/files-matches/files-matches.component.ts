@@ -30,7 +30,6 @@ export class FilesMatchesComponent implements OnInit {
     this._compService.getComparisons().subscribe(data => {
       this._comparisons = this._util.sortBy(data, 'Date', true);
     });
-
     this.InitTable();
   }
 
@@ -53,12 +52,10 @@ export class FilesMatchesComponent implements OnInit {
   }
 
   getMatches() {
-    this._matches = [];
     this._compService.getMatchesbyComparison(this._currentComparison.ID).subscribe(data => {
       data.forEach(element => {
         element.Confirmed = null;
       });
-      this.InitTable();
       this._matches = data;
     });
   }
