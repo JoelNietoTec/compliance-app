@@ -52,9 +52,9 @@ export class FinancialProfileComponent implements OnInit {
     let expenses = this._monthlyData.map(x => x.expense);
 
     const _options = {
-      legend: { labels: { fontFamily: 'Roboto', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
+      legend: { labels: { fontFamily: 'Poppins', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
       tooltips: {
-        bodyFontFamily: 'Roboto',
+        bodyFontFamily: 'Poppins',
         bodyFontSize: 12,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -63,15 +63,24 @@ export class FinancialProfileComponent implements OnInit {
         }
       },
       scales: {
-        fontStyle: 'bold',
         yAxes: [
           {
             ticks: {
+              fontStyle: 'bold',
+              fontFamily: 'Poppins',
               callback: (value, index, values) => {
                 return '$' + this._pipe.transform(value, '1.0');
               }
             }
           }
+        ],
+        xAxes: [
+          {
+            ticks: {
+            fontStyle: 'bold',
+            fontFamily: 'Poppins'
+          }
+        }
         ]
       }
     };
@@ -108,9 +117,9 @@ export class FinancialProfileComponent implements OnInit {
       this._sourceData.push(item);
     });
     this._sourceChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Roboto', boxWidth: 15, fontSize: 12 } },
+      legend: { position: 'left', labels: { fontFamily: 'Poppins', boxWidth: 15, fontSize: 12 } },
       tooltips: {
-        bodyFontFamily: 'Roboto',
+        bodyFontFamily: 'Poppins',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -132,9 +141,9 @@ export class FinancialProfileComponent implements OnInit {
       this._accountData.push(item);
     });
     this._accountChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Roboto', boxWidth: 15, fontSize: 12 } },
+      legend: { position: 'left', labels: { fontFamily: 'Poppins', boxWidth: 15, fontSize: 12 } },
       tooltips: {
-        bodyFontFamily: 'Roboto',
+        bodyFontFamily: 'Poppins',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {

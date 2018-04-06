@@ -47,6 +47,7 @@ export class FilesMatchesComponent implements OnInit {
     this._table.pageable = true;
     this._table.editable = true;
     this._table.exportToCSV = true;
+    this._table.addMethod = 'inline';
     this._table.style = 'table-sm table-squared';
     this._table.title = 'Descartes Pendientes';
   }
