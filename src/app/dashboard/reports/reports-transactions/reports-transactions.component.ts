@@ -30,7 +30,7 @@ export class ReportsTransactionsComponent implements OnInit {
       { name: 'Participant', title: 'Participante', type: 'object', objectColumn: 'Participant.ShortName', filterable: true, lookup: true },
       { name: 'TransactionType', title: 'Tipo', type: 'object', objectColumn: 'TransactionType.Name', sortable: true, lookup: true },
       { name: 'TransactionSource', title: 'Fuente', type: 'object', objectColumn: 'TransactionSource.Name', sortable: true, lookup: true },
-      { name: 'Account', title: 'Cuenta', type: 'object', objectColumn: 'Account.Name', sortable: true, lookup: true },
+      { name: 'Account', title: 'Producto', type: 'object', objectColumn: 'Account.Name', sortable: true, lookup: true },
       { name: 'Title', title: 'Nombre' },
       { name: 'Description', title: 'Descripción' },
       { name: 'Date', title: 'Fecha', type: 'date' },

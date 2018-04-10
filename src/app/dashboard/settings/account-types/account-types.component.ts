@@ -16,7 +16,7 @@ export class AccountTypesComponent implements OnInit {
   constructor(private _typeServ: ProfileAccountsService, private toast: ToastsManager) {}
 
   ngOnInit() {
-    this._table.title = 'Tipos Cuenta';
+    this._table.title = 'Tipos Producto';
     this._table.pageable = true;
     this._table.editable = true;
     this._table.addMethod = 'inline';
@@ -37,7 +37,7 @@ export class AccountTypesComponent implements OnInit {
   addType(type: AccountType) {
     this._typeServ.addType(type).subscribe(
       data => {
-        this.toast.success(data.Name, 'Tipo agregada');
+        this.toast.success(data.Name, 'Producto agregada');
         this._types.push(data);
       },
       (err: Error) => {
@@ -49,7 +49,7 @@ export class AccountTypesComponent implements OnInit {
   editType(type: AccountType) {
     this._typeServ.editType(type.ID, type).subscribe(
       data => {
-        this.toast.success(type.Name, 'Tipo actualizada');
+        this.toast.success(type.Name, 'Producto actualizada');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');
@@ -60,7 +60,7 @@ export class AccountTypesComponent implements OnInit {
   deleteType(id: number) {
     this._typeServ.deleteType(id).subscribe(
       data => {
-        this.toast.info('Tipo eliminado');
+        this.toast.info('Producto eliminado');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrión un error');

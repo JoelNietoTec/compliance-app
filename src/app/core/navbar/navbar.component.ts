@@ -8,7 +8,7 @@ import { AsyncLocalStorageModule, AsyncLocalStorage } from 'angular-async-local-
 import { UtilService } from '../../shared/services/util.service';
 
 export interface UserAlert extends ParticipantAlert {
-  Seen?: Boolean;
+  Seen?: boolean;
 }
 
 @Component({
@@ -19,6 +19,7 @@ export interface UserAlert extends ParticipantAlert {
 export class NavbarComponent implements OnInit {
   _loggedUSer: User;
   _alerts: UserAlert[];
+  _count: number = 0;
 
   constructor(
     private _auth: AuthService,
@@ -28,13 +29,22 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // this.localStorage.removeItem('alerts').subscribe(() => {
+    //   console.log('Hi');
+    // }, () => {});
     this._loggedUSer = this._auth.getUserInfo();
     this.localStorage.getItem<UserAlert[]>('alerts').subscribe(alerts => {
       this._alerts = this._util.sortBy(alerts, 'Date', true);
+      this._alerts.forEach(alert => {
+        if (!alert.Seen) {
+          this._count = this._count + 1;
+        }
+      });
     });
   }
 
   hideAlert(alert: UserAlert) {
+    this._count = this._count - 1;
     alert.Seen = true;
     this.localStorage.setItem('alerts', this._alerts).subscribe(() => {});
   }

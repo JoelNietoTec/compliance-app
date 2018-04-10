@@ -169,6 +169,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
 
   selectItem(item: any) {
     this._selectedItem = Object.assign({}, this._selectedItem, item);
+    console.log(this._selectedItem);
     if (this.options.addMethod === 'modal') {
       this.openModal();
     }

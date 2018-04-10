@@ -37,22 +37,6 @@ export class AuthService {
 
   authLogin(login: any): Observable<User> {
     return this._http.post<User>(this._loginURL, JSON.stringify(login), { headers: this._headers });
-    // subscribe(
-    //   data => {
-    //     const token = data['results'];
-    //     if (token) {
-    //       this.token = token;
-    //       localStorage.setItem('currentUser', JSON.stringify({ username: login.UserName, token: token }));
-    //       this.initLocalInfo();
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   },
-    //   err => {
-    //     Observable.of(false);
-    //   }
-    // );
   }
 
   setCurrentUser(token: User) {

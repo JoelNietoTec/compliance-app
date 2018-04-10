@@ -1,10 +1,15 @@
 <ul class="nav nav-pills flex-column ">
-  <h6 class="user-name"><i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.UserName }}</h6>
-  <li class="nav-item dropdown user-email"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
+  <h6 class="user-name">
+    <i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.UserName }}
+  </h6>
+  <li class="nav-item dropdown user-email">
+    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
     <div class="dropdown-menu">
       <!-- <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a -->
-      <a [routerLink]="['usuarios']" class="dropdown-item"><i class="fas fa-users" aria-hidden="true"></i> Gestión de Usuarios</a>
-      <a [routerLink]="['/login']" class="dropdown-item"><i class="fas fa-power-off" aria-hidden="true"></i> Cerrar Sesión</a>
+      <a *ngIf="_loggedUser.UserProfileID === 1" [routerLink]="['usuarios']" class="dropdown-item">
+        <i class="fas fa-users" aria-hidden="true"></i> Gestión de Usuarios</a>
+      <a [routerLink]="['/login']" class="dropdown-item">
+        <i class="fas fa-power-off" aria-hidden="true"></i> Cerrar Sesión</a>
     </div>
   </li>
   <li class="nav-item">
@@ -18,13 +23,14 @@
     </a>
   </li>
   <li class="nav-item">
-    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active"><i class="fas fa-users fa-fw"></i> Participantes
+    <a [routerLink]="['participantes']" class="nav-link" routerLinkActive="active">
+      <i class="fas fa-users fa-fw"></i> Participantes
     </a>
   </li>
   <li class="nav-item">
     <a data-toggle="collapse" href="#paramLinks" class="nav-link">
       <i class="fas fa-chart-line fa-fw" aria-hidden="true"></i> Gestión de Riesgo
-      </a>
+    </a>
     <ul class="nav-pills flex-column sub-items collapse" id="paramLinks">
       <li class="nav-item sub-item">
         <a [routerLink]="['parametros', 'matrices']" class="nav-link" routerLinkActive="active">Matrices</a>
@@ -49,6 +55,6 @@
   </li>
   <li class="nav-item">
     <a [routerLink]="['ajustes']" class="nav-link" routerLinkActive="active">
-    <i class="fas fa-wrench fa-fw" aria-hidden="true"></i> Ajustes</a>
+      <i class="fas fa-wrench fa-fw" aria-hidden="true"></i> Ajustes</a>
   </li>
 </ul>

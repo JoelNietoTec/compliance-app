@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit {
         }
       }
       this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
-      console.log(this.byRisk);
       this.loadRiskChart();
     });
     this.loadCountry();

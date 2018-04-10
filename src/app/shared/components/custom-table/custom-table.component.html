@@ -17,7 +17,7 @@
       </button>
       <button *ngIf="options.exportToCSV" type="button" class="btn btn-default" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
         <i class="ms-Icon ms-Icon--ExcelLogo text-success" aria-hidden="true"></i>
-         Exportar Excel
+        Exportar Excel
       </button>
       <!-- <button *ngIf="options.exportToCSV" class="btn btn-success pull-right" (click)="exportCSV()" ngbTooltip="Exportar a Excel">
         <i class="fas fa-download"></i>
@@ -70,15 +70,15 @@
           </td>
         </tr>
         <ng-container *ngFor="let item of _pagedItems">
-          <tr *ngIf="item.ID != _selectedItem.ID || options.addMethod === 'modal'" (dblclick)="selectItem(item)">
+          <tr *ngIf="item.ID != _selectedItem.ID || options.addMethod !== 'inline'" (dblclick)="selectItem(item)">
             <ng-container *ngFor="let col of options.columns">
               <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="getClassRate(item.Rate, col)">
                 <ng-container [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
-                    {{ item | column: col.name | date: 'mediumDate' : '+0600' }}
+                    {{ item | column: col.name | date: 'shortDate' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
-                    {{ item | column: col.name | date: 'd/M/yy, h:mm a' : '+0600' }}
+                    {{ item | column: col.name | date: 'd/MM/yyyy, h:mm a' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'decimal'">
                     {{ item | column: col.name | number: '1.3-3' }}
@@ -135,10 +135,10 @@
                 </ng-container>
                 <ng-container *ngIf="col.readonly" [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
-                    {{ item | column: col.name | date: 'mediumDate' }}
+                    {{ item | column: col.name | date: 'shortDate' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
-                    {{ item | column: col.name | date: 'medium' }}
+                    {{ item | column: col.name | date:'d/MM/yyyy, h:mm a' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'decimal'">
                     {{ item | column: col.name | number: '1.3-3' }}
@@ -203,7 +203,8 @@
       </ng-container>
     </div>
     <div class="col-md-2 ">
-      <button *ngIf="options.addMethod === 'modal' && addItem.observers.length" type="button" class="btn btn-primary pull-right" (click)="openModal()">
+      <button *ngIf="options.addMethod === 'modal' && addItem.observers.length" type="button" class="btn btn-primary pull-right"
+        (click)="openModal()">
         <i class="fa fa-plus-circle"></i> Nuevo elemento
       </button>
       <a *ngIf="options.newURL" [routerLink]="options.newURL" class="btn btn-primary pull-right">

@@ -6,4 +6,12 @@ export interface User {
   Active?: number;
   CreateDate?: Date;
   LastChangePassword?: Date;
+  UserProfileID?: number;
+  UserProfile?: UserProfile;
+}
+
+export interface UserProfile {
+  ID?: number;
+  Name?: number;
+  EnglishName?: number;
 }

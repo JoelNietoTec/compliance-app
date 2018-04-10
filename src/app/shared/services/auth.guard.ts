@@ -27,7 +27,16 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivateChild() {
-    return true;
+    // return true;
+
+    if (localStorage.getItem('currentUser')) {
+      this._authServ.initLocalInfo();
+      this.getAlerts();
+      return true;
+    } else {
+      this._router.navigate(['/login']);
+      return false;
+    }
   }
 
   getAlerts() {

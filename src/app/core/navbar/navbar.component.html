@@ -11,14 +11,15 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">
           <span class="fa-layers fa-2x fa-fw">
             <i class="far fa-bell"></i>
-            <ng-container *ngIf="_alerts">
-              <span class="fa-layers-counter fa-lg">{{ _alerts.length }}</span>
+            <ng-container *ngIf="_count">
+              <span class="fa-layers-counter fa-lg">{{ _count }}</span>
             </ng-container>
           </span>
         </a>
         <div class="dropdown-menu">
           <ng-container *ngFor="let alert of _alerts">
             <span *ngIf="!alert.Seen" class="dropdown-item">
+              {{ alert.Seen }}
               <i class="fas fa-exclamation-circle fa-fw text-danger" aria-hidden="true"></i>
               <span class="font-weight-bold"> {{alert.Name}}</span>
               <span [title]="'Ocultar'" (click)="hideAlert(alert)">

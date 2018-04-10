@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
         if (data) {
           this._loading = false;
           this._authServ.setCurrentUser(data);
+          console.log(data);
           const _user = this._authServ.getUserInfo();
           this.toastr.success(_user.UserName, 'Bienvenido');
           this._router.navigate(['/']);

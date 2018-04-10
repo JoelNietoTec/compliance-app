@@ -60,3 +60,7 @@ ul.sub-items {
 a.nav-link {
   border-radius: 0 !important;
 }
+
+small {
+  font-size: 70%;
+}
