@@ -78,7 +78,7 @@
                     {{ item | column: col.name | date: 'shortDate' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
-                    {{ item | column: col.name | date: 'd/MM/yyyy, h:mm a' : '+0600' }}
+                    {{ item | column: col.name | date: 'd/MM/yyyy, h:mm a' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'decimal'">
                     {{ item | column: col.name | number: '1.3-3' }}
@@ -138,7 +138,7 @@
                     {{ item | column: col.name | date: 'shortDate' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
-                    {{ item | column: col.name | date:'d/MM/yyyy, h:mm a' : '+0600' }}
+                    {{ item | column: col.name | date:'d/MM/yyyy, h:mm a' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'decimal'">
                     {{ item | column: col.name | number: '1.3-3' }}

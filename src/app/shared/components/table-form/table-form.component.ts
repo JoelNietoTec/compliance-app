@@ -15,4 +15,13 @@ export class TableFormComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private _util: UtilService) {}
 
   ngOnInit() {}
+
+  updateObject(event) {
+    this.fields.forEach(field => {
+      if (field.type === 'object') {
+        this.item[field.name] = this._util.filterByID(field.list, this.item[field.objectID]);
+        this.item[field.objectText] = this.item[field.name][field.listDisplay];
+      }
+    });
+  }
 }

@@ -12,6 +12,6 @@ export interface User {
 
 export interface UserProfile {
   ID?: number;
-  Name?: number;
-  EnglishName?: number;
+  Name?: string;
+  EnglishName?: string;
 }

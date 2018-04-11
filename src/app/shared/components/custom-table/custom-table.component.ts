@@ -102,7 +102,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   openModal() {
-    console.log(this._selectedItem);
     const modalRef = this.modalService.open(TableFormComponent);
     modalRef.result.then(
       result => {
@@ -169,7 +168,6 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
 
   selectItem(item: any) {
     this._selectedItem = Object.assign({}, this._selectedItem, item);
-    console.log(this._selectedItem);
     if (this.options.addMethod === 'modal') {
       this.openModal();
     }
