@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/users.service';
 import { User, UserProfile } from '../../../shared/models/users.model';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -14,7 +15,7 @@ export class UsersListComponent implements OnInit {
   _table: TableOptions = {};
   _profiles: UserProfile[];
 
-  constructor(private _userServ: UserService) {}
+  constructor(private _userServ: UserService, private toast: ToastsManager) {}
 
   ngOnInit() {
     this._profiles = [
@@ -59,5 +60,16 @@ export class UsersListComponent implements OnInit {
     this._userServ.getUsers().subscribe(data => {
       this._users = data;
     });
+  }
+
+  updateUser(user: User) {
+    this._userServ.updateUser(user.ID, user).subscribe(
+      data => {
+        this.toast.success(data.UserName, 'Usuario actualizado');
+      },
+      (err: Error) => {
+        this.toast.error(err.message, 'Ocurrió un error');
+      }
+    );
   }
 }

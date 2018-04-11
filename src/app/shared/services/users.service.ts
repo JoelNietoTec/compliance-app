@@ -26,6 +26,10 @@ export class UserService {
     return this._http.get<User>(`${this._usrURL}/${_id}`);
   }
 
+  updateUser(id: number, user: User): Observable<User> {
+    return this._http.put<User>(`${this._usrURL}/${id}`, JSON.stringify(user), { headers: this._headers });
+  }
+
   createUser(usr: User): Observable<User> {
     return this._http.post(this._usrURL, JSON.stringify(usr), { headers: this._headers });
   }

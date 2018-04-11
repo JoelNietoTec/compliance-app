@@ -1,5 +1,5 @@
-<app-card >
+<app-card>
   <div card-section="body">
-    <app-custom-table [options]="_table" [items]="_users"></app-custom-table>
+    <app-custom-table [options]="_table" [items]="_users" (editItem)="updateUser($event)"></app-custom-table>
   </div>
 </app-card>
