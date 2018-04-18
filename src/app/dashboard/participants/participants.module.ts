@@ -32,6 +32,7 @@ import { ParticipantProfileFormComponent } from './participant-profile-form/part
 import { ParticipantTransactionsFormComponent } from './participant-transactions-form/participant-transactions-form.component';
 import { ParticipantAlertsComponent } from './participant-alerts/participant-alerts.component';
 import { FinancialProfileComponent } from './financial-profile/financial-profile.component';
+import { ParticipantProductsComponent } from './participant-products/participant-products.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ParticipantsRoutingModule, SharedModule],
@@ -64,7 +65,8 @@ import { FinancialProfileComponent } from './financial-profile/financial-profile
     ParticipantProfileFormComponent,
     ParticipantTransactionsFormComponent,
     ParticipantAlertsComponent,
-    FinancialProfileComponent
+    FinancialProfileComponent,
+    ParticipantProductsComponent
   ],
   providers: [
     DecimalPipe

@@ -78,19 +78,19 @@ export class HomeComponent implements OnInit {
       title: {
         display: false,
         text: 'Distribución de Riesgo',
-        fontFamily: 'Poppins',
+        fontFamily: 'Nunito',
         fontSize: 12
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Poppins',
+          fontFamily: 'Nunito',
           boxWidth: 15,
           fontSize: 12
         }
       },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14
       }
     };
@@ -106,19 +106,19 @@ export class HomeComponent implements OnInit {
       title: {
         display: false,
         text: 'Tareas Diarias',
-        fontFamily: 'Poppins',
+        fontFamily: 'Nunito',
         fontSize: 14
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Poppins',
+          fontFamily: 'Nunito',
           boxWidth: 15,
           fontSize: 12
         }
       },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 12
       }
     };
@@ -137,18 +137,18 @@ export class HomeComponent implements OnInit {
       title: {
         display: true,
         text: 'Participantes por País',
-        fontFamily: 'Poppins',
+        fontFamily: 'Nunito',
         fontSize: 16
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Poppins',
+          fontFamily: 'Nunito',
           boxWidth: 20
         }
       },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14
       }
     };

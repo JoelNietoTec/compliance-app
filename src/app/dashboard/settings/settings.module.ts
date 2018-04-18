@@ -13,6 +13,7 @@ import { CountriesComponent } from './countries/countries.component';
 import { BanksComponent } from './banks/banks.component';
 import { FoundSourcesComponent } from './found-sources/found-sources.component';
 import { AccountTypesComponent } from './account-types/account-types.component';
+import { FinancialProductsComponent } from './financial-products/financial-products.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { AccountTypesComponent } from './account-types/account-types.component';
     NgbModule,
     SettingsRoutingModule
   ],
-  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent, CountriesComponent, BanksComponent, FoundSourcesComponent, AccountTypesComponent]
+  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent, CountriesComponent, BanksComponent, FoundSourcesComponent, AccountTypesComponent, FinancialProductsComponent]
 })
 export class SettingsModule { }

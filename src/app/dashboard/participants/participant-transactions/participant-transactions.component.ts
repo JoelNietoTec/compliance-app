@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { TransactionsService } from '../../../shared/services/transactions.service';
+import { UtilService } from '../../../shared/services/util.service';
 
 @Component({
   selector: 'participant-transactions',
@@ -27,11 +28,12 @@ export class ParticipantTransactionsComponent implements OnInit {
     private _profileServ: ParticipantProfilesService,
     private _tranServ: TransactionsService,
     private modal: NgbModal,
-    private toast: ToastsManager
+    private toast: ToastsManager,
+    private _util: UtilService
   ) {}
 
   ngOnInit() {
-    this._types = [{ ID: 1, Name: 'Ingreso' }, { ID: 2, Name: 'Egreso' }];
+    this._types = [{ ID: 1, Name: 'Ingreso/Pago' }, { ID: 2, Name: 'Desembolso' }];
 
     this._tranServ.getSources().subscribe(data => {
       this._sources = data;
@@ -68,16 +70,16 @@ export class ParticipantTransactionsComponent implements OnInit {
         objectID: 'TransactionSourceID'
       },
       { name: 'Title', title: 'Nombre' },
-      { name: 'Description', title: 'Descripción' },
+      { name: 'Description', title: 'Descripción', hidden: true, type: 'text' },
       {
-        name: 'Account',
-        title: 'Cuenta',
+        name: 'ProfileProduct',
+        title: 'Producto',
         type: 'object',
-        objectColumn: 'Account.Name',
-        list: this.profile.Accounts,
+        objectColumn: 'ProfileProduct.Name',
+        list: this.profile.Products,
         listID: 'ID',
         listDisplay: 'Name',
-        objectID: 'AccountID'
+        objectID: 'ProfileProductID'
       },
       { name: 'Date', title: 'Fecha', type: 'date' },
       { name: 'Amount', title: 'Monto', type: 'money' }
@@ -86,22 +88,8 @@ export class ParticipantTransactionsComponent implements OnInit {
 
   getTransactions() {
     this._tranServ.getTransactionsByProfile(this.profile.ID).subscribe(data => {
-      this._transactions = data;
+      this._transactions = this._util.sortBy(data, 'Date', true);
     });
-  }
-
-  open() {
-    // const modalRef = this.modal.open(ParticipantTransactionsFormComponent, { size: 'lg' });
-    // modalRef.result.then(
-    //   result => {
-    //     this.addTransaction();
-    //   },
-    //   dissmiss => {
-    //     this._newTransaction = {};
-    //   }
-    // );
-    // modalRef.componentInstance.currentTransaction = this._newTransaction;
-    // modalRef.componentInstance.profile = this.profile;
   }
 
   addTransaction(tran: Transaction) {
@@ -113,7 +101,6 @@ export class ParticipantTransactionsComponent implements OnInit {
         this._newTransaction = {};
         this.toast.success('Transacción registrada');
         this.updateProfile.emit();
-        // this.getTransactions();
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

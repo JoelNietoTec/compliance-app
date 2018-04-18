@@ -72,4 +72,15 @@ export class UsersListComponent implements OnInit {
       }
     );
   }
+
+  deleteUser(id: number) {
+    this._userServ.deleteUser(id).subscribe(
+      data => {
+        this.toast.info('Usuario eliminado');
+      },
+      (err: Error) => {
+        this.toast.error(err.message, 'Ocurrió un error');
+      }
+    );
+  }
 }

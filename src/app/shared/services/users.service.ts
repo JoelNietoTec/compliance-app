@@ -30,6 +30,10 @@ export class UserService {
     return this._http.put<User>(`${this._usrURL}/${id}`, JSON.stringify(user), { headers: this._headers });
   }
 
+  deleteUser(id: number) {
+    return this._http.delete(`${this._usrURL}/${id}`, { headers: this._headers });
+  }
+
   createUser(usr: User): Observable<User> {
     return this._http.post(this._usrURL, JSON.stringify(usr), { headers: this._headers });
   }

@@ -9,10 +9,10 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-3">
-            <span class="text-primary">
+            <!-- <span class="text-primary">
               Saldo
             </span>
-            <h6>$ {{ _profile.Total | number: '3.2'}}</h6>
+            <h6>$ {{ _profile.Total | number: '3.2'}}</h6> -->
           </div>
           <div class="col-md-3">
             <span class="text-primary">
@@ -22,31 +22,31 @@
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Tope Ingresos Mes
+              Tope Ingresos/Pagos Mes
             </span>
             <h6>$ {{ _profile.MonthlyIncomeLimit | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Tope Egresos Mes
+              Tope Desembolsos Mes
             </span>
             <h6>$ {{ _profile.MonthlyExpenseLimit | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Ingresos Año
+               Ingresos/Pagos Año
             </span>
             <h6>$ {{ _profile.IncomeYTD | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Egresos Año
+              Desembolsos Año
             </span>
             <h6>$ {{ _profile.ExpenseYTD | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Ingresos Mes
+              Ingresos/Pagos Mes
             </span>
             <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.IncomeMTD >= _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0, 'text-success':  _profile.IncomeMTD < _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0 }">
               $ {{ _profile.IncomeMTD | number: '3.2' }}
@@ -60,7 +60,7 @@
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-              Egresos Mes
+              Desembolsos Mes
             </span>
             <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.ExpenseMTD >= _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0, 'text-success': _profile.ExpenseMTD
             < _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit> 0 }">
@@ -80,7 +80,8 @@
         </div>
       </div>
     </div>
-    <participant-accounts [profile]="_profile" (updateProfile)="getProfile()"></participant-accounts>
+    <app-participant-products [profile]="_profile"></app-participant-products>
+    <!-- <participant-accounts [profile]="_profile" (updateProfile)="getProfile()"></participant-accounts> -->
     <participant-transactions [profile]="_profile" (updateProfile)="getProfile()"></participant-transactions>
   </div>
 </div>

@@ -125,7 +125,7 @@ export class IndividualFormComponent implements OnInit {
   saveIndividual() {
     this._individual.BirthDate = new Date(this._dateFormatter.format(this._individual.formBirthDate));
     if (!this.individual) {
-      // this.setNationalities();
+      this._individual.CreateDate = new Date();
       this._partServ.createParticipant(this._individual).subscribe(data => {
         this.toastr.success(data.ShortName, 'Individuo Creado');
         this._router.navigate(['app/participantes', data.ID]);

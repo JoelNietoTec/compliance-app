@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,500');
 
 body,
 button,
@@ -11,9 +11,9 @@ select.form-control,
 textarea,
 textarea.form-control,
 .tooltip {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .justify-content-end > .btn.btn-primary,

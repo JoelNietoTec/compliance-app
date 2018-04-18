@@ -70,7 +70,7 @@
           <small class="text-primary font-weight-bold">
             <i class="fas fa-user-plus"></i> Creado por
           </small>
-          <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'medium'}}</h6>
+          <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'd/MM/yyyy, h:mm a' }}</h6>
         </ng-template>
       </ngb-tab>
       <ngb-tab>

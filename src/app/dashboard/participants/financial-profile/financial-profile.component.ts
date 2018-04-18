@@ -18,7 +18,9 @@ export class FinancialProfileComponent implements OnInit {
   _sourceChart: any;
   _sourceData: any[] = [];
   _accountData: any[] = [];
+  _productData: any[] = [];
   _accountChart: any;
+  _productChart: any;
   _monthlyData: any[] = [];
   _chart: any = [];
 
@@ -30,6 +32,7 @@ export class FinancialProfileComponent implements OnInit {
       this.initCharts();
       this.initSourceChart();
       this.initAccountChart();
+      this.initProductChart();
     });
   }
 
@@ -39,7 +42,7 @@ export class FinancialProfileComponent implements OnInit {
       let item = { month: month.shortName, income: 0, expense: 0 };
       let amount: number = 0;
       items.forEach(element => {
-        if (element.Type === 'Ingresos') {
+        if (element.Type === 'Ingreso/Pago') {
           item.income = item.income + element.Amount;
         } else {
           item.expense = item.expense + element.Amount;
@@ -52,9 +55,9 @@ export class FinancialProfileComponent implements OnInit {
     let expenses = this._monthlyData.map(x => x.expense);
 
     const _options = {
-      legend: { labels: { fontFamily: 'Poppins', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
+      legend: { labels: { fontFamily: 'Nunito', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 12,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -67,7 +70,7 @@ export class FinancialProfileComponent implements OnInit {
           {
             ticks: {
               fontStyle: 'bold',
-              fontFamily: 'Poppins',
+              fontFamily: 'Nunito',
               callback: (value, index, values) => {
                 return '$' + this._pipe.transform(value, '1.0');
               }
@@ -77,28 +80,34 @@ export class FinancialProfileComponent implements OnInit {
         xAxes: [
           {
             ticks: {
-            fontStyle: 'bold',
-            fontFamily: 'Poppins'
+              fontStyle: 'bold',
+              fontFamily: 'Nunito'
+            }
           }
-        }
         ]
       }
     };
 
     this._chart = new Chart('canvas', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: labels,
         datasets: [
           {
-            label: 'Ingresos',
+            label: 'Ingresos/Pagos',
             data: incomes,
-            backgroundColor: 'rgba(54,162,235,0.6)'
+            borderColor: 'rgba(54,162,235,0.6)',
+            pointBackgroundColor: 'rgba(54,162,235,0.6)',
+            backgroundColor: 'rgba(54,162,235,0.6)',
+            fill: false
           },
           {
-            label: 'Egresos',
+            label: 'Desembolsos',
             data: expenses,
-            backgroundColor: 'rgba(255,99,132,0.6)'
+            borderColor: 'rgba(255,99,132,0.6)',
+            pointBackgroundColor: 'rgba(255,99,132,0.6)',
+            backgroundColor: 'rgba(255,99,132,0.6)',
+            fill: false
           }
         ]
       },
@@ -117,9 +126,9 @@ export class FinancialProfileComponent implements OnInit {
       this._sourceData.push(item);
     });
     this._sourceChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Poppins', boxWidth: 15, fontSize: 12 } },
+      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -141,9 +150,33 @@ export class FinancialProfileComponent implements OnInit {
       this._accountData.push(item);
     });
     this._accountChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Poppins', boxWidth: 15, fontSize: 12 } },
+      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
       tooltips: {
-        bodyFontFamily: 'Poppins',
+        bodyFontFamily: 'Nunito',
+        bodyFontSize: 14,
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const value = data.datasets[0].data[tooltipItem.index];
+            return '$ ' + this._pipe.transform(value, '1.2');
+          }
+        }
+      }
+    };
+  }
+  initProductChart() {
+    const products = this._util.mapDistinct(this._dashboard, 'FinancialProduct');
+    products.forEach(product => {
+      let item = { product: product, amount: 0 };
+      let items = this._dashboard.filter(x => x.FinancialProduct === product);
+      items.forEach(element => {
+        item.amount = item.amount + element.Amount;
+      });
+      this._productData.push(item);
+    });
+    this._productChart = {
+      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
+      tooltips: {
+        bodyFontFamily: 'Nunito',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {

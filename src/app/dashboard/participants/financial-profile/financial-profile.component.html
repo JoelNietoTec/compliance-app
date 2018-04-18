@@ -18,8 +18,11 @@
     <div class="col-md-6">
       <app-chart-card *ngIf="_sourceChart" [title]="'Transacciones por Fuente'" [items]="_sourceData" [data]="'amount'" [label]="'source'" [type]="'pie'" [options]="_sourceChart"></app-chart-card>
     </div>
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <app-chart-card *ngIf="_accountChart" [title]="'Transacciones por Cuenta'" [items]="_accountData" [data]="'amount'" [label]="'account'" [type]="'pie'" [options]="_accountChart"></app-chart-card>
+    </div> -->
+    <div class="col-md-6">
+      <app-chart-card *ngIf="_productChart" [title]="'Transacciones por Tipo Producto'" [items]="_productData" [data]="'amount'" [label]="'product'" [type]="'pie'" [options]="_productChart"></app-chart-card>
     </div>
   </div>
 </div>

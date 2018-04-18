@@ -6,6 +6,11 @@
   padding-bottom: 0;
 }
 
+.dropdown-menu.show {
+  overflow-y: scroll;
+  max-height: 600px;
+}
+
 .dropdown-item {
   padding: 15px 1.5rem;
   border-bottom: 1px solid #f6f6f6;

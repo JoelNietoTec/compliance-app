@@ -9,6 +9,28 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AgmCoreModule } from '@agm/core';
 import { BreadcrumbsModule } from 'ng2-breadcrumbs';
 
+// Components
+import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
+import { CardComponent } from './components/card/card.component';
+import { SortIconComponent } from './components/sort-icon/sort-icon.component';
+import { QuickCardComponent } from './components/quick-card/quick-card.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
+import { TableFormComponent } from './components/table-form/table-form.component';
+import { ChartCardComponent } from './components/chart-card/chart-card.component';
+
+// Pipes
+import { ScorePipe } from './pipes/score.pipe';
+import { ColumnPipe } from './pipes/column.pipe';
+
+// Directives
+import { SaveButtonComponent } from './components/save-button/save-button.component';
+import { CustomTableComponent } from './components/custom-table/custom-table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { BooleanPipe } from './pipes/boolean.pipe';
+import { MapComponent } from './components/map/map.component';
+import { DateInputComponent } from './components/date-input/date-input.component';
+
 // Model Services
 import { GendersService } from './services/genders.service';
 import { ParticipantsService } from './services/participants.service';
@@ -39,28 +61,8 @@ import { ParticipantAlertsService } from './services/participant-alerts.service'
 import { SanctionListsService } from './services/sanction-lists.service';
 import { TransactionsService } from './services/transactions.service';
 import { ProfileAccountsService } from './services/profile-accounts.service';
+import { FinancialProductsService } from './services/financial-products.service';
 
-// Components
-import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
-import { CardComponent } from './components/card/card.component';
-import { SortIconComponent } from './components/sort-icon/sort-icon.component';
-import { QuickCardComponent } from './components/quick-card/quick-card.component';
-import { TaskCardComponent } from './components/task-card/task-card.component';
-import { TaskFormComponent } from './components/task-form/task-form.component';
-import { TableFormComponent } from './components/table-form/table-form.component';
-import { ChartCardComponent } from './components/chart-card/chart-card.component';
-
-// Pipes
-import { ScorePipe } from './pipes/score.pipe';
-import { ColumnPipe } from './pipes/column.pipe';
-
-// Directives
-import { SaveButtonComponent } from './components/save-button/save-button.component';
-import { CustomTableComponent } from './components/custom-table/custom-table.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { BooleanPipe } from './pipes/boolean.pipe';
-import { MapComponent } from './components/map/map.component';
-import { DateInputComponent } from './components/date-input/date-input.component';
 
 @NgModule({
   imports: [
@@ -129,6 +131,7 @@ import { DateInputComponent } from './components/date-input/date-input.component
     SanctionListsService,
     TransactionsService,
     ProfileAccountsService,
+    FinancialProductsService,
     AuthGuard,
     DatePipe
   ],

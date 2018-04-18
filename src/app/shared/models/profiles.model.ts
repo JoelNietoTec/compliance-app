@@ -1,4 +1,5 @@
-import { Participant } from "./participants.model";
+import { Participant } from './participants.model';
+import { ProfileProduct } from './products.model';
 
 export interface ParticipantProfile {
   ID?: number;
@@ -6,6 +7,8 @@ export interface ParticipantProfile {
   Total?: number;
   ModifiedDate?: Date;
   Accounts?: ProfileAccount[];
+  Products?: ProfileProduct[];
+  Transactions?: Transaction[];
   MonthlyIncomeLimit?: number;
   MonthlyExpenseLimit?: number;
   IncomeYTD?: number;
@@ -37,6 +40,8 @@ export interface Transaction {
   TransactionTypeID?: number;
   ParticipantID?: number;
   Participant?: Participant;
+  ProfileProductID?: number;
+  ProfileProduct?: ProfileProduct;
   TransactionSourceID?: number;
   TransactionSource?: TransactionSource;
   TransactionType?: TransactionType;
@@ -80,5 +85,8 @@ export interface FinancialDashboard {
   Account?: string;
   Source?: string;
   Bank?: string;
+  ProfileProduct?: string;
+  FinancialProduct?: string;
+  ProductType?: string;
   Amount?: number;
 }

@@ -80,6 +80,7 @@ export class EntityFormComponent implements OnInit {
   saveEntity() {
     this._entity.BirthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
     if (!this.entity) {
+      this._entity.CreateDate = new Date();
       this._partServ.createParticipant(this._entity).subscribe(data => {
         this.toastr.success(data.ShortName, 'Entidad creada');
         this._router.navigate(['app/participantes', data.ID]);
