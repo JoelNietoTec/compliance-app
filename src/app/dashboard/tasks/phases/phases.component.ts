@@ -41,6 +41,12 @@ export class PhasesComponent implements OnInit {
     });
   }
 
+  updatePhase() {
+    this.roadmapServ.updatePhase(this._currentPhase.ID, this._currentPhase).subscribe(data => {
+      this.toast.success('Fase editada exitosamente');
+    });
+  }
+
   open() {
     const modalRef = this.modal.open(PhasesFormComponent);
     modalRef.result.then(
@@ -54,10 +60,17 @@ export class PhasesComponent implements OnInit {
     modalRef.componentInstance.currentPhase = this._currentPhase;
   }
 
+  selectPhase(phase: Phase) {
+    this._currentPhase = Object.assign({}, this._currentPhase, phase);
+    this.open();
+  }
+
   save() {
     if (!this._currentPhase.ID) {
       this.createPhase();
       this._currentPhase = {};
+    } else {
+      this.updatePhase();
     }
   }
 }

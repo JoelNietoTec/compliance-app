@@ -17,6 +17,7 @@ export class PhasesFormComponent implements OnInit {
   constructor(private _dateFormatter: NgbDateParserFormatter, _roadmapServ: RoadmapService, public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
+    console.log(this.currentPhase);
     if (this.currentPhase.StartDate) {
       this._startDate = this._dateFormatter.parse(this.currentPhase.StartDate.toString());
     }

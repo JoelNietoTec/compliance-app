@@ -1,10 +1,40 @@
 <div class="container">
   <app-loading-modal *ngIf="!_documents"></app-loading-modal>
+  <table class="table table-sm table-squared table-stripes">
+    <thead>
+      <tr>
+        <th>Nro. Doc</th>
+        <th>Tipo</th>
+        <th>Fec. Expedición</th>
+        <th>Fec. Expiración</th>
+        <th>País Expedición</th>
+        <th>Documento</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of _documents">
+        <td>{{ doc.DocumentCode }}</td>
+        <td>{{ doc.DocumentType.Name }}</td>
+        <td>{{ doc.ExpeditionDate | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ doc.ExpirationDate | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ doc.Country.Name }}</td>
+        <td><a [href]="_conn.fileURL + doc.FilePath" [download]="true" [target]="'_blank'">{{ doc.FilePath }}</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
   <ng-container *ngFor="let document of _documents; let i = index">
     <div class="card">
       <div class="card-header">Documento {{ i + 1 }}
-        <span class="pull-right fa-lg text-danger" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)">
-          <i class="far fa-trash-alt"></i>
+        <span class="pull-right">
+          <span class="fa-lg text-success" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)">
+            <i class="fas fa-pencil-alt   fa-fw"></i>
+          </span>
+          <span class="fa-lg text-danger" placement="top" ngbTooltip="Eliminar" (click)="removeDoc(document.ID)">
+            <i class="far fa-trash-alt"></i>
+          </span>
         </span>
       </div>
       <div class="card-body">

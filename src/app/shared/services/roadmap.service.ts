@@ -41,6 +41,10 @@ export class RoadmapService {
     return this._http.post<Phase>(this._phaseURL, JSON.stringify(phase), { headers: this._headers });
   }
 
+  updatePhase(id: number, phase: Phase) {
+    return this._http.put(`${this._phaseURL}/${id}`, JSON.stringify(phase), { headers: this._headers });
+  }
+
   createMilestone(milestone: Milestone): Observable<Milestone> {
     return this._http.post<Milestone>(this._milesURL, JSON.stringify(milestone), { headers: this._headers });
   }

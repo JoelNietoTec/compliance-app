@@ -47,7 +47,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   _originalCount: number;
   _pagedItems: Array<any> = [];
   _currentPage: any = {};
-  _searchText: string = '';
+  _searchText = '';
   _filteredItems: Array<any>;
   _searchColumns: Array<string> = [];
   _pageSizes: Array<number> = [5, 10, 15, 20, 25];
@@ -317,6 +317,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     const buf: ArrayBuffer = new ArrayBuffer(s.length);
     const view: Uint8Array = new Uint8Array(buf);
     for (let i = 0; i !== s.length; ++i) {
+      // tslint:disable-next-line:no-bitwise
       view[i] = s.charCodeAt(i) & 0xff;
     }
     return buf;
@@ -346,7 +347,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
           if (column.type === 'object') {
             object[column.title] = this._util.getProperty(item, column.objectColumn);
           } else if (column.type === 'date') {
-            object[column.title] = this.datePipe.transform(this._util.getProperty(item, column.name), 'mediumDate');
+            object[column.title] = this.datePipe.transform(this._util.getProperty(item, column.name), 'dd/MM/yyyy');
           } else {
             object[column.title] = this._util.getProperty(item, column.name);
           }
