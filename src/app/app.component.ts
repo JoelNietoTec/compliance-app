@@ -1,5 +1,6 @@
-import { Component, ViewContainerRef } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr';
+import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
+// import { ToastrService } from 'ngx-toastr';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,17 @@ import { ToastsManager } from 'ng2-toastr';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
+
   title = 'app works!';
 
   public viewContainerRef: ViewContainerRef;
 
-  public constructor(public toastr: ToastsManager, viewContainerRef: ViewContainerRef) {
-    this.viewContainerRef = viewContainerRef;
+  public constructor(private toastrService: ToastrService, viewContainerRef: ViewContainerRef) {
+    // this.viewContainerRef = viewContainerRef;
 
-    this.toastr.setRootViewContainerRef(viewContainerRef);
+    // this.toastr.setRootViewContainerRef(viewContainerRef);
+
+    toastrService.overlayContainer = this.toastContainer;
   }
 }

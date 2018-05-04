@@ -3,7 +3,7 @@ import { NgbModal, NgbDateParserFormatter, NgbDateStruct, ModalDismissReasons, N
 import { UtilService } from '../../../shared/services/util.service';
 import { RoadmapService } from '../../../shared/services/roadmap.service';
 import { Roadmap } from '../../../shared/models/roadmap.model';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { RoadmapsFormComponent } from '../roadmaps-form/roadmaps-form.component';
 
 @Component({
@@ -28,7 +28,7 @@ export class RoadmapComponent implements OnInit {
     private _roadmapServ: RoadmapService,
     private modal: NgbModal,
     private dateFormatter: NgbDateParserFormatter,
-    private toast: ToastsManager,
+    private toast: ToastrService,
     public activeModal: NgbActiveModal
   ) {}
 

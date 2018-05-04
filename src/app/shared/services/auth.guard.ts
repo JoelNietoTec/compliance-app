@@ -3,7 +3,7 @@ import { Router, ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterSt
 
 import { AuthService } from './auth.service';
 import { ParticipantAlertsService } from './participant-alerts.service';
-import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { ParticipantAlert } from '../models/alerts.model';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     private _router: Router,
     private _alertServ: ParticipantAlertsService,
     private _authServ: AuthService,
-    protected localStorage: AsyncLocalStorage
+    protected localStorage: LocalStorage
   ) {}
 
   canActivate() {
@@ -27,8 +27,6 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivateChild() {
-    // return true;
-
     if (localStorage.getItem('currentUser')) {
       this._authServ.initLocalInfo();
       this.getAlerts();

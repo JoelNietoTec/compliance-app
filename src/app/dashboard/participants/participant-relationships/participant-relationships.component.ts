@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { ParticipantRelationship, RelationshipType } from '../../../shared/models/relationships.model';
 import { Participant } from '../../../shared/models/participants.model';
@@ -27,7 +27,7 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
     private _partService: ParticipantsService,
     private _relService: RelationshipsService,
     private _util: UtilService,
-    private toastr: ToastsManager
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {

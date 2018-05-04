@@ -4,7 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { ConnectionService } from './connection.service';
 import { ParticipantAlert } from '../models/alerts.model';
-import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Participant } from '../models/participants.model';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class ParticipantAlertsService {
   _alertsURL: string;
   _participantsURL: String;
   _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  constructor(private _http: HttpClient, private _conn: ConnectionService, protected localStorage: AsyncLocalStorage) {
+  constructor(private _http: HttpClient, private _conn: ConnectionService, protected localStorage: LocalStorage) {
     this._alertsURL = _conn.APIUrl + 'participantalerts';
     this._participantsURL = _conn.APIUrl + 'participants';
   }

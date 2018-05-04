@@ -6,17 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
-import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 import localeEs from '@angular/common/locales/es-MX';
-
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(localeEs);
 
 // Packages Dependencies
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { ToastOptions } from 'ng2-toastr';
-import { ToastOption } from './shared/services/toast-options';
 import { CustomDatepickerI18n, I18n } from './shared/services/datepicker-i18n';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbsModule } from 'ng2-breadcrumbs';
@@ -44,10 +40,10 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ChartsModule,
     CalendarModule.forRoot(),
-    ToastModule.forRoot(),
+    // ToastModule.forRoot(),
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
-    BreadcrumbsModule,
-    AsyncLocalStorageModule
+    BreadcrumbsModule
   ],
   providers: [
     {
@@ -57,10 +53,6 @@ import { AppRoutingModule } from './app-routing.module';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    },
-    {
-      provide: ToastOptions,
-      useClass: ToastOption
     },
     I18n,
     {

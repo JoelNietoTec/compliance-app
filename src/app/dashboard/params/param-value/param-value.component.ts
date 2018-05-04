@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamSubValue, ParamValue } from '../../../shared/models/params.model';
@@ -18,7 +18,7 @@ export class ParamValueComponent implements OnInit {
   constructor(
     private _util: UtilService,
     private _subValService: ParamSubValuesService,
-    private toastr: ToastsManager
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {

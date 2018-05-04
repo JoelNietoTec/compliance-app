@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { SanctionsService } from '../../../shared/services/sanctions.service';
@@ -31,7 +31,7 @@ export class FilesComponent implements OnInit {
   _searching: Boolean = false;
 
   constructor(
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private modalService: NgbModal,
     private _sanctionServ: SanctionsService,
     private _compService: ComparisonsService,

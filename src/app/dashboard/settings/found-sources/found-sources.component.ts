@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { TransactionSource } from '../../../shared/models/profiles.model';
 import { TransactionsService } from '../../../shared/services/transactions.service';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-found-sources',
@@ -13,7 +13,7 @@ export class FoundSourcesComponent implements OnInit {
   _table: TableOptions = {};
   _sources: TransactionSource[];
 
-  constructor(private _tranServ: TransactionsService, private toast: ToastsManager) {}
+  constructor(private _tranServ: TransactionsService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._table.title = 'Origen Fondos';

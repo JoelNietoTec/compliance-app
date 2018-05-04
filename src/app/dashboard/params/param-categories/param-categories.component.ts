@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { ParamTable, ParamCategory, ParamMatrix } from '../../../shared/models/params.model';
 import { ParamCategoriesService } from '../../../shared/services/param-categories.service';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
-import { ToastModule } from 'ng2-toastr/src/toast.module';
 
 @Component({
   selector: 'param-categories',
@@ -21,7 +20,7 @@ export class ParamCategoriesComponent implements OnInit {
   _currentCategory: ParamCategory;
   _newCategories: ParamCategory[] = [];
 
-  constructor(private _categoriesService: ParamCategoriesService, private toast: ToastsManager) {}
+  constructor(private _categoriesService: ParamCategoriesService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._table.columns = [

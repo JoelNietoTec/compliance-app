@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/users.model';
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   _invalid: Boolean = false;
   _loading: Boolean = false;
 
-  constructor(private _authServ: AuthService, private _router: Router, private toastr: ToastsManager) {}
+  constructor(private _authServ: AuthService, private _router: Router, private toastr: ToastrService) {}
 
   ngOnInit() {
     if (this._authServ.isLogged()) {

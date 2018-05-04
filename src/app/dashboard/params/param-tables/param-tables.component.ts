@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
@@ -16,7 +16,7 @@ export class ParamTablesComponent implements OnInit {
   tables: Array<ParamTable>;
   _tableTypes: Array<TableType>;
 
-  constructor(private _tablesService: ParamTablesService, private _util: UtilService, private toastr: ToastsManager) {}
+  constructor(private _tablesService: ParamTablesService, private _util: UtilService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._table.title = 'Tablas';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Phase, Milestone, Recurrence } from '../../../shared/models/roadmap.model';
 import { UtilService } from '../../../shared/services/util.service';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { RoadmapService } from '../../../shared/services/roadmap.service';
 import { NgbModal, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
@@ -22,7 +22,7 @@ export class MilestonesComponent implements OnInit {
 
   constructor(
     private _util: UtilService,
-    private toast: ToastsManager,
+    private toast: ToastrService,
     private roadmapServ: RoadmapService,
     private modal: NgbModal,
     private dateFormatter: NgbDateParserFormatter

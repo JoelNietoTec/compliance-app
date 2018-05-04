@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { CountriesService } from '../../../shared/services/countries.service';
 import { Country } from '../../../shared/models/country.model';
@@ -15,7 +15,7 @@ export class CountriesComponent implements OnInit {
   _options: TableOptions = {};
   _countries: Array<Country>;
 
-  constructor(private _countryServ: CountriesService, private toastr: ToastsManager) {}
+  constructor(private _countryServ: CountriesService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._options.columns = [

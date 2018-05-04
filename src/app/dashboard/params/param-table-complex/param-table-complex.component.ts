@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamValuesService } from '../../../shared/services/param-values.service';
@@ -20,7 +20,7 @@ export class ParamTableComplexComponent implements OnInit {
   _editing: Boolean;
   _values: Array<ParamValue>;
 
-  constructor(private _tableService: ParamTablesService, private _valueService: ParamValuesService, private toastr: ToastsManager) {}
+  constructor(private _tableService: ParamTablesService, private _valueService: ParamValuesService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._valueService.getValuesByTable(this.table.ID).subscribe(data => {

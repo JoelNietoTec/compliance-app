@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/users.service';
 import { User, UserProfile } from '../../../shared/models/users.model';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -15,7 +15,7 @@ export class UsersListComponent implements OnInit {
   _table: TableOptions = {};
   _profiles: UserProfile[];
 
-  constructor(private _userServ: UserService, private toast: ToastsManager) {}
+  constructor(private _userServ: UserService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._profiles = [

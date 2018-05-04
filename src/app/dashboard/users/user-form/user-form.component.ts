@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, Form, FormControl, FormGroup, FormBuilder, EmailValidator } from '@angular/forms';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { User, UserProfile } from '../../../shared/models/users.model';
 import { UserService } from '../../../shared/services/users.service';
@@ -16,7 +16,7 @@ export class UserFormComponent implements OnInit {
   _user: User = {};
   _profiles: UserProfile[];
 
-  constructor(private _fb: FormBuilder, private _userServ: UserService, private _router: Router, private toastr: ToastsManager) {}
+  constructor(private _fb: FormBuilder, private _userServ: UserService, private _router: Router, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._profiles = [

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { SanctionsService } from '../../../shared/services/sanctions.service';
-import {TableOptions} from '../../../shared/components/custom-table/custom-table.options';
+import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { UtilService } from '../../../shared/services/util.service';
 import { Sanction, List } from '../../../shared/models/sanctions.model';
 
@@ -20,15 +20,15 @@ export class DiscardsListComponent implements OnInit {
   _pager: any = {};
   _table: TableOptions = {};
 
-  constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastsManager) {}
+  constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._table.columns = [
-      {name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true},
-      {name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true},
-      {name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true},
-      {name: 'Term4', title: 'Term. 4', type: 'text', sortable: true, filterable: true},
-      {name: 'Term5', title: 'Term. 5', type: 'text', sortable: true, filterable: true}
+      { name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true },
+      { name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true },
+      { name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true },
+      { name: 'Term4', title: 'Term. 4', type: 'text', sortable: true, filterable: true },
+      { name: 'Term5', title: 'Term. 5', type: 'text', sortable: true, filterable: true }
     ];
 
     this._table.pageable = true;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { Document, ParticipantDocument, DocumentType } from '../../../shared/models/documents.models';
 import { UtilService } from '../../../shared/services/util.service';
@@ -22,7 +22,7 @@ export class ParticipantDocumentsComponent implements OnInit {
   constructor(
     private _docServ: DocumentsService,
     private _util: UtilService,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     public _conn: ConnectionService
   ) {}
 

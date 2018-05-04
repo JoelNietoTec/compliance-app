@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { Task, TaskStatus } from '../../../shared/models/tasks.model';
 import { TasksService } from '../../../shared/services/tasks.service';
@@ -33,7 +33,7 @@ export class UsersTasksComponent implements OnInit {
     private _taskService: TasksService,
     private _dateFormatter: NgbDateParserFormatter,
     private _util: UtilService,
-    private toastr: ToastsManager
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {

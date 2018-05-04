@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { Sanction, Discard, DiscardMatch, List } from '../../../shared/models/sanctions.model';
 import { SanctionsService } from '../../../shared/services/sanctions.service';
@@ -17,7 +17,7 @@ export class MatchesComponent implements OnInit {
   _matches: Array<DiscardMatch> = [];
   _table: TableOptions = {};
 
-  constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastsManager) {}
+  constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._sanctionServ.getDiscards().subscribe(data => {

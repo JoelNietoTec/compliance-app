@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { UtilService } from '../../../shared/services/util.service';
 import { ComparisonsService } from '../../../shared/services/comparisons.service';
@@ -23,7 +23,7 @@ export class FilesMatchesComponent implements OnInit {
     private _util: UtilService,
     private _compService: ComparisonsService,
     private _alertService: ParticipantAlertsService,
-    private toastr: ToastsManager
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {

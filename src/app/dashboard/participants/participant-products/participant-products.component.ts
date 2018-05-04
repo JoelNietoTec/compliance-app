@@ -3,7 +3,7 @@ import { ParticipantProfile } from '../../../shared/models/profiles.model';
 import { FinancialProductsService } from '../../../shared/services/financial-products.service';
 import { FinancialProduct, ProfileProduct } from '../../../shared/models/products.model';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-participant-products',
@@ -16,7 +16,7 @@ export class ParticipantProductsComponent implements OnInit {
   _types: FinancialProduct[];
   _table: TableOptions = {};
 
-  constructor(private _prodServ: FinancialProductsService, private toast: ToastsManager) {}
+  constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._prodServ.getProducts().subscribe(data => {

@@ -5,7 +5,7 @@ import { UtilService } from '../../../shared/services/util.service';
 import { ParticipantAlert } from '../../../shared/models/alerts.model';
 import { ParticipantAlertsService } from '../../../shared/services/participant-alerts.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ParticipantAlertsComponent } from '../participant-alerts/participant-alerts.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class ParticipantSanctionsComponent implements OnInit {
     private _compServ: ComparisonsService,
     private _alertService: ParticipantAlertsService,
     private modal: NgbModal,
-    private toast: ToastsManager
+    private toast: ToastrService
   ) {}
 
   ngOnInit() {

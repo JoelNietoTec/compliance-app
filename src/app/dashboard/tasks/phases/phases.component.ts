@@ -3,7 +3,7 @@ import { Roadmap, Phase } from '../../../shared/models/roadmap.model';
 import { UtilService } from '../../../shared/services/util.service';
 import { RoadmapService } from '../../../shared/services/roadmap.service';
 import { NgbModal, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { PhasesFormComponent } from '../phases-form/phases-form.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class PhasesComponent implements OnInit {
     private roadmapServ: RoadmapService,
     private modal: NgbModal,
     private dateFormatter: NgbDateParserFormatter,
-    private toast: ToastsManager
+    private toast: ToastrService
   ) {}
 
   ngOnInit() {}

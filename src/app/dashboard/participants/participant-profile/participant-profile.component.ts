@@ -3,7 +3,7 @@ import { ParticipantProfilesService } from '../../../shared/services/participant
 import { Participant } from '../../../shared/models/participants.model';
 import { ParticipantProfile } from '../../../shared/models/profiles.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ParticipantProfileFormComponent } from '../participant-profile-form/participant-profile-form.component';
 import { ParticipantAlertsService } from '../../../shared/services/participant-alerts.service';
 import { ParticipantAlert } from '../../../shared/models/alerts.model';
@@ -24,7 +24,7 @@ export class ParticipantProfileComponent implements OnInit {
     private _profileServ: ParticipantProfilesService,
     private _alertServ: ParticipantAlertsService,
     public modal: NgbModal,
-    private toast: ToastsManager
+    private toast: ToastrService
   ) {}
 
   ngOnInit() {

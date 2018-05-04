@@ -3,7 +3,7 @@ import { ParticipantProfile, Transaction, TransactionSource, TransactionType } f
 import { ParticipantProfilesService } from '../../../shared/services/participant-profiles.service';
 import { ParticipantTransactionsFormComponent } from '../participant-transactions-form/participant-transactions-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { TransactionsService } from '../../../shared/services/transactions.service';
 import { UtilService } from '../../../shared/services/util.service';
@@ -28,7 +28,7 @@ export class ParticipantTransactionsComponent implements OnInit {
     private _profileServ: ParticipantProfilesService,
     private _tranServ: TransactionsService,
     private modal: NgbModal,
-    private toast: ToastsManager,
+    private toast: ToastrService,
     private _util: UtilService
   ) {}
 

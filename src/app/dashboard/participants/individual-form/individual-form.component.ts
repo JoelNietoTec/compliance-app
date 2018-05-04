@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
@@ -50,7 +50,7 @@ export class IndividualFormComponent implements OnInit {
     private _util: UtilService,
     private _countryServ: CountriesService,
     private _map: MapsService,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private _router: Router
   ) {
     this._genders = [

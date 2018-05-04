@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamValuesService } from '../../../shared/services/param-values.service';
@@ -22,7 +22,7 @@ export class ParamTableSimpleComponent implements OnInit {
   constructor(
     private _tableService: ParamTablesService,
     private _valueServ: ParamValuesService,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private _util: UtilService
   ) {}
 

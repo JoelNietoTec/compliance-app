@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { AccountType } from '../../../shared/models/profiles.model';
 import { ProfileAccountsService } from '../../../shared/services/profile-accounts.service';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-types',
@@ -13,7 +13,7 @@ export class AccountTypesComponent implements OnInit {
   _table: TableOptions = {};
   _types: AccountType[];
 
-  constructor(private _typeServ: ProfileAccountsService, private toast: ToastsManager) {}
+  constructor(private _typeServ: ProfileAccountsService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._table.title = 'Tipos Producto';

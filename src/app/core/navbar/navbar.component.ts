@@ -4,7 +4,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/users.model';
 import { ParticipantAlertsService } from '../../shared/services/participant-alerts.service';
 import { ParticipantAlert } from '../../shared/models/alerts.model';
-import { AsyncLocalStorageModule, AsyncLocalStorage } from 'angular-async-local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { UtilService } from '../../shared/services/util.service';
 
 export interface UserAlert extends ParticipantAlert {
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private _auth: AuthService,
-    protected localStorage: AsyncLocalStorage,
+    protected localStorage: LocalStorage,
     private _util: UtilService,
     private _alertService: ParticipantAlertsService
   ) {}

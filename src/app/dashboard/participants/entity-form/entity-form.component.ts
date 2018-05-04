@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
@@ -39,7 +39,7 @@ export class EntityFormComponent implements OnInit {
     private _partServ: ParticipantsService,
     private _countryServ: CountriesService,
     private _dateFormatter: NgbDateParserFormatter,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private _util: UtilService,
     private _map: MapsService,
     private _router: Router

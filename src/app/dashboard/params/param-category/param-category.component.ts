@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ParamCategory, ParamTable, Param } from '../../../shared/models/params.model';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamsService } from '../../../shared/services/params.service';
@@ -20,7 +20,7 @@ export class ParamCategoryComponent implements OnInit {
   _header;
   _customTable: TableOptions = {};
 
-  constructor(private _paramService: ParamsService, private toastr: ToastsManager) {
+  constructor(private _paramService: ParamsService, private toastr: ToastrService) {
     this._param = {};
   }
 

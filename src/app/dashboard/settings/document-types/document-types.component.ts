@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { DocumentType } from '../../../shared/models/documents.models';
@@ -16,7 +16,7 @@ export class DocumentTypesComponent implements OnInit {
   _newType: DocumentType = {};
   _table: TableOptions = {};
 
-  constructor(private _docServ: DocumentsService, private toastr: ToastsManager) {}
+  constructor(private _docServ: DocumentsService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._table.columns = [

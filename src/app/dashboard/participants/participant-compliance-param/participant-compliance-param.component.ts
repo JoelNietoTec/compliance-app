@@ -8,7 +8,7 @@ import { UtilService } from '../../../shared/services/util.service';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamValuesService } from '../../../shared/services/param-values.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'compliance-param',
@@ -39,7 +39,7 @@ export class ParticipantComplianceParamComponent implements OnInit {
     private _partService: ParticipantsService,
     private _valService: ParamValuesService,
     private _tableServ: ParamTablesService,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private _router: Router
   ) {}
 

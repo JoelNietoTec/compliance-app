@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { RelationshipType } from '../../../shared/models/relationships.model';
 import { RelationshipsService } from '../../../shared/services/relationships.service';
@@ -16,7 +16,7 @@ export class RelationshipTypesComponent implements OnInit {
   _currentType: RelationshipType = {};
   _table: TableOptions = {};
 
-  constructor(private _relService: RelationshipsService, private toastr: ToastsManager) {}
+  constructor(private _relService: RelationshipsService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._table.columns = [

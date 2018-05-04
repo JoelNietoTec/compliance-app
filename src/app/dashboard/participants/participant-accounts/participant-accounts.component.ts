@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 import { ParticipantProfile, ProfileAccount } from '../../../shared/models/profiles.model';
 import { ParticipantAccountsFormComponent } from '../participant-accounts-form/participant-accounts-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ParticipantProfilesService } from '../../../shared/services/participant-profiles.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class ParticipantAccountsComponent implements OnInit {
 
   _currentAccount: ProfileAccount = {};
 
-  constructor(private modal: NgbModal, private _profilesService: ParticipantProfilesService, private toast: ToastsManager) {}
+  constructor(private modal: NgbModal, private _profilesService: ParticipantProfilesService, private toast: ToastrService) {}
 
   ngOnInit() {}
 

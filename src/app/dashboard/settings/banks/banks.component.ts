@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BanksService } from '../../../shared/services/banks.service';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Bank, BankType } from '../../../shared/models/profiles.model';
 
 @Component({
@@ -14,7 +14,7 @@ export class BanksComponent implements OnInit {
   _banks: Bank[];
   _types: BankType[];
 
-  constructor(private _bankService: BanksService, private toast: ToastsManager) {}
+  constructor(private _bankService: BanksService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._types = [

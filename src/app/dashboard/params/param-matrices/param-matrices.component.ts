@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamMatrix, MatrixType } from '../../../shared/models/params.model';
@@ -20,7 +20,7 @@ export class ParamMatricesComponent implements OnInit {
   constructor(
     private _matrixService: ParamMatricesService,
     private _typesService: MatrixTypesService,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private _util: UtilService
   ) {}
 

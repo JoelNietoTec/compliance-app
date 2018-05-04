@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { FinancialProduct, ProductType } from '../../../shared/models/products.model';
 import { FinancialProductsService } from '../../../shared/services/financial-products.service';
-import { ToastsManager } from 'ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-financial-products',
@@ -13,7 +13,7 @@ export class FinancialProductsComponent implements OnInit {
   _table: TableOptions = {};
   _products: FinancialProduct[];
   _types: ProductType[] = [{ ID: 1, Name: 'Activo', EnglishName: 'Asset' }, { ID: 2, Name: 'Deuda', EnglishName: 'Debt' }];
-  constructor(private _prodServ: FinancialProductsService, private toast: ToastsManager) {}
+  constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
   ngOnInit() {
     this._table.title = 'Productos Financieros';
