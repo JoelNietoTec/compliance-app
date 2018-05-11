@@ -16,6 +16,7 @@ import { ReportsModule } from './reports/reports.module';
 // Routers
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { AlertsModule } from './alerts/alerts.module';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     UsersModule,
     SettingsModule,
     TrainingModule,
+    AlertsModule,
     ReportsModule
   ],
   exports: [],

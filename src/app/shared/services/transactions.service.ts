@@ -4,6 +4,9 @@ import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { ConnectionService } from './connection.service';
 import { TransactionSource, Transaction } from '../models/profiles.model';
+import { AlertsService } from './alerts.service';
+import { Alert } from '../models/alerts.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class TransactionsService {
@@ -12,7 +15,12 @@ export class TransactionsService {
   private _profilesURL: string;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private _http: HttpClient, private _conn: ConnectionService) {
+  constructor(
+    private _http: HttpClient,
+    private _alertServ: AlertsService,
+    private _conn: ConnectionService,
+    private toast: ToastrService
+  ) {
     this._transactionsURL = _conn.APIUrl + 'transactions';
     this._sourcesURL = _conn.APIUrl + 'transactionsources';
     this._profilesURL = _conn.APIUrl + 'participantprofiles';
@@ -48,5 +56,19 @@ export class TransactionsService {
 
   deleteSource(id: number) {
     return this._http.delete(`${this._sourcesURL}/${id}`, { headers: this._headers });
+  }
+
+  generateAlert(participantID: number, reason: string, message?: string) {
+    this._alertServ.getReason(reason).subscribe(data => {
+      const alert: Alert = {};
+      alert.ParticipantID = participantID;
+      alert.AlertReasonID = data.ID;
+      alert.AlertSourceID = data.AlertSourceID;
+      alert.Description = message;
+      alert.CreateDate = new Date();
+      this._alertServ.createAlert(alert).subscribe(datad => {
+        this.toast.warning(alert.Description, 'Alerta generada');
+      });
+    });
   }
 }

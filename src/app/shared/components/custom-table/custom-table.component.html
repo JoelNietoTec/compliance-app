@@ -197,12 +197,12 @@
     </table>
   </div>
   <div class="row justify-content-between paginator">
-    <div class="col-md-10">
+    <div class="col-md-8">
       <ng-container *ngIf="options.pageable">
         <app-paginator [itemsCount]="_itemsCount" (paginate)="setPage($event)"></app-paginator>
       </ng-container>
     </div>
-    <div class="col-md-2 ">
+    <div class="col-md-4">
       <button *ngIf="options.addMethod === 'modal' && addItem.observers.length" type="button" class="btn btn-primary pull-right"
         (click)="openModal()">
         <i class="fa fa-plus-circle"></i> Nuevo elemento

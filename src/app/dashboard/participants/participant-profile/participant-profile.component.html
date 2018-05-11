@@ -9,16 +9,16 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-3">
-            <!-- <span class="text-primary">
-              Saldo
-            </span>
-            <h6>$ {{ _profile.Total | number: '3.2'}}</h6> -->
-          </div>
-          <div class="col-md-3">
             <span class="text-primary">
               Última modificación
             </span>
             <h6>{{ _profile.ModifiedDate | date: 'dd/MM/yyyy hh:mm a' }}</h6>
+          </div>
+          <div class="col-md-3">
+            <span class="text-primary">
+              Tope Transacciones Mes
+            </span>
+            <h6>{{ _profile.TransactionsLimit }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
@@ -34,7 +34,7 @@
           </div>
           <div class="col-md-3">
             <span class="text-primary">
-               Ingresos/Pagos Año
+              Ingresos/Pagos Año
             </span>
             <h6>$ {{ _profile.IncomeYTD | number: '3.2' }}</h6>
           </div>

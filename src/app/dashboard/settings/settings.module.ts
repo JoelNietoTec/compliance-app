@@ -16,14 +16,16 @@ import { AccountTypesComponent } from './account-types/account-types.component';
 import { FinancialProductsComponent } from './financial-products/financial-products.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    NgbModule,
-    SettingsRoutingModule
-  ],
-  declarations: [SettingsComponent, RelationshipTypesComponent, DocumentTypesComponent, CountriesComponent, BanksComponent, FoundSourcesComponent, AccountTypesComponent, FinancialProductsComponent]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, NgbModule, SettingsRoutingModule],
+  declarations: [
+    SettingsComponent,
+    RelationshipTypesComponent,
+    DocumentTypesComponent,
+    CountriesComponent,
+    BanksComponent,
+    FoundSourcesComponent,
+    AccountTypesComponent,
+    FinancialProductsComponent
+  ]
 })
-export class SettingsModule { }
+export class SettingsModule {}

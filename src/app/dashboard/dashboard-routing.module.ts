@@ -16,7 +16,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { DiscardsModule } from './discards/discards.module';
 import { TasksModule } from './tasks/tasks.module';
 import { TrainingModule } from './training/training.module';
-import {ReportsModule} from './reports/reports.module';
+import { ReportsModule } from './reports/reports.module';
+import { AlertsModule } from './alerts/alerts.module';
 
 export function getParamsModule() {
   return ParamsModule;
@@ -69,6 +70,11 @@ export const routes: Routes = [
         path: 'reportes',
         canActivateChild: [AuthGuard],
         loadChildren: './reports/reports.module#ReportsModule'
+      },
+      {
+        path: 'alertas',
+        canActivateChild: [AuthGuard],
+        loadChildren: './alerts/alerts.module#AlertsModule'
       },
       {
         path: 'descartes',

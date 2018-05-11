@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { TransactionsService } from '../../../shared/services/transactions.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { Alert } from '../../../shared/models/alerts.model';
 
 @Component({
   selector: 'participant-transactions',
@@ -97,6 +98,7 @@ export class ParticipantTransactionsComponent implements OnInit {
     tran.ParticipantID = this.profile.ParticipantID;
     this._tranServ.createTransaction(tran).subscribe(
       data => {
+        this.validateAlert(data);
         this._transactions.push(data);
         this._newTransaction = {};
         this.toast.success('Transacción registrada');
@@ -118,5 +120,28 @@ export class ParticipantTransactionsComponent implements OnInit {
         this.toast.error(err.message, 'Ocurrió un error');
       }
     );
+  }
+
+  validateAlert(tran: Transaction) {
+    switch (tran.TransactionTypeID) {
+      case 1:
+        if (this.profile.IncomeMTD + tran.Amount > this.profile.MonthlyIncomeLimit && this.profile.MonthlyIncomeLimit > 0) {
+          const message = `Límite ingresos excedidos - Transaccion ${tran.Title}`;
+          this.processAlert(tran, message, 'budget-amount');
+        }
+        break;
+      case 2:
+        if (this.profile.ExpenseMTD + tran.Amount > this.profile.MonthlyExpenseLimit && this.profile.MonthlyExpenseLimit > 0) {
+          const message = `Límite egresos excedidos - Transaccion ${tran.Title}`;
+          this.processAlert(tran, message, 'budget-amount');
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  processAlert(tran: Transaction, message: string, reason: string) {
+    this._tranServ.generateAlert(this.profile.ParticipantID, reason, message);
   }
 }

@@ -62,6 +62,7 @@ import { SanctionListsService } from './services/sanction-lists.service';
 import { TransactionsService } from './services/transactions.service';
 import { ProfileAccountsService } from './services/profile-accounts.service';
 import { FinancialProductsService } from './services/financial-products.service';
+import { AlertsService } from './services/alerts.service';
 
 
 @NgModule({
@@ -132,6 +133,7 @@ import { FinancialProductsService } from './services/financial-products.service'
     TransactionsService,
     ProfileAccountsService,
     FinancialProductsService,
+    AlertsService,
     AuthGuard,
     DatePipe
   ],

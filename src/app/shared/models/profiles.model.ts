@@ -15,6 +15,7 @@ export interface ParticipantProfile {
   IncomeMTD?: number;
   ExpenseYTD?: number;
   ExpenseMTD?: number;
+  TransactionsLimit?: number;
 }
 
 export interface ProfileAccount {

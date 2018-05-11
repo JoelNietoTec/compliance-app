@@ -53,6 +53,7 @@ export class FilesComponent implements OnInit {
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
       this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
+      console.log(this.data);
       this.columns = [];
       this.selectedCols = [];
       this.data[0].forEach((element, index) => {

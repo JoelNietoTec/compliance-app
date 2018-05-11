@@ -15,9 +15,8 @@
               <i class="fas fa-dollar-sign fa-fw"></i>
             </span>
           </div>
-          <input type="text" id="income" name="income" [(ngModel)]="currentProfile.MonthlyIncomeLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <input type="number" id="income" name="income" [(ngModel)]="currentProfile.MonthlyIncomeLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
-        <small id="helpId" class="form-text text-muted">0 para ilimitado</small>
       </div>
     </div>
     <div class="col-md-6">
@@ -29,9 +28,15 @@
               <i class="fas fa-dollar-sign fa-fw"></i>
             </span>
           </div>
-          <input type="text" id="expense" name="expense" [(ngModel)]="currentProfile.MonthlyExpenseLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <input type="number" id="expense" name="expense" [(ngModel)]="currentProfile.MonthlyExpenseLimit" class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
-        <small id="helpId" class="form-text text-muted">0 para ilimitado</small>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="limit">Límite de transacciones</label>
+        <input type="number" class="form-control" name="limit" id="limit" [(ngModel)]="currentProfile.TransactionsLimit">
+        <small id="helpId" class="form-text text-muted">Transacciones al mes</small>
       </div>
     </div>
   </div>
