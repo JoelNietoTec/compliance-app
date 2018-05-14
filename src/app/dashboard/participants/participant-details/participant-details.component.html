@@ -9,17 +9,17 @@
     <div class="col-md-8">
       <div class="card">
         <ngb-tabset #t type="tabs" *ngIf="_participant">
-          <ngb-tab title="Matriz de Riesgo">
+          <ngb-tab title="Riesgo">
             <ng-template ngbTabContent>
               <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Perfil Transaccional">
+          <ngb-tab title="Transacciones">
             <ng-template ngbTabContent>
               <app-financial-profile [participant]="_participant"></app-financial-profile>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Perfil Financiero">
+          <ngb-tab title="Finanzas">
             <ng-template ngbTabContent>
               <app-participant-profile [participant]="_participant"></app-participant-profile>
             </ng-template>

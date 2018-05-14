@@ -11,12 +11,12 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
   styleUrls: ['./relationship-types.component.css']
 })
 export class RelationshipTypesComponent implements OnInit {
-  _types: Array<RelationshipType>;
+  _types = this._relService.getTypes();
   _newType: RelationshipType = {};
   _currentType: RelationshipType = {};
   _table: TableOptions = {};
 
-  constructor(private _relService: RelationshipsService, private toastr: ToastrService) {}
+  constructor(public _relService: RelationshipsService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this._table.columns = [
@@ -32,15 +32,12 @@ export class RelationshipTypesComponent implements OnInit {
     this._table.pageable = true;
     this._table.exportToPDF = true;
 
-    this._relService.getTypes().subscribe(data => {
-      this._types = data;
-    });
   }
 
   addType(type: RelationshipType) {
     this._relService.createType(type).subscribe(data => {
       this.toastr.success(data.Name, 'Tipo creado');
-      this._types.push(data);
+      this._types = this._relService.getTypes();
       this._newType = {};
     });
   }
@@ -68,6 +65,7 @@ export class RelationshipTypesComponent implements OnInit {
     this._relService.updateType(type.ID, type).subscribe(
       data => {
         this.toastr.success(data.Name, 'Tipo editado');
+        this._types = this._relService.getTypes();
         this._currentType = {};
       },
       (err: Error) => {

@@ -23,11 +23,15 @@ export class DocumentsService {
     this._partURL = _conn.APIUrl + 'participants';
   }
 
-  getTypes(): Observable<Array<DocumentType>> {
+  getTypes(): Observable<DocumentType[]> {
     return this._http.get<DocumentType[]>(this._docTypeURL);
   }
 
-  getTypesByParticipant(id: number): Observable<Array<DocumentType>> {
+  getExpired(): Observable<ParticipantDocument[]> {
+    return this._http.get<ParticipantDocument[]>(`${this._partDocURL}/expired`);
+  }
+
+  getTypesByParticipant(id: number): Observable<DocumentType[]> {
     return this._http.get<DocumentType[]>(`${this._docTypeURL}/type/${id}`);
   }
 
@@ -43,12 +47,16 @@ export class DocumentsService {
     return this._http.delete(`${this._docTypeURL}/${id}`, { headers: this._headers });
   }
 
-  getDocByParticipant(participantID: number): Observable<Array<ParticipantDocument>> {
+  getDocByParticipant(participantID: number): Observable<ParticipantDocument[]> {
     return this._http.get<ParticipantDocument[]>(`${this._partURL}/${participantID}/documents`);
   }
 
   saveDoc(doc: ParticipantDocument): Observable<ParticipantDocument> {
     return this._http.post<ParticipantDocument>(this._partDocURL, JSON.stringify(doc), { headers: this._headers });
+  }
+
+  updateDocument(id: number, doc: ParticipantDocument) {
+    return this._http.put(`${this._partDocURL}/${id}`, JSON.stringify(doc), { headers: this._headers });
   }
 
   deleteDoc(id: number) {

@@ -11,7 +11,7 @@ import { DocumentsService } from '../../../shared/services/documents.service';
   styleUrls: ['./document-types.component.css']
 })
 export class DocumentTypesComponent implements OnInit {
-  _types: Array<DocumentType>;
+  _types = this._docServ.getTypes();
   _currentType: DocumentType = {};
   _newType: DocumentType = {};
   _table: TableOptions = {};
@@ -33,9 +33,6 @@ export class DocumentTypesComponent implements OnInit {
     this._table.pageable = true;
     this._table.exportToCSV = true;
 
-    this._docServ.getTypes().subscribe(data => {
-      this._types = data;
-    });
   }
 
   selectType(type: DocumentType) {
@@ -49,7 +46,7 @@ export class DocumentTypesComponent implements OnInit {
   addType(type: DocumentType) {
     this._docServ.addType(type).subscribe(data => {
       this.toastr.success(data.Name, 'Tipo Documento Creado');
-      this._types.push(data);
+      this._types = this._docServ.getTypes();
     });
   }
 
@@ -62,6 +59,7 @@ export class DocumentTypesComponent implements OnInit {
   updateType(type: DocumentType) {
     this._docServ.updateType(type.ID, type).subscribe(data => {
       this.toastr.success(data.Name, 'Tipo Documento Editado');
+      this._types = this._docServ.getTypes();
     });
   }
 }

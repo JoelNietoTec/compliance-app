@@ -11,9 +11,8 @@ import { TableOptions, Column } from '../../../shared/components/custom-table/cu
   styleUrls: ['./countries.component.css']
 })
 export class CountriesComponent implements OnInit {
-  _columns: Array<Column>;
   _options: TableOptions = {};
-  _countries: Array<Country>;
+  _countries = this._countryServ.getCountries();
 
   constructor(private _countryServ: CountriesService, private toastr: ToastrService) {}
 
@@ -39,21 +38,19 @@ export class CountriesComponent implements OnInit {
 
     this._options.addMethod = 'inline';
 
-    this._countryServ.getCountries().subscribe(data => {
-      this._countries = data;
-    });
   }
 
   addCountry(country: Country) {
     return this._countryServ.addCountry(country).subscribe(data => {
       this.toastr.success(data.Name, 'País añadido');
-      this._countries.push(data);
+      this._countries = this._countryServ.getCountries();
     });
   }
 
   updateCountry(country: Country) {
     this._countryServ.editCountry(country.ID, country).subscribe(data => {
       this.toastr.success(country.Name, 'País editado');
+      this._countries = this._countryServ.getCountries();
     });
   }
 }

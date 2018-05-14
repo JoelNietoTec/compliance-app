@@ -30,7 +30,7 @@ export class ParticipantDocumentComponent implements OnInit {
   _countries: Country[];
   _filestoUpload: File[];
   _isLoading: Boolean = false;
-  _partDocument: FormDocument = { File: {} };
+  _partDocument: FormDocument;
   _title: string;
 
   constructor(

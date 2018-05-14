@@ -10,8 +10,6 @@ export interface ParticipantDocument {
   ExpirationDate?: Date;
   CountryID?: number;
   Country?: Country;
-  File?: Document;
-  FileID?: number;
   FilePath?: string;
 }
 
@@ -21,9 +19,4 @@ export interface DocumentType {
   EnglishName?: string;
   RequiredIndividual?: Boolean;
   RequiredEntity?: Boolean;
-}
-
-export interface Document {
-  ID?: number;
-  File?: any;
 }

@@ -28,7 +28,6 @@ export class BanksComponent implements OnInit {
       }
     ];
 
-
     this._table.style = 'table table-sm table-squared';
     this._table.editable = true;
     this._table.searcheable = true;

@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 export interface TableOptions {
   columns?: Column[];
   style?: string;
@@ -21,7 +23,7 @@ export interface TableOptions {
 export interface Column {
   name?: string;
   title?: string;
-  type?: 'date' | 'datetime' | 'decimal' | 'number' | 'money' | 'boolean' | 'checkbox' | 'object' | 'text';
+  type?: 'date' | 'datetime' | 'decimal' | 'number' | 'money' | 'boolean' | 'checkbox' | 'object' | 'text' | 'file';
   sortable?: boolean;
   filterable?: boolean;
   pipe?: string;
@@ -29,6 +31,7 @@ export interface Column {
   style?: string;
   readonly?: boolean;
   list?: any[];
+  asyncList?: Observable<any[]>;
   listID?: any;
   listDisplay?: any;
   objectColumn?: string;
@@ -38,4 +41,5 @@ export interface Column {
   lookupValues?: any[];
   customClasses?: string;
   rateField?: boolean;
+  fileURL?: string;
 }

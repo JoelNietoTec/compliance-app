@@ -24,6 +24,7 @@ import { saveAs } from 'file-saver';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 import { DatePipe } from '@angular/common';
 import { TableFormComponent } from '../table-form/table-form.component';
+import { ConnectionService } from '../../services/connection.service';
 
 @Component({
   selector: 'app-custom-table',
@@ -58,7 +59,13 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   _filterValues: Array<string> = [];
   _visibleColumns: number;
   _booleanValues: any = [{ value: true, display: 'Sí' }, { value: false, display: 'No' }];
-  constructor(private _util: UtilService, private _cdr: ChangeDetectorRef, private modalService: NgbModal, private datePipe: DatePipe) {}
+  constructor(
+    public _conn: ConnectionService,
+    private _util: UtilService,
+    private _cdr: ChangeDetectorRef,
+    private modalService: NgbModal,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit() {
     // this.initTable();

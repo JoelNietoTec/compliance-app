@@ -4,6 +4,8 @@
   left: auto;
   padding-top: 0;
   padding-bottom: 0;
+  font-size: 12px;
+  min-width: 300px;
 }
 
 .dropdown-menu.show {
@@ -30,7 +32,7 @@
 }
 
 .logo {
-  height: 28px;
+  height: 38px;
 }
 
 nav.navbar {

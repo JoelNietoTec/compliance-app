@@ -12,7 +12,7 @@ export class RelationshipsService {
   private _typesURL: string;
   private _participantsURL: string;
   private _relationshipsURL: string;
-  private _types: Array<RelationshipType>;
+  private _types: RelationshipType[];
   private _newType: RelationshipType;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -22,11 +22,11 @@ export class RelationshipsService {
     this._participantsURL = _conn.APIUrl + 'participants';
   }
 
-  getRelationships(participantID: number): Observable<Array<ParticipantRelationship>> {
+  getRelationships(participantID: number): Observable<ParticipantRelationship[]> {
     return this._http.get<ParticipantRelationship[]>(`${this._participantsURL}/${participantID}/relationships`);
   }
 
-  getTypes(): Observable<Array<RelationshipType>> {
+  getTypes(): Observable<RelationshipType[]> {
     return this._http.get<RelationshipType[]>(this._typesURL);
   }
 
