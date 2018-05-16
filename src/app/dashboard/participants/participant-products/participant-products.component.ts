@@ -13,14 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 export class ParticipantProductsComponent implements OnInit {
   @Input() profile: ParticipantProfile;
 
-  _types: FinancialProduct[];
+  _types = this._prodServ.getProducts();
   _table: TableOptions = {};
 
   constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
   ngOnInit() {
-    this._prodServ.getProducts().subscribe(data => {
-      this._types = data;
+
       this._table.title = 'Productos';
       this._table.addMethod = 'modal';
       this._table.creatable = true;
@@ -33,7 +32,7 @@ export class ParticipantProductsComponent implements OnInit {
           title: 'Tipo',
           type: 'object',
           objectColumn: 'FinancialProduct.Name',
-          list: this._types,
+          asyncList: this._types,
           listID: 'ID',
           listDisplay: 'Name',
           objectID: 'FinancialProductID'
@@ -44,7 +43,6 @@ export class ParticipantProductsComponent implements OnInit {
         { name: 'MonthlyPayment', title: 'Pago Mensual', type: 'money' },
         { name: 'Balance', title: 'Saldo', type: 'money' }
       ];
-    });
   }
 
   addProduct(product: ProfileProduct) {

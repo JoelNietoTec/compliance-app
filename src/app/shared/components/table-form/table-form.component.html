@@ -20,6 +20,12 @@
               </option>
             </ng-container>
           </select>
+          <select *ngSwitchCase="field.type === 'boolean'" [(ngModel)]="item[field.name]" class="custom-select form-control" [name]="field.name"
+            [id]="field.name">
+            <option [value]="undefined" [disabled]="true">---Seleccionar---</option>
+            <option [value]="true"> Sí </option>
+            <option [value]="false"> No </option>
+          </select>
           <textarea *ngSwitchCase="field.type === 'text'" class="form-control" [id]="field.name" [name]="field.name" [cols]="2" [readOnly]="field.readonly"
             [(ngModel)]="item[field.name]"></textarea>
           <input *ngSwitchCase="field.type === 'file'" type="file" class="form-control" (change)="setFile($event, field)">

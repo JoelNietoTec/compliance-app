@@ -64,3 +64,8 @@ a.nav-link {
 small {
   font-size: 70%;
 }
+
+.nav-item {
+  text-transform: uppercase;
+  font-weight: 700;
+}

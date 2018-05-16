@@ -3,6 +3,7 @@ import { AlertsService } from '../../../shared/services/alerts.service';
 import { AlertReason, AlertSource, AlertPriority } from '../../../shared/models/alerts.model';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-alert-reasons',
@@ -10,23 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./alert-reasons.component.css']
 })
 export class AlertReasonsComponent implements OnInit {
-  _sources: AlertSource[] = [
-    {
-      ID: 1,
-      Name: 'Presupuesto',
-      EnglishName: 'Budget'
-    },
-    {
-      ID: 2,
-      Name: 'Documentos',
-      EnglishName: 'Documents'
-    },
-    {
-      ID: 3,
-      Name: 'Sanciones',
-      EnglishName: 'Sanctions'
-    }
-  ];
+  _sources: Observable<AlertSource[]>;
 
   _priorities: AlertPriority[] = [
     {
@@ -46,14 +31,13 @@ export class AlertReasonsComponent implements OnInit {
     }
   ];
   _table: TableOptions = {};
-  _reasons: AlertReason[];
+  _reasons: Observable<AlertReason[]>;
 
   constructor(private _alertService: AlertsService, private toast: ToastrService) {}
 
   ngOnInit() {
-    this._alertService.getReasons().subscribe(data => {
-      this._reasons = data;
-    });
+    this._reasons = this._alertService.getReasons();
+    this._sources = this._alertService.getSources();
 
     this._table.title = 'Generadores de Alertas';
     this._table.style = 'table-sm table-squared';
@@ -64,7 +48,7 @@ export class AlertReasonsComponent implements OnInit {
         title: 'Fuente',
         sortable: true,
         type: 'object',
-        list: this._sources,
+        asyncList: this._sources,
         listID: 'ID',
         listDisplay: 'Name',
         objectColumn: 'AlertSource.Name',
@@ -93,7 +77,7 @@ export class AlertReasonsComponent implements OnInit {
     this._alertService.createReason(reason).subscribe(
       data => {
         this.toast.success(data.Name, 'Generador creado');
-        this._reasons.push(data);
+        this._reasons = this._alertService.getReasons();
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

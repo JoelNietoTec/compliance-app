@@ -27,3 +27,12 @@
 .btn {
   margin-left: 20px;
 }
+
+
+.actions-cell > .action-button {
+  margin: 0 2.5px;
+}
+
+.table > thead {
+  text-transform: uppercase;
+}

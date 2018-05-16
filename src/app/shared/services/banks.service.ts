@@ -29,4 +29,8 @@ export class BanksService {
   updateBank(id: number, bank: Bank): Observable<Bank> {
     return this._http.put<Bank>(`${this._banksURL}/${id}`, JSON.stringify(bank), { headers: this._headers });
   }
+
+  deleteBank(id: number) {
+    return this._http.delete(`${this._banksURL}/${id}`, { headers: this._headers });
+  }
 }

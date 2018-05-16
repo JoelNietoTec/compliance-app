@@ -18,6 +18,8 @@ export interface TableOptions {
   exportToPDF?: boolean;
   reportsOnly?: boolean;
   showTitle?: boolean;
+  sortColumn?: string;
+  sortDesc?: boolean;
 }
 
 export interface Column {

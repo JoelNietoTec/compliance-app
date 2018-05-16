@@ -3,6 +3,7 @@ import { BanksService } from '../../../shared/services/banks.service';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ToastrService } from 'ngx-toastr';
 import { Bank, BankType } from '../../../shared/models/profiles.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-banks',
@@ -11,7 +12,7 @@ import { Bank, BankType } from '../../../shared/models/profiles.model';
 })
 export class BanksComponent implements OnInit {
   _table: TableOptions = {};
-  _banks: Bank[];
+  _banks: Observable<Bank[]>;
   _types: BankType[];
 
   constructor(private _bankService: BanksService, private toast: ToastrService) {}
@@ -33,7 +34,7 @@ export class BanksComponent implements OnInit {
     this._table.searcheable = true;
     this._table.exportToCSV = true;
     this._table.creatable = true;
-    this._table.addMethod = 'inline';
+    this._table.addMethod = 'modal';
     this._table.title = 'Bancos';
     this._table.columns = [
       { name: 'Name', title: 'Nombre', sortable: true, filterable: true },
@@ -52,17 +53,40 @@ export class BanksComponent implements OnInit {
     ];
     this._table.pageable = true;
 
-    this._bankService.getBanks().subscribe(data => {
-      this._banks = data;
-    });
+    this._banks = this._bankService.getBanks();
   }
 
   addBank(bank: Bank) {
-    console.log(bank);
-    this._bankService.createBank(bank).subscribe(data => {
-      this.toast.success(data.Name, 'Banco creado');
-      console.log(data);
-      this._banks.push(data);
-    });
+    this._bankService.createBank(bank).subscribe(
+      data => {
+        this.toast.success(data.Name, 'Banco creado');
+        this._banks = this._bankService.getBanks();
+      },
+      (err: Error) => {
+        this.toast.error(err.message, 'Ocurrió un error');
+      }
+    );
+  }
+
+  editBank(bank: Bank) {
+    this._bankService.updateBank(bank.ID, bank).subscribe(
+      data => {
+        this.toast.success(bank.Name, 'Banco actualizado');
+      },
+      (err: Error) => {
+        this.toast.error(err.message, 'Ocurrió un error');
+      }
+    );
+  }
+
+  deleteBank(id: number) {
+    this._bankService.deleteBank(id).subscribe(
+      data => {
+        this.toast.info('Banco eliminado');
+      },
+      (err: Error) => {
+        this.toast.error(err.message, 'Ocurrió un error');
+      }
+    );
   }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,500');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,500,600,700');
 
 body,
 button,
@@ -99,21 +99,33 @@ small.text-muted > .typcn {
   font-size: 13px;
 }
 
-.card,
 .form-control,
 .input-group,
 .input-group-addon,
 .breadcrumb,
 .card-header,
 .card-footer,
-.modal-content,
 .btn,
 .pagination,
-.page-item:last-child .page-link,
-.page-item:first-child .page-link,
+/* .page-item:last-child .page-link,
+.page-item:first-child .page-link, */
 .input-group-text,
 .nav-pills .nav-link {
-  border-radius: 0.15rem;
+  border-radius: 0.35rem;
+}
+
+.modal-dialog {
+  max-width: 600px;
+}
+
+.modal-title {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card,
+.modal-content {
+  border-radius: 0.55rem;
 }
 
 table.table-striped td {
@@ -317,7 +329,7 @@ ngb-tabset > ul.nav-tabs {
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active {
   border-bottom: 1px solid #0275d8;
   border-radius: 0;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link {

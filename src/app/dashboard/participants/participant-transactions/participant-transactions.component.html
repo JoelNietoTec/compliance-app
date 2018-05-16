@@ -4,7 +4,7 @@
       <i class="fas fa-exchange-alt fa-fw"></i> Historial Transacciones</p>
   </div>
   <div *ngIf="_sources" class="card-body">
-    <app-custom-table [options]="_table" [items]="_transactions" (addItem)="addTransaction($event)" (editItem)="editTransaction($event)"></app-custom-table>
+    <app-custom-table [options]="_table" [items]="_transactions | async" (addItem)="addTransaction($event)" (editItem)="editTransaction($event)"></app-custom-table>
     <!-- <button type="button" class="btn btn-primary pull-right" (click)="open()">
       <i class="fas fa-exchange-alt fa-fw"></i> Agregar</button> -->
   </div>

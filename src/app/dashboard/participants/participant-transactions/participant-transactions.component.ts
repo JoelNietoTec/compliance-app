@@ -8,6 +8,7 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
 import { TransactionsService } from '../../../shared/services/transactions.service';
 import { UtilService } from '../../../shared/services/util.service';
 import { Alert } from '../../../shared/models/alerts.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'participant-transactions',
@@ -19,10 +20,10 @@ export class ParticipantTransactionsComponent implements OnInit {
   @ViewChild(ParticipantTransactionsFormComponent) form: ParticipantTransactionsFormComponent;
   @Output() updateProfile = new EventEmitter();
 
-  _transactions: Transaction[];
+  _transactions: Observable<Transaction[]>;
   _newTransaction: Transaction = {};
   _table: TableOptions = {};
-  _sources: TransactionSource[];
+  _sources = this._tranServ.getSources();
   _types: TransactionType[];
 
   constructor(
@@ -34,13 +35,9 @@ export class ParticipantTransactionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this._transactions = this._tranServ.getTransactionsByProfile(this.profile.ID);
     this._types = [{ ID: 1, Name: 'Ingreso/Pago' }, { ID: 2, Name: 'Desembolso' }];
-
-    this._tranServ.getSources().subscribe(data => {
-      this._sources = data;
       this.initTable();
-    });
-    this.getTransactions();
   }
 
   initTable() {
@@ -65,7 +62,7 @@ export class ParticipantTransactionsComponent implements OnInit {
         title: 'Fuente',
         type: 'object',
         objectColumn: 'TransactionSource.Name',
-        list: this._sources,
+        asyncList: this._sources,
         listID: 'ID',
         listDisplay: 'Name',
         objectID: 'TransactionSourceID'
@@ -85,12 +82,8 @@ export class ParticipantTransactionsComponent implements OnInit {
       { name: 'Date', title: 'Fecha', type: 'date' },
       { name: 'Amount', title: 'Monto', type: 'money' }
     ];
-  }
-
-  getTransactions() {
-    this._tranServ.getTransactionsByProfile(this.profile.ID).subscribe(data => {
-      this._transactions = this._util.sortBy(data, 'Date', true);
-    });
+    this._table.sortColumn = 'Date';
+    this._table.sortDesc = true;
   }
 
   addTransaction(tran: Transaction) {
@@ -99,8 +92,7 @@ export class ParticipantTransactionsComponent implements OnInit {
     this._tranServ.createTransaction(tran).subscribe(
       data => {
         this.validateAlert(data);
-        this._transactions.push(data);
-        this._newTransaction = {};
+        this._transactions = this._tranServ.getTransactionsByProfile(this.profile.ID);
         this.toast.success('Transacción registrada');
         this.updateProfile.emit();
       },

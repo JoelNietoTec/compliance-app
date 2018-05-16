@@ -5,7 +5,7 @@
       <div class="form-group">
         <select class="form-control custom-select" [(ngModel)]="_currentListID" name="list" id="list" (ngModelChange)="getSanctions()">
           <option selected disabled [value]="undefined">--- Seleccionar Lista ---</option>
-          <option *ngFor="let list of _lists" [value]="list.ID">{{ list.Name }}</option>
+          <option *ngFor="let list of _lists | async" [value]="list.ID">{{ list.Name }}</option>
         </select>
       </div>
     </div>
@@ -17,6 +17,6 @@
   </div>
 </div>
 <div class="container-fluid">
-  <app-custom-table *ngIf="_currentListID" [options]="_table" [items]="_sanctions"></app-custom-table>
+  <app-custom-table *ngIf="_currentListID" [options]="_table" [items]="_sanctions | async"></app-custom-table>
 </div>
 

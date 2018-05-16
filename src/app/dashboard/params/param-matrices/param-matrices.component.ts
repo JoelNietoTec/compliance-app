@@ -6,6 +6,7 @@ import { ParamMatrix, MatrixType } from '../../../shared/models/params.model';
 import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 import { MatrixTypesService } from '../../../shared/services/matrix-types.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-param-matrices',
@@ -13,7 +14,7 @@ import { UtilService } from '../../../shared/services/util.service';
   styleUrls: ['./param-matrices.component.css']
 })
 export class ParamMatricesComponent implements OnInit {
-  _matrices: ParamMatrix[];
+  _matrices: Observable<ParamMatrix[]>;
   _matrixTypes: MatrixType[];
   _table: TableOptions = {};
 
@@ -28,7 +29,7 @@ export class ParamMatricesComponent implements OnInit {
     this._table.addMethod = 'inline';
     this._table.creatable = true;
     this._table.editable = true;
-    this._table.pageable = true
+    this._table.pageable = true;
     this._table.detailsURL = [];
     this._table.style = 'table-sm table-squared';
     this._table.title = 'Matrices';
@@ -64,16 +65,14 @@ export class ParamMatricesComponent implements OnInit {
       { name: 'CreateDate', title: 'Fec. Creación', type: 'datetime', readonly: true }
     ];
 
-    this._matrixService.getMatrices().subscribe(data => {
-      this._matrices = data;
-    });
+    this._matrices = this._matrixService.getMatrices();
   }
 
   createMatrix(matrix: ParamMatrix) {
     matrix.CreateDate = new Date();
     this._matrixService.createMatrix(matrix).subscribe(data => {
       this.toastr.success(data.Name, 'Matriz creada');
-      this._matrices.push(data);
+      this._matrices = this._matrixService.getMatrices();
     });
   }
 

@@ -76,7 +76,11 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     if (model.items) {
       if (this.items) {
         this.initTable();
-        this._filteredItems = this.items;
+        if (this.options.sortColumn) {
+          this._filteredItems = this._util.sortBy(this.items, this.options.sortColumn, this.options.sortDesc);
+        } else {
+          this._filteredItems = this.items;
+        }
         // this.filterItems();
       }
     }

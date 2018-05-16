@@ -107,14 +107,14 @@
                 </ng-container>
               </td>
             </ng-container>
-            <td *ngIf="options.editable || options.detailsURL" class="text-center">
-              <span *ngIf="options.detailsURL" [routerLink]="getDetailsURL(item.ID)" placement="top" ngbTooltip="Detalles">
+            <td *ngIf="options.editable || options.detailsURL" class="text-center actions-cell">
+              <span class="action-button" *ngIf="options.detailsURL" [routerLink]="getDetailsURL(item.ID)" placement="top" ngbTooltip="Detalles">
                 <i class="fas fa-search-plus fa-lg text-primary"></i>
               </span>
-              <span *ngIf="editItem.observers.length" (click)="selectItem(item)" placement="top" ngbTooltip="Editar">
+              <span class="action-button" *ngIf="editItem.observers.length" (click)="selectItem(item)" placement="top" ngbTooltip="Editar">
                 <i class="fas fa-edit fa-lg text-success"></i>
               </span>
-              <span *ngIf="removeItem.observers.length" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar">
+              <span class="action-button" *ngIf="removeItem.observers.length" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar">
                 <i class="far fa-trash-alt fa-lg text-danger"></i>
               </span>
             </td>
@@ -161,11 +161,11 @@
                 </ng-container>
               </td>
             </ng-container>
-            <td class="text-center">
-              <span (click)="updateItem()" placement="top" ngbTooltip="Guardar Cambios">
+            <td class="text-center actions-cell">
+              <span class="action-button" (click)="updateItem()" placement="top" ngbTooltip="Guardar Cambios">
                 <i class="fas fa-lock fa-lg text-success"></i>
               </span>
-              <span (click)="cancelSelect()" placement="top" ngbTooltip="Cancelar">
+              <span class="action-button" (click)="cancelSelect()" placement="top" ngbTooltip="Cancelar">
                 <i class="fas fa-times fa-lg text-danger"></i>
               </span>
             </td>

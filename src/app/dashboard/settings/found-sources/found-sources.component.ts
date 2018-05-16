@@ -3,6 +3,7 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
 import { TransactionSource } from '../../../shared/models/profiles.model';
 import { TransactionsService } from '../../../shared/services/transactions.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-found-sources',
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FoundSourcesComponent implements OnInit {
   _table: TableOptions = {};
-  _sources: TransactionSource[];
+  _sources: Observable<TransactionSource[]>;
 
   constructor(private _tranServ: TransactionsService, private toast: ToastrService) {}
 
@@ -29,16 +30,14 @@ export class FoundSourcesComponent implements OnInit {
       { name: 'EnglishName', title: 'Nombre Inglés', filterable: true }
     ];
 
-    this._tranServ.getSources().subscribe(data => {
-      this._sources = data;
-    });
+    this._sources = this._tranServ.getSources();
   }
 
   addSource(source: TransactionSource) {
     this._tranServ.createSource(source).subscribe(
       data => {
         this.toast.success(data.Name, 'Fuente agregada');
-        this._sources.push(data);
+        this._sources = this._tranServ.getSources();
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrio error');

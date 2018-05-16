@@ -4,7 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { SanctionsService } from '../../../shared/services/sanctions.service';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { UtilService } from '../../../shared/services/util.service';
-import { Sanction, List } from '../../../shared/models/sanctions.model';
+import { Sanction, List, SanctionList, SanctionedItem } from '../../../shared/models/sanctions.model';
+import { Observable } from 'rxjs/Observable';
+import { SanctionListsService } from '../../../shared/services/sanction-lists.service';
 
 @Component({
   selector: 'discards-list',
@@ -12,50 +14,47 @@ import { Sanction, List } from '../../../shared/models/sanctions.model';
   styleUrls: ['./discards-list.component.css']
 })
 export class DiscardsListComponent implements OnInit {
-  _sanctions: Array<Sanction>;
+  _sanctions: Observable<SanctionedItem[]>;
   _pagedSanctions: Array<Sanction>;
-  _lists: Array<List>;
+  _lists: Observable<SanctionList[]>;
   _currentListID: number;
   _matches: Array<any>;
   _pager: any = {};
   _table: TableOptions = {};
 
-  constructor(private _sanctionServ: SanctionsService, private _util: UtilService, private toastr: ToastrService) {}
+  constructor(
+    private _sanctionServ: SanctionsService,
+    private _listServ: SanctionListsService,
+    private _util: UtilService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'Term1', title: 'Term. 1', type: 'text', sortable: true, filterable: true },
-      { name: 'Term2', title: 'Term. 2', type: 'text', sortable: true, filterable: true },
-      { name: 'Term3', title: 'Term. 3', type: 'text', sortable: true, filterable: true },
-      { name: 'Term4', title: 'Term. 4', type: 'text', sortable: true, filterable: true },
-      { name: 'Term5', title: 'Term. 5', type: 'text', sortable: true, filterable: true }
+      { name: 'FullTerm', title: 'Término', sortable: true, filterable: true },
+      { name: 'Comments', title: 'Comentarios', sortable: true, filterable: true },
+      { name: 'Country', title: 'País', lookup: true }
     ];
 
     this._table.pageable = true;
     this._table.searcheable = true;
     this._table.style = 'table table-sm table-squared';
 
-    this._sanctionServ.getLists().subscribe(data => {
-      this._lists = data;
-    });
+    this._lists = this._listServ.getLists();
   }
 
   getSanctions() {
-    this._sanctionServ.getSanctionsByList(this._currentListID).subscribe(data => {
-      this._sanctions = data;
-      // this._table.items = this._sanctions;
-      this.setPage(1);
-    });
+    this._sanctions =  this._listServ.getItemsByList(this._currentListID);
   }
 
   runDiscards() {
-    this._sanctionServ.addDiscard(this._currentListID).subscribe(discard => {
-      this._sanctionServ.runDiscard(discard.ID, this._sanctions).then(matches => {
-        this.toastr.success(`${matches.length} concurrencias encontradas`, 'Comparación ejecutada');
-        this._matches = matches;
-        this.saveMatches(discard, this._matches.shift());
-      });
-    });
+    // this._sanctionServ.addDiscard(this._currentListID).subscribe(discard => {
+    //   this._sanctionServ.runDiscard(discard.ID, this._sanctions).then(matches => {
+    //     this.toastr.success(`${matches.length} concurrencias encontradas`, 'Comparación ejecutada');
+    //     this._matches = matches;
+    //     this.saveMatches(discard, this._matches.shift());
+    //   });
+    // });
   }
 
   saveMatches(discard: any, match: any) {
@@ -64,15 +63,5 @@ export class DiscardsListComponent implements OnInit {
         this.saveMatches(discard, this._matches.shift());
       }
     });
-  }
-
-  setPage(page: number) {
-    if (page < 1 || page > this._pager.totalPages) {
-      return;
-    }
-
-    this._pager = this._util.paginate(this._sanctions.length, page);
-
-    this._pagedSanctions = this._sanctions.slice(this._pager.startIndex, this._pager.endIndex + 1);
   }
 }

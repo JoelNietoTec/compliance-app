@@ -1,3 +1,4 @@
 <div class="container-fluid">
-  <app-custom-table [items]="_lists" [options]="_table" (addItem)="addList($event)"></app-custom-table>
+  <app-custom-table [items]="_lists | async" [options]="_table" (addItem)="addList($event)" (editItem)="editList($event)"></app-custom-table>
+  <button type="button" class="btn btn-primary" (click)="loadList()">Load</button>
 </div>

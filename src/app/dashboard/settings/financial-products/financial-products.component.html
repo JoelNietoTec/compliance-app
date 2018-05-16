@@ -1,3 +1,3 @@
 <div class="container-fluid">
-  <app-custom-table [options]="_table" [items]="_products" (addItem)="addProduct($event)" (editItem)="editProduct($event)" (removeItem)="deleteProduct($event)"></app-custom-table>
+  <app-custom-table [options]="_table" [items]="_products | async" (addItem)="addProduct($event)" (editItem)="editProduct($event)" (removeItem)="deleteProduct($event)"></app-custom-table>
 </div>

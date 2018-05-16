@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { ConnectionService } from './connection.service';
-import { SanctionList } from '../models/sanctions.model';
+import { SanctionList, SanctionedItem } from '../models/sanctions.model';
 
 @Injectable()
 export class SanctionListsService {
@@ -18,17 +18,24 @@ export class SanctionListsService {
     return this._http.get<SanctionList[]>(this._listURl);
   }
 
+  getItemsByList(id: number): Observable<SanctionedItem[]> {
+    return this._http.get<SanctionedItem[]>(`${this._listURl}/${id}/items`);
+  }
+
+  getList(id: number): Observable<SanctionList> {
+    return this._http.get<SanctionList>(`${this._listURl}/${id}`);
+  }
+
+  loadList(list: SanctionList) {
+    return this._http.post(`${this._listURl}/load`, JSON.stringify(list), { headers: this._headers });
+    // return this._http.post('http://localhost:65175/api/sanctionlists/load', JSON.stringify(list), { headers: this._headers });
+  }
+
   addList(list: SanctionList): Observable<SanctionList> {
     return this._http.post(this._listURl, JSON.stringify(list), { headers: this._headers });
   }
 
   updateList(id: number, list: SanctionList) {
     return this._http.put(`${this._listURl}/${id}`, JSON.stringify(list), { headers: this._headers });
-  }
-
-  getListData(list: SanctionList) {
-    return this._http.get(list.URL).subscribe(data => {
-      console.log(data);
-    });
   }
 }

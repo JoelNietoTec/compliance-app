@@ -3,6 +3,7 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
 import { FinancialProduct, ProductType } from '../../../shared/models/products.model';
 import { FinancialProductsService } from '../../../shared/services/financial-products.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-financial-products',
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FinancialProductsComponent implements OnInit {
   _table: TableOptions = {};
-  _products: FinancialProduct[];
+  _products: Observable<FinancialProduct[]>;
   _types: ProductType[] = [{ ID: 1, Name: 'Activo', EnglishName: 'Asset' }, { ID: 2, Name: 'Deuda', EnglishName: 'Debt' }];
   constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
@@ -40,16 +41,14 @@ export class FinancialProductsComponent implements OnInit {
       { name: 'EnglishName', title: 'Nombre Inglés', filterable: true }
     ];
 
-    this._prodServ.getProducts().subscribe(data => {
-      this._products = data;
-    });
+    this._products =  this._prodServ.getProducts();
   }
 
   addProduct(product: FinancialProduct) {
     this._prodServ.createProduct(product).subscribe(
       data => {
         this.toast.success(data.Name, 'Producto creado');
-        this._products.push(data);
+        this._products = this._prodServ.getProducts();
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

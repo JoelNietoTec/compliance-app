@@ -17,6 +17,19 @@ export interface Sanction {
   FullTerm?: String;
 }
 
+export interface SanctionedItem {
+  ID?: number;
+  ListID?: number;
+  Date?: Date;
+  Term1?: String;
+  Term2?: String;
+  Term3?: String;
+  Term4?: String;
+  FullTerm?: String;
+  Comments?: String;
+  Country?: String;
+}
+
 export interface Discard {
   ID?: number;
   ListID?: number;
@@ -57,10 +70,12 @@ export interface Match {
 export interface SanctionList {
   ID?: number;
   Name?: string;
+  NameSpace?: string;
   URL?: string;
   ElementIDs?: string;
   TermField?: string;
   CommentsField?: string;
   CountryField?: string;
   ActiveSearch?: Boolean;
+  LoadDate?: Date;
 }

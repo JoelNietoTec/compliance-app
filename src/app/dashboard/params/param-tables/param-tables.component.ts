@@ -5,6 +5,7 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
 import { ParamTablesService } from '../../../shared/services/param-tables.service';
 import { ParamTable, ParamValue, TableType } from '../../../shared/models/params.model';
 import { UtilService } from '../../../shared/services/util.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-param-tables',
@@ -13,8 +14,8 @@ import { UtilService } from '../../../shared/services/util.service';
 })
 export class ParamTablesComponent implements OnInit {
   _table: TableOptions = {};
-  tables: Array<ParamTable>;
-  _tableTypes: Array<TableType>;
+  tables: Observable<ParamTable[]>;
+  _tableTypes: TableType[];
 
   constructor(private _tablesService: ParamTablesService, private _util: UtilService, private toastr: ToastrService) {}
 
@@ -57,29 +58,40 @@ export class ParamTablesComponent implements OnInit {
     ];
     this._table.pageable = true;
 
-    this._tablesService.getTables().subscribe(data => {
-      this.tables = data;
-    });
+    this.tables = this._tablesService.getTables();
   }
 
   addTable(table: ParamTable) {
-    this._tablesService.createTable(table).subscribe(data => {
-      this.toastr.success(data.Name, 'Tabla Creada');
-      data.TableType = this._util.filterByID(this._tableTypes, data.TableTypeID);
-      this.tables.push(data);
-    });
+    this._tablesService.createTable(table).subscribe(
+      data => {
+        this.toastr.success(data.Name, 'Tabla Creada');
+        this.tables = this._tablesService.getTables();
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, 'Ocurrió un error');
+      }
+    );
   }
 
   editTable(table: ParamTable) {
-    this._tablesService.editTable(table.ID, table).subscribe(data => {
-      this.toastr.success(data.Name, 'Tabla Editada');
-    });
+    this._tablesService.editTable(table.ID, table).subscribe(
+      data => {
+        this.toastr.success(data.Name, 'Tabla Editada');
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, 'Ocurrió un error');
+      }
+    );
   }
 
   deleteTable(id: number) {
-    this._tablesService.deleteTable(id).subscribe(data => {
-      this.toastr.info('Tabla eliminada');
-      this.tables = this._util.removeByID(this.tables, id);
-    });
+    this._tablesService.deleteTable(id).subscribe(
+      data => {
+        this.toastr.info('Tabla eliminada');
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, 'Ocurrió un error');
+      }
+    );
   }
 }
