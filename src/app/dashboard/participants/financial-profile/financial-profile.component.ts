@@ -55,9 +55,9 @@ export class FinancialProfileComponent implements OnInit {
     let expenses = this._monthlyData.map(x => x.expense);
 
     const _options = {
-      legend: { labels: { fontFamily: 'Nunito', boxWidth: 25, fontSize: 14, fontStyle: 'bold' } },
+      legend: { labels: { fontFamily: 'Quicksand', boxWidth: 25, fontSize: 14, fontStyle: 'normal' } },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 12,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -70,7 +70,7 @@ export class FinancialProfileComponent implements OnInit {
           {
             ticks: {
               fontStyle: 'bold',
-              fontFamily: 'Nunito',
+              fontFamily: 'Quicksand',
               callback: (value, index, values) => {
                 return '$' + this._pipe.transform(value, '1.0');
               }
@@ -81,7 +81,7 @@ export class FinancialProfileComponent implements OnInit {
           {
             ticks: {
               fontStyle: 'bold',
-              fontFamily: 'Nunito'
+              fontFamily: 'Quicksand'
             }
           }
         ]
@@ -126,9 +126,9 @@ export class FinancialProfileComponent implements OnInit {
       this._sourceData.push(item);
     });
     this._sourceChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
+      legend: { position: 'left', labels: { fontFamily: 'Quicksand', boxWidth: 15, fontSize: 14, fontStyle: 'normal' } },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -150,9 +150,9 @@ export class FinancialProfileComponent implements OnInit {
       this._accountData.push(item);
     });
     this._accountChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
+      legend: { position: 'left', labels: { fontFamily: 'Quicksand', boxWidth: 15, fontSize: 14, fontStyle: 'normal' } },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {
@@ -174,9 +174,9 @@ export class FinancialProfileComponent implements OnInit {
       this._productData.push(item);
     });
     this._productChart = {
-      legend: { position: 'left', labels: { fontFamily: 'Nunito', boxWidth: 15, fontSize: 14 } },
+      legend: { position: 'left', labels: { fontFamily: 'Quicksand', boxWidth: 15, fontSize: 14, fontStyle: 'normal' } },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 14,
         callbacks: {
           label: (tooltipItem, data) => {

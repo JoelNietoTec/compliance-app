@@ -23,6 +23,10 @@ export class AlertsService {
     return this._http.get<Alert[]>(this._alertsURL);
   }
 
+  getAlertsByParticipant(id: number): Observable<Alert[]> {
+    return this._http.get<Alert[]>(`${this._alertsURL}/participant/${id}`);
+  }
+
   createAlert(alert: Alert): Observable<Alert> {
     alert.CreateDate = new Date();
     return this._http.post<Alert>(this._alertsURL, JSON.stringify(alert), { headers: this._headers });

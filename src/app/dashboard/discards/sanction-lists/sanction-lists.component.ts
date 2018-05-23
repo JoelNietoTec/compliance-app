@@ -79,5 +79,10 @@ export class SanctionListsComponent implements OnInit {
         }
       });
     });
+    // this._listServ.getList(2).subscribe(data => {
+    //   this._listServ.loadList(data).subscribe(count => {
+    //     this.toastr.success(`${count} elementos actualizados`, `Lista ${data.Name} actualizada`);
+    //   });
+    // });
   }
 }

@@ -1,22 +1,24 @@
 <h6 [ngClass]="{'text-muted completed': participant.MatrixReady}">Completar Matrix
   <span class="float-right">
-    <i class="typcn" [ngClass]="{
-      'typcn-input-checked text-success': participant.MatrixReady,
-      'typcn-input-checked-outline text-muted': !participant.MatrixReady
-    }"></i>
+    <span *ngIf="participant.MatrixReady">
+      <i class="fas fa-check-circle text-success"></i>
+    </span>
+    <span *ngIf="!participant.MatrixReady">
+      <i class="far fa-circle text-muted"></i>
+    </span>
   </span>
 </h6>
 <ng-container *ngFor="let doc of _pending">
   <h6 *ngIf="doc.Uploaded == 0">{{ doc.Name }}
     <span class="float-right">
-      <i class="typcn typcn-input-checked-outline text-muted"></i>
+      <i class="far fa-circle text-muted"></i>
     </span>
   </h6>
 </ng-container>
 <ng-container *ngFor="let doc of _pending">
   <h6 *ngIf="doc.Uploaded > 0" class="text-muted completed">{{ doc.Name }}
     <span class="float-right">
-      <i class="typcn typcn-input-checked text-success"></i>
+      <i class="fas fa-check-circle text-success"></i>
     </span>
   </h6>
 </ng-container>

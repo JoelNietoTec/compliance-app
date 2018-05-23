@@ -5,6 +5,7 @@ import { Participant } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { Title } from '@angular/platform-browser';
 
 interface ParticipantData extends Participant {
   Age?: number;
@@ -20,7 +21,7 @@ export class ParticipantDetailsComponent implements OnInit {
   _participant: ParticipantData;
   _participantCopy: Participant;
 
-  constructor(private _route: ActivatedRoute, private _partServ: ParticipantsService, private _util: UtilService) {}
+  constructor(private _route: ActivatedRoute, private title: Title, private _partServ: ParticipantsService, private _util: UtilService) {}
 
   ngOnInit() {
     this.getParticipant();
@@ -29,6 +30,7 @@ export class ParticipantDetailsComponent implements OnInit {
   getParticipant() {
     this._route.params.subscribe(params => {
       this._partServ.getParticipant(params['id']).subscribe(data => {
+        this.title.setTitle(`ProCompliance | Participante: ${data.ShortName}`);
         this._participant = data;
         this._participantCopy = Object.assign({}, this._participant, data);
         this._participant.Age = this._util.getAge(this._participant.BirthDate);

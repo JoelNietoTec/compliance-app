@@ -8,10 +8,17 @@ import { SanctionList, SanctionedItem } from '../models/sanctions.model';
 @Injectable()
 export class SanctionListsService {
   _listURl: string;
+  _matchesURL: string;
+
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._listURl = _conn.APIUrl + 'sanctionlists';
+    this._matchesURL = 'http://localhost:65175/api/' + 'sanctionmatches';
+  }
+
+  runDiscard() {
+    return this._http.get(this._matchesURL + '/run/all');
   }
 
   getLists(): Observable<SanctionList[]> {

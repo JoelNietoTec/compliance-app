@@ -1,4 +1,5 @@
 <div class="container-fluid">
   <app-custom-table [items]="_lists | async" [options]="_table" (addItem)="addList($event)" (editItem)="editList($event)"></app-custom-table>
-  <button type="button" class="btn btn-primary" (click)="loadList()">Load</button>
+  <button type="button" class="btn btn-primary" (click)="loadList()"><i class="fas fa-sync-alt fa-fw text-success"></i> Actualizar Listas</button>
+<br/>
 </div>

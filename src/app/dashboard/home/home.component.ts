@@ -78,19 +78,20 @@ export class HomeComponent implements OnInit {
       title: {
         display: false,
         text: 'Distribución de Riesgo',
-        fontFamily: 'Nunito',
+        fontFamily: 'Quicksand',
         fontSize: 12
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Nunito',
+          fontFamily: 'Quicksand',
           boxWidth: 15,
-          fontSize: 12
+          fontSize: 12,
+          fontStyle: 'bold'
         }
       },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 14
       }
     };
@@ -106,19 +107,20 @@ export class HomeComponent implements OnInit {
       title: {
         display: false,
         text: 'Tareas Diarias',
-        fontFamily: 'Nunito',
+        fontFamily: 'Quicksand',
         fontSize: 14
       },
       legend: {
         position: 'left',
         labels: {
-          fontFamily: 'Nunito',
+          fontFamily: 'Quicksand',
           boxWidth: 15,
-          fontSize: 12
+          fontSize: 12,
+          fontStyle: 'bold'
         }
       },
       tooltips: {
-        bodyFontFamily: 'Nunito',
+        bodyFontFamily: 'Quicksand',
         bodyFontSize: 12
       }
     };
@@ -134,23 +136,9 @@ export class HomeComponent implements OnInit {
 
   loadCountry() {
     this.countryChartOptions = {
-      title: {
-        display: true,
-        text: 'Participantes por País',
-        fontFamily: 'Nunito',
-        fontSize: 16
-      },
-      legend: {
-        position: 'left',
-        labels: {
-          fontFamily: 'Nunito',
-          boxWidth: 20
-        }
-      },
-      tooltips: {
-        bodyFontFamily: 'Nunito',
-        bodyFontSize: 14
-      }
+      title: { display: true, text: 'Participantes por País', fontFamily: 'Quicksand', fontSize: 16 },
+      legend: { position: 'left', labels: { fontFamily: 'Quicksand', boxWidth: 20, fontStyle: 'bold' } },
+      tooltips: { bodyFontFamily: 'Quicksand', bodyFontSize: 14 }
     };
     this._partServ.getParticipantsbyCountry().subscribe(data => {
       this.byCountry = data;

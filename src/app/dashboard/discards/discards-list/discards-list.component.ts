@@ -44,17 +44,13 @@ export class DiscardsListComponent implements OnInit {
   }
 
   getSanctions() {
-    this._sanctions =  this._listServ.getItemsByList(this._currentListID);
+    this._sanctions = this._listServ.getItemsByList(this._currentListID);
   }
 
   runDiscards() {
-    // this._sanctionServ.addDiscard(this._currentListID).subscribe(discard => {
-    //   this._sanctionServ.runDiscard(discard.ID, this._sanctions).then(matches => {
-    //     this.toastr.success(`${matches.length} concurrencias encontradas`, 'Comparación ejecutada');
-    //     this._matches = matches;
-    //     this.saveMatches(discard, this._matches.shift());
-    //   });
-    // });
+    this._listServ.runDiscard().subscribe(data => {
+      console.log(data);
+    });
   }
 
   saveMatches(discard: any, match: any) {

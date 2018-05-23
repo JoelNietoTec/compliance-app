@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
 body,
 button,
@@ -11,8 +11,8 @@ select.form-control,
 textarea,
 textarea.form-control,
 .tooltip {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
   font-size: 13px;
 }
 
@@ -181,7 +181,6 @@ a:not([href]):not([tabindex]) {
 }
 .breadcrumb-item {
   text-transform: uppercase;
-  font-weight: 400;
 }
 
 /* Typography */
@@ -329,13 +328,14 @@ ngb-tabset > ul.nav-tabs {
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link.active {
   border-bottom: 1px solid #0275d8;
   border-radius: 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link {
   background-color: inherit !important;
   color: #292b2c !important;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .card > ngb-tabset > ul.nav-tabs > li.nav-item > a.nav-link {
