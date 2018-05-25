@@ -14,7 +14,7 @@ export class SanctionListsService {
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._listURl = _conn.APIUrl + 'sanctionlists';
-    this._matchesURL = 'http://localhost:57682/api/' + 'sanctionmatches';
+    this._matchesURL = _conn.APIUrl + 'sanctionmatches';
   }
 
   runDiscard() {
