@@ -18,6 +18,7 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TableFormComponent } from './components/table-form/table-form.component';
 import { ChartCardComponent } from './components/chart-card/chart-card.component';
+import { WaitingModalComponent } from './components/waiting-modal/waiting-modal.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -64,7 +65,6 @@ import { ProfileAccountsService } from './services/profile-accounts.service';
 import { FinancialProductsService } from './services/financial-products.service';
 import { AlertsService } from './services/alerts.service';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -100,7 +100,8 @@ import { AlertsService } from './services/alerts.service';
     AgmCoreModule,
     ChartCardComponent,
     DateInputComponent,
-    MapComponent
+    MapComponent,
+    WaitingModalComponent
   ],
   providers: [
     GendersService,
@@ -153,7 +154,8 @@ import { AlertsService } from './services/alerts.service';
     TableFormComponent,
     ChartCardComponent,
     MapComponent,
-    DateInputComponent
+    DateInputComponent,
+    WaitingModalComponent
   ],
   entryComponents: [TableFormComponent]
 })
