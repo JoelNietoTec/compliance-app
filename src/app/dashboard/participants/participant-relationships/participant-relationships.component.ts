@@ -43,7 +43,7 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
   }
 
   getRelationships() {
-    this._relService.getRelationships(this.participant.ID).subscribe(data => {
+    this._relService.getRelationships(this.participant.id).subscribe(data => {
       this._relationships = data;
     });
   }
@@ -77,11 +77,11 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
   addRelationShip() {
     const relationship: ParticipantRelationship = {};
 
-    relationship.RelationshipTypeID = this._currentRelationship.Type.ID;
-    relationship.ParticipantID = this._currentRelationship.Participant.ID;
-    relationship.RelatedParticipantID = this._currentRelationship.RelatedParticipant.ID;
+    relationship.RelationshipTypeID = this._currentRelationship.Type.id;
+    relationship.ParticipantID = this._currentRelationship.Participant.id;
+    relationship.RelatedParticipantID = this._currentRelationship.RelatedParticipant.id;
     this._relService.addRelationship(relationship).subscribe(data => {
-      this.toastr.success(data.RelatedParticipant.ShortName, 'Relación agregada');
+      this.toastr.success(data.RelatedParticipant.shortName, 'Relación agregada');
       this._relationships.push(data);
     });
   }

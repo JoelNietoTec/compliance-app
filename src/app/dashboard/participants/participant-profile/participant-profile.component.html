@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container-fluid">
+  <h3>Perfil Financiero</h3>
   <app-loading-modal *ngIf="!_profile"></app-loading-modal>
   <div *ngIf="_profile">
     <div class="card">
@@ -12,48 +13,48 @@
             <span class="text-primary">
               Última modificación
             </span>
-            <h6>{{ _profile.ModifiedDate | date: 'dd/MM/yyyy hh:mm a' }}</h6>
+            <h6>{{ _profile.modifiedDate | date: 'dd/MM/yyyy hh:mm a' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Tope Transacciones Mes
             </span>
-            <h6>{{ _profile.TransactionsLimit }}</h6>
+            <h6>{{ _profile.transactionsLimit }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Tope Ingresos/Pagos Mes
             </span>
-            <h6>$ {{ _profile.MonthlyIncomeLimit | number: '3.2' }}</h6>
+            <h6>$ {{ _profile.monthlyIncomeLimit | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Tope Desembolsos Mes
             </span>
-            <h6>$ {{ _profile.MonthlyExpenseLimit | number: '3.2' }}</h6>
+            <h6>$ {{ _profile.monthlyExpenseLimit | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Ingresos/Pagos Año
             </span>
-            <h6>$ {{ _profile.IncomeYTD | number: '3.2' }}</h6>
+            <h6>$ {{ _profile.incomeYTD | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Desembolsos Año
             </span>
-            <h6>$ {{ _profile.ExpenseYTD | number: '3.2' }}</h6>
+            <h6>$ {{ _profile.expenseYTD | number: '3.2' }}</h6>
           </div>
           <div class="col-md-3">
             <span class="text-primary">
               Ingresos/Pagos Mes
             </span>
-            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.IncomeMTD >= _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0, 'text-success':  _profile.IncomeMTD < _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0 }">
-              $ {{ _profile.IncomeMTD | number: '3.2' }}
-              <span *ngIf=" _profile.IncomeMTD > _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0" class="pull-right">
+            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.incomeMTD >= _profile.monthlyIncomeLimit && _profile.monthlyIncomeLimit > 0, 'text-success':  _profile.incomeMTD < _profile.monthlyIncomeLimit && _profile.monthlyIncomeLimit > 0 }">
+              $ {{ _profile.incomeMTD | number: '3.2' }}
+              <span *ngIf=" _profile.incomeMTD > _profile.monthlyIncomeLimit && _profile.monthlyIncomeLimit > 0" class="pull-right">
                 <i class="fas fa-exclamation-circle"></i>
               </span>
-              <span *ngIf=" _profile.IncomeMTD < _profile.MonthlyIncomeLimit && _profile.MonthlyIncomeLimit > 0" class="pull-right">
+              <span *ngIf=" _profile.incomeMTD < _profile.monthlyIncomeLimit && _profile.monthlyIncomeLimit > 0" class="pull-right">
                 <i class="fas fa-check-circle"></i>
               </span>
             </h6>
@@ -62,13 +63,13 @@
             <span class="text-primary">
               Desembolsos Mes
             </span>
-            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.ExpenseMTD >= _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0, 'text-success': _profile.ExpenseMTD
+            <h6 class="font-weight-bold" [ngClass]="{'text-danger': _profile.expenseMTD >= _profile.monthlyExpenseLimit && _profile.monthlyExpenseLimit > 0, 'text-success': _profile.expenseMTD
             < _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit> 0 }">
-              $ {{ _profile.ExpenseMTD | number: '3.2' }}
-              <span *ngIf=" _profile.ExpenseMTD > _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0" class="pull-right">
+              $ {{ _profile.expenseMTD | number: '3.2' }}
+              <span *ngIf=" _profile.expenseMTD > _profile.monthlyExpenseLimit && _profile.monthlyExpenseLimit > 0" class="pull-right">
                 <i class="fas fa-exclamation-circle"></i>
               </span>
-              <span *ngIf=" _profile.ExpenseMTD < _profile.MonthlyExpenseLimit && _profile.MonthlyExpenseLimit > 0" class="pull-right">
+              <span *ngIf=" _profile.expenseMTD < _profile.monthlyExpenseLimit && _profile.monthlyExpenseLimit > 0" class="pull-right">
                 <i class="fas fa-check-circle"></i>
               </span>
             </h6>

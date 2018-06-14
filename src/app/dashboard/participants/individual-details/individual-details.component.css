@@ -1,5 +1,5 @@
 .user-img {
-  height: 120px;
+  height: 80px;
   margin-bottom: 10px;
 }
 
@@ -7,6 +7,10 @@
   border-right: 1px solid #d6d6d6;
   padding-left: 0;
   margin-left: -20px;
+}
+
+h5.user-name {
+  font-size: 1.15rem;
 }
 
 .info-name {
@@ -34,4 +38,8 @@
 
 agm-map {
   height: 300px;
+}
+
+.card {
+  border-width: 4px 0 0 0;
 }

@@ -6,6 +6,7 @@ import { ParamValuesService } from '../../../shared/services/param-values.servic
 import { UtilService } from '../../../shared/services/util.service';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ParamTable, ParamValue } from '../../../shared/models/params.model';
+import { Observable } from 'rxjs';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import { ParamTable, ParamValue } from '../../../shared/models/params.model';
 export class ParamTableSimpleComponent implements OnInit {
   @Input() table: ParamTable;
 
-  _values: Array<ParamValue>;
+  _values: Observable<ParamValue[]>;
   _customTable: TableOptions = {};
 
   constructor(
@@ -35,22 +36,20 @@ export class ParamTableSimpleComponent implements OnInit {
     this._customTable.searcheable = true;
     this._customTable.style = 'table-sm table-squared';
     this._customTable.columns = [
-      { name: 'DisplayValue', title: 'Nombre', sortable: true, type: 'text', filterable: true },
-      { name: 'EnglishDisplayValue', title: 'Nombre Inglés', sortable: true, type: 'text', filterable: true },
-      { name: 'Score', title: 'Puntaje', sortable: true, type: 'number' }
+      { name: 'displayValue', title: 'Nombre', sortable: true, type: 'text', filterable: true },
+      { name: 'englishDisplayValue', title: 'Nombre Inglés', sortable: true, type: 'text', filterable: true },
+      { name: 'score', title: 'Puntaje', sortable: true, type: 'number' }
     ];
 
-    this._valueServ.getValuesByTable(this.table.ID).subscribe(data => {
-      this._values = data;
-    });
+    this._values = this._valueServ.getValuesByTable(this.table.id);
   }
 
   addValue(value: ParamValue) {
-    value.ParamTableID = this.table.ID;
+    value.paramTableId = this.table.id;
     this._valueServ.addValue(value).subscribe(
       data => {
-        this.toastr.success(data.DisplayValue, 'Valor creado');
-        this._values.push(data);
+        this.toastr.success(data.displayValue, 'Valor creado');
+        this._values = this._valueServ.getValuesByTable(this.table.id);
       },
       (err: Error) => {
         this.toastr.error(err.message, 'No se pudo crear el valor');
@@ -59,15 +58,16 @@ export class ParamTableSimpleComponent implements OnInit {
   }
 
   editValue(value: ParamValue) {
-    this._valueServ.editValue(value.ID, value).subscribe(data => {
-      this.toastr.success(data.DisplayValue, 'Valor editado');
+    this._valueServ.editValue(value.id, value).subscribe(data => {
+      this.toastr.success(value.displayValue, 'Valor editado');
+      this._values = this._valueServ.getValuesByTable(this.table.id);
     });
   }
 
   deleteValue(id: number) {
     this._valueServ.deleteValue(id).subscribe(data => {
       this.toastr.info('Valor eliminado');
-      this._values = this._util.removeByID(this._values, id);
+      this._values = this._valueServ.getValuesByTable(this.table.id);
     });
   }
 }

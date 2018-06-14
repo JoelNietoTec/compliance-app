@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { ConnectionService } from './connection.service';
 import { FinancialProduct, ProfileProduct } from '../models/products.model';
@@ -9,11 +8,13 @@ import { FinancialProduct, ProfileProduct } from '../models/products.model';
 export class FinancialProductsService {
   private _productsURL: string;
   private _profileProductURL: string;
+  private _profileURL: string;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._productsURL = _conn.APIUrl + 'financialproducts';
     this._profileProductURL = _conn.APIUrl + 'profileproducts';
+    this._profileURL = _conn.APIUrl + 'participantprofiles';
   }
 
   getProducts(): Observable<FinancialProduct[]> {
@@ -34,6 +35,10 @@ export class FinancialProductsService {
 
   addProfileProduct(product: ProfileProduct): Observable<ProfileProduct> {
     return this._http.post<ProfileProduct>(this._profileProductURL, JSON.stringify(product), { headers: this._headers });
+  }
+
+  getProfileProducts(id: number): Observable<ProfileProduct[]> {
+    return this._http.get<ProfileProduct[]>(`${this._profileURL}/${id}/products`);
   }
 
   editProfileProduct(id: number, product: ProfileProduct) {

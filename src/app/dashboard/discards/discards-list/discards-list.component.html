@@ -5,7 +5,7 @@
       <div class="form-group">
         <select class="form-control custom-select" [(ngModel)]="_currentListID" name="list" id="list" (ngModelChange)="getSanctions()">
           <option selected disabled [value]="undefined">--- Seleccionar Lista ---</option>
-          <option *ngFor="let list of _lists | async" [value]="list.ID">{{ list.Name }}</option>
+          <option *ngFor="let list of _lists | async" [value]="list.id">{{ list.name }}</option>
         </select>
       </div>
     </div>

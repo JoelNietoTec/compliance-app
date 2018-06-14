@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">
-      Grupo: {{ _value.DisplayValue }}
+      Grupo: {{ _value.displayValue }}
     </h4>
-    <app-custom-table [options]="_table" [items]="_value.ParamSubValues" (addItem)="addValue($event)" (editItem)="updateValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
+    <app-custom-table [options]="_table" [items]="_value.subValues" (addItem)="addValue($event)" (editItem)="updateValue($event)" (removeItem)="deleteValue($event)"></app-custom-table>
   </div>
 </div>

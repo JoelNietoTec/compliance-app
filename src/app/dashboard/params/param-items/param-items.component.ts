@@ -22,7 +22,7 @@ export class ParamItemsComponent implements OnInit {
   ngOnInit() {
     this._tableService.getTables()
       .subscribe(data => {
-        this._tables = this._util.sortBy(data, 'EnglishName');
+        this._tables = this._util.sortBy(data, 'englishName');
       });
    }
 }

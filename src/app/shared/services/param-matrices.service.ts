@@ -26,7 +26,8 @@ export class ParamMatricesService {
     return this._http.get<ParamMatrix>(`${this._matrixURL}/${_id}`);
   }
 
-  createMatrix(mat: any): Observable<ParamMatrix> {
+  createMatrix(mat: ParamMatrix): Observable<ParamMatrix> {
+    console.log(mat);
     return this._http.post<ParamMatrix>(this._matrixURL, JSON.stringify(mat), { headers: this._headers });
   }
 

@@ -43,6 +43,6 @@ export class ParticipantTransactionsFormComponent implements OnInit {
   }
 
   updateDate() {
-    this.currentTransaction.Date = new Date(this._dateFormatter.format(this._date));
+    this.currentTransaction.date = new Date(this._dateFormatter.format(this._date));
   }
 }

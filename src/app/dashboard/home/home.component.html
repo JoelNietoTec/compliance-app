@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-md-3">
-    <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'Count'" [label]="'Rate'" [options]="riskChartOptions" [type]="'doughnut'"
+    <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'count'" [label]="'rate'" [options]="riskChartOptions" [type]="'doughnut'"
       [colors]="riskColors">
     </app-chart-card>
   </div>
   <div class="col-md-3">
-    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'count'" [label]="'status'" [options]="tasksChartOptions" [type]="'doughnut'"
       [colors]="riskColors"></app-chart-card>
   </div>
   <div class="col-md-3">
-    <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions"
+    <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'status'" [options]="tasksChartOptions"
       [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card>
   </div>
   <div class="col-md-3">
-    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'Count'" [label]="'Status'" [options]="tasksChartOptions" [type]="'doughnut'"
+    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'count'" [label]="'status'" [options]="tasksChartOptions" [type]="'doughnut'"
       [title]="'Cronograma'">
     </app-chart-card>
   </div>
@@ -30,11 +30,11 @@
           <ng-container *ngFor="let address of _addresses">
             <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
               <agm-info-window>
-                <b>{{ address.participant.ShortName }}</b>,
+                <b>{{ address.participant.shortName }}</b>,
                 <br> {{ address.formatted_address }}
                 <br>
                 <br>
-                <a [routerLink]="['/app', 'participantes', address.participant.ID]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
+                <a [routerLink]="['/app', 'participantes', address.participant.id]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
               </agm-info-window>
             </agm-marker>
           </ng-container>
@@ -60,11 +60,11 @@
           <tbody>
             <tr *ngFor="let part of _lastParticipants">
               <td class="font-weight-bold">
-                <a [routerLink]="['/app','participantes', part.ID]">{{ part.ShortName }}</a>
+                <a [routerLink]="['/app','participantes', part.id]">{{ part.shortName }}</a>
               </td>
-              <td>{{ part.CreateDate | date: 'shortDate' }}</td>
+              <td>{{ part.createDate | date: 'shortDate' }}</td>
               <td>
-                <span class="badge" [ngClass]="{'badge-success': part.Rate === 'Bajo', 'badge-warning': part.Rate === 'Medio', 'badge-danger': part.Rate === 'Alto', 'badge-secondary': part.Rate === 'Incompleto' }">{{ part.Rate }}</span>
+                <span class="badge" [ngClass]="{'badge-success': part.rate === 'Bajo', 'badge-warning': part.rate === 'Medio', 'badge-danger': part.rate === 'Alto', 'badge-secondary': part.rate === 'Incompleto' }">{{ part.rate }}</span>
               </td>
             </tr>
           </tbody>

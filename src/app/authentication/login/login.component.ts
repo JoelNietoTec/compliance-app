@@ -12,8 +12,8 @@ import { User } from '../../shared/models/users.model';
 })
 export class LoginComponent implements OnInit {
   _login: any = {
-    UserName: '',
-    Password: ''
+    userName: '',
+    password: ''
   };
 
   _invalid: Boolean = false;
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           this._authServ.setCurrentUser(data);
           console.log(data);
           const _user = this._authServ.getUserInfo();
-          this.toastr.success(_user.UserName, 'Bienvenido');
+          this.toastr.success(_user.userName, 'Bienvenido');
           this._router.navigate(['/']);
         } else {
           this._loading = false;

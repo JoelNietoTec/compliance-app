@@ -8,6 +8,7 @@ button.form-control,
 optgroup,
 select,
 select.form-control,
+select.form-control > option,
 textarea,
 textarea.form-control,
 .tooltip {
@@ -124,8 +125,19 @@ small.text-muted > .typcn {
 }
 
 .card,
-.modal-content {
+.modal-content,
+.list-group {
   border-radius: 0.55rem;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 0.55rem;
+  border-top-left-radius: 0.55rem
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0.55rem;
+  border-bottom-left-radius: 0.55rem
 }
 
 table.table-striped td {
@@ -168,6 +180,7 @@ table.table-striped td {
 .card,
 .breadcrumb,
 .navbar,
+.list-group,
 .dropdown-menu {
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
 }
@@ -397,7 +410,8 @@ ngb-tabset > ul.nav-tabs > li.nav-item {
 
 /* Button Primary*/
 .btn-primary,
-.page-item.active .page-link {
+.page-item.active .page-link,
+.nav-pills .nav-link.active, .list-group-item.active {
   background-color: #287fb9 !important;
   border-color: #206594 !important;
 }

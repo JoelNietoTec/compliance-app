@@ -17,9 +17,9 @@ export class ParticipantComplianceComponent implements OnInit {
   @Output() updateScore = new EventEmitter();
 
   _matrix: ParamMatrix;
-  _matrices: Array<ParamMatrix>;
-  _partParams: Array<ParticipantParam>;
-  _categories: Array<ParamCategory>;
+  _matrices: ParamMatrix[];
+  _partParams: ParticipantParam[];
+  _categories: ParamCategory[];
 
   constructor(
     private _matrixService: ParamMatricesService,
@@ -30,11 +30,11 @@ export class ParticipantComplianceComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
-    this._partService.getParams(this.participant.ID).subscribe(data => {
+    this._partService.getParams(this.participant.id).subscribe(data => {
       this._partParams = data;
     });
 
-    this._matrixService.getMatrix(this.participant.ParamMatrixID).subscribe(data => {
+    this._matrixService.getMatrix(this.participant.paramMatrixId).subscribe(data => {
       this._matrix = data;
     });
   }
@@ -44,11 +44,12 @@ export class ParticipantComplianceComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoriesService.getCategoriesByMatrix(this.participant.ParamMatrixID).subscribe(data => {
+    this._categoriesService.getCategoriesByMatrix(this.participant.paramMatrixId).subscribe(data => {
+      console.log(data);
       this._categories = data;
-      this._categories = this._util.sortBy(this._categories, 'Name');
+      this._categories = this._util.sortBy(this._categories, 'name');
       for (let i of this._categories) {
-        i.Params = this._util.sortBy(i.Params, 'Name');
+        i.params = this._util.sortBy(i.params, 'name');
       }
     });
   }

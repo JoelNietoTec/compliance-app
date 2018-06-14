@@ -1,16 +1,16 @@
 <app-loading-modal *ngIf="!_partParam"></app-loading-modal>
 <div *ngIf="_partParam" class="form-group" >
   <div class="form-group" [ngClass]="{'has-danger': !_currentValue && !_currentSubValue, 'has-success': _currentValue || _currentSubValue}">
-    <label class="form-control-label" for="">{{ param.Name }} </label>
-    <ng-container [ngSwitch]="param.ParamTable.TableTypeID">
+    <label class="form-control-label" for="">{{ param.name }} </label>
+    <ng-container [ngSwitch]="param.table.tableTypeId">
       <select [ngClass]="{'is-invalid': !_currentValue, 'is-valid': _currentValue}" *ngSwitchCase="1" class="form-control custom-select" name="" id="" [(ngModel)]="_currentValue" (ngModelChange)="updateParam($event)" >
         <option selected disabled [value]="_default">--- Seleccionar ---</option>
-        <option *ngFor="let value of _values" [ngValue]="value">{{ value.DisplayValue }}</option>
+        <option *ngFor="let value of _values" [ngValue]="value">{{ value.displayValue }}</option>
       </select>
       <select [ngClass]="{'is-invalid': !_currentValue && !_currentSubValue, 'is-valid': _currentValue || _currentSubValue}" *ngSwitchCase="2" name="" id="" class="form-control custom-select" [(ngModel)]="_currentSubValue" (ngModelChange)="updateParam($event)">
         <option selected disabled [value]="_default">--- Seleccionar ---</option>
-        <optgroup *ngFor="let val of _values" label="{{ val.DisplayValue }}">
-          <option *ngFor="let subval of val.ParamSubValues" [ngValue]="subval">{{ subval.DisplayValue }}</option>
+        <optgroup *ngFor="let val of _values" label="{{ val.displayValue }}">
+          <option *ngFor="let subval of val.subValues" [ngValue]="subval">{{ subval.displayValue }}</option>
         </optgroup>
       </select>
     </ng-container>

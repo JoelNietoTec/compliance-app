@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class FinancialProductsComponent implements OnInit {
   _table: TableOptions = {};
   _products: Observable<FinancialProduct[]>;
-  _types: ProductType[] = [{ ID: 1, Name: 'Activo', EnglishName: 'Asset' }, { ID: 2, Name: 'Deuda', EnglishName: 'Debt' }];
+  _types: ProductType[] = [{ id: 1, name: 'Activo', englishName: 'Asset' }, { id: 2, name: 'Deuda', englishName: 'Debt' }];
   constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
   ngOnInit() {
@@ -27,18 +27,18 @@ export class FinancialProductsComponent implements OnInit {
     this._table.columns = [
       { name: 'ID', title: '#', hidden: true },
       {
-        name: 'ProductType',
+        name: 'type',
         title: 'Tipo',
         sortable: true,
         type: 'object',
         list: this._types,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'ProductType.Name',
-        objectID: 'ProductTypeID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'type.name',
+        objectID: 'productTypeId'
       },
-      { name: 'Name', title: 'Nombre', filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', filterable: true }
+      { name: 'name', title: 'Nombre', filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', filterable: true }
     ];
 
     this._products =  this._prodServ.getProducts();
@@ -47,7 +47,7 @@ export class FinancialProductsComponent implements OnInit {
   addProduct(product: FinancialProduct) {
     this._prodServ.createProduct(product).subscribe(
       data => {
-        this.toast.success(data.Name, 'Producto creado');
+        this.toast.success(data.name, 'Producto creado');
         this._products = this._prodServ.getProducts();
       },
       (err: Error) => {
@@ -57,9 +57,9 @@ export class FinancialProductsComponent implements OnInit {
   }
 
   editProduct(product: FinancialProduct) {
-    this._prodServ.editProduct(product.ID, product).subscribe(
+    this._prodServ.editProduct(product.id, product).subscribe(
       data => {
-        this.toast.success(product.Name, 'Producto actualizado');
+        this.toast.success(product.name, 'Producto actualizado');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

@@ -68,13 +68,13 @@ export class FilesMatchesComponent implements OnInit {
         alert.AlertTypeID = 1;
         alert.Date = new Date();
         alert.Name = 'Coincidencia confirmada';
-        alert.ParticipantID = match.Participant.ID;
+        alert.ParticipantID = match.Participant.id;
         alert.Description = `Coincidencia confirmada contra archivo ${this._currentComparison.File}`;
         this._alertService.createAlert(alert).subscribe(datad => {
-          this.toastr.success(match.Participant.FullName, 'Coincidencia confirmada');
+          this.toastr.success(match.Participant.fullName, 'Coincidencia confirmada');
         });
       } else {
-        this.toastr.success(match.Participant.FullName, 'Coincidencia descartada');
+        this.toastr.success(match.Participant.fullName, 'Coincidencia descartada');
       }
       this._matches = this._util.removeByID(this._matches, match.ID);
     });

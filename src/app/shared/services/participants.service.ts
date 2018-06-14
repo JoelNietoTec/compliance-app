@@ -43,7 +43,7 @@ export class ParticipantsService {
 
   createParticipant(part: Participant): Observable<Participant> {
     const _user = this._auth.getUserInfo(); // get Current User
-    part.CreatedBy = _user.ID; // set User ID
+    part.createdUserId = _user.id; // set User ID
     return this._http.post<Participant>(this._partURL, JSON.stringify(part), { headers: this._headers });
   }
 
@@ -57,8 +57,8 @@ export class ParticipantsService {
     search = search.toLocaleLowerCase();
 
     for (let item of participants) {
-      let term = this._util.isNullString(item.FirstName) + this._util.isNullString(item.SecondName);
-      term = term + this._util.isNullString(item.ThirdName) + this._util.isNullString(item.FourthName);
+      let term = this._util.isNullString(item.firstName) + this._util.isNullString(item.secondName);
+      term = term + this._util.isNullString(item.thirdName) + this._util.isNullString(item.fourthName);
       term = term.toLocaleLowerCase();
 
       if (term.indexOf(search) >= 0) {
@@ -82,11 +82,11 @@ export class ParticipantsService {
   }
 
   getRate(_part: Participant): string {
-    if (!_part.Score) {
+    if (!_part.score) {
       return 'Incompleto';
-    } else if (_part.Score < 3) {
+    } else if (_part.score < 3) {
       return 'Bajo';
-    } else if (_part.Score < 6) {
+    } else if (_part.score < 6) {
       return 'Medio';
     } else {
       return 'Alto';

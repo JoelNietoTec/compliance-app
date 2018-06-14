@@ -49,17 +49,18 @@ export class ParticipantProfileComponent implements OnInit {
     if (this._profile) {
       profile = Object.assign({}, profile, this._profile);
     }
-    this._profileServ.getProfile(this.participant.ID).subscribe(data => {
+    this._profileServ.getProfile(this.participant.id).subscribe(data => {
       this._profile = data;
+      console.log(this._profile);
       if (profile) {
         if (
-          this._profile.ExpenseMTD > this._profile.MonthlyExpenseLimit &&
-          this._profile.MonthlyExpenseLimit > 0 &&
-          profile.ExpenseMTD < this._profile.ExpenseMTD
+          this._profile.expenseMTD > this._profile.monthlyExpenseLimit &&
+          this._profile.monthlyExpenseLimit > 0 &&
+          profile.expenseMTD < this._profile.expenseMTD
         ) {
           const alert: ParticipantAlert = {};
           alert.Date = new Date();
-          alert.ParticipantID = this._profile.ParticipantID;
+          alert.ParticipantID = this._profile.participantId;
           alert.AlertTypeID = 2;
           alert.Name = 'Sobrepaso egresos';
           alert.Description = 'Sobrepasó límite de egresos mensuales';
@@ -69,13 +70,13 @@ export class ParticipantProfileComponent implements OnInit {
           });
         }
         if (
-          this._profile.IncomeMTD > this._profile.MonthlyIncomeLimit &&
-          this._profile.MonthlyIncomeLimit > 0 &&
-          profile.IncomeMTD < this._profile.IncomeMTD
+          this._profile.incomeMTD > this._profile.monthlyIncomeLimit &&
+          this._profile.monthlyIncomeLimit > 0 &&
+          profile.incomeMTD < this._profile.incomeMTD
         ) {
           const alert: ParticipantAlert = {};
           alert.Date = new Date();
-          alert.ParticipantID = this._profile.ParticipantID;
+          alert.ParticipantID = this._profile.participantId;
           alert.AlertTypeID = 2;
           alert.Name = 'Sobrepaso ingresos';
           alert.Description = 'Sobrepasó límite de ingresos mensuales';
@@ -92,7 +93,7 @@ export class ParticipantProfileComponent implements OnInit {
     profile = Object.assign({}, profile, this._updatedProfile);
     console.log(profile);
     profile.Accounts = [];
-    this._profileServ.updateProfile(profile.ID, profile).subscribe(data => {
+    this._profileServ.updateProfile(profile.id, profile).subscribe(data => {
       this.toast.success('Perfil actualizado');
       profile.Accounts = this._profile.Accounts;
       this._profile = profile;

@@ -62,8 +62,8 @@ export class TransactionsService {
     this._alertServ.getReason(reason).subscribe(data => {
       const alert: Alert = {};
       alert.ParticipantID = participantID;
-      alert.AlertReasonID = data.ID;
-      alert.AlertSourceID = data.AlertSourceID;
+      alert.AlertReasonID = data.id;
+      alert.AlertSourceID = data.alertSourceId;
       alert.Description = message;
       alert.CreateDate = new Date();
       this._alertServ.createAlert(alert).subscribe(datad => {

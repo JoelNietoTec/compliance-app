@@ -4,6 +4,7 @@ import { FinancialProductsService } from '../../../shared/services/financial-pro
 import { FinancialProduct, ProfileProduct } from '../../../shared/models/products.model';
 import { TableOptions } from '../../../shared/components/custom-table/custom-table.options';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-participant-products',
@@ -13,44 +14,45 @@ import { ToastrService } from 'ngx-toastr';
 export class ParticipantProductsComponent implements OnInit {
   @Input() profile: ParticipantProfile;
 
+  _products: Observable<ProfileProduct[]>;
   _types = this._prodServ.getProducts();
   _table: TableOptions = {};
 
   constructor(private _prodServ: FinancialProductsService, private toast: ToastrService) {}
 
   ngOnInit() {
-
-      this._table.title = 'Productos';
-      this._table.addMethod = 'modal';
-      this._table.creatable = true;
-      this._table.pageable = true;
-      this._table.style = 'table-sm table-striped table-squared';
-      this._table.columns = [
-        { name: 'Name', title: 'Nombre' },
-        {
-          name: 'FinancialProduct',
-          title: 'Tipo',
-          type: 'object',
-          objectColumn: 'FinancialProduct.Name',
-          asyncList: this._types,
-          listID: 'ID',
-          listDisplay: 'Name',
-          objectID: 'FinancialProductID'
-        },
-        { name: 'Description', title: 'Descripción', type: 'text', hidden: true },
-        { name: 'StartDate', title: 'Fec.Inicio', type: 'date' },
-        { name: 'DueDate', title: 'Fec.Vencimiento', type: 'date' },
-        { name: 'MonthlyPayment', title: 'Pago Mensual', type: 'money' },
-        { name: 'Balance', title: 'Saldo', type: 'money' }
-      ];
+    this._products = this._prodServ.getProfileProducts(this.profile.id);
+    this._table.title = 'Productos';
+    this._table.addMethod = 'modal';
+    this._table.creatable = true;
+    this._table.pageable = true;
+    this._table.style = 'table-sm table-striped table-squared';
+    this._table.columns = [
+      { name: 'name', title: 'Nombre' },
+      {
+        name: 'financialProduct',
+        title: 'Tipo',
+        type: 'object',
+        objectColumn: 'financialProduct.name',
+        asyncList: this._types,
+        listID: 'id',
+        listDisplay: 'name',
+        objectID: 'financialProductID'
+      },
+      { name: 'description', title: 'Descripción', type: 'text', hidden: true },
+      { name: 'startDate', title: 'Fec.Inicio', type: 'date' },
+      { name: 'dueDate', title: 'Fec.Vencimiento', type: 'date' },
+      { name: 'monthlyPayment', title: 'Pago Mensual', type: 'money' },
+      { name: 'balance', title: 'Saldo', type: 'money' }
+    ];
   }
 
   addProduct(product: ProfileProduct) {
-    product.ParticipantProfileID = this.profile.ID;
+    product.participantProfileID = this.profile.id;
     this._prodServ.addProfileProduct(product).subscribe(
       data => {
-        this.toast.success(data.Name, 'Producto agregado');
-        this.profile.Products.push(data);
+        this._products = this._prodServ.getProfileProducts(this.profile.id);
+        this.toast.success(data.name, 'Producto agregado');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');
@@ -59,9 +61,10 @@ export class ParticipantProductsComponent implements OnInit {
   }
 
   editProduct(product: ProfileProduct) {
-    this._prodServ.editProfileProduct(product.ID, product).subscribe(
+    this._prodServ.editProfileProduct(product.id, product).subscribe(
       data => {
-        this.toast.success(product.Name, 'Producto actualizado');
+        this.toast.success(product.name, 'Producto actualizado');
+        this._products = this._prodServ.getProfileProducts(this.profile.id);
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

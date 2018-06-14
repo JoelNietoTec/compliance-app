@@ -58,13 +58,13 @@ export class CalendarComponent implements OnInit {
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: TaskEvent }): void => {
         this.handleEvent('Editado', event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: TaskEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -90,12 +90,12 @@ export class CalendarComponent implements OnInit {
       }
     }
   }
-  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
-    event.start = newStart;
-    event.end = newEnd;
-    this.handleEvent('Cambiado o borrada', event);
-    this.refresh.next();
-  }
+  // eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
+  //   event.start = newStart;
+  //   event.end = newEnd;
+  //   this.handleEvent('Cambiado o borrada', event);
+  //   this.refresh.next();
+  // }
 
   handleEvent(action: string, event: TaskEvent): void {
     if ((event.categoryid = 1)) {

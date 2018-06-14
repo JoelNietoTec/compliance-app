@@ -19,26 +19,26 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this._profiles = [
-      { ID: 1, Name: 'Administrador', EnglishName: 'Administrator' },
-      { ID: 2, Name: 'Usuario', EnglishName: 'User' },
-      { ID: 3, Name: 'Pruebas', EnglishName: 'Test' }
+      { id: 1, name: 'Administrador', englishName: 'Administrator' },
+      { id: 2, name: 'Usuario', englishName: 'User' },
+      { id: 3, name: 'Pruebas', englishName: 'Test' }
     ];
 
     this._table.columns = [
-      { name: 'ID', title: '#', sortable: true, filterable: true, readonly: true },
-      { name: 'UserName', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'id', title: '#', sortable: true, filterable: true, readonly: true },
+      { name: 'userName', title: 'Nombre', sortable: true, filterable: true },
       {
-        name: 'UserProfile',
+        name: 'userProfile',
         title: 'Rol',
         type: 'object',
-        objectColumn: 'UserProfile.Name',
-        objectID: 'UserProfileID',
+        objectColumn: 'userProfile.name',
+        objectID: 'userProfileID',
         list: this._profiles,
-        listID: 'ID',
-        listDisplay: 'Name'
+        listID: 'id',
+        listDisplay: 'name'
       },
-      { name: 'Email', title: 'Email', sortable: true, filterable: true },
-      { name: 'CreateDate', title: 'Fecha Creación', type: 'datetime', sortable: true, readonly: true }
+      { name: 'email', title: 'Email', sortable: true, filterable: true },
+      { name: 'createDate', title: 'Fecha Creación', type: 'datetime', sortable: true, readonly: true }
     ];
 
     this._table.style = 'table-sm table-squared';
@@ -63,9 +63,9 @@ export class UsersListComponent implements OnInit {
   }
 
   updateUser(user: User) {
-    this._userServ.updateUser(user.ID, user).subscribe(
+    this._userServ.updateUser(user.id, user).subscribe(
       data => {
-        this.toast.success(data.UserName, 'Usuario actualizado');
+        this.toast.success(data.userName, 'Usuario actualizado');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

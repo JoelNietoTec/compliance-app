@@ -15,14 +15,10 @@ export class ParamValueComponent implements OnInit {
   @Input() _value: ParamValue;
   _table: TableOptions = {};
 
-  constructor(
-    private _util: UtilService,
-    private _subValService: ParamSubValuesService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private _util: UtilService, private _subValService: ParamSubValuesService, private toastr: ToastrService) {}
 
   ngOnInit() {
-    this._table.addMethod = 'inline';
+    this._table.addMethod = 'modal';
     this._table.creatable = true;
     this._table.deletable = true;
     this._table.editable = true;
@@ -30,23 +26,23 @@ export class ParamValueComponent implements OnInit {
     this._table.searcheable = true;
     this._table.pageable = true;
     this._table.columns = [
-      { name: 'DisplayValue', title: 'Nombre', type: 'text', sortable: true, filterable: true },
-      { name: 'EnglishDisplayValue', title: 'Nombre Inglés', type: 'text', sortable: true, filterable: true },
-      { name: 'Score', title: 'Valor', type: 'number', sortable: true }
+      { name: 'displayValue', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'englishDisplayValue', title: 'Nombre Inglés', sortable: true, filterable: true },
+      { name: 'score', title: 'Valor', type: 'number', sortable: true }
     ];
   }
 
   addValue(value: ParamSubValue) {
-    value.ParamValueID = this._value.ID;
+    value.paramValueId = this._value.id;
     this._subValService.addSubValue(value).subscribe(data => {
-      this.toastr.success(data.DisplayValue, 'Valor creado');
-      this._value.ParamSubValues.push(data);
+      this.toastr.success(data.displayValue, 'Valor creado');
+      this._value.subValues.push(data);
     });
   }
 
   updateValue(value: ParamSubValue) {
-    this._subValService.editSubValue(value.ID, value).subscribe(data => {
-      this.toastr.success(data.DisplayValue, 'Valor editado');
+    this._subValService.editSubValue(value.id, value).subscribe(data => {
+      this.toastr.success(value.displayValue, 'Valor editado');
     });
   }
 

@@ -1,25 +1,25 @@
 <app-loading-modal *ngIf="!_participant"></app-loading-modal>
 <div *ngIf="_participant">
   <div class="row">
-    <div class="col-md-4">
+    <!-- <div class="col-md-12">
       <ng-container>
         <individual-details [individual]="_participant"></individual-details>
       </ng-container>
-    </div>
-    <div class="col-md-8">
+    </div> -->
+    <!-- <div class="col-md-8">
       <div class="card">
-        <ngb-tabset #t type="tabs" *ngIf="_participant">
+        <ngb-tabset #t type="tabs" *ngIf="_participant" [orientation]="'vertical'">
           <ngb-tab title="Riesgo">
             <ng-template ngbTabContent>
               <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Transacciones">
+          <ngb-tab title="Perfil Transaccional">
             <ng-template ngbTabContent>
-              <app-financial-profile [participant]="_participant"></app-financial-profile>
+
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Finanzas">
+          <ngb-tab title="Perfil Financiero">
             <ng-template ngbTabContent>
               <app-participant-profile [participant]="_participant"></app-participant-profile>
             </ng-template>
@@ -37,14 +37,69 @@
           <ngb-tab title="Editar">
             <ng-template ngbTabContent>
               <div class="form-container">
-                <individual-form *ngIf="_participant.ParticipantTypeID == 1" [individual]="_participantCopy" (updateParticipant)="getParticipant()"></individual-form>
+                <individual-form *ngIf="_participant.participantTypeId == 1" [individual]="_participantCopy" (updateParticipant)="getParticipant()"></individual-form>
               </div>
               <div class="form-container">
-                <entity-form *ngIf="_participant.ParticipantTypeID == 2" [entity]="_participantCopy" (updateParticipant)="getParticipant()"></entity-form>
+                <entity-form *ngIf="_participant.participantTypeId == 2" [entity]="_participantCopy" (updateParticipant)="getParticipant()"></entity-form>
               </div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
+      </div>
+    </div> -->
+
+    <div class="col-md-2">
+      <ng-container>
+        <individual-details [individual]="_participant"></individual-details>
+      </ng-container>
+      <div class="list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a href="#v-pills-info" class="list-group-item list-group-item-action active" id="v-pills-info-tab" data-toggle="pill" role="tab" aria-controls="v-pills"
+          aria-selected="true">Información</a>
+        <a href="#v-pills-risk" class="list-group-item list-group-item-action" id="v-pills-risk-tab" data-toggle="pill" role="tab" aria-controls="v-pills" aria-selected="false">Matriz de Riesgo</a>
+        <a href="#v-pills-transactions" class="list-group-item list-group-item-action" id="v-pills-transactions-tab" data-toggle="pill" role="tab" aria-controls="v-pills"
+          aria-selected="false">Perfil Transaccional</a>
+        <a href="#v-pills-financial" class="list-group-item list-group-item-action" id="v-pills-financial-tab" data-toggle="pill" role="tab" aria-controls="v-pills"
+          aria-selected="false">Perfil Financiero</a>
+        <a href="#v-pills-documents" class="list-group-item list-group-item-action" id="v-pills-documents-tab" data-toggle="pill" role="tab" aria-controls="v-pills"
+          aria-selected="false">Documentos</a>
+        <a href="#v-pills-relations" class="list-group-item list-group-item-action" id="v-pills-relations-tab" data-toggle="pill" role="tab" aria-controls="v-pills"
+          aria-selected="false">Relaciones</a>
+        <a href="#v-pills-edit" class="list-group-item list-group-item-action" id="v-pills-edit-tab" data-toggle="pill" role="tab" aria-controls="v-pills" aria-selected="false">Editar</a>
+      </div>
+
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="v-pills-info" role="tabpanel" aria-labelledby="v-pills-info-tab">
+              <participant-info [participant]="_participant"></participant-info>
+            </div>
+            <div class="tab-pane fade" id="v-pills-risk" role="tabpanel" aria-labelledby="v-pills-risk-tab">
+              <participant-compliance [participant]="_participant" (updateScore)="getParticipant()"></participant-compliance>
+            </div>
+            <div class="tab-pane fade" id="v-pills-transactions" role="tabpanel" aria-labelledby="v-pills-transactions-tab">
+              <app-financial-profile [participant]="_participant"></app-financial-profile>
+            </div>
+            <div class="tab-pane fade" id="v-pills-financial" role="tabpanel" aria-labelledby="v-pills-financial-tab">
+              <app-participant-profile [participant]="_participant"></app-participant-profile>
+            </div>
+            <div class="tab-pane fade" id="v-pills-documents" role="tabpanel" aria-labelledby="v-pills-documents-tab">
+              <participant-documents [participant]="_participant"></participant-documents>
+            </div>
+            <div class="tab-pane fade" id="v-pills-relations" role="tabpanel" aria-labelledby="v-pills-relations-tab">
+              <participant-relationships [participant]="_participant"></participant-relationships>
+            </div>
+            <div class="tab-pane fade" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-edit-tab">
+              <div class="form-container">
+                <individual-form *ngIf="_participant.participantTypeId == 1" [individual]="_participantCopy" (updateParticipant)="getParticipant()"></individual-form>
+              </div>
+              <div class="form-container">
+                <entity-form *ngIf="_participant.participantTypeId == 2" [entity]="_participantCopy" (updateParticipant)="getParticipant()"></entity-form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

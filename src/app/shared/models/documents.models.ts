@@ -1,22 +1,24 @@
 import { Country } from './country.model';
+import { Participant } from './participants.model';
 
 export interface ParticipantDocument {
-  ID?: number;
-  DocumentTypeID?: number;
-  DocumentType?: DocumentType;
-  ParticipantID?: number;
-  DocumentCode?: string;
-  ExpeditionDate?: Date;
-  ExpirationDate?: Date;
-  CountryID?: number;
-  Country?: Country;
-  FilePath?: string;
+  id?: number;
+  documentTypeId?: number;
+  type?: DocumentType;
+  participantId?: number;
+  participant?: Participant;
+  documentCode?: string;
+  expeditionDate?: Date;
+  expirationDate?: Date;
+  countryId?: number;
+  country?: Country;
+  filePath?: string;
 }
 
 export interface DocumentType {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
-  RequiredIndividual?: Boolean;
-  RequiredEntity?: Boolean;
+  id?: number;
+  name?: string;
+  englishName?: string;
+  requiredIndividual?: Boolean;
+  requiredEntity?: Boolean;
 }

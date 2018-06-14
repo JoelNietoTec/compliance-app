@@ -20,31 +20,31 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
     this._profiles = [
-      { ID: 1, Name: 'Administrador', EnglishName: 'Administrator' },
-      { ID: 2, Name: 'Usuario', EnglishName: 'User' },
-      { ID: 3, Name: 'Pruebas', EnglishName: 'Test' }
+      { id: 1, name: 'Administrador', englishName: 'Administrator' },
+      { id: 2, name: 'Usuario', englishName: 'User' },
+      { id: 3, name: 'Pruebas', englishName: 'Test' }
     ];
     this._userForm = new FormGroup(
       {
-        UserName: new FormControl('', [Validators.required, Validators.minLength(5)]),
-        Email: new FormControl('', Validators.required),
-        UserProfileID: new FormControl('', Validators.required),
-        Password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-        PasswordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
+        userName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+        email: new FormControl('', Validators.required),
+        userProfileID: new FormControl('', Validators.required),
+        password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+        passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
       },
       this.passwordConfirm
     );
   }
 
   saveUser(model: User) {
-    model.CreateDate = new Date();
+    model.createDate = new Date();
     this._userServ.createUser(model).subscribe(data => {
-      this.toastr.success('Usuario creado exitosamente', model.UserName);
+      this.toastr.success('Usuario creado exitosamente', model.userName);
       this._router.navigate(['app/usuarios']);
     });
   }
 
   passwordConfirm(g: FormGroup) {
-    return g.get('Password').value === g.get('PasswordConfirm').value ? null : { mismatch: true };
+    return g.get('password').value === g.get('passwordConfirm').value ? null : { mismatch: true };
   }
 }

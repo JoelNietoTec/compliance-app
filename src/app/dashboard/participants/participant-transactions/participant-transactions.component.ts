@@ -9,6 +9,8 @@ import { TransactionsService } from '../../../shared/services/transactions.servi
 import { UtilService } from '../../../shared/services/util.service';
 import { Alert } from '../../../shared/models/alerts.model';
 import { Observable } from 'rxjs/Observable';
+import { ProfileProduct } from '../../../shared/models/products.model';
+import { FinancialProductsService } from '../../../shared/services/financial-products.service';
 
 @Component({
   selector: 'participant-transactions',
@@ -25,18 +27,19 @@ export class ParticipantTransactionsComponent implements OnInit {
   _table: TableOptions = {};
   _sources = this._tranServ.getSources();
   _types: TransactionType[];
+  _products: Observable<ProfileProduct[]>;
 
   constructor(
-    private _profileServ: ParticipantProfilesService,
     private _tranServ: TransactionsService,
-    private modal: NgbModal,
+    private _prodServ: FinancialProductsService,
     private toast: ToastrService,
-    private _util: UtilService
   ) {}
 
   ngOnInit() {
-    this._transactions = this._tranServ.getTransactionsByProfile(this.profile.ID);
-    this._types = [{ ID: 1, Name: 'Ingreso/Pago' }, { ID: 2, Name: 'Desembolso' }];
+    this._transactions = this._tranServ.getTransactionsByProfile(this.profile.id);
+    this._products = this._prodServ.getProfileProducts(this.profile.id);
+
+    this._types = [{ id: 1, name: 'Ingreso/Pago' }, { id: 2, name: 'Desembolso' }];
       this.initTable();
   }
 
@@ -48,51 +51,51 @@ export class ParticipantTransactionsComponent implements OnInit {
     this._table.style = 'table-sm table-striped table-squared';
     this._table.columns = [
       {
-        name: 'TransactionType',
+        name: 'type',
         title: 'Tipo',
         type: 'object',
-        objectColumn: 'TransactionType.Name',
+        objectColumn: 'type.name',
         list: this._types,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectID: 'TransactionTypeID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectID: 'transactionTypeId'
       },
       {
-        name: 'TransactionSource',
+        name: 'source',
         title: 'Fuente',
         type: 'object',
-        objectColumn: 'TransactionSource.Name',
+        objectColumn: 'source.name',
         asyncList: this._sources,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectID: 'TransactionSourceID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectID: 'transactionSourceId'
       },
-      { name: 'Title', title: 'Nombre' },
-      { name: 'Description', title: 'Descripción', hidden: true, type: 'text' },
+      { name: 'title', title: 'Nombre' },
+      { name: 'description', title: 'Descripción', hidden: true, type: 'text' },
       {
-        name: 'ProfileProduct',
+        name: 'product',
         title: 'Producto',
         type: 'object',
-        objectColumn: 'ProfileProduct.Name',
-        list: this.profile.Products,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectID: 'ProfileProductID'
+        objectColumn: 'product.name',
+        asyncList: this._products,
+        listID: 'id',
+        listDisplay: 'name',
+        objectID: 'profileProductId'
       },
-      { name: 'Date', title: 'Fecha', type: 'date' },
-      { name: 'Amount', title: 'Monto', type: 'money' }
+      { name: 'date', title: 'Fecha', type: 'date' },
+      { name: 'amount', title: 'Monto', type: 'money' }
     ];
     this._table.sortColumn = 'Date';
     this._table.sortDesc = true;
   }
 
   addTransaction(tran: Transaction) {
-    tran.ParticipantProfileID = this.profile.ID;
-    tran.ParticipantID = this.profile.ParticipantID;
+    tran.participantProfileId = this.profile.id;
+    tran.participantId = this.profile.participantId;
     this._tranServ.createTransaction(tran).subscribe(
       data => {
         this.validateAlert(data);
-        this._transactions = this._tranServ.getTransactionsByProfile(this.profile.ID);
+        this._transactions = this._tranServ.getTransactionsByProfile(this.profile.id);
         this.toast.success('Transacción registrada');
         this.updateProfile.emit();
       },
@@ -103,7 +106,7 @@ export class ParticipantTransactionsComponent implements OnInit {
   }
 
   editTransaction(tran: Transaction) {
-    this._tranServ.updateTransaction(tran.ID, tran).subscribe(
+    this._tranServ.updateTransaction(tran.id, tran).subscribe(
       data => {
         this.toast.success('Transacción actualizada');
         this.updateProfile.emit();
@@ -115,16 +118,16 @@ export class ParticipantTransactionsComponent implements OnInit {
   }
 
   validateAlert(tran: Transaction) {
-    switch (tran.TransactionTypeID) {
+    switch (tran.transactionTypeId) {
       case 1:
-        if (this.profile.IncomeMTD + tran.Amount > this.profile.MonthlyIncomeLimit && this.profile.MonthlyIncomeLimit > 0) {
-          const message = `Límite ingresos excedidos - Transaccion ${tran.Title}`;
+        if (this.profile.incomeMTD + tran.amount > this.profile.monthlyIncomeLimit && this.profile.monthlyIncomeLimit > 0) {
+          const message = `Límite ingresos excedidos - Transaccion ${tran.title}`;
           this.processAlert(tran, message, 'budget-amount');
         }
         break;
       case 2:
-        if (this.profile.ExpenseMTD + tran.Amount > this.profile.MonthlyExpenseLimit && this.profile.MonthlyExpenseLimit > 0) {
-          const message = `Límite egresos excedidos - Transaccion ${tran.Title}`;
+        if (this.profile.expenseMTD + tran.amount > this.profile.monthlyExpenseLimit && this.profile.monthlyExpenseLimit > 0) {
+          const message = `Límite egresos excedidos - Transaccion ${tran.title}`;
           this.processAlert(tran, message, 'budget-amount');
         }
         break;
@@ -134,6 +137,6 @@ export class ParticipantTransactionsComponent implements OnInit {
   }
 
   processAlert(tran: Transaction, message: string, reason: string) {
-    this._tranServ.generateAlert(this.profile.ParticipantID, reason, message);
+    this._tranServ.generateAlert(this.profile.participantId, reason, message);
   }
 }

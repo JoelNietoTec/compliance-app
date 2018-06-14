@@ -19,18 +19,18 @@ export class IndividualsListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'FullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
-      { name: 'Code', title: '# Doc', filterable: true },
-      { name: 'BirthDate', title: 'Fec. Nac', type: 'date', sortable: true },
-      { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
-      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
-      { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true, rateField: true, customClasses: 'font-weight-bold' },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true, rateField: true, customClasses: 'font-weight-bold' },
-      { name: 'Address', title: 'Dirección', hidden: true },
-      { name: 'Gender', title: 'Género', type: 'object', objectColumn: 'Gender.Name', hidden: true },
-      { name: 'Phone', title: 'Teléfono', hidden: true },
-      { name: 'MobilePhone', title: 'Tel. Celular', hidden: true },
-      { name: 'CreateDate', title: 'Fec. Creación', hidden: true }
+      { name: 'fullName', title: 'Nombre', type: 'text', filterable: true, sortable: true },
+      { name: 'code', title: '# Doc', filterable: true },
+      { name: 'birthDate', title: 'Fec. Nac', type: 'date', sortable: true },
+      { name: 'email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'country', title: 'País', type: 'object', objectColumn: 'country.name', sortable: true, lookup: true },
+      { name: 'score', title: 'Puntaje', type: 'decimal', sortable: true, rateField: true, customClasses: 'font-weight-bold' },
+      { name: 'rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true, rateField: true, customClasses: 'font-weight-bold' },
+      { name: 'address', title: 'Dirección', hidden: true },
+      { name: 'gender', title: 'Género', type: 'object', objectColumn: 'gender.name', hidden: true },
+      { name: 'phone', title: 'Teléfono', hidden: true },
+      { name: 'mobilePhone', title: 'Tel. Celular', hidden: true },
+      { name: 'createDate', title: 'Fec. Creación', hidden: true }
     ];
 
     this._table.style = 'table table-sm table-squared';
@@ -49,7 +49,7 @@ export class IndividualsListComponent implements OnInit {
     this._table.title = 'Individuos';
 
     for (let i of this.individuals) {
-      i.Rate = this._partServ.getRate(i);
+      i.rate = this._partServ.getRate(i);
     }
   }
 }

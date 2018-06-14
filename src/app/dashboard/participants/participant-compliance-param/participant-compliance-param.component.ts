@@ -31,8 +31,8 @@ export class ParticipantComplianceParamComponent implements OnInit {
   _currentValue: ParamValue;
   _currentSubValue: ParamSubValue;
 
-  _values: Array<ParamValue>;
-  _subvalues: Array<ParamSubValue>;
+  _values: ParamValue[];
+  _subvalues: ParamSubValue[];
 
   constructor(
     private _util: UtilService,
@@ -45,41 +45,42 @@ export class ParticipantComplianceParamComponent implements OnInit {
 
   ngOnInit() {
 
-    this._valService.getValuesByTable(this.param.ParamTableID).subscribe(data => {
+    this._valService.getValuesByTable(this.param.paramTableId).subscribe(data => {
+
       this._values = data;
-      this._values = this._util.sortBy(this._values, 'DisplayValue');
+      this._values = this._util.sortBy(this._values, 'displayValue');
       for (const i of this._values) {
-        i.ParamSubValues = this._util.sortBy(i.ParamSubValues, 'DisplayValue');
+        i.subValues = this._util.sortBy(i.subValues, 'displayValue');
       }
       this.getParam();
     });
   }
 
   getParam() {
-    this._partParam = this.partParams.find(item => item.ParamID === this.param.ID);
-    this._currentValue = this._util.filterByID(this._values, this._partParam.ParamValueID);
-    if (this.param.ParamTable.TableType.ID === 2 && this._partParam.ParamSubValueID) {
-      this._currentSubValue = this._currentValue.ParamSubValues.find(item => item.ID === this._partParam.ParamSubValueID);
+    this._partParam = this.partParams.find(item => item.paramId === this.param.id);
+    this._currentValue = this._util.filterByID(this._values, this._partParam.paramValueId);
+    if (this.param.table.type.id === 2 && this._partParam.paramSubValueId) {
+      this._currentSubValue = this._currentValue.subValues.find(item => item.id === this._partParam.paramSubValueId);
     }
-    this._value.ID = this._partParam.ParamValueID;
-    this._value.Score = this._partParam.Score;
+    this._value.id = this._partParam.paramValueId;
+    this._value.Score = this._partParam.score;
   }
 
   updateParam(event: string) {
-    if (this.param.ParamTable.TableType.ID === 2) {
-      this._partParam.ParamValueID = this._currentSubValue.ParamValueID;
-      this._partParam.ParamValue = this._util.filterByID(this._values, this._currentSubValue.ParamValueID);
-      this._partParam.ParamSubValueID = this._currentSubValue.ID;
-      this._partParam.ParamSubValue = this._currentSubValue;
-      this._partParam.Score = this._currentSubValue.Score;
+    if (this.param.table.type.id === 2) {
+      this._partParam.paramValueId = this._currentSubValue.paramValueId;
+      this._partParam.paramValue = this._util.filterByID(this._values, this._currentSubValue.paramValueId);
+      this._partParam.paramSubValueId = this._currentSubValue.id;
+      this._partParam.paramSubValue = this._currentSubValue;
+      this._partParam.score = this._currentSubValue.score;
     } else {
-      this._partParam.ParamValueID = this._currentValue.ID;
-      this._partParam.ParamValue = this._currentValue;
-      this._partParam.Score = this._currentValue.Score;
+      this._partParam.paramValueId = this._currentValue.id;
+      this._partParam.paramValue = this._currentValue;
+      this._partParam.score = this._currentValue.score;
     }
 
-    this._partService.updateParam(this._partParam.ID, this._partParam).subscribe(data => {
-      this.toastr.success(this.param.Name, 'Parámetro actualizado');
+    this._partService.updateParam(this._partParam.id, this._partParam).subscribe(data => {
+      this.toastr.success(this.param.name, 'Parámetro actualizado');
       this.update.emit(this._partParam);
     });
   }

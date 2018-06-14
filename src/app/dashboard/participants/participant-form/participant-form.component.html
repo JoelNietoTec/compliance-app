@@ -6,14 +6,14 @@
           <label for="participant-type">Tipo de Participante</label>
           <select class="form-control custom-select" name="participant-type" id="participant-type" [(ngModel)]="_type">
             <option disabled [value]="_default">--- Seleccionar ----</option>
-            <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name}}</option>
+            <option *ngFor="let type of _types" [ngValue]="type">{{ type.name}}</option>
           </select>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="_type" [ngSwitch]="_type.ID">
+<div *ngIf="_type" [ngSwitch]="_type.id">
   <app-card *ngSwitchCase=1>
     <div card-section="body">
       <h4 class="card-title">Formulario de Individuo</h4>

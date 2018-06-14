@@ -61,34 +61,34 @@ export class EntityFormComponent implements OnInit {
     });
     if (!this.entity) {
       this._entity = {
-        ParticipantTypeID: 2,
-        GenderID: 1
+        participantTypeId: 2,
+        genderId: 1
       };
     } else {
       this._entity = this.entity;
-      this._entity.formBirthDate = this._dateFormatter.parse(this._entity.BirthDate.toString());
+      this._entity.formBirthDate = this._dateFormatter.parse(this._entity.birthDate.toString());
       this.setLocation();
     }
   }
 
   setLocation() {
-    this._map.getPosition(this._entity.Address).subscribe(position => {
+    this._map.getPosition(this._entity.address).subscribe(position => {
       this._location = position.results[0].geometry.location;
     });
   }
 
   saveEntity() {
-    this._entity.BirthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
+    this._entity.birthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
     if (!this.entity) {
-      this._entity.CreateDate = new Date();
+      this._entity.createDate = new Date();
       this._partServ.createParticipant(this._entity).subscribe(data => {
-        this.toastr.success(data.ShortName, 'Entidad creada');
-        this._router.navigate(['app/participantes', data.ID]);
+        this.toastr.success(data.shortName, 'Entidad creada');
+        this._router.navigate(['app/participantes', data.id]);
       });
     } else {
-      this._entity.Country = this._util.filterByID(this._countries, this._entity.CountryID);
-      this._partServ.updateParticipant(this._entity.ID, this._entity).subscribe(data => {
-        this.toastr.success(data.ShortName, 'Entidad actualizada');
+      this._entity.country = this._util.filterByID(this._countries, this._entity.countryId);
+      this._partServ.updateParticipant(this._entity.id, this._entity).subscribe(data => {
+        this.toastr.success(data.shortName, 'Entidad actualizada');
         this.updateParticipant.emit();
       });
     }

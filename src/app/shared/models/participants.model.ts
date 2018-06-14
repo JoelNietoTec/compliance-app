@@ -7,60 +7,57 @@ import { Country } from './country.model';
 import {Task} from './tasks.model';
 
 export interface Participant {
-  ID?: number;
-  Code?: string;
-  FirstName?: string;
-  SecondName?: string;
-  ThirdName?: string;
-  FourthName?: string;
-  GenderID?: number;
-  Gender?: Gender;
-  BirthDate?: Date;
-  ParticipantTypeID?: number;
-  ParticipantType?: ParticipantType;
-  Address?: string;
-  Email?: string;
-  WebSite?: string;
-  LegalRepresentative?: string;
-  Phone?: string;
-  MobilePhone?: string;
-  ParticipantContacts?: ParticipantContact[];
-  ParamMatrixID?: number;
-  ParticipantParams?: ParticipantParam[];
-  Score?: number;
-  Rate?: string;
-  CreateDate?: Date;
-  CreatedBy?: number;
-  CreatedByUser?: User;
-  PEP?: Boolean;
-  CountryID?: number;
-  Country?: Country;
-  FullName?: string;
-  ShortName?: string;
-  MatrixReady?: Boolean;
-  Tasks?: Task[];
-  Age?: number;
-  Status?: Boolean;
+  id?: number;
+  code?: string;
+  firstName?: string;
+  secondName?: string;
+  thirdName?: string;
+  fourthName?: string;
+  genderId?: number;
+  gender?: Gender;
+  birthDate?: Date;
+  participantTypeId?: number;
+  type?: ParticipantType;
+  address?: string;
+  email?: string;
+  webSite?: string;
+  legalRepresentative?: string;
+  phone?: string;
+  mobilePhone?: string;
+  paramMatrixId?: number;
+  score?: number;
+  rate?: string;
+  createDate?: Date;
+  createdUserId?: number;
+  createdUser?: User;
+  pep?: Boolean;
+  countryId?: number;
+  country?: Country;
+  fullName?: string;
+  shortName?: string;
+  matrixReady?: Boolean;
+  age?: number;
+  status?: Boolean;
 }
 
 export interface ParticipantParam {
-  ID?: number;
-  ParticipantID?: number;
-  ParamMatrixID?: number;
-  ParamCategoryID?: number;
-  ParamID?: number;
-  Param?: Param;
-  ParamValueID?: number;
-  ParamValue?: ParamValue;
-  ParamSubValueID?: number;
-  ParamSubValue?: ParamSubValue;
-  Score?: number;
+  id?: number;
+  participantId?: number;
+  paramMatrixId?: number;
+  paramCategoryId?: number;
+  paramId?: number;
+  param?: Param;
+  paramValueId?: number;
+  paramValue?: ParamValue;
+  paramSubValueId?: number;
+  paramSubValue?: ParamSubValue;
+  score?: number;
 }
 
 export interface ParticipantType {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }
 
 export interface ParticipantContact {

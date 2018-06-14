@@ -42,7 +42,7 @@ export class ParticipantAccountsComponent implements OnInit {
   }
 
   createAccount() {
-    this._currentAccount.ParticipantProfileID = this.profile.ID;
+    this._currentAccount.ParticipantProfileID = this.profile.id;
     this._profilesService.createAccount(this._currentAccount).subscribe(data => {
       this.toast.success('Cuenta agregada exitosamente');
       this.profile.Accounts.push(data);

@@ -1,17 +1,17 @@
 export interface User {
-  ID?: number;
-  UserName?: string;
-  Password?: string;
-  Email?: string;
-  Active?: number;
-  CreateDate?: Date;
-  LastChangePassword?: Date;
-  UserProfileID?: number;
-  UserProfile?: UserProfile;
+  id?: number;
+  userName?: string;
+  password?: string;
+  email?: string;
+  active?: number;
+  createDate?: Date;
+  lastChangePassword?: Date;
+  userProfileID?: number;
+  userProfile?: UserProfile;
 }
 
 export interface UserProfile {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }

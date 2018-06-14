@@ -12,7 +12,6 @@ import { IndividualsListComponent } from './individuals-list/individuals-list.co
 import { EntitiesListComponent } from './entities-list/entities-list.component';
 import { ParticipantsListComponent } from './participants-list/participants-list.component';
 import { ParticipantComplianceComponent } from './participant-compliance/participant-compliance.component';
-import { ParticipantComplianceDetailsComponent } from './participant-compliance-details/participant-compliance-details.component';
 import { ParticipantComplianceParamComponent } from './participant-compliance-param/participant-compliance-param.component';
 import { ParticipantDetailsComponent } from './participant-details/participant-details.component';
 import { EntityDetailsComponent } from './entity-details/entity-details.component';
@@ -33,6 +32,7 @@ import { ParticipantTransactionsFormComponent } from './participant-transactions
 import { ParticipantAlertsComponent } from './participant-alerts/participant-alerts.component';
 import { FinancialProfileComponent } from './financial-profile/financial-profile.component';
 import { ParticipantProductsComponent } from './participant-products/participant-products.component';
+import { ParticipantInfoComponent } from './participant-info/participant-info.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ParticipantsRoutingModule, SharedModule],
@@ -46,7 +46,6 @@ import { ParticipantProductsComponent } from './participant-products/participant
     EntitiesListComponent,
     ParticipantsListComponent,
     ParticipantComplianceComponent,
-    ParticipantComplianceDetailsComponent,
     ParticipantComplianceParamComponent,
     ParticipantDetailsComponent,
     EntityDetailsComponent,
@@ -66,7 +65,8 @@ import { ParticipantProductsComponent } from './participant-products/participant
     ParticipantTransactionsFormComponent,
     ParticipantAlertsComponent,
     FinancialProfileComponent,
-    ParticipantProductsComponent
+    ParticipantProductsComponent,
+    ParticipantInfoComponent
   ],
   providers: [
     DecimalPipe

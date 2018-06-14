@@ -14,8 +14,8 @@ export class ParamCategoriesComponent implements OnInit {
   @Input() matrixID: number;
 
   _table: TableOptions = {};
-  _tables: Array<ParamTable>;
-  _categories: Array<ParamCategory>;
+  _tables: ParamTable[];
+  _categories: ParamCategory[];
   _newCategory: ParamCategory;
   _currentCategory: ParamCategory;
   _newCategories: ParamCategory[] = [];
@@ -24,9 +24,9 @@ export class ParamCategoriesComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', sortable: true, filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true, filterable: true },
-      { name: 'Weighting', title: 'Ponderación', sortable: true }
+      { name: 'name', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true, filterable: true },
+      { name: 'weighting', title: 'Ponderación', sortable: true }
     ];
 
     this._table.editable = true;
@@ -43,17 +43,17 @@ export class ParamCategoriesComponent implements OnInit {
   }
 
   addCategory(cat: ParamCategory) {
-    cat.ParamMatrixID = this.matrixID;
+    cat.paramMatrixId = this.matrixID;
     this._categoriesService.createCategory(cat).subscribe(data => {
-      this.toast.success(data.Name, 'Categoría creada exitosamente');
+      this.toast.success(data.name, 'Categoría creada exitosamente');
       this._categories.push(data);
       console.log(this._categories);
     });
   }
 
   editCategory(cat: ParamCategory) {
-    this._categoriesService.editCategory(cat.ID, cat).subscribe(data => {
-      this.toast.success(cat.Name, 'Categoría editada exitosamente');
+    this._categoriesService.editCategory(cat.id, cat).subscribe(data => {
+      this.toast.success(cat.name, 'Categoría editada exitosamente');
     });
   }
 }

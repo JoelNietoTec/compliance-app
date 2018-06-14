@@ -16,20 +16,20 @@ export interface Alert {
 }
 
 export interface AlertSource {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }
 
 export interface AlertReason {
-  ID?: number;
-  AlertSourceID?: number;
-  AlertSource?: AlertSource;
-  Name?: string;
-  EnglishName?: string;
-  AlertPriorityID?: number;
-  AlertPriority?: AlertPriority;
-  Code?: string;
+  id?: number;
+  alertSourceId?: number;
+  alertSource?: AlertSource;
+  name?: string;
+  englishName?: string;
+  alertPriorityId?: number;
+  alertPriority?: AlertPriority;
+  code?: string;
 }
 
 export interface ParticipantAlert {
@@ -52,7 +52,7 @@ export interface AlertType {
 }
 
 export interface AlertPriority {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }

@@ -59,7 +59,7 @@ export class ComparisonsService {
       this._partService.getParticipants().subscribe(data => {
         const participants = data;
         participants.forEach(participant => {
-          const partTerm = participant.FullName.toLocaleLowerCase().split(' ');
+          const partTerm = participant.fullName.toLocaleLowerCase().split(' ');
           sheet.forEach(row => {
             let count = 0;
             const match = row;

@@ -2,28 +2,28 @@
   <div class="col-md-6">
     <div class="form-group">
       <label for="first-name">Razón Social</label>
-      <input [(ngModel)]="_entity.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Razón Social de Entidad"
+      <input [(ngModel)]="_entity.firstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Razón Social de Entidad"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="second-name">Nombre Comercial</label>
-      <input type="text" [(ngModel)]="_entity.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial">
+      <input type="text" [(ngModel)]="_entity.secondName" name="second-name" id="second-name" class="form-control" placeholder="Nombre Comercial">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="code">RUC/NIT</label>
-      <input type="text" name="code" id="code" [(ngModel)]="_entity.Code" class="form-control" placeholder="RUC/NIT de la Entidad">
+      <input type="text" name="code" id="code" [(ngModel)]="_entity.code" class="form-control" placeholder="RUC/NIT de la Entidad">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="country">País de Constitución</label>
-      <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_entity.CountryID">
+      <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_entity.countryId">
         <option [value]="undefined" disabled>---Seleccionar---</option>
-        <option *ngFor="let country of _countries" [value]="country.ID">{{ country.Name }}</option>
+        <option *ngFor="let country of _countries" [value]="country.id">{{ country.name }}</option>
       </select>
     </div>
   </div>
@@ -44,41 +44,41 @@
   <div class="col-md-3">
     <div class="form-group">
       <label for="representative">Representante Legal</label>
-      <input type="text" class="form-control" [(ngModel)]="_entity.LegalRepresentative" name="representative" id="representative"
+      <input type="text" class="form-control" [(ngModel)]="_entity.legalRepresentative" name="representative" id="representative"
         aria-describedby="helpId" placeholder="Represante Legal de la Entidad">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" [(ngModel)]="_entity.Email" name="email" id="email" aria-describedby="helpId" placeholder="example@domain.com">
+      <input type="email" class="form-control" [(ngModel)]="_entity.email" name="email" id="email" aria-describedby="helpId" placeholder="example@domain.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="website">Sitio Web</label>
-      <input type="url" class="form-control" [(ngModel)]="_entity.WebSite" name="website" id="website" aria-describedby="helpId"
+      <input type="url" class="form-control" [(ngModel)]="_entity.webSite" name="website" id="website" aria-describedby="helpId"
         placeholder="http://example.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="phone-number">Número Telefónico</label>
-      <input type="tel" class="form-control" [(ngModel)]="_entity.Phone" name="phone-number" id="phone-number" aria-describedby="helpId"
+      <input type="tel" class="form-control" [(ngModel)]="_entity.phone" name="phone-number" id="phone-number" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="mobile-phoner">Número Celular</label>
-      <input type="tel" class="form-control" [(ngModel)]="_entity.MobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
+      <input type="tel" class="form-control" [(ngModel)]="_entity.mobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-12">
     <div class="form-group">
       <label for="address">Dirección</label>
-      <textarea [(ngModel)]="_entity.Address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad"
+      <textarea [(ngModel)]="_entity.address" class="form-control" name="address" id="" rows="3" placeholder="Locación de la Entidad"
         (blur)="setLocation()"></textarea>
     </div>
   </div>

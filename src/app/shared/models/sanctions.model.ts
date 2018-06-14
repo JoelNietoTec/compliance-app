@@ -68,14 +68,14 @@ export interface Match {
 }
 
 export interface SanctionList {
-  ID?: number;
-  Name?: string;
-  NameSpace?: string;
-  URL?: string;
-  ElementIDs?: string;
-  TermField?: string;
-  CommentsField?: string;
-  CountryField?: string;
-  ActiveSearch?: Boolean;
-  LoadDate?: Date;
+  id?: number;
+  name?: string;
+  nameSpace?: string;
+  url?: string;
+  elementIds?: string;
+  termField?: string;
+  commentsField?: string;
+  countryField?: string;
+  activeSearch?: Boolean;
+  loadDate?: Date;
 }

@@ -6,6 +6,6 @@
     </p>
   </div>
   <div class="card-body" *ngIf="_types">
-    <app-custom-table [items]="profile.Products" [options]="_table" (addItem)="addProduct($event)" (editItem)="editProduct($event)"></app-custom-table>
+    <app-custom-table [items]="_products | async" [options]="_table" (addItem)="addProduct($event)" (editItem)="editProduct($event)"></app-custom-table>
   </div>
 </div>

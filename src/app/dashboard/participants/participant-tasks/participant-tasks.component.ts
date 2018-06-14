@@ -17,7 +17,7 @@ export class ParticipantTasksComponent implements OnInit {
   constructor(private _route: ActivatedRoute, private _partServ: ParticipantsService, private _util: UtilService) {}
 
   ngOnInit() {
-    this._partServ.getPendingDocuments(this.participant.ID).subscribe(data => {
+    this._partServ.getPendingDocuments(this.participant.id).subscribe(data => {
       this._pending = data;
     });
   }

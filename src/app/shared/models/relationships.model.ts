@@ -1,9 +1,9 @@
 import { Participant } from './participants.model';
 
 export interface RelationshipType {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }
 
 export interface ParticipantRelationship {

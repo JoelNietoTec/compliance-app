@@ -18,10 +18,10 @@ export class CountriesComponent implements OnInit {
 
   ngOnInit() {
     this._options.columns = [
-      { name: 'Name', title: 'Nombre', type: 'text', filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', type: 'text', filterable: true },
-      { name: 'Abbreviation', title: 'Código', type: 'text', filterable: true },
-      { name: 'BlackList', title: 'Lista Negra', type: 'boolean' }
+      { name: 'name', title: 'Nombre', type: 'text', filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', type: 'text', filterable: true },
+      { name: 'abbreviation', title: 'Código', type: 'text', filterable: true },
+      { name: 'blackList', title: 'Lista Negra', type: 'boolean' }
     ];
 
     this._options.style = 'table table-sm table-squared';
@@ -42,14 +42,14 @@ export class CountriesComponent implements OnInit {
 
   addCountry(country: Country) {
     return this._countryServ.addCountry(country).subscribe(data => {
-      this.toastr.success(data.Name, 'País añadido');
+      this.toastr.success(data.name, 'País añadido');
       this._countries = this._countryServ.getCountries();
     });
   }
 
   updateCountry(country: Country) {
-    this._countryServ.editCountry(country.ID, country).subscribe(data => {
-      this.toastr.success(country.Name, 'País editado');
+    this._countryServ.editCountry(country.id, country).subscribe(data => {
+      this.toastr.success(country.name, 'País editado');
       this._countries = this._countryServ.getCountries();
     });
   }

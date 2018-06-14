@@ -26,14 +26,14 @@ export class ParticipantFormComponent implements OnInit {
   ) {
     this._types = [
       {
-        ID: 1,
-        EnglishName: 'Individual',
-        Name: 'Individuo'
+        id: 1,
+        englishName: 'Individual',
+        name: 'Individuo'
       },
       {
-        ID: 2,
-        EnglishName: 'Entity',
-        Name: 'Entidad'
+        id: 2,
+        englishName: 'Entity',
+        name: 'Entidad'
       }
     ];
   }

@@ -29,11 +29,11 @@ export class ParticipantRelationshipComponent implements OnInit {
     public activeModal: NgbActiveModal
   ) {
     _partService.getParticipants().subscribe(data => {
-      this._participants = this._util.sortBy(data, 'Name');
+      this._participants = this._util.sortBy(data, 'name');
     });
 
     _relService.getTypes().subscribe(data => {
-      this._types = this._util.sortBy(data, 'Name');
+      this._types = this._util.sortBy(data, 'name');
     });
   }
 
@@ -45,5 +45,5 @@ export class ParticipantRelationshipComponent implements OnInit {
       .distinctUntilChanged()
       .map(term => (term.length < 2 ? [] : this._util.searchFilter(this._participants, this._searchColumns, term)));
 
-  formatter = (x: { FirstName: string; ThirdName: string }) => x.FirstName + ' ' + x.ThirdName;
+  formatter = (x: { firstName: string; thirdName: string }) => x.firstName + ' ' + x.thirdName;
 }

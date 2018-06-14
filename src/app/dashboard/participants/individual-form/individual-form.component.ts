@@ -55,14 +55,14 @@ export class IndividualFormComponent implements OnInit {
   ) {
     this._genders = [
       {
-        ID: 1,
-        Name: 'Femenino',
-        EnglishName: 'Female'
+        id: 1,
+        name: 'Femenino',
+        englishName: 'Female'
       },
       {
-        ID: 2,
-        Name: 'Masculino',
-        EnglishName: 'Male'
+        id: 2,
+        name: 'Masculino',
+        englishName: 'Male'
       }
     ];
 
@@ -84,16 +84,16 @@ export class IndividualFormComponent implements OnInit {
 
   ngOnInit() {
     this._countryServ.getCountries().subscribe(data => {
-      this._countries = this._util.sortBy(data, 'Name');
+      this._countries = this._util.sortBy(data, 'name');
     });
     if (!this.individual) {
       this._individual = {
-        ParticipantTypeID: 1
+        participantTypeId: 1
         // Nationalities: []
       };
     } else {
       this._individual = this.individual;
-      this._individual.formBirthDate = this._dateFormatter.parse(this._individual.BirthDate.toString());
+      this._individual.formBirthDate = this._dateFormatter.parse(this._individual.birthDate.toString());
       this.setLocation();
     }
 
@@ -118,22 +118,22 @@ export class IndividualFormComponent implements OnInit {
   // }
 
   setLocation() {
-    this._map.getPosition(this._individual.Address).subscribe(position => {
+    this._map.getPosition(this._individual.address).subscribe(position => {
       this._location = position.results[0].geometry.location;
     });
   }
   saveIndividual() {
-    this._individual.BirthDate = new Date(this._dateFormatter.format(this._individual.formBirthDate));
+    this._individual.birthDate = new Date(this._dateFormatter.format(this._individual.formBirthDate));
     if (!this.individual) {
-      this._individual.CreateDate = new Date();
+      this._individual.createDate = new Date();
       this._partServ.createParticipant(this._individual).subscribe(data => {
-        this.toastr.success(data.ShortName, 'Individuo Creado');
-        this._router.navigate(['app/participantes', data.ID]);
+        this.toastr.success(data.shortName, 'Individuo Creado');
+        this._router.navigate(['app/participantes', data.id]);
       });
     } else {
-      this._individual.Country = this._util.filterByID(this._countries, this._individual.CountryID);
-      this._partServ.updateParticipant(this._individual.ID, this._individual).subscribe(data => {
-        this.toastr.success(data.ShortName, 'Individuo Actualizado');
+      this._individual.country = this._util.filterByID(this._countries, this._individual.countryId);
+      this._partServ.updateParticipant(this._individual.id, this._individual).subscribe(data => {
+        this.toastr.success(data.shortName, 'Individuo Actualizado');
         this.updateParticipant.emit();
       });
     }

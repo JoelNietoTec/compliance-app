@@ -1,3 +1,4 @@
-<div class="container">
+<div class="container-fluid">
+  <h3>Documentos</h3>
   <app-custom-table [items]="_documents | async" [options]="_table" (addItem)="addDoc($event)" (editItem)="updateDoc($event)" (removeItem)="removeDoc($event)"></app-custom-table>
 </div>

@@ -1,8 +1,8 @@
 export interface Country {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
-  Abbreviation?: string;
-  Code?: string;
-  BlackList?: Boolean;
+  id?: number;
+  name?: string;
+  englishName?: string;
+  abbreviation?: string;
+  code?: string;
+  blackList?: Boolean;
 }

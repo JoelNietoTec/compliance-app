@@ -31,9 +31,9 @@ export class DiscardsListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'FullTerm', title: 'Término', sortable: true, filterable: true },
-      { name: 'Comments', title: 'Comentarios', sortable: true, filterable: true },
-      { name: 'Country', title: 'País', lookup: true }
+      { name: 'fullTerm', title: 'Término', sortable: true, filterable: true },
+      { name: 'comments', title: 'Comentarios', sortable: true, filterable: true },
+      { name: 'country', title: 'País', lookup: true }
     ];
 
     this._table.pageable = true;

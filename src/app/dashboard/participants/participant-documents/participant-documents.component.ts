@@ -21,7 +21,7 @@ export class ParticipantDocumentsComponent implements OnInit {
 
   _types: Observable<DocumentType[]>;
   _showForm: Boolean = false;
-  _documents: Observable<DocumentType[]>;
+  _documents: Observable<ParticipantDocument[]>;
   _countries = this._countryServ.getCountries();
   _table: TableOptions = {};
 
@@ -34,65 +34,65 @@ export class ParticipantDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._documents = this._docServ.getDocByParticipant(this.participant.ID);
-    this._types = this._docServ.getTypesByParticipant(this.participant.ParticipantTypeID);
+    this._documents = this._docServ.getDocByParticipant(this.participant.id);
+    this._types = this._docServ.getTypesByParticipant(this.participant.participantTypeId);
     this._table.title = 'Documentos';
     this._table.editable = true;
     this._table.style = 'table-sm table-squared';
     this._table.pageable = true;
     this._table.addMethod = 'modal';
     this._table.columns = [
-      { name: 'DocumentCode', title: 'Nro. Documento' },
+      { name: 'documentCode', title: 'Nro. Documento' },
       {
-        name: 'DocumentType',
+        name: 'type',
         title: 'Tipo',
         type: 'object',
-        objectColumn: 'DocumentType.Name',
+        objectColumn: 'type.name',
         asyncList: this._types,
         sortable: true,
-        listDisplay: 'Name',
-        listID: 'ID',
-        objectID: 'DocumentTypeID'
+        listDisplay: 'name',
+        listID: 'id',
+        objectID: 'documentTypeId'
       },
-      { name: 'ExpeditionDate', title: 'Fec. Expedición', type: 'date' },
-      { name: 'ExpirationDate', title: 'Fec. Expiración', type: 'date' },
+      { name: 'expeditionDate', title: 'Fec. Expedición', type: 'date' },
+      { name: 'expirationDate', title: 'Fec. Expiración', type: 'date' },
       {
-        name: 'Country',
+        name: 'country',
         title: 'País Expedición',
         type: 'object',
-        objectColumn: 'Country.Name',
+        objectColumn: 'country.name',
         asyncList: this._countries,
         sortable: true,
-        listDisplay: 'Name',
-        listID: 'ID',
-        objectID: 'CountryID'
+        listDisplay: 'name',
+        listID: 'id',
+        objectID: 'countryId'
       },
-      { name: 'FilePath', title: 'Documento', type: 'file', fileURL: this._conn.fileURL }
+      { name: 'filePath', title: 'Documento', type: 'file', fileURL: this._conn.fileURL }
     ];
   }
 
   removeDoc(id: number) {
     this._docServ.deleteDoc(id).subscribe(data => {
       this.toastr.info('Documento eliminado');
-      this._documents = this._docServ.getDocByParticipant(this.participant.ID);
+      this._documents = this._docServ.getDocByParticipant(this.participant.id);
     });
   }
 
   addDoc(doc: ParticipantDocument) {
-    doc.ParticipantID = this.participant.ID;
+    doc.participantId = this.participant.id;
     this._docServ.saveDoc(doc).subscribe(
       data => {
-        this.toastr.success(data.DocumentType.Name, 'Documento creado');
-        this._documents = this._docServ.getDocByParticipant(this.participant.ID);
+        this.toastr.success(data.type.name, 'Documento creado');
+        this._documents = this._docServ.getDocByParticipant(this.participant.id);
       },
       (err: Error) => this.toastr.error(err.message, 'Ocurrió un error')
     );
   }
 
   updateDoc(doc: ParticipantDocument) {
-    this._docServ.updateDocument(doc.ID, doc).subscribe(data => {
-      this.toastr.success(doc.DocumentType.Name, 'Documento actualizado');
-      this._documents = this._docServ.getDocByParticipant(this.participant.ID);
+    this._docServ.updateDocument(doc.id, doc).subscribe(data => {
+      this.toastr.success(doc.type.name, 'Documento actualizado');
+      this._documents = this._docServ.getDocByParticipant(this.participant.id);
     });
   }
 

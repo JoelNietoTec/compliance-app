@@ -2,20 +2,20 @@ import { Participant } from './participants.model';
 import { ProfileProduct } from './products.model';
 
 export interface ParticipantProfile {
-  ID?: number;
-  ParticipantID?: number;
-  Total?: number;
-  ModifiedDate?: Date;
+  id?: number;
+  participantId?: number;
+  total?: number;
+  modifiedDate?: Date;
   Accounts?: ProfileAccount[];
   Products?: ProfileProduct[];
-  Transactions?: Transaction[];
-  MonthlyIncomeLimit?: number;
-  MonthlyExpenseLimit?: number;
-  IncomeYTD?: number;
-  IncomeMTD?: number;
-  ExpenseYTD?: number;
-  ExpenseMTD?: number;
-  TransactionsLimit?: number;
+  transactions?: Transaction[];
+  monthlyIncomeLimit?: number;
+  monthlyExpenseLimit?: number;
+  incomeYTD?: number;
+  incomeMTD?: number;
+  expenseYTD?: number;
+  expenseMTD?: number;
+  transactionsLimit?: number;
 }
 
 export interface ProfileAccount {
@@ -37,57 +37,57 @@ export interface AccountType {
 }
 
 export interface Transaction {
-  ID?: number;
-  TransactionTypeID?: number;
-  ParticipantID?: number;
-  Participant?: Participant;
-  ProfileProductID?: number;
-  ProfileProduct?: ProfileProduct;
-  TransactionSourceID?: number;
-  TransactionSource?: TransactionSource;
-  TransactionType?: TransactionType;
-  ParticipantProfileID?: number;
-  Title?: string;
-  Description?: string;
-  AccountID?: number;
-  Account?: ProfileAccount;
-  Date?: Date;
-  Amount?: number;
+  id?: number;
+  transactionTypeId?: number;
+  participantId?: number;
+  participant?: Participant;
+  profileProductId?: number;
+  product?: ProfileProduct;
+  transactionSourceId?: number;
+  source?: TransactionSource;
+  type?: TransactionType;
+  participantProfileId?: number;
+  title?: string;
+  description?: string;
+  accountId?: number;
+  account?: ProfileAccount;
+  date?: Date;
+  amount?: number;
 }
 
 export interface TransactionType {
-  ID?: number;
-  Name?: string;
+  id?: number;
+  name?: string;
 }
 
 export interface TransactionSource {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }
 
 export interface Bank {
-  ID?: number;
-  BankTypeID?: number;
-  BankType?: BankType;
-  Name: string;
-  ShortName: string;
+  id?: number;
+  bankTypeId?: number;
+  type?: BankType;
+  name: string;
+  shortName: string;
 }
 
 export interface BankType {
-  ID?: number;
-  Name?: string;
+  id?: number;
+  name?: string;
 }
 
 export interface FinancialDashboard {
-  ParticipantID?: number;
-  Month?: number;
-  Type?: string;
-  Account?: string;
-  Source?: string;
-  Bank?: string;
-  ProfileProduct?: string;
-  FinancialProduct?: string;
-  ProductType?: string;
-  Amount?: number;
+  participantId?: number;
+  month?: number;
+  type?: string;
+  account?: string;
+  source?: string;
+  bank?: string;
+  profileProduct?: string;
+  financialProduct?: string;
+  productType?: string;
+  amount?: number;
 }

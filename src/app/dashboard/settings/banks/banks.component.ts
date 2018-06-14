@@ -20,12 +20,12 @@ export class BanksComponent implements OnInit {
   ngOnInit() {
     this._types = [
       {
-        ID: 1,
-        Name: 'Local'
+        id: 1,
+        name: 'Local'
       },
       {
-        ID: 2,
-        Name: 'Extranjero'
+        id: 2,
+        name: 'Extranjero'
       }
     ];
 
@@ -37,18 +37,18 @@ export class BanksComponent implements OnInit {
     this._table.addMethod = 'modal';
     this._table.title = 'Bancos';
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', sortable: true, filterable: true },
-      { name: 'ShortName', title: 'Nombre Corto', sortable: true, filterable: true },
+      { name: 'name', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'shortName', title: 'Nombre Corto', sortable: true, filterable: true },
       {
-        name: 'BankType',
+        name: 'type',
         title: 'Tipo',
         sortable: true,
         type: 'object',
         list: this._types,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'BankType.Name',
-        objectID: 'BankTypeID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'type.name',
+        objectID: 'bankTypeId'
       }
     ];
     this._table.pageable = true;
@@ -57,9 +57,10 @@ export class BanksComponent implements OnInit {
   }
 
   addBank(bank: Bank) {
+    console.log(bank);
     this._bankService.createBank(bank).subscribe(
       data => {
-        this.toast.success(data.Name, 'Banco creado');
+        this.toast.success(data.name, 'Banco creado');
         this._banks = this._bankService.getBanks();
       },
       (err: Error) => {
@@ -69,9 +70,12 @@ export class BanksComponent implements OnInit {
   }
 
   editBank(bank: Bank) {
-    this._bankService.updateBank(bank.ID, bank).subscribe(
+    console.log(bank);
+    delete bank['texttype'];
+    this._bankService.updateBank(bank.id, bank).subscribe(
       data => {
-        this.toast.success(bank.Name, 'Banco actualizado');
+        this.toast.success(bank.name, 'Banco actualizado');
+        this._banks = this._bankService.getBanks();
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

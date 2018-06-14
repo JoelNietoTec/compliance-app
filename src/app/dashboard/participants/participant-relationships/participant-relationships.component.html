@@ -5,23 +5,23 @@
       <app-card>
         <div card-section="body" class="border-primary">
           <h4 class="card-title">
-            <a *ngIf="relation.ParticipantID == participant.ID" [routerLink]="['/app', 'participantes', relation.RelatedParticipantID]">
-              {{ relation.RelatedParticipant.ShortName }}
+            <a *ngIf="relation.ParticipantID == participant.id" [routerLink]="['/app', 'participantes', relation.RelatedParticipantID]">
+              {{ relation.RelatedParticipant.shortName }}
             </a>
-            <a *ngIf="relation.RelatedParticipantID == participant.ID" [routerLink]="['/app', 'participantes', relation.ParticipantID]">
-              {{ relation.Participant.ShortName }}
+            <a *ngIf="relation.RelatedParticipantID == participant.id" [routerLink]="['/app', 'participantes', relation.ParticipantID]">
+              {{ relation.Participant.shortName }}
             </a>
-            <small *ngIf="relation.ParticipantID == participant.ID" class="score pull-right" [ngClass]="{
+            <small *ngIf="relation.ParticipantID == participant.id" class="score pull-right" [ngClass]="{
               'text-success': relation.RelatedParticipant.Score < 3,
               'text-warning': relation.RelatedParticipant.Score > 2.99 && relation.RelatedParticipant.Score < 6,
               'text-danger': relation.RelatedParticipant.Score >= 6 }">
-              {{ relation.RelatedParticipant.Score | number: '1.2-2' }}
+              {{ relation.RelatedParticipant.score | number: '1.2-2' }}
             </small>
-            <small *ngIf="relation.RelatedParticipantID == participant.ID" class="score pull-right" [ngClass]="{
+            <small *ngIf="relation.RelatedParticipantID == participant.id" class="score pull-right" [ngClass]="{
               'text-success': relation.Participant.Score < 3,
               'text-warning': relation.Participant.Score > 2.99 && relation.Participant.Score < 6,
               'text-danger': relation.Participant.Score >= 6 }">
-              {{ relation.Participant.Score | number: '1.2-2' }}
+              {{ relation.Participant.score | number: '1.2-2' }}
             </small>
           </h4>
           <p class="card-text">{{ relation.Type.Name }}</p>

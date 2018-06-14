@@ -29,32 +29,32 @@ export class ParamTablesComponent implements OnInit {
 
     this._tableTypes = [
       {
-        ID: 1,
-        Name: 'Simple',
-        EnglishName: 'Simple'
+        id: 1,
+        name: 'Simple',
+        englishName: 'Simple'
       },
       {
-        ID: 2,
-        Name: 'Complejo',
-        EnglishName: 'Complex'
+        id: 2,
+        name: 'Complejo',
+        englishName: 'Complex'
       }
     ];
 
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', sortable: true, type: 'text', filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true, type: 'text' },
+      { name: 'name', title: 'Nombre', sortable: true, type: 'text', filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true, type: 'text' },
       {
-        name: 'TableType',
+        name: 'type',
         title: 'Tipo',
         sortable: true,
         type: 'object',
         list: this._tableTypes,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'TableType.Name',
-        objectID: 'TableTypeID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'type.name',
+        objectID: 'tableTypeId'
       },
-      { name: 'CreateDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
+      { name: 'createDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
     ];
     this._table.pageable = true;
 
@@ -64,7 +64,7 @@ export class ParamTablesComponent implements OnInit {
   addTable(table: ParamTable) {
     this._tablesService.createTable(table).subscribe(
       data => {
-        this.toastr.success(data.Name, 'Tabla Creada');
+        this.toastr.success(data.name, 'Tabla Creada');
         this.tables = this._tablesService.getTables();
       },
       (err: Error) => {
@@ -74,9 +74,9 @@ export class ParamTablesComponent implements OnInit {
   }
 
   editTable(table: ParamTable) {
-    this._tablesService.editTable(table.ID, table).subscribe(
+    this._tablesService.editTable(table.id, table).subscribe(
       data => {
-        this.toastr.success(data.Name, 'Tabla Editada');
+        this.toastr.success(table.name, 'Tabla Editada');
       },
       (err: Error) => {
         this.toastr.error(err.message, 'Ocurrió un error');

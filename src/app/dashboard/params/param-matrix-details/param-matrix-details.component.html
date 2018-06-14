@@ -1,6 +1,6 @@
 <app-loading-modal *ngIf="!_matrix"></app-loading-modal>
 <h3 *ngIf="_matrix">
-  {{ _matrix.Name }} / {{ _matrix.Code }}
+  {{ _matrix.name }} / {{ _matrix.code }}
   <a [routerLink]="['edit']" class="btn btn-primary">Editar
     <i class="fa fa-edit" aria-hidden="true"></i>
   </a>
@@ -20,17 +20,17 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let category of _matrix.ParamCategories">
+          <ng-container *ngFor="let category of _matrix.paramCategories">
             <tr class="bg-primary text-white font-weight-bold">
-              <td colspan="4">{{ category.EnglishName }}</td>
-              <td>{{ category.Weighting }}%</td>
+              <td colspan="4">{{ category.englishName }}</td>
+              <td>{{ category.weighting }}%</td>
             </tr>
-            <tr *ngFor="let param of category.Params">
-              <td>{{ param.Name }}</td>
-              <td>{{ param.EnglishName }}</td>
-              <td>{{ param.Description }}</td>
-              <td>{{ param.ParamTable.EnglishName}}</td>
-              <td>{{ param.Weighting }}%</td>
+            <tr *ngFor="let param of category.params">
+              <td>{{ param.name }}</td>
+              <td>{{ param.englishName }}</td>
+              <td>{{ param.description }}</td>
+              <td>{{ param.paramTable.EnglishName}}</td>
+              <td>{{ param.weighting }}%</td>
             </tr>
             <tr>
               <td colspan="5"></td>

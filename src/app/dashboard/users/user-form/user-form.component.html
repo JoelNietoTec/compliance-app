@@ -7,26 +7,26 @@
           <div class="form-group">
             <label class="form-control-label" for="">Nombre</label>
             <input type="text" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine}"
-              [(ngModel)]="_user.UserName" id="name" required #name name="name" formControlName="UserName" placeholder="Nombre de usuario">
+              [(ngModel)]="_user.userName" id="name" required #name name="name" formControlName="UserName" placeholder="Nombre de usuario">
             <small *ngIf="!_userForm.controls.UserName.valid && !_userForm.controls.UserName.pristine" class="invalid-feedback animated fadeIn">Nombre requiere al menos 5 caracteres</small>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="">Email</label>
             <input type="email" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.Email.valid && !_userForm.controls.Email.pristine}"
-              [(ngModel)]="_user.Email" formControlName="Email" email placeholder="Correo de electrónico de usuario">
+              [(ngModel)]="_user.email" formControlName="Email" email placeholder="Correo de electrónico de usuario">
             <small *ngIf="!_userForm.controls.Email.valid && !_userForm.controls.Email.pristine" class="invalid-feedback animated fadeIn">Dirección de correo inválida</small>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="rol">Rol Usuario</label>
-            <select class="custom-select form-control" [(ngModel)]="_user.UserProfileID" formControlName="UserProfileID" name="rol" id="rol">
+            <select class="custom-select form-control" [(ngModel)]="_user.userProfileID" formControlName="UserProfileID" name="rol" id="rol">
               <option [value]="undefined" [disabled]="true">---Seleccionar---</option>
-              <option *ngFor="let profile of _profiles" [value]="profile.ID">{{ profile.Name }}</option>
+              <option *ngFor="let profile of _profiles" [value]="profile.id">{{ profile.name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="">Contraseña</label>
             <input type="password" class="form-control" [ngClass]="{'is-invalid': !_userForm.controls.Password.valid && !_userForm.controls.Password.pristine}"
-              [(ngModel)]="_user.Password" formControlName="Password" name="password" id="" placeholder="Contraseña de usuario">
+              [(ngModel)]="_user.password" formControlName="Password" name="password" id="" placeholder="Contraseña de usuario">
             <small *ngIf="!_userForm.controls.Password.valid && !_userForm.controls.Password.pristine" class="invalid-feedback animated fadeIn">Contraseña requiere al menos 6 caracteres</small>
           </div>
           <div class="form-group">

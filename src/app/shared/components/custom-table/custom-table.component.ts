@@ -54,7 +54,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
   _pageSizes: Array<number> = [5, 10, 15, 20, 25];
   _deleteMessage = ['Eliminar elemento?', 'No podrá ser cancelado', 'question'];
   _idColumn: Column = {
-    name: 'ID'
+    name: 'id'
   };
   _filterValues: Array<string> = [];
   _visibleColumns: number;
@@ -116,7 +116,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     const modalRef = this.modalService.open(TableFormComponent);
     modalRef.result.then(
       result => {
-        if (this._selectedItem.ID) {
+        if (this._selectedItem.id) {
           this.updateItem();
         } else {
           this.createItem();
@@ -127,7 +127,7 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
       }
     );
     modalRef.componentInstance.fields = this.options.columns;
-    if (this._selectedItem.ID) {
+    if (this._selectedItem.id) {
       modalRef.componentInstance.item = this._selectedItem;
     } else {
       modalRef.componentInstance.item = this._newItem;
@@ -234,9 +234,9 @@ export class CustomTableComponent implements OnInit, AfterViewChecked, DoCheck, 
     this.pageItems();
   }
 
-  getDetailsURL(ID: number): String[] {
+  getDetailsURL(id: number): String[] {
     const URL = this.options.detailsURL.slice();
-    URL.push(ID.toString());
+    URL.push(id.toString());
     return URL;
   }
 

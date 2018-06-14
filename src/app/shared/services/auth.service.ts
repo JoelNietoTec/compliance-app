@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   setCurrentUser(token: User) {
-    localStorage.setItem('currentUser', JSON.stringify({ username: token.UserName, token: token }));
+    localStorage.setItem('currentUser', JSON.stringify({ username: token.userName, token: token }));
     this.initLocalInfo();
   }
 

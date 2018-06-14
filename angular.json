@@ -22,7 +22,7 @@
             ],
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/dist/css/angular-calendar.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/jqvmap/dist/jqvmap.min.css",
               "src/styles.css"
             ],

@@ -27,7 +27,7 @@ export class FinancialProfileComponent implements OnInit {
   constructor(private _util: UtilService, private _financialServ: ParticipantProfilesService, private _pipe: DecimalPipe) {}
 
   ngOnInit() {
-    this._financialServ.getDashboard(this.participant.ID).subscribe(data => {
+    this._financialServ.getDashboard(this.participant.id).subscribe(data => {
       this._dashboard = data;
       this.initCharts();
       this.initSourceChart();
@@ -38,14 +38,14 @@ export class FinancialProfileComponent implements OnInit {
 
   initCharts() {
     this._util.months.forEach(month => {
-      let items = this._dashboard.filter(x => x.Month === month.id);
+      let items = this._dashboard.filter(x => x.month === month.id);
       let item = { month: month.shortName, income: 0, expense: 0 };
       let amount: number = 0;
       items.forEach(element => {
-        if (element.Type === 'Ingreso/Pago') {
-          item.income = item.income + element.Amount;
+        if (element.type === 'Ingreso/Pago') {
+          item.income = item.income + element.amount;
         } else {
-          item.expense = item.expense + element.Amount;
+          item.expense = item.expense + element.amount;
         }
       });
       this._monthlyData.push(item);
@@ -116,12 +116,12 @@ export class FinancialProfileComponent implements OnInit {
   }
 
   initSourceChart() {
-    const sources = this._util.mapDistinct(this._dashboard, 'Source');
+    const sources = this._util.mapDistinct(this._dashboard, 'source');
     sources.forEach(source => {
       let item = { source: source, amount: 0 };
-      let items = this._dashboard.filter(x => x.Source === source);
+      let items = this._dashboard.filter(x => x.source === source);
       items.forEach(element => {
-        item.amount = item.amount + element.Amount;
+        item.amount = item.amount + element.amount;
       });
       this._sourceData.push(item);
     });
@@ -140,12 +140,12 @@ export class FinancialProfileComponent implements OnInit {
     };
   }
   initAccountChart() {
-    const accounts = this._util.mapDistinct(this._dashboard, 'Account');
+    const accounts = this._util.mapDistinct(this._dashboard, 'account');
     accounts.forEach(account => {
       let item = { account: account, amount: 0 };
-      let items = this._dashboard.filter(x => x.Account === account);
+      let items = this._dashboard.filter(x => x.account === account);
       items.forEach(element => {
-        item.amount = item.amount + element.Amount;
+        item.amount = item.amount + element.amount;
       });
       this._accountData.push(item);
     });
@@ -164,12 +164,12 @@ export class FinancialProfileComponent implements OnInit {
     };
   }
   initProductChart() {
-    const products = this._util.mapDistinct(this._dashboard, 'FinancialProduct');
+    const products = this._util.mapDistinct(this._dashboard, 'financialProduct');
     products.forEach(product => {
       let item = { product: product, amount: 0 };
-      let items = this._dashboard.filter(x => x.FinancialProduct === product);
+      let items = this._dashboard.filter(x => x.financialProduct === product);
       items.forEach(element => {
-        item.amount = item.amount + element.Amount;
+        item.amount = item.amount + element.amount;
       });
       this._productData.push(item);
     });

@@ -20,8 +20,8 @@ export class RelationshipTypesComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true }
+      { name: 'name', title: 'Nombre', type: 'text', sortable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true }
     ];
 
     this._table.editable = true;
@@ -36,7 +36,7 @@ export class RelationshipTypesComponent implements OnInit {
 
   addType(type: RelationshipType) {
     this._relService.createType(type).subscribe(data => {
-      this.toastr.success(data.Name, 'Tipo creado');
+      this.toastr.success(data.name, 'Tipo creado');
       this._types = this._relService.getTypes();
       this._newType = {};
     });
@@ -62,9 +62,9 @@ export class RelationshipTypesComponent implements OnInit {
   }
 
   updateType(type: RelationshipType) {
-    this._relService.updateType(type.ID, type).subscribe(
+    this._relService.updateType(type.id, type).subscribe(
       data => {
-        this.toastr.success(data.Name, 'Tipo editado');
+        this.toastr.success(data.name, 'Tipo editado');
         this._types = this._relService.getTypes();
         this._currentType = {};
       },

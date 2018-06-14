@@ -21,11 +21,11 @@ export class ParticipantProfilesService {
     this._accountsURL = _conn.APIUrl + 'profileaccounts';
     this._profilesURL = _conn.APIUrl + 'participantprofiles';
     this._transactionsURL = _conn.APIUrl + 'transactions';
-    this._dashboardURL = _conn.APIUrl + 'financialdashboard';
+    this._dashboardURL = _conn.APIUrl + 'financialdashboards';
   }
 
   getProfile(id: number): Observable<ParticipantProfile> {
-    return this._http.get<ParticipantProfile>(`${this._participantsURL}/${id}/profile`);
+    return this._http.get<ParticipantProfile>(`${this._profilesURL}/${id}`);
   }
 
   updateProfile(id: number, profile: ParticipantProfile) {

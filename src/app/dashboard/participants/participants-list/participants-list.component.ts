@@ -30,8 +30,8 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   classify() {
-    this._entities = this._participants.filter(item => item.ParticipantTypeID === 2);
-    this._individuals = this._participants.filter(item => item.ParticipantTypeID === 1);
+    this._entities = this._participants.filter(item => item.participantTypeId === 2);
+    this._individuals = this._participants.filter(item => item.participantTypeId === 1);
   }
 
 }

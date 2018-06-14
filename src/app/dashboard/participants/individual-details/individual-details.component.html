@@ -1,94 +1,11 @@
-<div class="card">
+<div class="card border-primary">
   <div class="card-body text-center">
-    <img *ngIf="individual.ParticipantTypeID==1" src="assets/img/user.png" alt="" class="img-fluid user-img">
-    <img *ngIf="individual.ParticipantTypeID==2" src="assets/img/office-block.png" alt="" class="img-fluid user-img">
-    <h4 class="user-name">
-      {{ individual.FullName }}
-    </h4>
-    <h5 *ngIf="individual.Score" class="font-weight-bold" [ngClass]="{'text-success': individual.Score < 3, 'text-warning': individual.Score > 2.99 && individual.Score < 6, 'text-danger': individual.Score >= 6 }">
-      <i class="fab fa-cloudscale"></i> {{ individual.Score | number: '1.3-3' }}</h5>
-  </div>
-  <div class="card-body section-block">
-    <ngb-tabset type="tabs" [justify]="'center'">
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="far fa-address-card fa-fw"></i> Info</ng-template>
-        <ng-template ngbTabContent>
-          <small class="text-primary font-weight-bold">
-            <i class="far fa-address-card"></i>
-            <ng-container>
-              <span *ngIf="individual.ParticipantTypeID==1"> Documento de Identidad</span>
-              <span *ngIf="individual.ParticipantTypeID==2"> RUC/NIT</span>
-            </ng-container>
-          </small>
-          <h6 class="participant-info">{{ individual.Code }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="far fa-flag"></i>
-            <ng-container>
-              <span *ngIf="individual.ParticipantTypeID==1"> País de Origen</span>
-              <span *ngIf="individual.ParticipantTypeID==2"> País de Constitución</span>
-            </ng-container>
-          </small>
-          <h6 class="participant-info">{{ individual.Country.Name }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="far fa-envelope-open"></i> Email
-          </small>
-          <h6 class="participant-info">{{ individual.Email }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="fas fa-phone"></i> Número Telefónico
-          </small>
-          <h6 class="participant-info">{{ individual.Phone }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="fas fa-mobile"></i> Teléfono Celular
-          </small>
-          <h6 class="participant-info">{{ individual.MobilePhone }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
-            <i class="fas fa-birthday-cake"></i> Fecha de nacimiento (edad)
-          </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' : '+0600' }}
-            <em>({{ individual.Age }})</em>
-          </h6>
-          <small *ngIf="individual.ParticipantTypeID == 2" class="text-primary font-weight-bold">
-            <i class="far fa-building"></i> Fecha de constitución
-          </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 2" class="participant-info">{{ individual.BirthDate | date: 'mediumDate' : '+0600' }}</h6>
-          <small *ngIf="individual.ParticipantTypeID == 1" class="text-primary font-weight-bold">
-            <i class="fas fa-venus-mars"></i> Género
-          </small>
-          <h6 *ngIf="individual.ParticipantTypeID == 1" class="participant-info">{{ individual.Gender.Name }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="fas fa-globe"></i> Sitio Web
-          </small>
-          <h6 class="participant-info">{{ individual.WebSite }}</h6>
-          <small class="text-primary font-weight-bold">
-            <i class="fas fa-map-marker"></i> Dirección
-          </small>
-          <h6 class="participant-info">{{ individual.Address }}</h6>
-          <agm-map *ngIf="position" [latitude]="position.lat" [longitude]="position.lng" [zoom]=15>
-            <agm-marker [latitude]="position.lat" [longitude]="position.lng"></agm-marker>
-          </agm-map>
-          <small class="text-primary font-weight-bold">
-            <i class="fas fa-user-plus"></i> Creado por
-          </small>
-          <h6 class="participant-info">{{ individual.CreatedByUser.UserName }} - {{ individual.CreateDate | date: 'd/MM/yyyy, h:mm a' }}</h6>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="far fa-edit fa-fw"></i> Tareas</ng-template>
-        <ng-template ngbTabContent>
-          <participant-tasks [participant]="individual"></participant-tasks>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <i class="fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>
-          Alertas
-        </ng-template>
-        <ng-template ngbTabContent>
-          <participant-sanctions [participantID]="individual.ID"></participant-sanctions>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+    <img *ngIf="individual.participantTypeId==1" src="assets/img/user.png" alt="" class="img-fluid user-img">
+    <img *ngIf="individual.participantTypeId==2" src="assets/img/office-block.png" alt="" class="img-fluid user-img">
+    <h5 class="user-name">
+      {{ individual.shortName }}
+    </h5>
+    <h5 *ngIf="individual.score" class="font-weight-bold" [ngClass]="{'text-success': individual.score < 3, 'text-warning': individual.score > 2.99 && individual.score < 6, 'text-danger': individual.score >= 6 }">
+      <i class="fab fa-cloudscale"></i> {{ individual.score | number: '1.3-3' }}</h5>
   </div>
 </div>

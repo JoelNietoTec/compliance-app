@@ -1,70 +1,70 @@
 export interface ParamTable {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
-  CreateDate?: Date;
-  ModificateDate?: Date;
-  TableTypeID?: number;
-  TableType?: TableType;
+  id?: number;
+  name?: string;
+  englishName?: string;
+  createDate?: Date;
+  modificateDate?: Date;
+  tableTypeId?: number;
+  type?: TableType;
 }
 
 export interface ParamCategory {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
-  Weighting?: number;
-  ParamMatrixID?: number;
-  Params?: Param[];
+  id?: number;
+  name?: string;
+  englishName?: string;
+  weighting?: number;
+  paramMatrixId?: number;
+  params?: Param[];
 }
 
 export interface ParamValue {
-  ID?: number;
-  ParamTableID?: number;
-  DisplayValue?: string;
-  EnglishDisplayValue?: string;
-  ParamSubValues?: ParamSubValue[];
-  Score?: number;
+  id?: number;
+  paramTableId?: number;
+  displayValue?: string;
+  englishDisplayValue?: string;
+  subValues?: ParamSubValue[];
+  score?: number;
 }
 
 export interface Param {
-  ID?: number;
-  ParamCategoryID?: number;
-  Name?: string;
-  EnglishName?: string;
-  Description?: string;
-  ParamTableID?: number;
-  ParamTable?: ParamTable;
-  Weighting?: number;
+  id?: number;
+  paramCategoryId?: number;
+  name?: string;
+  englishName?: string;
+  description?: string;
+  paramTableId?: number;
+  table?: ParamTable;
+  weighting?: number;
 }
 
 export interface TableType {
-  ID: number;
-  Name: string;
-  EnglishName: string;
+  id: number;
+  name: string;
+  englishName: string;
 }
 
 export interface ParamSubValue {
-  ID?: number;
-  ParamValueID?: number;
-  DisplayValue?: string;
-  EnglishDisplayValue?: string;
-  Score?: number;
+  id?: number;
+  paramValueId?: number;
+  displayValue?: string;
+  englishDisplayValue?: string;
+  score?: number;
 }
 
 export interface ParamMatrix {
-  ID?: number;
-  Name?: string;
-  Code?: string;
-  Description?: string;
-  ParamCategories?: ParamCategory[];
-  MatrixTypeID?: number;
-  MatrixType?: MatrixType;
-  CreateDate?: Date;
-  ModificateDate?: Date;
+  id?: number;
+  name?: string;
+  code?: string;
+  description?: string;
+  paramCategories?: ParamCategory[];
+  matrixTypeId?: number;
+  type?: MatrixType;
+  createDate?: Date;
+  modificateDate?: Date;
 }
 
 export interface MatrixType {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }

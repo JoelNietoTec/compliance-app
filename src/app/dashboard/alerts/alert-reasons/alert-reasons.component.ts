@@ -15,19 +15,19 @@ export class AlertReasonsComponent implements OnInit {
 
   _priorities: AlertPriority[] = [
     {
-      ID: 1,
-      Name: 'Baja',
-      EnglishName: 'Low'
+      id: 1,
+      name: 'Baja',
+      englishName: 'Low'
     },
     {
-      ID: 2,
-      Name: 'Media',
-      EnglishName: 'Medium'
+      id: 2,
+      name: 'Media',
+      englishName: 'Medium'
     },
     {
-      ID: 3,
-      Name: 'Alta',
-      EnglishName: 'High'
+      id: 3,
+      name: 'Alta',
+      englishName: 'High'
     }
   ];
   _table: TableOptions = {};
@@ -44,30 +44,30 @@ export class AlertReasonsComponent implements OnInit {
     this._table.addMethod = 'modal';
     this._table.columns = [
       {
-        name: 'AlertSource',
+        name: 'source',
         title: 'Fuente',
         sortable: true,
         type: 'object',
         asyncList: this._sources,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'AlertSource.Name',
-        objectID: 'AlertSourceID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'source.name',
+        objectID: 'alertSourceId'
       },
-      { name: 'Name', title: 'Nombre' },
-      { name: 'EnglishName', title: 'Nombre Inglés' },
+      { name: 'name', title: 'Nombre' },
+      { name: 'englishName', title: 'Nombre Inglés' },
       {
-        name: 'AlertPriority',
+        name: 'priority',
         title: 'Prioridad',
         sortable: true,
         type: 'object',
         list: this._priorities,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'AlertPriority.Name',
-        objectID: 'AlertPriorityID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'priority.name',
+        objectID: 'alertPriorityId'
       },
-      { name: 'Code', title: 'Código' }
+      { name: 'code', title: 'Código' }
     ];
     this._table.pageable = true;
     this._table.editable = true;
@@ -76,7 +76,7 @@ export class AlertReasonsComponent implements OnInit {
   addReason(reason: AlertReason) {
     this._alertService.createReason(reason).subscribe(
       data => {
-        this.toast.success(data.Name, 'Generador creado');
+        this.toast.success(data.name, 'Generador creado');
         this._reasons = this._alertService.getReasons();
       },
       (err: Error) => {
@@ -86,9 +86,9 @@ export class AlertReasonsComponent implements OnInit {
   }
 
   editReason(reason: AlertReason) {
-    this._alertService.editReason(reason.ID, reason).subscribe(
+    this._alertService.editReason(reason.id, reason).subscribe(
       data => {
-        this.toast.success(reason.Name, 'Generador actualizado');
+        this.toast.success(reason.name, 'Generador actualizado');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

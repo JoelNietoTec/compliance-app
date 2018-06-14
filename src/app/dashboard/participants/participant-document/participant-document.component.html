@@ -4,16 +4,16 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-control-label" for="">Nro. Documento</label>
-          <input type="text" [(ngModel)]="_partDocument.DocumentCode" class="form-control" name="" id="" aria-describedby="helpId"
+          <input type="text" [(ngModel)]="_partDocument.documentCode" class="form-control" name="" id="" aria-describedby="helpId"
             placeholder="">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="doc-type" class="form-control-label">Tipo Documento</label>
-          <select class="form-control custom-select" [(ngModel)]="_partDocument.DocumentTypeID" name="" id="">
+          <select class="form-control custom-select" [(ngModel)]="_partDocument.documentTypeId" name="" id="">
             <option disabled value="undefined">--- Seleccionar ---</option>
-            <option *ngFor="let type of types" [value]="type.ID">{{ type.Name }}</option>
+            <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
           </select>
         </div>
       </div>
@@ -56,10 +56,10 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="">País Expedición</label>
-          <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.CountryID" required>
+          <select class="form-control custom-select" name="country" id="country" [(ngModel)]="_partDocument.countryId" required>
             <option [value]="undefined" disabled>--- Seleccionar ---</option>
-            <option *ngFor="let country of _countries" [value]="country.ID">
-              {{ country.Name }}
+            <option *ngFor="let country of _countries" [value]="country.id">
+              {{ country.name }}
             </option>
           </select>
         </div>

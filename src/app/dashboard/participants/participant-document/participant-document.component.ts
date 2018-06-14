@@ -45,10 +45,10 @@ export class ParticipantDocumentComponent implements OnInit {
     this._title = `Documento ${this.index + 1}`;
     if (this.doc) {
       this._partDocument = this.doc;
-      this._partDocument.formExpeditionDate = this._dateFormatter.parse(this._partDocument.ExpeditionDate.toString());
-      this._partDocument.formExpirationDate = this._dateFormatter.parse(this._partDocument.ExpirationDate.toString());
+      this._partDocument.formExpeditionDate = this._dateFormatter.parse(this._partDocument.expeditionDate.toString());
+      this._partDocument.formExpirationDate = this._dateFormatter.parse(this._partDocument.expirationDate.toString());
     } else {
-      this._partDocument.ParticipantID = this.participant.ID;
+      this._partDocument.participantId = this.participant.id;
     }
 
     this.getCountries();
@@ -57,20 +57,20 @@ export class ParticipantDocumentComponent implements OnInit {
   getCountries() {
     this._countryServ.getCountries().subscribe(data => {
       this._countries = data;
-      this._countries = this._util.sortBy(this._countries, 'Name');
+      this._countries = this._util.sortBy(this._countries, 'name');
     });
   }
 
   setFile(file: any) {
     this._filestoUpload = <Array<File>>file.target.files;
     this._fileServ.uploadFiles(this._filestoUpload).subscribe(data => {
-      this._partDocument.FilePath = data;
+      this._partDocument.filePath = data;
     });
   }
 
   saveDocument() {
-    this._partDocument.ExpeditionDate = new Date(this._dateFormatter.format(this._partDocument.formExpeditionDate));
-    this._partDocument.ExpirationDate = new Date(this._dateFormatter.format(this._partDocument.formExpirationDate));
+    this._partDocument.expeditionDate = new Date(this._dateFormatter.format(this._partDocument.formExpeditionDate));
+    this._partDocument.expirationDate = new Date(this._dateFormatter.format(this._partDocument.formExpirationDate));
     this.addDocument.emit(this._partDocument);
   }
 
@@ -79,6 +79,6 @@ export class ParticipantDocumentComponent implements OnInit {
   // }
 
   removeDoc() {
-    this.removeDocument.emit(this.doc.ID);
+    this.removeDocument.emit(this.doc.id);
   }
 }

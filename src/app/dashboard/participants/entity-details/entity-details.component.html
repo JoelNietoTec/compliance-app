@@ -2,29 +2,29 @@
   <div class="card-body text-center">
     <img src="assets/img/company.jpg" alt="" class="img-fluid img-circle user-img">
     <h4 class="user-name">
-      {{ entity.FirstName }}
+      {{ entity.firstName }}
     </h4>
-    <h5 [ngClass]="{'text-success': entity.Score < 3, 'text-warning': entity.Score > 2.99 && entity.Score < 6, 'text-danger': entity.Score >= 6 }">{{ entity.Score }}</h5>
+    <h5 [ngClass]="{'text-success': entity.Score < 3, 'text-warning': entity.Score > 2.99 && entity.Score < 6, 'text-danger': entity.Score >= 6 }">{{ entity.score }}</h5>
   </div>
   <div>
     <hr/>
   </div>
   <div class="card-body section-block">
     <small class="text-muted">Email <i class="fa fa-envelope-o" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.Email }}</h6>
+    <h6 class="participant-info">{{ entity.email }}</h6>
     <small class="text-muted">Número telefónico <i class="fa fa-phone" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.Phone }}</h6>
+    <h6 class="participant-info">{{ entity.phone }}</h6>
     <small class="text-muted">Número celular <i class="fa fa-mobile-phone" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.MobilePhone }}</h6>
+    <h6 class="participant-info">{{ entity.mobilePhone }}</h6>
     <small class="text-muted">Fecha de constitución <i class="fa fa-birthday-cake" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.BirthDate | date: 'shortDate' }} </h6>
+    <h6 class="participant-info">{{ entity.birthDate | date: 'shortDate' }} </h6>
     <small class="text-muted">Representante Legal<i class="fa fa-user-md" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.LegalRepresentative }}</h6>
+    <h6 class="participant-info">{{ entity.legalRepresentative }}</h6>
     <small class="text-muted">Sitio Web <i class="fa fa-globe" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.WebSite }}</h6>
+    <h6 class="participant-info">{{ entity.webSite }}</h6>
     <small class="text-muted">Dirección <i class="fa fa-map-marker" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.Address }}</h6>
+    <h6 class="participant-info">{{ entity.address }}</h6>
     <small class="text-muted">Creado por <i class="fa fa-plus-square" aria-hidden="true"></i></small>
-    <h6 class="participant-info">{{ entity.CreatedByUser.UserName }} - {{ entity.CreateDate | date: 'medium'}}</h6>
+    <h6 class="participant-info">{{ entity.createdUser.userName }} - {{ entity.createDate | date: 'medium'}}</h6>
   </div>
 </div>

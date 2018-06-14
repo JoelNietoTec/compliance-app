@@ -47,7 +47,7 @@ export class ParamMatrixComponent implements OnInit {
         .subscribe(data => {
           this._matrix = data;
           this.getCategories();
-          if (this._matrix.ParamCategories) {
+          if (this._matrix.paramCategories) {
             this.calculatePercent();
           }
         });
@@ -55,14 +55,14 @@ export class ParamMatrixComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoryService.getCategoriesByMatrix(this._matrix.ID)
+    this._categoryService.getCategoriesByMatrix(this._matrix.id)
       .subscribe(data => {
         this._categories = data;
       });
   }
 
   addCategory() {
-    this._newCategory.ParamMatrixID = this._matrix.ID;
+    this._newCategory.paramMatrixId = this._matrix.id;
     this._newCategories.push(this._newCategory);
     this.calculatePercent();
     this._newCategory = {};
@@ -70,14 +70,14 @@ export class ParamMatrixComponent implements OnInit {
 
   calculatePercent() {
     this._totalPercent = 0;
-    if (this._matrix.ParamCategories) {
-      this._matrix.ParamCategories.forEach(element => {
-        this._totalPercent = this._totalPercent + element.Weighting;
+    if (this._matrix.paramCategories) {
+      this._matrix.paramCategories.forEach(element => {
+        this._totalPercent = this._totalPercent + element.weighting;
       });
     }
 
     this._newCategories.forEach(element => {
-      this._totalPercent = this._totalPercent + element.Weighting;
+      this._totalPercent = this._totalPercent + element.weighting;
     });
 
   }

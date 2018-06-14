@@ -23,15 +23,15 @@ export class ParamTableComplexComponent implements OnInit {
   constructor(private _tableService: ParamTablesService, private _valueService: ParamValuesService, private toastr: ToastrService) {}
 
   ngOnInit() {
-    this._valueService.getValuesByTable(this.table.ID).subscribe(data => {
+    this._valueService.getValuesByTable(this.table.id).subscribe(data => {
       this._values = data;
     });
   }
 
   onSubmit() {
-    this._newValue.ParamTableID = this.table.ID;
+    this._newValue.paramTableId = this.table.id;
     this._valueService.addValue(this._newValue).subscribe(data => {
-      this.toastr.success(data.DisplayValue, 'Categoría creada');
+      this.toastr.success(data.displayValue, 'Categoría creada');
       this._values.push(data);
       this._newValue = {};
     });

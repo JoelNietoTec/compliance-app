@@ -30,10 +30,10 @@ export class ParticipantDetailsComponent implements OnInit {
   getParticipant() {
     this._route.params.subscribe(params => {
       this._partServ.getParticipant(params['id']).subscribe(data => {
-        this.title.setTitle(`ProCompliance | Participante: ${data.ShortName}`);
+        this.title.setTitle(`ProCompliance | Participante: ${data.shortName}`);
         this._participant = data;
         this._participantCopy = Object.assign({}, this._participant, data);
-        this._participant.Age = this._util.getAge(this._participant.BirthDate);
+        this._participant.age = this._util.getAge(this._participant.birthDate);
       });
     });
   }

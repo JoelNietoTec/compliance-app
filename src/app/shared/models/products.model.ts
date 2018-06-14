@@ -1,26 +1,26 @@
 export interface FinancialProduct {
-  ID?: number;
-  ProductTypeID?: number;
-  ProductType?: ProductType;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  productTypeId?: number;
+  type?: ProductType;
+  name?: string;
+  englishName?: string;
 }
 
 export interface ProductType {
-  ID?: number;
-  Name?: string;
-  EnglishName?: string;
+  id?: number;
+  name?: string;
+  englishName?: string;
 }
 
 export interface ProfileProduct {
-  ID?: number;
-  ParticipantProfileID?: number;
-  FinancialProductID?: number;
-  FinancialProduct?: FinancialProduct;
-  Name?: string;
-  Description?: string;
-  StartDate?: Date;
-  DueDate?: Date;
-  MonnthlyPayment?: number;
-  Balance?: number;
+  id?: number;
+  participantProfileID?: number;
+  financialProductID?: number;
+  financialProduct?: FinancialProduct;
+  name?: string;
+  description?: string;
+  startDate?: Date;
+  dueDate?: Date;
+  monthlyPayment?: number;
+  balance?: number;
 }

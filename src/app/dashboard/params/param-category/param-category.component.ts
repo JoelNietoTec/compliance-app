@@ -25,21 +25,21 @@ export class ParamCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._header = `${this.category.Name} / ${this.category.Weighting} %`;
+    this._header = `${this.category.name} / ${this.category.weighting} %`;
     this._customTable.columns = [
-      { name: 'Name', title: 'Nombre', sortable: true, filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true, filterable: true },
-      { name: 'Description', title: 'Descripción', sortable: true, filterable: true },
-      { name: 'Weighting', title: 'Ponderación', type: 'decimal', sortable: true },
+      { name: 'name', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true, filterable: true },
+      { name: 'description', title: 'Descripción', sortable: true, filterable: true },
+      { name: 'weighting', title: 'Ponderación', type: 'decimal', sortable: true },
       {
-        name: 'ParamTable',
+        name: 'table',
         title: 'Tabla',
         type: 'object',
         list: this.tables,
-        listID: 'ID',
-        objectColumn: 'ParamTable.Name',
-        listDisplay: 'Name',
-        objectID: 'ParamTableID'
+        listID: 'id',
+        objectColumn: 'table.name',
+        listDisplay: 'name',
+        objectID: 'paramTableId'
       }
     ];
     this._customTable.creatable = true;
@@ -49,16 +49,16 @@ export class ParamCategoryComponent implements OnInit {
   }
 
   addParam(param: Param) {
-    param.ParamCategoryID = this.category.ID;
+    param.paramCategoryId = this.category.id;
     this._paramService.addParams(param).subscribe(data => {
-      this.toastr.success(param.Name, 'Parámetro creado');
-      this.category.Params.push(data);
+      this.toastr.success(param.name, 'Parámetro creado');
+      this.category.params.push(data);
     });
   }
 
   editParam(param: Param) {
-    this._paramService.editParam(param.ID, param).subscribe(data => {
-      this.toastr.success(param.Name, 'Parámetro actualizado');
+    this._paramService.editParam(param.id, param).subscribe(data => {
+      this.toastr.success(param.name, 'Parámetro actualizado');
     });
   }
 

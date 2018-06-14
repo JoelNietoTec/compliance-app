@@ -20,6 +20,6 @@ export class AlertSourcesComponent implements OnInit {
     this._table.title = 'Fuentes de alertas';
     this._table.style = 'table-sm table-squared';
     this._table.pageable = true;
-    this._table.columns = [{ name: 'Name', title: 'Nombre' }, { name: 'EnglishName', title: 'Nombre Inglés' }];
+    this._table.columns = [{ name: 'name', title: 'Nombre' }, { name: 'englishName', title: 'Nombre Inglés' }];
   }
 }

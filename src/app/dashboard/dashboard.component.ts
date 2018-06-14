@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { DocumentsService } from '../shared/services/documents.service';
 
 @Component({
@@ -12,7 +12,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this._docServ.getExpired().subscribe(data => {
-      console.log(data);
+      data.forEach(document => {
+        this.toast.warning(document.type.name, document.participant.shortName);
+      });
     });
   }
 }

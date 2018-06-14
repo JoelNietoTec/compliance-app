@@ -1,6 +1,6 @@
 <app-card [header]="_header" [footer]=false>
   <div card-section="body">
-    <app-custom-table [options]="_customTable" [items]="category.Params" (addItem)="addParam($event)" (editItem)="editParam($event)"
+    <app-custom-table [options]="_customTable" [items]="category.params" (addItem)="addParam($event)" (editItem)="editParam($event)"
       (removeItem)="deleteParam($event)"></app-custom-table>
   </div>
 </app-card>

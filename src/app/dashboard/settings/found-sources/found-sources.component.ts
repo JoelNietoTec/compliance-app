@@ -25,9 +25,9 @@ export class FoundSourcesComponent implements OnInit {
     this._table.style = 'table-squared';
     this._table.deletable = true;
     this._table.columns = [
-      { name: 'ID', title: '#', hidden: true },
-      { name: 'Name', title: 'Nombre', filterable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', filterable: true }
+      { name: 'id', title: '#', hidden: true },
+      { name: 'name', title: 'Nombre', filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', filterable: true }
     ];
 
     this._sources = this._tranServ.getSources();
@@ -36,7 +36,7 @@ export class FoundSourcesComponent implements OnInit {
   addSource(source: TransactionSource) {
     this._tranServ.createSource(source).subscribe(
       data => {
-        this.toast.success(data.Name, 'Fuente agregada');
+        this.toast.success(data.name, 'Fuente agregada');
         this._sources = this._tranServ.getSources();
       },
       (err: Error) => {
@@ -46,9 +46,9 @@ export class FoundSourcesComponent implements OnInit {
   }
 
   editSource(source: TransactionSource) {
-    this._tranServ.editSource(source.ID, source).subscribe(
+    this._tranServ.editSource(source.id, source).subscribe(
       data => {
-        this.toast.success(source.Name, 'Fuente actualizada');
+        this.toast.success(source.name, 'Fuente actualizada');
       },
       (err: Error) => {
         this.toast.error(err.message, 'Ocurrió un error');

@@ -27,6 +27,7 @@ export class BanksService {
   }
 
   updateBank(id: number, bank: Bank): Observable<Bank> {
+    console.log(JSON.stringify(bank));
     return this._http.put<Bank>(`${this._banksURL}/${id}`, JSON.stringify(bank), { headers: this._headers });
   }
 

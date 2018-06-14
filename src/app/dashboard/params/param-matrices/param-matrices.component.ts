@@ -26,7 +26,7 @@ export class ParamMatricesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._table.addMethod = 'inline';
+    this._table.addMethod = 'modal';
     this._table.creatable = true;
     this._table.editable = true;
     this._table.pageable = true;
@@ -36,51 +36,56 @@ export class ParamMatricesComponent implements OnInit {
 
     this._matrixTypes = [
       {
-        ID: 1,
-        Name: 'Individuos',
-        EnglishName: 'Individuals'
+        id: 1,
+        name: 'Individuos',
+        englishName: 'Individuals'
       },
       {
-        ID: 2,
-        Name: 'Entidades',
-        EnglishName: 'Entities'
+        id: 2,
+        name: 'Entidades',
+        englishName: 'Entities'
       }
     ];
 
     this._table.columns = [
-      { name: 'Code', title: 'Código', type: 'text', sortable: true },
-      { name: 'Name', title: 'Nombre', type: 'text', sortable: true },
+      { name: 'code', title: 'Código', sortable: true },
+      { name: 'name', title: 'Nombre', sortable: true },
       {
-        name: 'MatrixType',
+        name: 'type',
         title: 'Tipo',
         sortable: true,
         type: 'object',
         list: this._matrixTypes,
-        listID: 'ID',
-        listDisplay: 'Name',
-        objectColumn: 'MatrixType.Name',
-        objectID: 'MatrixTypeID'
+        listID: 'id',
+        listDisplay: 'name',
+        objectColumn: 'type.name',
+        objectID: 'matrixTypeId'
       },
-      { name: 'Description', title: 'Descripción', type: 'text', sortable: true },
-      { name: 'CreateDate', title: 'Fec. Creación', type: 'datetime', readonly: true }
+      { name: 'description', title: 'Descripción', type: 'text', sortable: true },
+      { name: 'createDate', title: 'Fec. Creación', type: 'datetime', readonly: true }
     ];
 
     this._matrices = this._matrixService.getMatrices();
   }
 
   createMatrix(matrix: ParamMatrix) {
-    matrix.CreateDate = new Date();
-    this._matrixService.createMatrix(matrix).subscribe(data => {
-      this.toastr.success(data.Name, 'Matriz creada');
-      this._matrices = this._matrixService.getMatrices();
-    });
+    matrix.createDate = new Date();
+    this._matrixService.createMatrix(matrix).subscribe(
+      data => {
+        this.toastr.success(data.name, 'Matriz creada');
+        this._matrices = this._matrixService.getMatrices();
+      },
+      (err: Error) => {
+        this.toastr.error(err.message, err.name);
+      }
+    );
   }
 
   updateMatrix(matrix: ParamMatrix) {
-    console.log(matrix);
-    this._matrixService.updateMatrix(matrix.ID, matrix).subscribe(
+    this._matrixService.updateMatrix(matrix.id, matrix).subscribe(
       data => {
-        this.toastr.success(matrix.Name, 'Matrix Updated');
+        this._matrices = this._matrixService.getMatrices();
+        this.toastr.success(matrix.name, 'Matrix Updated');
       },
       (error: Error) => {
         this.toastr.error(error.message, error.name);

@@ -1,8 +1,8 @@
 <app-loading-modal *ngIf="!_table"></app-loading-modal>
 <div *ngIf="_table">
   <div class="col-md-12">
-    <h3>Tabla: {{ _table.Name }}</h3>
+    <h3>Tabla: {{ _table.name }}</h3>
   </div>
-  <param-table-simple *ngIf="_table.TableTypeID == 1" [table]="_table" ></param-table-simple>
-  <param-table-complex *ngIf="_table.TableTypeID == 2" [table]="_table"></param-table-complex>
+  <param-table-simple *ngIf="_table.tableTypeId == 1" [table]="_table" ></param-table-simple>
+  <param-table-complex *ngIf="_table.tableTypeId == 2" [table]="_table"></param-table-complex>
 </div>

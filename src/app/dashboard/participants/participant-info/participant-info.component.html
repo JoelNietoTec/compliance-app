@@ -1,0 +1,72 @@
+<h3>Información General</h3>
+<div class="row">
+  <div class="col-md-4">
+    <small class="text-primary font-weight-bold">
+      <ng-container>
+        <span>
+          <i class="fas fa-user   fa-fw"></i> Nombre Comppletp</span>
+      </ng-container>
+    </small>
+    <h6 class="participant-info">{{ participant.fullName }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="far fa-address-card"></i>
+      <ng-container>
+        <span *ngIf="participant.participantTypeId==1"> Documento de Identidad</span>
+        <span *ngIf="participant.participantTypeId==2"> RUC/NIT</span>
+      </ng-container>
+    </small>
+    <h6 class="participant-info">{{ participant.code }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="far fa-flag"></i>
+      <ng-container>
+        <span *ngIf="participant.participantTypeId==1"> País de Origen</span>
+        <span *ngIf="participant.participantTypeId==2"> País de Constitución</span>
+      </ng-container>
+    </small>
+    <h6 class="participant-info">{{ participant.country.name }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="far fa-envelope-open"></i> Email
+    </small>
+    <h6 class="participant-info">{{ participant.email }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="fas fa-phone"></i> Número Telefónico
+    </small>
+    <h6 class="participant-info">{{ participant.phone }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="fas fa-mobile"></i> Teléfono Celular
+    </small>
+    <h6 class="participant-info">{{ participant.mobilePhone }}</h6>
+    <small *ngIf="participant.participantTypeId == 1" class="text-primary font-weight-bold">
+      <i class="fas fa-birthday-cake"></i> Fecha de nacimiento (edad)
+    </small>
+    <h6 *ngIf="participant.participantTypeId == 1" class="participant-info">{{ participant.birthDate | date: 'mediumDate' : '+0600' }}
+      <em>({{ participant.age }})</em>
+    </h6>
+    <small *ngIf="participant.participantTypeId == 2" class="text-primary font-weight-bold">
+      <i class="far fa-building"></i> Fecha de constitución
+    </small>
+    <h6 *ngIf="participant.participantTypeId == 2" class="participant-info">{{ participant.birthDate | date: 'mediumDate' : '+0600' }}</h6>
+    <small *ngIf="participant.participantTypeId == 1" class="text-primary font-weight-bold">
+      <i class="fas fa-venus-mars"></i> Género
+    </small>
+    <h6 *ngIf="participant.participantTypeId == 1" class="participant-info">{{ participant.gender.name }}</h6>
+    <small class="text-primary font-weight-bold">
+      <i class="fas fa-globe"></i> Sitio Web
+    </small>
+    <h6 class="participant-info">{{ participant.webSite }}</h6>
+
+    <small class="text-primary font-weight-bold">
+      <i class="fas fa-user-plus"></i> Creado por
+    </small>
+    <h6 class="participant-info">{{ participant.createdUser.userName }} - {{ participant.createDate | date: 'd/MM/yyyy, h:mm a' }}</h6>
+  </div>
+  <div class="col-md-8">
+    <small class="text-primary font-weight-bold">
+      <i class="fas fa-map-marker"></i> Dirección
+    </small>
+    <h6 class="participant-info">{{ participant.address }}</h6>
+    <agm-map *ngIf="position" [latitude]="position.lat" [longitude]="position.lng" [zoom]=15>
+      <agm-marker [latitude]="position.lat" [longitude]="position.lng"></agm-marker>
+    </agm-map>
+  </div>
+</div>

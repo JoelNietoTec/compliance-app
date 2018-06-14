@@ -9,14 +9,14 @@
           <label for="email">
             <i class="far fa-envelope"></i> Email /
             <i class="far fa-user"></i> Nombre Usuario </label>
-          <input type="email" [(ngModel)]="_login.UserName" class="form-control form-control-lg" name="email" id="email" [disabled]="_loading"
+          <input type="email" [(ngModel)]="_login.userName" class="form-control form-control-lg" name="email" id="email" [disabled]="_loading"
             placeholder="username@domain.com">
           <small id="emailHelpId" class="form-text text-muted">Email / Nombre de Usuario </small>
         </div>
         <div class="form-group">
           <label for="password">
             <i class="fas fa-key" aria-hidden="true"></i> Contraseña</label>
-          <input type="password" [(ngModel)]="_login.Password" class="form-control form-control-lg" name="password" id="password" placeholder="Contraseña"
+          <input type="password" [(ngModel)]="_login.password" class="form-control form-control-lg" name="password" id="password" placeholder="Contraseña"
             [disabled]="_loading">
           <small class="form-text text-muted">Contraseña de Usuario</small>
         </div>

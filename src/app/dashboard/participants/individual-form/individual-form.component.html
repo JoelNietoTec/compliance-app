@@ -1,50 +1,50 @@
 <div class="row">
   <div class="col-12">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" name="pep" id="pep" [(ngModel)]="_individual.PEP" class="custom-control-input">
+      <input type="checkbox" name="pep" id="pep" [(ngModel)]="_individual.pep" class="custom-control-input">
       <label class="custom-control-label" for="pep">Es PEP?</label>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="first-name">Primer Nombre</label>
-      <input [(ngModel)]="_individual.FirstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Primer Nombre Individuo"
+      <input [(ngModel)]="_individual.firstName" type="text" name="first-name" id="first-name" class="form-control" placeholder="Primer Nombre Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="second-name">Segundo Nombre</label>
-      <input type="text" [(ngModel)]="_individual.SecondName" name="second-name" id="second-name" class="form-control" placeholder="Segundo Nombre Individuo"
+      <input type="text" [(ngModel)]="_individual.secondName" name="second-name" id="second-name" class="form-control" placeholder="Segundo Nombre Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="firs-name">Apellido</label>
-      <input type="text" [(ngModel)]="_individual.ThirdName" name="third-name" id="third-name" class="form-control" placeholder="Apellido Individuo"
+      <input type="text" [(ngModel)]="_individual.thirdName" name="third-name" id="third-name" class="form-control" placeholder="Apellido Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="fourth-name">Segundo Apellido</label>
-      <input type="text" [(ngModel)]="_individual.FourthName" name="fourth-name" id="fourth-name" class="form-control" placeholder="Segundo Apellido Individuo"
+      <input type="text" [(ngModel)]="_individual.fourthName" name="fourth-name" id="fourth-name" class="form-control" placeholder="Segundo Apellido Individuo"
         aria-describedby="helpId">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="code"># Documento Personal</label>
-      <input type="text" name="code" id="code" [(ngModel)]="_individual.Code"  class="form-control" placeholder="C.I.P./Pasaporte">
+      <input type="text" name="code" id="code" [(ngModel)]="_individual.code"  class="form-control" placeholder="C.I.P./Pasaporte">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="country">País de Origen</label>
-      <select class="custom-select form-control" [(ngModel)]="_individual.CountryID" name="country-id" id="country" required>
+      <select class="custom-select form-control" [(ngModel)]="_individual.countryId" name="country-id" id="country" required>
         <option [value]="_default" disabled="true">---Seleccionar---</option>
-        <option *ngFor="let country of _countries" [value]="country.ID">{{ country.Name }}</option>
+        <option *ngFor="let country of _countries" [value]="country.id">{{ country.name }}</option>
       </select>
     </div>
   </div>
@@ -65,44 +65,44 @@
   <div class="col-md-3">
     <div class="form-group">
       <label for="gender">Género</label>
-      <select class="custom-select form-control" [(ngModel)]="_individual.GenderID" name="GenderID" id="GenderID" required>
+      <select class="custom-select form-control" [(ngModel)]="_individual.genderId" name="GenderID" id="GenderID" required>
         <option [value]="_default" disabled="true">---Seleccionar---</option>
-        <option *ngFor="let gender of _genders" [value]="gender.ID">{{ gender.Name }}</option>
+        <option *ngFor="let gender of _genders" [value]="gender.id">{{ gender.name }}</option>
       </select>
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" [(ngModel)]="_individual.Email" name="email" id="email" aria-describedby="helpId"
+      <input type="email" class="form-control" [(ngModel)]="_individual.email" name="email" id="email" aria-describedby="helpId"
         placeholder="example@domain.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="website">Sitio Web</label>
-      <input type="url" class="form-control" [(ngModel)]="_individual.WebSite" name="website" id="website" aria-describedby="helpId"
+      <input type="url" class="form-control" [(ngModel)]="_individual.webSite" name="website" id="website" aria-describedby="helpId"
         placeholder="http://example.com">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="phone-number">Número Telefónico</label>
-      <input type="tel" class="form-control" [(ngModel)]="_individual.Phone" name="phone-number" id="phone-number" aria-describedby="helpId"
+      <input type="tel" class="form-control" [(ngModel)]="_individual.phone" name="phone-number" id="phone-number" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
       <label for="mobile-phone">Número Celular</label>
-      <input type="tel" class="form-control" [(ngModel)]="_individual.MobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
+      <input type="tel" class="form-control" [(ngModel)]="_individual.mobilePhone" name="mobile-phone" id="mobile-phone" aria-describedby="helpId"
         placeholder="9999-9999">
     </div>
   </div>
   <div class="col-md-12">
     <div class="form-group">
       <label for="">Dirección</label>
-      <textarea class="form-control" name="" id="" rows="3" [(ngModel)]="_individual.Address" (blur)="setLocation()"></textarea>
+      <textarea class="form-control" name="" id="" rows="3" [(ngModel)]="_individual.address" (blur)="setLocation()"></textarea>
     </div>
   </div>
   <div class="col-md-12">

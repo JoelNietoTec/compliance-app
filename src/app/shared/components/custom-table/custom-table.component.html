@@ -70,9 +70,9 @@
           </td>
         </tr>
         <ng-container *ngFor="let item of _pagedItems">
-          <tr *ngIf="item.ID != _selectedItem.ID || options.addMethod !== 'inline'" (dblclick)="selectItem(item)">
+          <tr *ngIf="item.id != _selectedItem.id || options.addMethod !== 'inline'" (dblclick)="selectItem(item)">
             <ng-container *ngFor="let col of options.columns">
-              <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="getClassRate(item.Rate, col)">
+              <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="getClassRate(item.rate, col)">
                 <ng-container [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
                     {{ item | column: col.name | date: 'dd/MM/yyyy' : '+0600' }}
@@ -108,18 +108,18 @@
               </td>
             </ng-container>
             <td *ngIf="options.editable || options.detailsURL" class="text-center actions-cell">
-              <span class="action-button" *ngIf="options.detailsURL" [routerLink]="getDetailsURL(item.ID)" placement="top" ngbTooltip="Detalles">
+              <span class="action-button" *ngIf="options.detailsURL" [routerLink]="getDetailsURL(item.id)" placement="top" ngbTooltip="Detalles">
                 <i class="fas fa-search-plus fa-lg text-primary"></i>
               </span>
               <span class="action-button" *ngIf="editItem.observers.length" (click)="selectItem(item)" placement="top" ngbTooltip="Editar">
                 <i class="fas fa-edit fa-lg text-success"></i>
               </span>
-              <span class="action-button" *ngIf="removeItem.observers.length" [swal]="_deleteMessage" (confirm)="deleteItem(item.ID)" placement="top" ngbTooltip="Eliminar">
+              <span class="action-button" *ngIf="removeItem.observers.length" [swal]="_deleteMessage" (confirm)="deleteItem(item.id)" placement="top" ngbTooltip="Eliminar">
                 <i class="far fa-trash-alt fa-lg text-danger"></i>
               </span>
             </td>
           </tr>
-          <tr class="table-info" *ngIf="item.ID === _selectedItem.ID && options.addMethod === 'inline'">
+          <tr class="table-info" *ngIf="item.id === _selectedItem.id && options.addMethod === 'inline'">
             <ng-container *ngFor="let col of options.columns">
               <td *ngIf="!col.hidden" [ngClass]="{'text-center': col.type == 'checkbox'}">
                 <ng-container *ngIf="!col.readonly" [ngSwitch]="col.type">
@@ -141,7 +141,7 @@
                     {{ item | column: col.name | date: 'dd/MM/yyyy' : '+0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
-                    {{ item | column: col.name | date:'d/MM/yyyy, h:mm a' }}
+                    {{ item | column: col.name | date:'d/MM/yyyy, h:mm a' : '-0600' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'decimal'">
                     {{ item | column: col.name | number: '1.3-3' }}

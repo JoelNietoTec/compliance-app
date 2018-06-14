@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       this._participants = participants;
       this._participants.forEach(part => {
         let location: any = {};
-        _map.getPosition(part.Address).subscribe(position => {
+        _map.getPosition(part.address).subscribe(position => {
           if (position.results[0]) {
             location = position.results[0];
             location.participant = part;
@@ -57,15 +57,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this._partServ.getParticipantsbyRisk().subscribe(data => {
+      console.log(data);
       this.byRisk = data;
       for (const i of this.byRisk) {
-        if (i.Rate === 'No disponible') {
+        if (i.rate === 'No disponible') {
           i.name = 'No disponible';
         } else {
-          i.name = `${i.Rate} Riesgo`;
+          i.name = `${i.rate} Riesgo`;
         }
       }
-      this.byRisk = this._util.sortBy(this.byRisk, 'Sort', true);
+      this.byRisk = this._util.sortBy(this.byRisk, 'sort', true);
       this.loadRiskChart();
     });
     this.loadCountry();
@@ -144,7 +145,7 @@ export class HomeComponent implements OnInit {
       this.byCountry = data;
       this._countries = {};
       this.byCountry.forEach(country => {
-        this._countries[country.Abbreviation.toLowerCase()] = country.Value;
+        this._countries[country.abbreviation.toLowerCase()] = country.value;
       });
     });
   }

@@ -20,10 +20,10 @@ export class DocumentTypesComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'Name', title: 'Nombre', sortable: true },
-      { name: 'EnglishName', title: 'Nombre Inglés', sortable: true },
-      { name: 'RequiredIndividual', title: 'Req. Individuo', type: 'boolean' },
-      { name: 'RequiredEntity', title: 'Req. Entidad', type: 'boolean' }
+      { name: 'name', title: 'Nombre', sortable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true },
+      { name: 'requiredIndividual', title: 'Req. Individuo', type: 'boolean' },
+      { name: 'requiredEntity', title: 'Req. Entidad', type: 'boolean' }
     ];
 
     this._table.editable = true;
@@ -45,7 +45,7 @@ export class DocumentTypesComponent implements OnInit {
 
   addType(type: DocumentType) {
     this._docServ.addType(type).subscribe(data => {
-      this.toastr.success(data.Name, 'Tipo Documento Creado');
+      this.toastr.success(data.name, 'Tipo Documento Creado');
       this._types = this._docServ.getTypes();
     });
   }
@@ -57,8 +57,8 @@ export class DocumentTypesComponent implements OnInit {
   }
 
   updateType(type: DocumentType) {
-    this._docServ.updateType(type.ID, type).subscribe(data => {
-      this.toastr.success(data.Name, 'Tipo Documento Editado');
+    this._docServ.updateType(type.id, type).subscribe(data => {
+      this.toastr.success(type.name, 'Tipo Documento Editado');
       this._types = this._docServ.getTypes();
     });
   }

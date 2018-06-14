@@ -19,19 +19,19 @@ export class EntitiesListComponent implements OnInit {
 
   ngOnInit() {
     this._table.columns = [
-      { name: 'FullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
-      { name: 'Code', title: 'RUC/NIT', sortable: true },
-      { name: 'BirthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
-      { name: 'Email', title: 'Email', type: 'text', sortable: true, filterable: true },
-      { name: 'Country', title: 'País', type: 'object', objectColumn: 'Country.Name', sortable: true, lookup: true },
-      { name: 'Score', title: 'Puntaje', type: 'decimal', sortable: true, rateField: true, customClasses: 'font-weight-bold' },
-      { name: 'Rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true, rateField: true, customClasses: 'font-weight-bold' },
-      { name: 'Address', title: 'Dirección', hidden: true },
-      { name: 'WebSite', title: 'Sitio Web', hidden: true },
-      { name: 'LegalRepresentative', title: 'Representante Legal', hidden: true },
-      { name: 'Phone', title: 'Teléfono', hidden: true },
-      { name: 'MobilePhone', title: 'Tel. Celular', hidden: true },
-      { name: 'CreateDate', title: 'Fec. Creación', hidden: true }
+      { name: 'fullName', title: 'Razón Social', type: 'text', filterable: true, sortable: true },
+      { name: 'code', title: 'RUC/NIT', sortable: true },
+      { name: 'birthDate', title: 'Fec. Constitución', type: 'date', sortable: true },
+      { name: 'email', title: 'Email', type: 'text', sortable: true, filterable: true },
+      { name: 'country', title: 'País', type: 'object', objectColumn: 'country.name', sortable: true, lookup: true },
+      { name: 'score', title: 'Puntaje', type: 'decimal', sortable: true, rateField: true, customClasses: 'font-weight-bold' },
+      { name: 'rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true, rateField: true, customClasses: 'font-weight-bold' },
+      { name: 'address', title: 'Dirección', hidden: true },
+      { name: 'webSite', title: 'Sitio Web', hidden: true },
+      { name: 'legalRepresentative', title: 'Representante Legal', hidden: true },
+      { name: 'phone', title: 'Teléfono', hidden: true },
+      { name: 'mobilePhone', title: 'Tel. Celular', hidden: true },
+      { name: 'createDate', title: 'Fec. Creación', hidden: true }
     ];
 
     this._table.style = 'table table-sm table-squared';

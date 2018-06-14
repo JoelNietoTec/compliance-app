@@ -57,14 +57,14 @@ export class SanctionsService {
         sanctions.forEach(sanction => {
           const terms = sanction.Term1.toLocaleLowerCase().split(' ');
           participants.forEach(participant => {
-            let searchTerm = this._util.isNullString(participant.FirstName);
-            searchTerm = searchTerm + this._util.isNullString(participant.ThirdName);
+            let searchTerm = this._util.isNullString(participant.firstName);
+            searchTerm = searchTerm + this._util.isNullString(participant.thirdName);
             searchTerm = searchTerm.toLocaleLowerCase();
             terms.forEach(term => {
               if (searchTerm.indexOf(term) >= 0 && term.length > 4) {
                 const match = {
                   sanctionID: sanction.ID,
-                  participantID: participant.ID
+                  participantID: participant.id
                 };
                 concurrences.push(match);
               }
