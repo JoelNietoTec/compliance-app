@@ -7,12 +7,12 @@ export interface RelationshipType {
 }
 
 export interface ParticipantRelationship {
-  ID?: number;
-  ParticipantID?: number;
-  Participant?: Participant;
-  RelatedParticipantID?: number;
-  RelatedParticipant?: Participant;
-  RelationshipTypeID?: number;
-  Type?: RelationshipType;
+  id?: number;
+  participantId?: number;
+  participant?: Participant;
+  relatedParticipantId?: number;
+  relatedParticipant?: Participant;
+  relationshipTypeId?: number;
+  type?: RelationshipType;
 
 }

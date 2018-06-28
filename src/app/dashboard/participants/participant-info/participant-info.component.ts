@@ -18,9 +18,7 @@ export class ParticipantInfoComponent implements OnInit {
   ngOnInit() {
     if (this.participant.address) {
       this._map.getPosition(this.participant.address).subscribe(ps => {
-
         this.position = ps.results[0].geometry.location;
-        console.log(this.position);
       });
     }
   }

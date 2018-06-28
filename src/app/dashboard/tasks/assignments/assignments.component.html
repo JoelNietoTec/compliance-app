@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div *ngFor="let progress of _progresses | async" class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="bucket-title">
+            <i class="far" [ngClass]="{'fa-clock': progress.id == 1, 'fa-edit': progress.id == 2, 'fa-check-square': progress.id ==3}"></i> {{ progress.name }}</h4>
+            <button *ngIf="progress.id == 1" type="button" (click)="open()" placement="top" ngbTooltip="Nueva Tarea" class="btn btn-primary btn-block add-button">
+              <i class="fas fa-plus" aria-hidden="true"></i>
+            </button>
+            <div *ngFor="let assign of _assignments">
+              <assignment-card *ngIf="assign.progressId == progress.id" [assignment]="assign" (select)="selectAssignment($event)"></assignment-card>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,16 +13,16 @@
             {{ r.firstName }} {{ r.thirdName }}
           </ng-template>
           <label for="participant">Participante</label>
-          <input type="text" class="form-control" [(ngModel)]="relation.RelatedParticipant" name="" id=""
+          <input type="text" class="form-control" [(ngModel)]="relation.relatedParticipant" name="" id=""
             placeholder="Buscar" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="type">Tipo de relación</label>
-          <select class="form-control custom-select" [(ngModel)]="relation.Type" name="type" id="type">
+          <select class="form-control custom-select" [(ngModel)]="relation.type" name="type" id="type">
             <option disabled value="undefined">--- Seleccionar ---</option>
-            <option *ngFor="let type of _types" [ngValue]="type">{{ type.Name }}</option>
+            <option *ngFor="let type of _types" [ngValue]="type">{{ type.name }}</option>
           </select>
         </div>
       </div>

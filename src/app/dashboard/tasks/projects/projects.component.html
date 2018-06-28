@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="_projectTitle" (keydown)="onKeyDown($event)" name="title" id="title"
+      placeholder="Nuevo Projecto">
+  </div>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel *ngFor="let project of _projects">
+      <ng-template ngbPanelTitle>
+        <span class="panel-title">{{ project.title }}</span>
+        <span class="float-right">
+          <i class="fas fa-ellipsis-h  fa-fw"></i>
+        </span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Content1
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

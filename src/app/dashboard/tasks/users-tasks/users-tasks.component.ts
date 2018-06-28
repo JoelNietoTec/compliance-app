@@ -2,11 +2,14 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges } from '@
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import {Observable} from 'rxjs';
 
 import { Task, TaskStatus } from '../../../shared/models/tasks.model';
 import { TasksService } from '../../../shared/services/tasks.service';
 import { UtilService } from '../../../shared/services/util.service';
 import { TaskFormComponent } from '../../../shared/components/task-form/task-form.component';
+import { AssignmentsService } from '../../../shared/services/assignments.service';
+import { Assignment } from '../../../shared/models/assignment.model';
 
 interface FormTask extends Task {
   formBeginDate?: NgbDateStruct;
@@ -27,11 +30,13 @@ export class UsersTasksComponent implements OnInit {
   _currentTask: FormTask = {};
   _newTask: Task = {};
   _tasks: Task[];
+  _assignments: Observable<Assignment[]>;
 
   constructor(
     private modalService: NgbModal,
     private _taskService: TasksService,
     private _dateFormatter: NgbDateParserFormatter,
+    private _assignmentServ: AssignmentsService,
     private _util: UtilService,
     private toastr: ToastrService
   ) {}
@@ -42,6 +47,8 @@ export class UsersTasksComponent implements OnInit {
       this._tasks = data;
       this.sortTask();
     });
+
+    this._assignments = this._assignmentServ.getAssigments();
   }
 
   open() {

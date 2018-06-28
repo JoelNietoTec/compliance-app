@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiURL: 'http://localhost:5000/api/',
-  filesURL: 'http://localhost:53212/uploadfiles/'
+  filesURL: 'http://localhost:5000/api/uploadfiles/'
 };

@@ -48,7 +48,7 @@ export class ParticipantTransactionsComponent implements OnInit {
     this._table.pageable = true;
     this._table.reportsOnly = true;
     this._table.addMethod = 'modal';
-    this._table.style = 'table-sm table-striped table-squared';
+    this._table.style = 'table-sm table-striped';
     this._table.columns = [
       {
         name: 'type',

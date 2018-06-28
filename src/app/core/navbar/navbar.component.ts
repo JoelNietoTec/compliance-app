@@ -33,14 +33,14 @@ export class NavbarComponent implements OnInit {
     //   console.log('Hi');
     // }, () => {});
     this._loggedUSer = this._auth.getUserInfo();
-    this.localStorage.getItem<UserAlert[]>('alerts').subscribe(alerts => {
-      this._alerts = this._util.sortBy(alerts, 'Date', true);
-      this._alerts.forEach(alert => {
-        if (!alert.Seen) {
-          this._count = this._count + 1;
-        }
-      });
-    });
+    // this.localStorage.getItem<UserAlert[]>('alerts').subscribe(alerts => {
+    //   this._alerts = this._util.sortBy(alerts, 'Date', true);
+    //   this._alerts.forEach(alert => {
+    //     if (!alert.Seen) {
+    //       this._count = this._count + 1;
+    //     }
+    //   });
+    // });
   }
 
   hideAlert(alert: UserAlert) {

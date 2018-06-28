@@ -1,0 +1,18 @@
+.bucket-title {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+.add-button {
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  font-weight: 300;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.modal-header {
+  border-width: 0;
+}

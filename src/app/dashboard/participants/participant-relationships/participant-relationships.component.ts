@@ -31,7 +31,7 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this._currentRelationship.Participant = this.participant;
+    this._currentRelationship.participant = this.participant;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -77,11 +77,11 @@ export class ParticipantRelationshipsComponent implements OnInit, OnChanges {
   addRelationShip() {
     const relationship: ParticipantRelationship = {};
 
-    relationship.RelationshipTypeID = this._currentRelationship.Type.id;
-    relationship.ParticipantID = this._currentRelationship.Participant.id;
-    relationship.RelatedParticipantID = this._currentRelationship.RelatedParticipant.id;
+    relationship.relationshipTypeId = this._currentRelationship.type.id;
+    relationship.participantId = this._currentRelationship.participant.id;
+    relationship.relatedParticipantId = this._currentRelationship.relatedParticipant.id;
     this._relService.addRelationship(relationship).subscribe(data => {
-      this.toastr.success(data.RelatedParticipant.shortName, 'Relación agregada');
+      this.toastr.success(data.relatedParticipant.shortName, 'Relación agregada');
       this._relationships.push(data);
     });
   }

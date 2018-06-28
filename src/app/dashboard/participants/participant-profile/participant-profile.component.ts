@@ -51,7 +51,6 @@ export class ParticipantProfileComponent implements OnInit {
     }
     this._profileServ.getProfile(this.participant.id).subscribe(data => {
       this._profile = data;
-      console.log(this._profile);
       if (profile) {
         if (
           this._profile.expenseMTD > this._profile.monthlyExpenseLimit &&

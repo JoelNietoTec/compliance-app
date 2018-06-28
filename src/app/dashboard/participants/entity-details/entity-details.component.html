@@ -4,7 +4,7 @@
     <h4 class="user-name">
       {{ entity.firstName }}
     </h4>
-    <h5 [ngClass]="{'text-success': entity.Score < 3, 'text-warning': entity.Score > 2.99 && entity.Score < 6, 'text-danger': entity.Score >= 6 }">{{ entity.score }}</h5>
+    <h5 [ngClass]="{'text-success': entity.score < 3, 'text-warning': entity.score > 2.99 && entity.score < 6, 'text-danger': entity.score >= 6 }">{{ entity.score }}</h5>
   </div>
   <div>
     <hr/>

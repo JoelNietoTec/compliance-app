@@ -33,6 +33,12 @@ export class TableFormComponent implements OnInit {
   setFile(file: any, field: Column) {
     this.uploadFile(file).subscribe(data => {
       this.item[field.name] = data;
+      if (field.fileName) {
+        this.item[field.fileName] = data.fileName;
+      }
+      if (field.fileID) {
+        this.item[field.fileID] = data.id;
+      }
     });
   }
 
@@ -47,9 +53,10 @@ export class TableFormComponent implements OnInit {
   }
 
   uploadFile(file: any) {
-    this._filesToUpload = <Array<File>>file.target.files;
-    return this._fileServ.uploadFiles(this._filesToUpload).map(filename => {
-      return filename;
+    this._filesToUpload = <File[]>file.target.files;
+    return this._fileServ.uploadFiles(this._filesToUpload).map(files => {
+      console.log(files);
+      return files;
     });
   }
 }

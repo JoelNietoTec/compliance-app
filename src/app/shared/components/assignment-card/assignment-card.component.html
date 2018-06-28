@@ -1,0 +1,25 @@
+<div class="card" [ngClass]="{'to-do border-primary': assignment.progressId == 1, 'doing border-success': assignment.progressId == 2, 'done': assignment.progressId == 3}">
+  <div class="card-header">
+    <span>
+      {{ assignment.title }}
+      <div class="pull-right">
+        <ng-container [ngSwitch]="assignment.progressId">
+          <span *ngSwitchCase=1 placement="top" ngbTooltip="Iniciar" (click)="progress()">
+            <i class="far fa-check-square task-icon text-muted"></i>
+          </span>
+          <span *ngSwitchCase=2 placement="top" ngbToolTip="Completar" (click)="progress()">
+            <i class="far fa-check-square task-icon text-muted"></i>
+          </span>
+        </ng-container>
+      </div>
+    </span>
+  </div>
+  <div class="card-body" (click)="click()">
+    <p class="task-description">
+      {{ assignment.description }}
+    </p>
+    <p>
+      <i class="far fa-calendar-alt"></i> {{ assignment.dueDate | date: 'dd/MM' : '+0600' }}
+    </p>
+  </div>
+</div>

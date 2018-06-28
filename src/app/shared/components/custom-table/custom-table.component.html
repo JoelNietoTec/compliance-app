@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="table-responsive">
-    <table class="table table-sm" [ngClass]="options.style" *ngIf="_pagedItems">
+    <table class="table" [ngClass]="options.style" *ngIf="_pagedItems">
       <thead>
         <tr>
           <ng-container *ngFor="let header of options.columns">
@@ -99,7 +99,7 @@
                     {{ item | column: col.objectText }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'file'">
-                    <a [href]="col.fileURL + item[col.name]" [download]="true" [target]="'_blank'">{{ item | column: col.name }}</a>
+                    <a [href]="col.fileURL + item[col.fileID]" [download]="true" [target]="'_blank'">{{ item | column: col.fileName }}</a>
                   </ng-container>
                   <ng-container *ngSwitchDefault>
                     {{ item | column: col.name }}

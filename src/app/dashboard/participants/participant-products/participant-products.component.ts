@@ -26,7 +26,7 @@ export class ParticipantProductsComponent implements OnInit {
     this._table.addMethod = 'modal';
     this._table.creatable = true;
     this._table.pageable = true;
-    this._table.style = 'table-sm table-striped table-squared';
+    this._table.style = 'table-sm table-striped';
     this._table.columns = [
       { name: 'name', title: 'Nombre' },
       {

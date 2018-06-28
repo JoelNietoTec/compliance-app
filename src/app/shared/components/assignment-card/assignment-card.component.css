@@ -1,0 +1,56 @@
+.task-description {
+  font-size: .75em;
+}
+
+.card {
+  border-width: 4px 0 0 0;
+}
+
+.card-title {
+  font-size: 1.3em;
+}
+
+.card-header {
+  background-color: inherit;
+  font-weight: 400;
+  padding: .75em 1.25em .25em 1.25em;
+}
+
+.card-body {
+  padding: .15em 1.25em;
+}
+
+.card-body > p {
+  margin-bottom: .75em;
+}
+
+.done, .done > .card-body, .done > .card-header {
+  background-color: #dededf
+}
+
+.done .card-header {
+  text-decoration: line-through;
+}
+
+.card:hover .task-icon, .card:active .task-icon {
+  opacity: 1 !important;
+}
+
+.to-do .task-icon:hover {
+  color: #287FB9 !important;
+}
+
+.doing .task-icon:hover {
+  color: #27ae60 !important;
+}
+
+.task-icon {
+  opacity: 0;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+
+.card-header span {
+  font-weight: bold;
+}

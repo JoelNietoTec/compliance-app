@@ -11,7 +11,7 @@ import { TableOptions } from '../../../shared/components/custom-table/custom-tab
   styleUrls: ['./entities-list.component.css']
 })
 export class EntitiesListComponent implements OnInit {
-  @Input() entities: Array<Participant>;
+  @Input() entities: Participant[];
 
   _table: TableOptions = {};
 
@@ -34,7 +34,7 @@ export class EntitiesListComponent implements OnInit {
       { name: 'createDate', title: 'Fec. Creación', hidden: true }
     ];
 
-    this._table.style = 'table table-sm table-squared';
+    this._table.style = 'table table-sm table-striped';
 
     this._table.pageable = true;
 

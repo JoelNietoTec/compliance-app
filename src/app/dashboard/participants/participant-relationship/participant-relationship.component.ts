@@ -20,7 +20,7 @@ export class ParticipantRelationshipComponent implements OnInit {
   @Input() relation: ParticipantRelationship;
   _participants: Array<Participant>;
   _types: Array<RelationshipType>;
-  _searchColumns: Array<string> = ['FirstName', 'SecondName', 'ThirdName', 'FourthName'];
+  _searchColumns: Array<string> = ['firstName', 'secondName', 'thirdName', 'fourthName'];
 
   constructor(
     private _partService: ParticipantsService,
@@ -30,6 +30,7 @@ export class ParticipantRelationshipComponent implements OnInit {
   ) {
     _partService.getParticipants().subscribe(data => {
       this._participants = this._util.sortBy(data, 'name');
+      console.log(this._participants);
     });
 
     _relService.getTypes().subscribe(data => {

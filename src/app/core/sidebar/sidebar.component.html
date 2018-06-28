@@ -1,12 +1,12 @@
 <ul class="nav nav-pills flex-column ">
   <h6 class="user-name">
-    <i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.UserName }}
+    <i class="far fa-user" aria-hidden="true"></i> {{ _loggedUser.userName }}
   </h6>
   <li class="nav-item dropdown user-email">
-    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.Email }}</a>
+    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ _loggedUser.email }}</a>
     <div class="dropdown-menu">
       <!-- <a class="dropdown-item"><i class="typcn typcn-eject-outline" aria-hidden="true"></i> Change Password</a -->
-      <a *ngIf="_loggedUser.UserProfileID === 1" [routerLink]="['usuarios']" class="dropdown-item">
+      <a *ngIf="_loggedUser.userProfileId === 1" [routerLink]="['usuarios']" class="dropdown-item">
         <i class="fas fa-users" aria-hidden="true"></i> Gestión de Usuarios</a>
       <a [routerLink]="['/login']" class="dropdown-item">
         <i class="fas fa-power-off" aria-hidden="true"></i> Cerrar Sesión</a>

@@ -1,9 +1,9 @@
-<h6 [ngClass]="{'text-muted completed': participant.MatrixReady}">Completar Matrix
+<h6 [ngClass]="{'text-muted completed': participant.matrixReady}">Completar Matrix
   <span class="float-right">
-    <span *ngIf="participant.MatrixReady">
+    <span *ngIf="participant.matrixReady">
       <i class="fas fa-check-circle text-success"></i>
     </span>
-    <span *ngIf="!participant.MatrixReady">
+    <span *ngIf="!participant.matrixReady">
       <i class="far fa-circle text-muted"></i>
     </span>
   </span>

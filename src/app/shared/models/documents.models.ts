@@ -13,6 +13,8 @@ export interface ParticipantDocument {
   countryId?: number;
   country?: Country;
   filePath?: string;
+  documentId?: number;
+  document?: Document;
 }
 
 export interface DocumentType {
@@ -21,4 +23,9 @@ export interface DocumentType {
   englishName?: string;
   requiredIndividual?: Boolean;
   requiredEntity?: Boolean;
+}
+
+export interface Document {
+  id?: number;
+  fileName?: string;
 }

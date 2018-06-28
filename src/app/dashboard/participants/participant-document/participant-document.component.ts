@@ -64,7 +64,7 @@ export class ParticipantDocumentComponent implements OnInit {
   setFile(file: any) {
     this._filestoUpload = <Array<File>>file.target.files;
     this._fileServ.uploadFiles(this._filestoUpload).subscribe(data => {
-      this._partDocument.filePath = data;
+      // this._partDocument.filePath = data;
     });
   }
 

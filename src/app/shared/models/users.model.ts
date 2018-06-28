@@ -6,7 +6,7 @@ export interface User {
   active?: number;
   createDate?: Date;
   lastChangePassword?: Date;
-  userProfileID?: number;
+  userProfileId?: number;
   userProfile?: UserProfile;
 }
 

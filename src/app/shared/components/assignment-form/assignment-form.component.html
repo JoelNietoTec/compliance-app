@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h4 *ngIf="!currentAssignment.id" class="modal-title text-secondary">
+    <i class="fa fa-edit" aria-hidden="true"></i> Nueva Tarea
+  </h4>
+  <h4 *ngIf="currentAssignment.id" class="modal-title text-secondary">
+    <i class="fa fa-edit" aria-hidden="true"></i> {{ currentAssignment.title }}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="card-title">Nombre</label>
+          <input type="text" name="title" id="title" [(ngModel)]="currentAssignment.title" class="form-control" placeholder="" aria-describedby="helpId">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="birthDate">Fecha Inicio</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="AAAA-MM-DD" [(ngModel)]="currentAssignment.formStartDate" (ngModelChange)="updateDates()"
+              name="bd" [minDate]="_minDate" [maxDate]="_maxDate" ngbDatepicker #bd="ngbDatepicker">
+            <div class="input-group-append" (click)="bd.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="birthDate">Fecha Expiración</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="AAAA-MM-DD" [(ngModel)]="currentAssignment.formDueDate" (ngModelChange)="updateDates()"
+              [minDate]="_minDate" [maxDate]="_maxDate" name="ed" ngbDatepicker #ed="ngbDatepicker">
+            <div class="input-group-append" (click)="ed.toggle()">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control custom-select" [(ngModel)]="currentAssignment.progressId" name="status" id="status">
+            <option selected disabled value="undefined"> --- Seleccionar --- </option>
+            <option *ngFor="let status of _progresses | async" [value]="status.id">{{ status.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <textarea class="form-control" [(ngModel)]="currentAssignment.description" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="button" (click)="activeModal.close('Close click')" class="btn btn-outline-primary">
+          <i class="far fa-save"></i> Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

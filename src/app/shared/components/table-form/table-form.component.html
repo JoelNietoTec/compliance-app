@@ -28,7 +28,7 @@
           </select>
           <textarea *ngSwitchCase="field.type === 'text'" class="form-control" [id]="field.name" [name]="field.name" [cols]="2" [readOnly]="field.readonly"
             [(ngModel)]="item[field.name]"></textarea>
-          <input *ngSwitchCase="field.type === 'file'" type="file" class="form-control" (change)="setFile($event, field)">
+          <input *ngSwitchCase="field.type === 'file'" type="file" class="form-control" accept=".pdf, .jpg, .jpeg, .png" (change)="setFile($event, field)">
           <app-date-input [(ngModel)]="item[field.name]" [name]="field.name" [id]="field.name" *ngSwitchCase="field.type === 'datetime' || field.type === 'date'"></app-date-input>
           <input *ngSwitchDefault [(ngModel)]="item[field.name]" type="text" class="form-control" [readOnly]="field.readonly" [ngClass]="{'form-control-plaintext': field.readonly}"
             [id]="field.name" [name]="field.name">

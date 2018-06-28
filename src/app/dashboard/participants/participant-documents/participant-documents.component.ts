@@ -38,7 +38,7 @@ export class ParticipantDocumentsComponent implements OnInit {
     this._types = this._docServ.getTypesByParticipant(this.participant.participantTypeId);
     this._table.title = 'Documentos';
     this._table.editable = true;
-    this._table.style = 'table-sm table-squared';
+    this._table.style = 'table-striped';
     this._table.pageable = true;
     this._table.addMethod = 'modal';
     this._table.columns = [
@@ -67,7 +67,7 @@ export class ParticipantDocumentsComponent implements OnInit {
         listID: 'id',
         objectID: 'countryId'
       },
-      { name: 'filePath', title: 'Documento', type: 'file', fileURL: this._conn.fileURL }
+      { name: 'document', title: 'Documento', type: 'file', fileURL: this._conn.fileURL, fileID: 'documentId', fileName: 'filePath' }
     ];
   }
 

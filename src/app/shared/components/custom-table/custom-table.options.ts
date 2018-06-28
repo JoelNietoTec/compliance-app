@@ -44,4 +44,6 @@ export interface Column {
   customClasses?: string;
   rateField?: boolean;
   fileURL?: string;
+  fileID?: string;
+  fileName?: string;
 }

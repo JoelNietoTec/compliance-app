@@ -15,6 +15,8 @@ import { MilestonesComponent } from './milestones/milestones.component';
 import { PhasesComponent } from './phases/phases.component';
 import { RoadmapsFormComponent } from './roadmaps-form/roadmaps-form.component';
 import { PhasesFormComponent } from './phases-form/phases-form.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   imports: [CommonModule, TasksRoutingModule, CalendarModule, FormsModule, NgbModule, SharedModule],
@@ -27,7 +29,9 @@ import { PhasesFormComponent } from './phases-form/phases-form.component';
     MilestonesComponent,
     PhasesComponent,
     RoadmapsFormComponent,
-    PhasesFormComponent
+    PhasesFormComponent,
+    AssignmentsComponent,
+    ProjectsComponent
   ],
   entryComponents: [RoadmapsFormComponent, PhasesFormComponent]
 })

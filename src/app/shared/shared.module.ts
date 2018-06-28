@@ -19,6 +19,8 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TableFormComponent } from './components/table-form/table-form.component';
 import { ChartCardComponent } from './components/chart-card/chart-card.component';
 import { WaitingModalComponent } from './components/waiting-modal/waiting-modal.component';
+import { AssignmentCardComponent } from './components/assignment-card/assignment-card.component';
+import { AssignmentFormComponent } from './components/assignment-form/assignment-form.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -64,6 +66,8 @@ import { TransactionsService } from './services/transactions.service';
 import { ProfileAccountsService } from './services/profile-accounts.service';
 import { FinancialProductsService } from './services/financial-products.service';
 import { AlertsService } from './services/alerts.service';
+import { AssignmentsService } from './services/assignments.service';
+import { ProjectsService } from './services/projects.service';
 
 @NgModule({
   imports: [
@@ -101,7 +105,9 @@ import { AlertsService } from './services/alerts.service';
     ChartCardComponent,
     DateInputComponent,
     MapComponent,
-    WaitingModalComponent
+    WaitingModalComponent,
+    AssignmentCardComponent,
+    AssignmentFormComponent
   ],
   providers: [
     GendersService,
@@ -136,7 +142,9 @@ import { AlertsService } from './services/alerts.service';
     FinancialProductsService,
     AlertsService,
     AuthGuard,
-    DatePipe
+    DatePipe,
+    AssignmentsService,
+    ProjectsService
   ],
   declarations: [
     LoadingModalComponent,
@@ -155,8 +163,10 @@ import { AlertsService } from './services/alerts.service';
     ChartCardComponent,
     MapComponent,
     DateInputComponent,
-    WaitingModalComponent
+    WaitingModalComponent,
+    AssignmentCardComponent,
+    AssignmentFormComponent
   ],
-  entryComponents: [TableFormComponent]
+  entryComponents: [TableFormComponent, AssignmentFormComponent]
 })
 export class SharedModule {}

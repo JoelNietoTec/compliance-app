@@ -71,11 +71,11 @@ export class AuthService {
       });
     }
 
-    if (!localStorage.getItem('taskStatus')) {
-      this._taskService.getStatus().subscribe(data => {
-        this._taskStatus = data;
-        localStorage.setItem('taskStatus', JSON.stringify(this._taskStatus));
-      });
-    }
+    // if (!localStorage.getItem('taskStatus')) {
+    //   this._taskService.getStatus().subscribe(data => {
+    //     this._taskStatus = data;
+    //     localStorage.setItem('taskStatus', JSON.stringify(this._taskStatus));
+    //   });
+    // }
   }
 }

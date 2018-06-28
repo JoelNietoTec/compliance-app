@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: 'http://apicompliance.azurewebsites.net/api/',
-  filesURL: 'http://apicompliance.azurewebsites.net/uploadfiles/'
+  apiURL: 'http://corecompliance.azurewebsites.net/api/',
+  filesURL: 'http://corecompliance.azurewebsites.net/api/uploadfiles/'
 };

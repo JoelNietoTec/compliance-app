@@ -1,30 +1,31 @@
-<div class="container">
+<div class="container-fluid">
+  <h3>Relaciones</h3>
   <app-loading-modal *ngIf="!_relationships"></app-loading-modal>
   <div *ngIf="_relationships" class="row">
     <div *ngFor="let relation of _relationships" class="col-md-4">
       <app-card>
         <div card-section="body" class="border-primary">
           <h4 class="card-title">
-            <a *ngIf="relation.ParticipantID == participant.id" [routerLink]="['/app', 'participantes', relation.RelatedParticipantID]">
-              {{ relation.RelatedParticipant.shortName }}
+            <a *ngIf="relation.participantId == participant.id" [routerLink]="['/app', 'participantes', relation.relatedParticipantId]">
+              {{ relation.relatedParticipant.shortName }}
             </a>
-            <a *ngIf="relation.RelatedParticipantID == participant.id" [routerLink]="['/app', 'participantes', relation.ParticipantID]">
-              {{ relation.Participant.shortName }}
+            <a *ngIf="relation.relatedParticipantId == participant.id" [routerLink]="['/app', 'participantes', relation.participantId]">
+              {{ relation.participant.shortName }}
             </a>
-            <small *ngIf="relation.ParticipantID == participant.id" class="score pull-right" [ngClass]="{
-              'text-success': relation.RelatedParticipant.Score < 3,
-              'text-warning': relation.RelatedParticipant.Score > 2.99 && relation.RelatedParticipant.Score < 6,
-              'text-danger': relation.RelatedParticipant.Score >= 6 }">
-              {{ relation.RelatedParticipant.score | number: '1.2-2' }}
+            <small *ngIf="relation.participantId == participant.id" class="score pull-right" [ngClass]="{
+              'text-success': relation.relatedParticipant.score < 3,
+              'text-warning': relation.relatedParticipant.score > 2.99 && relation.relatedParticipant.score < 6,
+              'text-danger': relation.relatedParticipant.score >= 6 }">
+              {{ relation.relatedParticipant.score | number: '1.2-2' }}
             </small>
-            <small *ngIf="relation.RelatedParticipantID == participant.id" class="score pull-right" [ngClass]="{
-              'text-success': relation.Participant.Score < 3,
-              'text-warning': relation.Participant.Score > 2.99 && relation.Participant.Score < 6,
-              'text-danger': relation.Participant.Score >= 6 }">
-              {{ relation.Participant.score | number: '1.2-2' }}
+            <small *ngIf="relation.relatedParticipantId == participant.id" class="score pull-right" [ngClass]="{
+              'text-success': relation.participant.score < 3,
+              'text-warning': relation.participant.score > 2.99 && relation.participant.score < 6,
+              'text-danger': relation.participant.score >= 6 }">
+              {{ relation.participant.score | number: '1.2-2' }}
             </small>
           </h4>
-          <p class="card-text">{{ relation.Type.Name }}</p>
+          <p class="card-text">{{ relation.type.name }}</p>
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-outline-danger btn-sm">
               <i class="far fa-trash-alt"></i> Borrar</button>

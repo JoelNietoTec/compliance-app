@@ -12,7 +12,7 @@
       <i class="far fa-list-alt fa-fw"></i> Planificador
     </ng-template>
     <ng-template ngbTabContent>
-      <users-tasks></users-tasks>
+      <assignments></assignments>
     </ng-template>
   </ngb-tab>
   <ngb-tab>
@@ -28,7 +28,12 @@
       <i class="fas fa-road fa-fw"></i> Cronogramas
     </ng-template>
     <ng-template ngbTabContent>
-     <app-roadmap></app-roadmap>
+    <app-projects></app-projects>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Proyectos">
+    <ng-template ngbTabContent>
+      <app-projects></app-projects>
     </ng-template>
   </ngb-tab>
 </ngb-tabset>

@@ -10,10 +10,10 @@ import { TableOptions, Column } from '../../../shared/components/custom-table/cu
   styleUrls: ['./individuals-list.component.css']
 })
 export class IndividualsListComponent implements OnInit {
-  @Input() individuals: Array<Participant>;
+  @Input() individuals: Participant[];
 
   _table: TableOptions = {};
-  _columns: Array<Column>;
+  _columns: Column[];
 
   constructor(private _partServ: ParticipantsService) {}
 
@@ -33,7 +33,7 @@ export class IndividualsListComponent implements OnInit {
       { name: 'createDate', title: 'Fec. Creación', hidden: true }
     ];
 
-    this._table.style = 'table table-sm table-squared';
+    this._table.style = 'table table-sm table-striped';
 
     this._table.pageable = true;
 
