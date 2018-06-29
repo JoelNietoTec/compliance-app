@@ -18,6 +18,7 @@ interface Part extends Participant {
 export class HomeComponent implements OnInit {
   public byRisk: any[];
   public byCountry: any[];
+  public byType: any[];
   public _countries: any;
   public _lastParticipants: Participant[];
   public _participants: Part[];
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
     _partServ.getParticipants().subscribe(participants => {
       this._addresses = [];
       this._participants = participants;
+      this.byType = (_util.mapCountItems(this._participants, 'type.name'));
       this._participants.forEach(part => {
         let location: any = {};
         _map.getPosition(part.address).subscribe(position => {

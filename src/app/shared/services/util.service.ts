@@ -1,5 +1,6 @@
 import * as _ from 'underscore';
 import { Injectable } from '@angular/core';
+import { element } from 'protractor';
 
 @Injectable()
 export class UtilService {
@@ -70,6 +71,36 @@ export class UtilService {
     items.forEach(element => {
       if (!result.includes(element)) {
         result.push(element);
+      }
+    });
+    return result;
+  }
+
+  mapCountItems(array: any[], field: string): any[] {
+    const items = array.map(x => this.getProperty(x, field));
+    let result = [];
+    items.forEach(element => {
+      if (result.filter(e => e.name === element).length === 0) {
+        let item: any = {};
+        item.name = element;
+        item.count = 1;
+        result.push(item);
+      } else {
+        let item = result.find(e => e.name === element);
+        item.count++;
+      }
+    });
+    return result;
+  }
+
+  mapCount(array: any[], field: string): any {
+    const items = array.map(x => this.getProperty(x, field));
+    let result = {};
+    items.forEach(element => {
+      if (!result[element]) {
+        result[element] = 1;
+      } else {
+        result[element]++;
       }
     });
     return result;

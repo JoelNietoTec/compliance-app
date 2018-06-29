@@ -5,8 +5,8 @@
     </app-chart-card>
   </div>
   <div class="col-md-3">
-    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'count'" [label]="'status'" [options]="tasksChartOptions" [type]="'doughnut'"
-      [colors]="riskColors"></app-chart-card>
+    <app-chart-card *ngIf="byType" [items]="byType" [data]="'count'" [label]="'name'" [options]="tasksChartOptions" [type]="'doughnut'"
+      [title]="'Participantes por Tipo'"></app-chart-card>
   </div>
   <div class="col-md-3">
     <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'status'" [options]="tasksChartOptions"

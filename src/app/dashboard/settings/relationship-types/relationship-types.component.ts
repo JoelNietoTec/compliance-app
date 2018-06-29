@@ -64,7 +64,7 @@ export class RelationshipTypesComponent implements OnInit {
   updateType(type: RelationshipType) {
     this._relService.updateType(type.id, type).subscribe(
       data => {
-        this.toastr.success(data.name, 'Tipo editado');
+        this.toastr.success(type.name, 'Tipo editado');
         this._types = this._relService.getTypes();
         this._currentType = {};
       },
