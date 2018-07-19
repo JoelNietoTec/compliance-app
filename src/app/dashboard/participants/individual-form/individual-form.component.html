@@ -5,6 +5,16 @@
       <label class="custom-control-label" for="pep">Es PEP?</label>
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="matrix">Matriz de Riesgo</label>
+      <select class="custom-select form-control" [(ngModel)]="_individual.paramMatrixId" name="matrix" id="matrix">
+        <option [value]="_default" disabled="true" selected>---Selecionar--- </option>
+        <option *ngFor="let matrix of _matrices | async as list" [value]="matrix.id">{{ matrix.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-8"></div>
   <div class="col-md-6">
     <div class="form-group">
       <label for="first-name">Primer Nombre</label>
@@ -117,7 +127,7 @@
   <div class="col-md-12 d-flex justify-content-end">
     <a [routerLink]="['/app/participantes']" class="btn btn-outline-secondary" role="button">
       <i class="fas fa-ban" aria-hidden="true"></i> Cancelar</a>
-    <button type="button" class="btn btn-primary" (click)="saveIndividual()">
+    <button type="button" [disabled]="_saving" class="btn btn-primary" (click)="saveIndividual()">
       <i class="fas fa-download" aria-hidden="true"></i> Guardar</button>
   </div>
 </div>

@@ -1,16 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import {Observable} from 'rxjs';
 
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
-import { Gender } from '../../../shared/models/genders.model';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { UtilService } from '../../../shared/services/util.service';
 import { MapsService } from '../../../shared/services/maps.service';
 import { CountriesService } from '../../../shared/services/countries.service';
 import { Country } from '../../../shared/models/country.model';
+import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
+import { ParamMatrix } from '../../../shared/models/params.model';
 
 interface Entity extends Participant {
   formBirthDate?: NgbDateStruct;
@@ -27,10 +29,10 @@ export class EntityFormComponent implements OnInit {
   @Input() entity?: Entity;
   @Output() updateParticipant = new EventEmitter();
 
-  _countries: Array<Country>;
+  _countries: Country[];
+  _matrices: Observable<ParamMatrix[]>;
   _entity: Entity;
   _location: any;
-  private birthdate: string;
   _default: any = undefined;
   _maxDate: any;
   _minDate: any;
@@ -38,6 +40,7 @@ export class EntityFormComponent implements OnInit {
   constructor(
     private _partServ: ParticipantsService,
     private _countryServ: CountriesService,
+    private _matrixServ: ParamMatricesService,
     private _dateFormatter: NgbDateParserFormatter,
     private toastr: ToastrService,
     private _util: UtilService,
@@ -59,6 +62,8 @@ export class EntityFormComponent implements OnInit {
     this._countryServ.getCountries().subscribe(data => {
       this._countries = this._util.sortBy(data, 'Name');
     });
+
+    this._matrices = this._matrixServ.getMatrices();
     if (!this.entity) {
       this._entity = {
         participantTypeId: 2,

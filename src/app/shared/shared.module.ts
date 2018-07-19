@@ -21,6 +21,7 @@ import { ChartCardComponent } from './components/chart-card/chart-card.component
 import { WaitingModalComponent } from './components/waiting-modal/waiting-modal.component';
 import { AssignmentCardComponent } from './components/assignment-card/assignment-card.component';
 import { AssignmentFormComponent } from './components/assignment-form/assignment-form.component';
+import { SegmentChartComponent } from './components/segment-chart/segment-chart.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -107,7 +108,8 @@ import { ProjectsService } from './services/projects.service';
     MapComponent,
     WaitingModalComponent,
     AssignmentCardComponent,
-    AssignmentFormComponent
+    AssignmentFormComponent,
+    SegmentChartComponent
   ],
   providers: [
     GendersService,
@@ -165,7 +167,8 @@ import { ProjectsService } from './services/projects.service';
     DateInputComponent,
     WaitingModalComponent,
     AssignmentCardComponent,
-    AssignmentFormComponent
+    AssignmentFormComponent,
+    SegmentChartComponent
   ],
   entryComponents: [TableFormComponent, AssignmentFormComponent]
 })

@@ -28,7 +28,7 @@ export class ParamTableSimpleComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._customTable.addMethod = 'inline';
+    this._customTable.addMethod = 'modal';
     this._customTable.editable = true;
     this._customTable.creatable = true;
     this._customTable.deletable = true;
@@ -36,8 +36,8 @@ export class ParamTableSimpleComponent implements OnInit {
     this._customTable.searcheable = true;
     this._customTable.style = 'table-sm table-squared';
     this._customTable.columns = [
-      { name: 'displayValue', title: 'Nombre', sortable: true, type: 'text', filterable: true },
-      { name: 'englishDisplayValue', title: 'Nombre Inglés', sortable: true, type: 'text', filterable: true },
+      { name: 'displayValue', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'englishDisplayValue', title: 'Nombre Inglés', sortable: true, filterable: true },
       { name: 'score', title: 'Puntaje', sortable: true, type: 'number' }
     ];
 

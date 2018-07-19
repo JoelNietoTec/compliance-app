@@ -7,19 +7,19 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="display">Nombre</label>
-          <input [(ngModel)]="_newValue.displayValue" type="text" name="display" id="display" class="form-control" placeholder="Group Display Value">
+          <input [(ngModel)]="_newValue.displayValue" type="text" name="display" id="display" class="form-control" placeholder="Nombre grupo">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="display">Nombre Inglés</label>
-          <input [(ngModel)]="_newValue.englishDisplayValue" type="text" name="display" id="display" class="form-control" placeholder="Group English Display Value">
+          <input [(ngModel)]="_newValue.englishDisplayValue" type="text" name="display" id="display" class="form-control" placeholder="Nombre grupo inglés">
         </div>
       </div>
     </div>
   </div>
   <div class="card-footer">
-    <button type="submit" class="btn btn-primary">Agregar <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+    <button type="submit" [disabled]="!_newValue.displayValue || !_newValue.englishDisplayValue" class="btn btn-primary">Agregar <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
   </div>
 </form>
 <param-value *ngFor="let value of _values" [_value]="value"></param-value>

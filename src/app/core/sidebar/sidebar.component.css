@@ -46,6 +46,7 @@ ul.sub-items {
 
 .user-email {
   margin-bottom: 20px;
+  font-size: 75%;
 }
 
 .user-email > .nav-link {

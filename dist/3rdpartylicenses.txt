@@ -22,7 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-pdfmake@0.1.36
+pdfmake@0.1.37
 MIT
 The MIT License (MIT)
 
@@ -45,7 +45,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-webpack@4.6.0
+webpack@4.8.3
 MIT
 Copyright JS Foundation and other contributors
 
@@ -363,7 +363,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-ngx-toastr@8.5.1
+ngx-toastr@8.8.0
 MIT
 The MIT License (MIT)
 
@@ -469,15 +469,15 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@angular/core@6.0.1
+@angular/core@6.0.7
 MIT
 MIT
 
-@angular/platform-browser@6.0.1
+@angular/platform-browser@6.0.7
 MIT
 MIT
 
-tslib@1.9.0
+tslib@1.9.3
 Apache-2.0
 Apache License
 
@@ -535,7 +535,7 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
-@angular/common@6.0.1
+@angular/common@6.0.7
 MIT
 MIT
 
@@ -795,11 +795,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/forms@6.0.1
+@angular/router@6.0.7
 MIT
 MIT
 
-@ngx-pwa/local-storage@6.0.0-rc.0
+@angular/forms@6.0.7
+MIT
+MIT
+
+@ngx-pwa/local-storage@6.0.0-rc.1
 MIT
 The MIT License
 
@@ -823,11 +827,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/router@6.0.1
-MIT
-MIT
-
-moment@2.22.0
+moment@2.22.2
 MIT
 Copyright (c) JS Foundation and other contributors
 
@@ -909,9 +909,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-underscore@1.9.0
+underscore@1.9.1
 MIT
-Copyright (c) 2009-2017 Jeremy Ashkenas, DocumentCloud and Investigative
+Copyright (c) 2009-2018 Jeremy Ashkenas, DocumentCloud and Investigative
 Reporters & Editors
 
 Permission is hereby granted, free of charge, to any person
@@ -935,7 +935,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-sweetalert2@7.20.1
+sweetalert2@7.25.0
 MIT
 The MIT License (MIT)
 

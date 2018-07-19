@@ -75,7 +75,7 @@
               <td class="text-nowrap" *ngIf="!col.hidden" [ngClass]="getClassRate(item.rate, col)">
                 <ng-container [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
-                    {{ item | column: col.name | date: 'dd/MM/yyyy' : '+0600' }}
+                    {{ item | column: col.name | date: 'dd/MM/yyyy' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'datetime'">
                     {{ item | column: col.name | date: 'd/MM/yyyy, h:mm a' }}
@@ -85,6 +85,9 @@
                   </ng-container>
                   <ng-container *ngSwitchCase="'number'">
                     {{ item | column: col.name | number: '1.2-2' }}
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'percent'">
+                    {{ item | column: col.name | number: '1.2-2' }} %
                   </ng-container>
                   <ng-container *ngSwitchCase="'money'">
                     $ {{ item | column: col.name | number: '1.2' }}

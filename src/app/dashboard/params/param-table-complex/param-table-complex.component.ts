@@ -32,6 +32,7 @@ export class ParamTableComplexComponent implements OnInit {
     this._newValue.paramTableId = this.table.id;
     this._valueService.addValue(this._newValue).subscribe(data => {
       this.toastr.success(data.displayValue, 'Categoría creada');
+      data.subValues = [];
       this._values.push(data);
       this._newValue = {};
     });

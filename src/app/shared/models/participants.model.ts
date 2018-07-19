@@ -71,9 +71,16 @@ export interface ParticipantContact {
 }
 
 export interface PendingDocument {
-  ID?: number;
-  ParticipantID?: number;
-  Name?: string;
-  EnglishName?: string;
-  Uploaded?: number;
+  id: number;
+  participantId?: number;
+  name?: string;
+  englishName?: string;
+  uploaded?: number;
+}
+
+export interface Segment {
+  id?: number;
+  valueName?: string;
+  englishValueName?: string;
+  count?: number;
 }

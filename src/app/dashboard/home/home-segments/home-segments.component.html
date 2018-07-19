@@ -1,0 +1,5 @@
+<div class="row">
+  <div *ngFor="let param of _params | async" class="col-md-4">
+    <app-segment-chart [paramId]="param.id"></app-segment-chart>
+  </div>
+</div>

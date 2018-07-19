@@ -8,6 +8,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { TaskFormComponent } from '../../shared/components/task-form/task-form.component';
+import { HomeSegmentsComponent } from './home-segments/home-segments.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { TaskFormComponent } from '../../shared/components/task-form/task-form.c
     HomeRoutingModule,
     CalendarModule.forRoot()
   ],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, HomeSegmentsComponent],
   entryComponents: [TaskFormComponent]
 })
 export class HomeModule { }

@@ -1,97 +1,97 @@
-<div class="row">
-  <div class="col-md-3">
-    <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'count'" [label]="'rate'" [options]="riskChartOptions" [type]="'doughnut'"
-      [colors]="riskColors">
-    </app-chart-card>
-  </div>
-  <div class="col-md-3">
-    <app-chart-card *ngIf="byType" [items]="byType" [data]="'count'" [label]="'name'" [options]="tasksChartOptions" [type]="'doughnut'"
-      [title]="'Participantes por Tipo'"></app-chart-card>
-  </div>
-  <div class="col-md-3">
-    <!-- <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'status'" [options]="tasksChartOptions"
-      [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card> -->
-      <div class="card">
-        <div class="card-header">
-          <p class="card-title">Numero</p>
+<ngb-tabset type="tabs">
+  <ngb-tab title="Dashboard">
+    <ng-template ngbTabContent>
+      <div class="row">
+        <div class="col-md-4">
+          <app-chart-card *ngIf="byRisk" [items]="byRisk" [data]="'count'" [label]="'rate'" [options]="riskChartOptions" [type]="'doughnut'"
+            [colors]="riskColors">
+          </app-chart-card>
         </div>
-        <div class="card-body">
-          <p class="card-text">Text</p>
+        <div class="col-md-4">
+          <app-chart-card *ngIf="byType" [items]="byType" [data]="'count'" [label]="'name'" [options]="tasksChartOptions" [type]="'doughnut'"
+            [title]="'Participantes por Tipo'"></app-chart-card>
         </div>
-      </div>
-  </div>
-  <div class="col-md-3">
-    <app-chart-card *ngIf="_tasks" [items]="_tasks" [data]="'count'" [label]="'status'" [options]="tasksChartOptions" [type]="'doughnut'"
-      [title]="'Cronograma'">
-    </app-chart-card>
-  </div>
-  <div class="col-md-12">
-    <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
-    <div *ngIf="_addresses" class="card">
-      <div class="card-header">
-        <p class="card-title">
-          <i class="fa fa-globe" aria-hidden="true"></i> Ubicación Global Participantes
-        </p>
-      </div>
-      <div class="card-body">
-        <agm-map [zoom]="2">
-          <ng-container *ngFor="let address of _addresses">
-            <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
-              <agm-info-window>
-                <b>{{ address.participant.shortName }}</b>,
-                <br> {{ address.formatted_address }}
-                <br>
-                <br>
-                <a [routerLink]="['/app', 'participantes', address.participant.id]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
-              </agm-info-window>
-            </agm-marker>
-          </ng-container>
-        </agm-map>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="_lastParticipants" class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <p class="card-title">
-          <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</p>
-      </div>
-      <div class="card-body">
-        <table class="table table-sm table-striped">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Creado</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let part of _lastParticipants">
-              <td class="font-weight-bold">
-                <a [routerLink]="['/app','participantes', part.id]">{{ part.shortName }}</a>
-              </td>
-              <td>{{ part.createDate | date: 'shortDate' }}</td>
-              <td>
-                <span class="badge" [ngClass]="{'badge-success': part.rate === 'Bajo', 'badge-warning': part.rate === 'Medio', 'badge-danger': part.rate === 'Alto', 'badge-secondary': part.rate === 'Incompleto' }">{{ part.rate }}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
+        <div class="col-md-4">
+          <!-- <app-chart-card *ngIf="_partTasks" [items]="_partTasks" [data]="'Count'" [label]="'status'" [options]="tasksChartOptions"
+            [type]="'doughnut'" [colors]="riskColors" [title]="'Tareas Participantes'"></app-chart-card> -->
+          <app-segment-chart [paramId]="8"></app-segment-chart>
+        </div>
+        <div class="col-md-12">
+          <app-loading-modal *ngIf="!_addresses"></app-loading-modal>
+          <div *ngIf="_addresses" class="card">
+            <div class="card-header">
+              <p class="card-title">
+                <i class="fa fa-globe" aria-hidden="true"></i> Ubicación Global Participantes
+              </p>
+            </div>
+            <div class="card-body">
+              <agm-map [zoom]="2">
+                <ng-container *ngFor="let address of _addresses">
+                  <agm-marker *ngIf="address.geometry" [openInfoWindow]=true [latitude]="address.geometry.location.lat" [longitude]="address.geometry.location.lng">
+                    <agm-info-window>
+                      <b>{{ address.participant.shortName }}</b>,
+                      <br> {{ address.formatted_address }}
+                      <br>
+                      <br>
+                      <a [routerLink]="['/app', 'participantes', address.participant.id]" class="btn btn-outline-primary btn-sm" role="button">Ver Participante</a>
+                    </agm-info-window>
+                  </agm-marker>
+                </ng-container>
+              </agm-map>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="_lastParticipants" class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <p class="card-title">
+                <i class="fas fa-user-plus fa-fw"></i> Últimos Participantes</p>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Creado</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let part of _lastParticipants">
+                    <td class="font-weight-bold">
+                      <a [routerLink]="['/app','participantes', part.id]">{{ part.shortName }}</a>
+                    </td>
+                    <td>{{ part.createDate | date: 'shortDate' }}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{'badge-success': part.rate === 'Bajo', 'badge-warning': part.rate === 'Medio', 'badge-danger': part.rate === 'Alto', 'badge-secondary': part.rate === 'Incompleto' }">{{ part.rate }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
 
-    <app-loading-modal *ngIf="!_countries"></app-loading-modal>
-    <div *ngIf="_countries" class="card">
-      <div class="card-header">
-        <p class="card-title">
-          <i class="far fa-flag" aria-hidden="true"></i> Distribución de Participantes por País
-        </p>
+          <app-loading-modal *ngIf="!_countries"></app-loading-modal>
+          <div *ngIf="_countries" class="card">
+            <div class="card-header">
+              <p class="card-title">
+                <i class="far fa-flag" aria-hidden="true"></i> Distribución de Participantes por País
+              </p>
+            </div>
+            <div class="card-body">
+              <app-map [regions]="_countries"></app-map>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        <app-map [regions]="_countries"></app-map>
-      </div>
-    </div>
-  </div>
-</div>
+
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Segmentos">
+    <ng-template ngbTabContent>
+      <app-home-segments></app-home-segments>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

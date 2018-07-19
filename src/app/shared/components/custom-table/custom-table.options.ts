@@ -25,7 +25,18 @@ export interface TableOptions {
 export interface Column {
   name?: string;
   title?: string;
-  type?: 'date' | 'datetime' | 'decimal' | 'number' | 'money' | 'boolean' | 'checkbox' | 'object' | 'text' | 'file';
+  type?:
+    | 'date'
+    | 'datetime'
+    | 'decimal'
+    | 'number'
+    | 'percent'
+    | 'money'
+    | 'boolean'
+    | 'checkbox'
+    | 'object'
+    | 'text'
+    | 'file';
   sortable?: boolean;
   filterable?: boolean;
   pipe?: string;

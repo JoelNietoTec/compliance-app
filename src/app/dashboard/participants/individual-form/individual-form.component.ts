@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
 import { Gender } from '../../../shared/models/genders.model';
@@ -10,6 +11,8 @@ import { MapsService } from '../../../shared/services/maps.service';
 import { CountriesService } from '../../../shared/services/countries.service';
 import { ParticipantsService } from '../../../shared/services/participants.service';
 import { UtilService } from '../../../shared/services/util.service';
+import { ParamMatrix } from '../../../shared/models/params.model';
+import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 
 interface Individual extends Participant {
   formBirthDate?: NgbDateStruct;
@@ -25,7 +28,7 @@ const NOW = new Date();
 export class IndividualFormComponent implements OnInit {
   @Input() individual?: Individual;
   @Output() updateParticipant = new EventEmitter();
-
+  _saving: boolean;
   _individual: Individual;
   private birthdate: string;
   _genders: Gender[];
@@ -35,6 +38,7 @@ export class IndividualFormComponent implements OnInit {
   _minDate: any;
   _countries: Country[];
   _location: any;
+  _matrices: Observable<ParamMatrix[]>;
 
   // mySettings: IMultiSelectSettings = {
   //   enableSearch: true,
@@ -50,6 +54,7 @@ export class IndividualFormComponent implements OnInit {
     private _util: UtilService,
     private _countryServ: CountriesService,
     private _map: MapsService,
+    private _paramService: ParamMatricesService,
     private toastr: ToastrService,
     private _router: Router
   ) {
@@ -80,9 +85,12 @@ export class IndividualFormComponent implements OnInit {
       year: NOW.getFullYear() - 100,
       month: 1
     };
+    this._saving = false;
   }
 
   ngOnInit() {
+
+    this._matrices = this._paramService.getMatrices();
     this._countryServ.getCountries().subscribe(data => {
       this._countries = this._util.sortBy(data, 'name');
     });
@@ -96,6 +104,7 @@ export class IndividualFormComponent implements OnInit {
       this._individual.formBirthDate = this._dateFormatter.parse(this._individual.birthDate.toString());
       this.setLocation();
     }
+
 
     // this._countries.forEach(country => {
     //   let item: IMultiSelectOption;
@@ -123,9 +132,9 @@ export class IndividualFormComponent implements OnInit {
     });
   }
   saveIndividual() {
+    this._saving = true;
     this._individual.birthDate = new Date(this._dateFormatter.format(this._individual.formBirthDate));
     if (!this.individual) {
-      this._individual.createDate = new Date();
       this._partServ.createParticipant(this._individual).subscribe(data => {
         this.toastr.success(data.shortName, 'Individuo Creado');
         this._router.navigate(['app/participantes', data.id]);

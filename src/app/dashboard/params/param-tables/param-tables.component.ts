@@ -24,7 +24,7 @@ export class ParamTablesComponent implements OnInit {
     this._table.editable = true;
     this._table.creatable = true;
     this._table.detailsURL = [];
-    this._table.addMethod = 'inline';
+    this._table.addMethod = 'modal';
     this._table.style = 'table-sm table-squared';
 
     this._tableTypes = [
@@ -41,8 +41,8 @@ export class ParamTablesComponent implements OnInit {
     ];
 
     this._table.columns = [
-      { name: 'name', title: 'Nombre', sortable: true, type: 'text', filterable: true },
-      { name: 'englishName', title: 'Nombre Inglés', sortable: true, type: 'text' },
+      { name: 'name', title: 'Nombre', sortable: true, filterable: true },
+      { name: 'englishName', title: 'Nombre Inglés', sortable: true },
       {
         name: 'type',
         title: 'Tipo',
@@ -54,7 +54,7 @@ export class ParamTablesComponent implements OnInit {
         objectColumn: 'type.name',
         objectID: 'tableTypeId'
       },
-      { name: 'createDate', title: 'Fec. Creación', sortable: true, type: 'date', readonly: true }
+      { name: 'createDate', title: 'Fec. Creación', sortable: true, type: 'datetime', readonly: true }
     ];
     this._table.pageable = true;
 

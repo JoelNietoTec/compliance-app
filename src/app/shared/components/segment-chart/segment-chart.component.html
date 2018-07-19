@@ -1,0 +1,10 @@
+<div *ngIf="_ready" class="card">
+  <div class="card-header">
+    <p class="card-title">
+      {{ _param.name }}
+    </p>
+  </div>
+  <div class="card-body">
+    <canvas baseChart [data]="_values" [labels]="_labels" [options]="_options" [chartType]="'doughnut'"></canvas>
+  </div>
+</div>

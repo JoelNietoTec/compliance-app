@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Participant, ParticipantParam, PendingDocument } from '../models/participants.model';
-import { ParticipantRelationship } from '../models/relationships.model';
+import { Participant, ParticipantParam, PendingDocument, Segment } from '../models/participants.model';
 import { ConnectionService } from './connection.service';
 import { UtilService } from './util.service';
 import { AuthService } from './auth.service';
@@ -13,11 +12,6 @@ import { AuthService } from './auth.service';
 export class ParticipantsService {
   private _partURL: string;
   private _paramURL: string;
-  private _participant: Participant;
-  private _param: ParticipantParam;
-  private _newParam: ParticipantParam;
-  private _participants: Array<Participant>;
-  private _newParticipant: Participant;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService, private _util: UtilService, private _auth: AuthService) {
@@ -31,6 +25,10 @@ export class ParticipantsService {
     } else {
       return this._http.get<Participant[]>(this._partURL);
     }
+  }
+
+  getSegments(paramId: number): Observable<Segment[]>{
+    return this._http.get<Segment[]>(`${this._partURL}/segments/${paramId}`);
   }
 
   getParticipant(_id: number): Observable<Participant> {

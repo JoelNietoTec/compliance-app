@@ -14,7 +14,7 @@ textarea.form-control,
 .tooltip {
   font-family: 'Quicksand', sans-serif;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .justify-content-end > .btn.btn-primary,
@@ -38,6 +38,10 @@ textarea.form-control,
 
 .progress {
   background-color: #fff;
+}
+
+.btn {
+  font-size: 1.15em;
 }
 
 .btn:disabled {
