@@ -5,6 +5,7 @@
     </p>
   </div>
   <div class="card-body">
-    <canvas baseChart [data]="_values" [labels]="_labels" [options]="_options" [chartType]="'doughnut'"></canvas>
+    <!-- <canvas baseChart [data]="_values" [labels]="_labels" [options]="_options" [chartType]="'doughnut'"></canvas> -->
+    <ngx-chartjs [data]="_chartData" type="doughnut" [options]="_options"></ngx-chartjs>
   </div>
 </div>

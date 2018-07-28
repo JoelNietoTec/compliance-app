@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import {Observable} from 'rxjs';
-
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { Participant, ParticipantType } from '../../../shared/models/participants.model';
@@ -14,10 +12,6 @@ import { Country } from '../../../shared/models/country.model';
 import { ParamMatricesService } from '../../../shared/services/param-matrices.service';
 import { ParamMatrix } from '../../../shared/models/params.model';
 
-interface Entity extends Participant {
-  formBirthDate?: NgbDateStruct;
-}
-
 const NOW = new Date();
 
 @Component({
@@ -26,12 +20,12 @@ const NOW = new Date();
   styleUrls: ['./entity-form.component.css']
 })
 export class EntityFormComponent implements OnInit {
-  @Input() entity?: Entity;
+  @Input() entity?: Participant;
   @Output() updateParticipant = new EventEmitter();
 
   _countries: Country[];
   _matrices: Observable<ParamMatrix[]>;
-  _entity: Entity;
+  _entity: Participant;
   _location: any;
   _default: any = undefined;
   _maxDate: any;
@@ -41,7 +35,6 @@ export class EntityFormComponent implements OnInit {
     private _partServ: ParticipantsService,
     private _countryServ: CountriesService,
     private _matrixServ: ParamMatricesService,
-    private _dateFormatter: NgbDateParserFormatter,
     private toastr: ToastrService,
     private _util: UtilService,
     private _map: MapsService,
@@ -71,7 +64,6 @@ export class EntityFormComponent implements OnInit {
       };
     } else {
       this._entity = this.entity;
-      this._entity.formBirthDate = this._dateFormatter.parse(this._entity.birthDate.toString());
       this.setLocation();
     }
   }
@@ -83,7 +75,6 @@ export class EntityFormComponent implements OnInit {
   }
 
   saveEntity() {
-    this._entity.birthDate = new Date(this._dateFormatter.format(this._entity.formBirthDate));
     if (!this.entity) {
       this._entity.createDate = new Date();
       this._partServ.createParticipant(this._entity).subscribe(data => {

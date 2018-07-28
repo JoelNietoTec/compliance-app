@@ -128,13 +128,13 @@ export class HomeComponent implements OnInit {
       }
     };
 
-    this._taskService.getTaskCount(1).subscribe(data => {
-      this._tasks = data;
-    });
+    // this._taskService.getTaskCount(1).subscribe(data => {
+    //   this._tasks = data;
+    // });
 
-    this._taskService.getTaskCount(2).subscribe(data => {
-      this._partTasks = data;
-    });
+    // this._taskService.getTaskCount(2).subscribe(data => {
+    //   this._partTasks = data;
+    // });
   }
 
   loadCountry() {

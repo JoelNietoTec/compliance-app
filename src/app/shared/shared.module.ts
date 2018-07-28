@@ -8,6 +8,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AgmCoreModule } from '@agm/core';
 import { BreadcrumbsModule } from 'ng2-breadcrumbs';
+import { ChartjsModule } from '@ctrl/ngx-chartjs';
 
 // Components
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
@@ -76,6 +77,7 @@ import { ProjectsService } from './services/projects.service';
     FormsModule,
     RouterModule,
     ChartsModule,
+    ChartjsModule,
     NgbModule.forRoot(),
     SweetAlert2Module.forRoot({
       buttonsStyling: false,

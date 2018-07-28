@@ -1,5 +1,34 @@
 <div class="row">
-  <div *ngFor="let param of _params | async" class="col-md-6">
-    <app-segment-chart [paramId]="param.id"></app-segment-chart>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="matrix">Matriz</label>
+      <select class="custom-select form-control" name="matrix" id="matrix" (change)="selectMatrix($event.target.value)">
+        <option selected [disabled]="true" [value]="undefined">---Seleccionar matriz---</option>
+        <option *ngFor="let mat of _matrices | async" [value]="mat.id">{{ mat.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="category">Categoría</label>
+      <select class="custom-select" name="category" id="category" [(ngModel)]="_selectedCategory">
+        <option selected [disabled]="true" [ngValue]="undefined">---Seleccionar categoría---</option>
+        <option *ngFor="let cat of _categories | async" [ngValue]="cat">{{ cat.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="param">Parámetro</label>
+      <select class="custom-select" name="param" id="param" [(ngModel)]="_selectedParam">
+        <option selected [disabled]="true" [value]="undefined" >---Seleccionar parámetro---</option>
+        <ng-container *ngIf="_selectedCategory">
+          <option *ngFor="let param of _selectedCategory.params" [value]="param.id">{{ param.name }}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="_selectedParam" class="col-md-8">
+    <app-segment-chart [paramId]="_selectedParam"></app-segment-chart>
   </div>
 </div>

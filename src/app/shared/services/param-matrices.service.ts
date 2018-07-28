@@ -9,16 +9,13 @@ import { ParamMatrix } from '../models/params.model';
 @Injectable()
 export class ParamMatricesService {
   private _matrixURL: string;
-  private _newMatrix: ParamMatrix;
-  private _matrix: ParamMatrix;
-  private _matrices: Array<ParamMatrix>;
   private _headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private _http: HttpClient, private _conn: ConnectionService) {
     this._matrixURL = _conn.APIUrl + 'parammatrices';
   }
 
-  getMatrices(): Observable<Array<ParamMatrix>> {
+  getMatrices(): Observable<ParamMatrix[]> {
     return this._http.get<ParamMatrix[]>(this._matrixURL);
   }
 

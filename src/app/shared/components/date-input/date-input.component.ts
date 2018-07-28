@@ -9,6 +9,9 @@ import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstra
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateInputComponent), multi: true }]
 })
 export class DateInputComponent implements ControlValueAccessor {
+  @Input() maxDate: NgbDateStruct;
+  @Input() minDate: NgbDateStruct;
+
   _currentDate: NgbDateStruct;
   constructor(private _dateFormatter: NgbDateParserFormatter) {}
 
