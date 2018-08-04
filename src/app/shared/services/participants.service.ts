@@ -27,8 +27,16 @@ export class ParticipantsService {
     }
   }
 
-  getSegments(paramId: number): Observable<Segment[]>{
+  getSegments(paramId: number): Observable<Segment[]> {
     return this._http.get<Segment[]>(`${this._partURL}/segments/${paramId}`);
+  }
+
+  getBySegments(paramId: number, valueId: string): Observable<Participant[]> {
+    return this._http.get<Participant[]>(`${this._partURL}/byparam/${paramId}/value/${valueId}`);
+  }
+
+  getSegmentMembers(paramId: number, valueId: number): Observable<Participant[]> {
+    return this._http.get<Participant[]>(`${this._partURL}/byparam/${paramId}/value/${valueId}`);
   }
 
   getParticipant(_id: number): Observable<Participant> {
@@ -50,11 +58,11 @@ export class ParticipantsService {
   }
 
   searchParticipant(participants: Participant[], search: string): Participant[] {
-    let filterParticipants: Participant[] = [];
+    const filterParticipants: Participant[] = [];
 
     search = search.toLocaleLowerCase();
 
-    for (let item of participants) {
+    for (const item of participants) {
       let term = this._util.isNullString(item.firstName) + this._util.isNullString(item.secondName);
       term = term + this._util.isNullString(item.thirdName) + this._util.isNullString(item.fourthName);
       term = term.toLocaleLowerCase();

@@ -27,7 +27,6 @@ export class IndividualsListComponent implements OnInit {
       { name: 'score', title: 'Puntaje', type: 'decimal', sortable: true, rateField: true, customClasses: 'font-weight-bold' },
       { name: 'rate', title: 'Riesgo', type: 'text', sortable: true, lookup: true, rateField: true, customClasses: 'font-weight-bold' },
       { name: 'address', title: 'Dirección', hidden: true },
-      { name: 'gender', title: 'Género', type: 'object', objectColumn: 'gender.name', hidden: true },
       { name: 'phone', title: 'Teléfono', hidden: true },
       { name: 'mobilePhone', title: 'Tel. Celular', hidden: true },
       { name: 'createDate', title: 'Fec. Creación', hidden: true }
@@ -48,6 +47,7 @@ export class IndividualsListComponent implements OnInit {
     this._table.newURL = ['nuevo'];
     this._table.title = 'Individuos';
 
+    // tslint:disable-next-line:prefer-const
     for (let i of this.individuals) {
       i.rate = this._partServ.getRate(i);
     }

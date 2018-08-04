@@ -70,6 +70,7 @@ import { FinancialProductsService } from './services/financial-products.service'
 import { AlertsService } from './services/alerts.service';
 import { AssignmentsService } from './services/assignments.service';
 import { ProjectsService } from './services/projects.service';
+import { SegmentListComponent } from './components/segment-list/segment-list.component';
 
 @NgModule({
   imports: [
@@ -170,7 +171,8 @@ import { ProjectsService } from './services/projects.service';
     WaitingModalComponent,
     AssignmentCardComponent,
     AssignmentFormComponent,
-    SegmentChartComponent
+    SegmentChartComponent,
+    SegmentListComponent
   ],
   entryComponents: [TableFormComponent, AssignmentFormComponent]
 })

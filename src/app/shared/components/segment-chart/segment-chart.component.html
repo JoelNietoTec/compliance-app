@@ -4,8 +4,22 @@
       {{ _param.name }}
     </p>
   </div>
-  <div class="card-body">
-    <!-- <canvas baseChart [data]="_values" [labels]="_labels" [options]="_options" [chartType]="'doughnut'"></canvas> -->
-    <ngx-chartjs [data]="_chartData" type="doughnut" [options]="_options"></ngx-chartjs>
+  <div class="card-body row">
+    <div class="col-md-8">
+      <ngx-chartjs [data]="_chartData" type="doughnut" [options]="_options"></ngx-chartjs>
+    </div>
+    <div *ngIf="_segments" class="col-md-4">
+      <h6>Detalles</h6>
+      <ul class="nav nav-pills flex-column">
+        <li *ngFor="let segment of _segments"  class="nav-item">
+          <a data-toggle="collapse" href="#element-{{ segment.id }}" class="nav-link">
+            {{ segment.valueName }}
+          </a>
+          <ul class="nav-pills flex-column sub-items collapse" id="element-{{segment.id}}">
+            <segment-list [param]="_param" [segment]="segment"></segment-list>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

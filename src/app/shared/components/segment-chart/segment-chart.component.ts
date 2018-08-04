@@ -52,6 +52,7 @@ export class SegmentChartComponent implements OnInit, OnChanges, OnDestroy {
 
     this._participantServ.getSegments(this.paramId).subscribe(data => {
       this._segments = data;
+      console.log(this._segments);
 
       this._labels = this._segments.map(label => label.valueName);
       this._values = this._segments.map(value => value.count);

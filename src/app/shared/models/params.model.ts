@@ -28,6 +28,7 @@ export interface ParamValue {
 
 export interface Param {
   id?: number;
+  paramMatrixId?: number;
   paramCategoryId?: number;
   name?: string;
   englishName?: string;

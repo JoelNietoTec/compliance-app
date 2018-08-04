@@ -79,6 +79,7 @@ export class ParamCategoryComponent implements OnInit {
 
   addParam(param: Param) {
     param.paramCategoryId = this.category.id;
+    param.paramMatrixId = this.category.paramMatrixId;
     this._paramService.addParams(param).subscribe(
       data => {
         this.toastr.success(param.name, 'Parámetro creado');

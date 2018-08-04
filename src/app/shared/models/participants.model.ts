@@ -1,10 +1,7 @@
 import { Gender } from './genders.model';
 import { Param, ParamValue, ParamSubValue } from './params.model';
 import { User } from './users.model';
-import { ParticipantDocument } from './documents.models';
-import { ParticipantRelationship } from './relationships.model';
 import { Country } from './country.model';
-import {Task} from './tasks.model';
 
 export interface Participant {
   id?: number;
@@ -82,5 +79,7 @@ export interface Segment {
   id?: number;
   valueName?: string;
   englishValueName?: string;
+  valueId?: number;
+  subValueId?: number;
   count?: number;
 }
